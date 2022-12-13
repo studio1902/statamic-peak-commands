@@ -14,7 +14,8 @@ trait InstallBlockBlocks {
                 'Full width image: A full width image with optional text and button(s). [full_width_image]',
                 'Index content: Render the currently mounted entries if available. [index_content]',
                 'Image and text: An image and text side by side. [image_and_text]',
-                'Images grid: A multi row image grid. [images_grid]'
+                'Images grid: A multi row image grid. [images_grid]',
+                'Text columns: Text wrapping in two columns. [text_columns]',
             ]
         ;
     }

@@ -1,0 +1,16 @@
+{{#
+    @name Text columns
+    @desc The Text columns page builder block.
+    @set page.page_builder.text_columns
+#}}
+
+<!-- /page_builder/_text_columns.antlers.html -->
+<section class="fluid-container">
+    {{ block:title ?= { partial:typography/h3 as="h2" :content="block:title" class="mb-2 md:max-w-[1/2]" } }}
+
+    {{ partial:typography/prose class="md:columns-2 gap-6 md:[&>ul]:inline-block md:[&>ul]:!mt-0 md:[&>ul]:mb-5 md:[&>ul]:break-inside-avoid md:[&>ol]:inline-block md:[&>ol]:!mt-0 md:[&>ol]:mb-5 md:[&>ol]:break-inside-avoid md:[&>p]:!mt-0
+    " }}
+        {{ block:text }}
+    {{ /partial:typography/prose }}
+</section>
+<!-- End: /page_builder/_text_columns.antlers.html -->
