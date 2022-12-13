@@ -45,7 +45,7 @@ class ClearSite extends Command
     protected function trashAssets()
     {
         $files = new Filesystem;
-        $path = public_path('assets');
+        $path = public_path('images');
         if ($files->exists($path))
             $files->cleanDirectory($path);
     }
