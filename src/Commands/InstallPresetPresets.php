@@ -96,7 +96,11 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "\nAdd this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => 'events',\n\t'width' => 50\n],\n"
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Events\n'events_all' => 'All events',\n'events_date' => 'Date',\n'events_date_start' => 'Start date',\n'events_date_end' => 'End date',\n'events_more' => 'More events',\n'events_when' => 'When',\n'events_where' => 'Where',\n'events_organizer' => 'Organizer',\n'events_tickets' => 'Tickets',"
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => 'events',\n\t'width' => 50\n],"
                     ]
                 ]
             ],
@@ -158,6 +162,10 @@ trait InstallPresetPresets {
                         'type' => 'copy',
                         'input' => 'language_picker.antlers.html.stub',
                         'output' => 'resources/views/navigation/_language_picker.antlers.html'
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Language picker\n'language_open' => 'Open language picker. Current language is :current_language',\n'language_close' => 'Close language picker',"
                     ],
                     [
                         'type' => 'notify',
@@ -263,6 +271,10 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// News\n'news_all' => 'All news',\n'news_more' => 'More news',"
+                    ],
+                    [
+                        'type' => 'notify',
                         'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => 'news',\n\t'width' => 50\n],"
                     ]
                 ]
@@ -284,6 +296,10 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Search\n'search' => 'Search',\n'search_no_results' => 'No results found',\n'search_results_for' => 'Results for',"
+                    ],
+                    [
+                        'type' => 'notify',
                         'content' => "To enable this do the following:\n1. Add `{{ partial:components/search_form }}` as the last list item in the main ul in `resources/views/navigation/_main.antlers.html`.\n2. Uncomment the search results route in routes/web.php.\n3. Add fields you want indexed to the index in config/statamic/search.php. The page_builder field is added by default.\n4. Update the search index by running php please search:update --all.\n5. Make sure you add the update command to your deployment script."
                     ]
                 ]
@@ -297,6 +313,10 @@ trait InstallPresetPresets {
                         'type' => 'copy',
                         'input' => 'theme_toggle.antlers.html.stub',
                         'output' => 'resources/views/components/_theme_toggle.antlers.html'
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Theme toggle\n'theme_toggle_dark' => 'Use dark theme.',\n'theme_toggle_light' => 'Use light theme.',\n'theme_toggle_system' => 'Use system preference.',\n'theme_toggle_dark_short' => 'Dark',\n'theme_toggle_light_short' => 'Light',\n'theme_toggle_system_short' => 'System',\n'theme_toggle_toggle_open' => 'Open dark mode picker.',\n'theme_toggle_toggle_close' => 'Close dark mode picker.',"
                     ],
                     [
                         'type' => 'notify',
