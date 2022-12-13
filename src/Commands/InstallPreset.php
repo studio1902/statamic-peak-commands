@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Statamic\Console\RunsInPlease;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
@@ -39,9 +40,19 @@ class InstallPreset extends Command
                 return $preset['handle'] == $this->handle;
             })->first();
 
-            collect($preset['operations'])->each(function ($operation, $key) {
+            $stubs = Storage::build([
+                'driver' => 'local',
+                'root' => __DIR__. "/stubs/presets/",
+            ]);
+
+            $target = Storage::build([
+                'driver' => 'local',
+                'root' => base_path(),
+            ]);
+
+            collect($preset['operations'])->each(function ($operation, $key) use ($stubs, $target) {
                 if ($operation['type'] == 'copy') {
-                    File::put(base_path("{$operation['output']}"), File::get(__DIR__."/stubs/presets/{$this->handle}/{$operation['input']}"));
+                    $target->put("{$operation['output']}", $stubs->get("{$this->handle}/{$operation['input']}"));
                     $this->info("Installed file: '{$operation['output']}'.");
                 }
 
