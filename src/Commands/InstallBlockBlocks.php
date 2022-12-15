@@ -15,6 +15,7 @@ trait InstallBlockBlocks {
                 'Index content: Render the currently mounted entries if available. [index_content]',
                 'Image and text: An image and text side by side. [image_and_text]',
                 'Images grid: A multi row image grid. [images_grid]',
+                'Link blocks: Blocks that link using the button fieldset. [link_blocks]',
                 'Text columns: Text wrapping in two columns. [text_columns]',
             ]
         ;
