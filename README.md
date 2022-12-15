@@ -2,7 +2,7 @@
 
 # Statamic Peak Commands
 
-This addon contains the various Peak CLI commands.
+This is an addon for [Statamic Peak](https://github.com/studio1902/statamic-peak) that contains the various Peak CLI commands.
 
 * peak:add-block
 * peak:add-collection
@@ -25,7 +25,7 @@ composer require studio1902/statamic-peak-commands
 ```
 
 ## Contributing
-Contributions and discussions are always welcome, no matter how large or small. Treat each other with respect. Read the [Code of Conduct](https://github.com/studio1902/statamic-peak/blob/main/.github/CODE_OF_CONDUCT.md).
+Contributions and discussions are always welcome, no matter how large or small. Treat each other with respect. Read the [Code of Conduct](https://github.com/studio1902/statamic-peak-commands/blob/main/.github/CODE_OF_CONDUCT.md).
 
 Read more about [how you can contribute](https://peak.1902.studio/other/contributing.html) here.
 
