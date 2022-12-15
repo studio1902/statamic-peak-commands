@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3 (2022-12-15)
+
+### What's new
+- Add a `Clients` preset with a routeless collection and a Logo cloud page builder block. 762ea70d by @robdekort
+- Add the default `Link blocks` page builder block as an installable block. d9c78c0c by @robdekort
+
 ## v1.2 (2022-12-13)
 
 ### What's changed
