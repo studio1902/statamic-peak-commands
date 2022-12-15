@@ -19,6 +19,50 @@ trait InstallPresetPresets {
                 ]
             ],
             [
+                'handle' => 'clients',
+                'name' => 'Clients',
+                'description' => 'A routeless client collection with a logo cloud page builder block.',
+                'operations' => [
+                    [
+                        'type' => 'copy',
+                        'input' => 'clients_blueprint.yaml.stub',
+                        'output' => 'resources/blueprints/collections/clients/clients.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'clients_collection.yaml.stub',
+                        'output' => 'content/collections/clients.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'clients.antlers.html.stub',
+                        'output' => 'resources/views/page_builder/_clients.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'clients_fieldset.yaml.stub',
+                        'output' => 'resources/fieldsets/clients.yaml'
+                    ],
+                    [
+                        'type' => 'update_page_builder',
+                        'block' => [
+                            'name' => 'Clients',
+                            'instructions' => 'A client logo cloud.',
+                            'handle' => 'clients',
+                        ]
+                    ],
+                    [
+                        'type' => 'update_role',
+                        'role' => 'editor',
+                        'permissions' => ['view clients entries', 'edit clients entries', 'create clients entries', 'delete clients entries', 'publish clients entries', 'reorder clients entries', 'edit other authors clients entries', 'publish other authors clients entries', 'delete other authors clients entries']
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => 'clients',\n\t'width' => 50\n],"
+                    ]
+                ]
+            ],
+            [
                 'handle' => 'events',
                 'name' => 'Events',
                 'description' => 'A dated events collection with index and show templates (including JSON-ld) and a page builder set.',

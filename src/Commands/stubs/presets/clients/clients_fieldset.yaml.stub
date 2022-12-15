@@ -1,0 +1,29 @@
+title: Clients
+fields:
+  -
+    handle: title
+    field:
+      input_type: text
+      antlers: false
+      display: Title
+      type: text
+      icon: text
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      always_save: false
+  -
+    handle: clients
+    field:
+      mode: default
+      create: true
+      collections:
+        - clients
+      display: Clients
+      type: entries
+      icon: entries
+      instructions: 'Select cliënts or leave empty to show all.'
+      listable: hidden
+      instructions_position: below
+      visibility: visible
+      always_save: false

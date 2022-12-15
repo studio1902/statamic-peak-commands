@@ -1,0 +1,23 @@
+{{#
+    @name Clients
+    @desc The Clients page builder block.
+    @set page.page_builder.clients
+#}}
+
+<!-- /page_builder/_clients.antlers.html -->
+<section class="fluid-container grid grid-cols-2 md:grid-cols-10 gap-12 place-items-center">
+    {{ block:title ?= { partial:typography/h2 :content="block:title" class="col-span-2 md:col-span-12" } }}
+
+    {{
+        clients = block:clients
+            ? block:clients
+            : { collection:clients sort="order" }
+    }}
+
+    {{ clients }}
+        <a class="md:col-span-2 p-1 -m-1 hover:scale-105 motion-safe:transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-primary group" href="{{ website }}" target="_blank" rel="noopener" aria-label="{{ title }}">
+            {{ partial:components/picture :image="logo" class="grayscale group-focus-visible:grayscale-0 group-hover:grayscale-0 motion-safe:transition" }}
+        </a>
+    {{ /clients }}
+</section>
+<!-- End: /page_builder/_clients.antlers.html -->
