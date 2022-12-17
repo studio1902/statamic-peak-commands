@@ -1,7 +1,7 @@
-title: News
+title: {{ name }}
 route: '/{mount}/{slug}'
 layout: layout
-template: news/show
+template: {{ handle }}/show
 revisions: false
 date: true
 sort_dir: desc

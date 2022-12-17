@@ -1,9 +1,9 @@
 {{#
-	@name News show
-	@desc The News show template.
+	@name {{ name }} show
+	@desc The {{ name }} show template.
 #}}
 
-<!-- /news/show.antlers.html -->
+<!-- /{{ handle }}/show.antlers.html -->
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -47,16 +47,16 @@
         {{ partial src="page_builder/{type}" }}
     {{ /page_builder }}
 
-    {{ collection:previous in="news" sort="date:asc" limit="1" as="items" }}
+    {{ collection:previous in="{{ handle }}" sort="date:asc" limit="1" as="items" }}
         {{ unless no_results }}
             <section class="fluid-container grid md:grid-cols-12 gap-8">
-                {{ partial:typography/h1 as="h2" content="{ trans:strings.news_more }" class="md:col-span-12" }}
+                {{ partial:typography/h1 as="h2" content="{ trans:strings.{{ handle }}_more }" class="md:col-span-12" }}
 
                 {{ items }}
-                    {{ partial:components/news_item class="md:col-span-4" }}
+                    {{ partial:components/{{ handle }}_item class="md:col-span-4" }}
                 {{ /items }}
             </section>
         {{ /unless }}
     {{ /collection:previous }}
 </main>
-<!-- /news/show.antlers.html -->
+<!-- /{{ handle }}/show.antlers.html -->
