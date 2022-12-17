@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.5 (2022-12-17)
+
+### What's new
+- An option to rename collections when installing presets. #1 by @robdekort
+
 ## v1.4 (2022-12-17)
 
 ### What's new
