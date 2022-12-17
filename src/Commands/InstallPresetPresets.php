@@ -21,44 +21,47 @@ trait InstallPresetPresets {
             [
                 'handle' => 'clients',
                 'name' => 'Clients',
-                'description' => 'A routeless client collection with a logo cloud page builder block.',
+                'description' => 'A routeless renamble client/partner collection with a logo cloud page builder block.',
                 'operations' => [
+                    [
+                        'type' => 'rename'
+                    ],
                     [
                         'type' => 'copy',
                         'input' => 'clients_blueprint.yaml.stub',
-                        'output' => 'resources/blueprints/collections/clients/clients.yaml'
+                        'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'clients_collection.yaml.stub',
-                        'output' => 'content/collections/clients.yaml'
+                        'output' => 'content/collections/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'clients.antlers.html.stub',
-                        'output' => 'resources/views/page_builder/_clients.antlers.html'
+                        'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'clients_fieldset.yaml.stub',
-                        'output' => 'resources/fieldsets/clients.yaml'
+                        'output' => 'resources/fieldsets/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'update_page_builder',
                         'block' => [
-                            'name' => 'Clients',
-                            'instructions' => 'A client logo cloud.',
-                            'handle' => 'clients',
+                            'name' => '{{ name }}',
+                            'instructions' => 'A {{ name }} logo cloud.',
+                            'handle' => '{{ handle }}',
                         ]
                     ],
                     [
                         'type' => 'update_role',
                         'role' => 'editor',
-                        'permissions' => ['view clients entries', 'edit clients entries', 'create clients entries', 'delete clients entries', 'publish clients entries', 'reorder clients entries', 'edit other authors clients entries', 'publish other authors clients entries', 'delete other authors clients entries']
+                        'permissions' => ['view {{ handle }} entries', 'edit {{ handle }} entries', 'create {{ handle }} entries', 'delete {{ handle }} entries', 'publish {{ handle }} entries', 'reorder {{ handle }} entries', 'edit other authors {{ handle }} entries', 'publish other authors {{ handle }} entries', 'delete other authors {{ handle }} entries']
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => 'clients',\n\t'width' => 50\n],"
+                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{{ handle }}',\n\t'width' => 50\n],"
                     ]
                 ]
             ],

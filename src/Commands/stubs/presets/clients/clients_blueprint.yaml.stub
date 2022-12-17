@@ -1,4 +1,4 @@
-title: Clients
+title: {{ name }}
 sections:
   main:
     display: Main

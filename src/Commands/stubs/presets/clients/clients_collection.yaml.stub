@@ -1,4 +1,4 @@
-title: Clients
+title: {{ name }}
 template: default
 layout: layout
 revisions: false

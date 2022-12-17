@@ -1,4 +1,4 @@
-title: Clients
+title: {{ name }}
 fields:
   -
     handle: title
@@ -13,16 +13,16 @@ fields:
       visibility: visible
       always_save: false
   -
-    handle: clients
+    handle: {{ handle }}
     field:
       mode: default
       create: true
       collections:
-        - clients
-      display: Clients
+        - {{ handle }}
+      display: {{ name }}
       type: entries
       icon: entries
-      instructions: 'Select cliënts or leave empty to show all.'
+      instructions: 'Select entries or leave empty to show all.'
       listable: hidden
       instructions_position: below
       visibility: visible

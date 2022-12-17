@@ -4,6 +4,7 @@ namespace Studio1902\Peak\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -16,10 +17,12 @@ class InstallPreset extends Command
 {
     use RunsInPlease, SharedFunctions, InstallPresetPresets;
 
+    protected $rename = false;
+    protected $rename_handle = '';
+    protected $rename_name = '';
     protected $choices = '';
     protected $description = "Install premade collections and page builder blocks into your site.";
     protected $handle = '';
-    protected $presets = '';
     protected $name = 'statamic:peak:install-preset';
 
     public function handle()
@@ -34,31 +37,36 @@ class InstallPreset extends Command
             null, null, true
         );
 
+        $target = Storage::build([
+            'driver' => 'local',
+            'root' => base_path(),
+        ]);
+
         foreach($this->choices as $choice) {
             $this->handle = Stringy::between($choice, '[', ']');
             $preset = $this->presets->filter(function ($preset, $key) {
                 return $preset['handle'] == $this->handle;
             })->first();
 
-            $stubs = Storage::build([
-                'driver' => 'local',
-                'root' => __DIR__. "/stubs/presets/",
-            ]);
-
-            $target = Storage::build([
-                'driver' => 'local',
-                'root' => base_path(),
-            ]);
-
-            collect($preset['operations'])->each(function ($operation, $key) use ($stubs, $target) {
+            collect($preset['operations'])->each(function ($operation, $key) use ($target) {
                 if ($operation['type'] == 'copy') {
-                    $target->put("{$operation['output']}", $stubs->get("{$this->handle}/{$operation['input']}"));
-                    $this->info("Installed file: '{$operation['output']}'.");
+                    $this->rename
+                        ? $output = Str::of($operation['output'])->replace('{{ handle }}',$this->rename_handle)
+                        : $output = $operation['output'];
+
+                    $stub = File::get(__DIR__."/stubs/presets/{$this->handle}/{$operation['input']}");
+                    $contents = Str::of($stub)
+                        ->replace('{{ handle }}', $this->rename_handle)
+                        ->replace('{{ name }}', $this->rename_name);
+
+                    $target->put($output, $contents);
+                    $this->info("Installed file: '{$output}'.");
                 }
 
-                elseif ($operation['type'] == 'update_page_builder') {
-                    $this->updatePageBuilder($operation['block']['name'], $operation['block']['instructions'], $operation['block']['handle']);
-                    $this->info("Installed page builder block: '{$operation['block']['name']}'.");
+                elseif ($operation['type'] == 'rename') {
+                    $this->rename = true;
+                    $this->rename_name = $this->ask('What should be the collection name?');
+                    $this->rename_handle = Str::slug($this->rename_name, '_');
                 }
 
                 elseif ($operation['type'] == 'update_article_sets') {
@@ -66,10 +74,22 @@ class InstallPreset extends Command
                     $this->info("Installed article set: '{$operation['block']['name']}'.");
                 }
 
+                elseif ($operation['type'] == 'update_page_builder') {
+                    $name = (string)Str::of($operation['block']['name'])
+                        ->replace('{{ name }}', $this->rename_name);
+                    $instructions = (string)Str::of($operation['block']['instructions'])
+                        ->replace('{{ name }}', $this->rename_name);
+                    $handle = (string)Str::of($operation['block']['handle'])
+                        ->replace('{{ handle }}', $this->rename_handle);
+
+                    $this->updatePageBuilder($name, $instructions, $handle);
+                    $this->info("Installed page builder block: '{$name}'.");
+                }
+
                 elseif ($operation['type'] == 'update_role') {
                     $roles = Yaml::parseFile(base_path('resources/users/roles.yaml'));
                     $existingPermissions = Arr::get($roles, "{$operation['role']}.permissions");
-                    $permissions = array_merge($existingPermissions, $operation['permissions']);
+                    $permissions = array_merge($existingPermissions, str_replace('{{ handle }}', $this->rename_handle, $operation['permissions']));
 
                     Arr::set($roles, 'editor.permissions', $permissions);
 
@@ -77,8 +97,12 @@ class InstallPreset extends Command
                 }
 
                 elseif($operation['type'] == 'notify') {
+                    $message = (string)Str::of($operation['content'])
+                        ->replace('{{ handle }}', $this->rename_handle)
+                        ->replace('{{ name }}', $this->rename_name);
+
                     $this->newLine();
-                    $this->warn($operation['content']);
+                    $this->warn($message);
                     $this->newLine();
                 }
             });
