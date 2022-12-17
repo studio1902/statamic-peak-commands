@@ -61,6 +61,11 @@ class InstallPreset extends Command
                     $this->info("Installed page builder block: '{$operation['block']['name']}'.");
                 }
 
+                elseif ($operation['type'] == 'update_article_sets') {
+                    $this->updateArticleSets($operation['block']['name'], $operation['block']['handle']);
+                    $this->info("Installed article set: '{$operation['block']['name']}'.");
+                }
+
                 elseif ($operation['type'] == 'update_role') {
                     $roles = Yaml::parseFile(base_path('resources/users/roles.yaml'));
                     $existingPermissions = Arr::get($roles, "{$operation['role']}.permissions");

@@ -31,7 +31,7 @@ class AddSet extends Command
 
             $this->createFieldset();
             $this->createPartial();
-            $this->updateArticleSets();
+            $this->updateArticleSets($this->set_name, $this->filename);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
