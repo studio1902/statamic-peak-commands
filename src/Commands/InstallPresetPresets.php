@@ -21,7 +21,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'clients',
                 'name' => 'Clients',
-                'description' => 'A routeless renamble client/partner collection with a logo cloud page builder block.',
+                'description' => 'A routeless renamable client/partner collection with a logo cloud page builder block.',
                 'operations' => [
                     [
                         'type' => 'rename'
@@ -68,37 +68,40 @@ trait InstallPresetPresets {
             [
                 'handle' => 'events',
                 'name' => 'Events',
-                'description' => 'A dated events collection with index and show templates (including JSON-ld) and a page builder set.',
+                'description' => 'A dated renamable events collection with index and show templates (including JSON-ld) and a page builder set.',
                 'operations' => [
+                    [
+                        'type' => 'rename'
+                    ],
                     [
                         'type' => 'copy',
                         'input' => 'events_blueprint.yaml.stub',
-                        'output' => 'resources/blueprints/collections/events/events.yaml'
+                        'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events_collection.yaml.stub',
-                        'output' => 'content/collections/events.yaml'
+                        'output' => 'content/collections/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events_fieldset.yaml.stub',
-                        'output' => 'resources/fieldsets/events.yaml'
+                        'output' => 'resources/fieldsets/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events_item.antlers.html.stub',
-                        'output' => 'resources/views/components/_events_item.antlers.html'
+                        'output' => 'resources/views/components/_{{ handle }}_item.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events.antlers.html.stub',
-                        'output' => 'resources/views/page_builder/_events.antlers.html'
+                        'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events.md.stub',
-                        'output' => 'content/collections/pages/events.md'
+                        'output' => 'content/collections/pages/{{ handle }}.md'
                     ],
                     [
                         'type' => 'copy',
@@ -113,12 +116,12 @@ trait InstallPresetPresets {
                     [
                         'type' => 'copy',
                         'input' => 'index.antlers.html.stub',
-                        'output' => 'resources/views/events/index.antlers.html'
+                        'output' => 'resources/views/{{ handle }}/index.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'show.antlers.html.stub',
-                        'output' => 'resources/views/events/show.antlers.html'
+                        'output' => 'resources/views/{{ handle }}/show.antlers.html'
                     ],
                     [
                         'type' => 'update_page_builder',
@@ -131,23 +134,23 @@ trait InstallPresetPresets {
                     [
                         'type' => 'update_page_builder',
                         'block' => [
-                            'name' => 'Events',
-                            'instructions' => 'List upcoming events.',
-                            'handle' => 'events',
+                            'name' => '{{ name }}',
+                            'instructions' => 'List upcoming {{ name }}.',
+                            'handle' => '{{ handle }}',
                         ]
                     ],
                     [
                         'type' => 'update_role',
                         'role' => 'editor',
-                        'permissions' => ['view events entries', 'edit events entries', 'create events entries', 'delete events entries', 'publish events entries', 'reorder events entries', 'edit other authors events entries', 'publish other authors events entries', 'delete other authors events entries']
+                        'permissions' => ['view {{ handle }} entries', 'edit {{ handle }} entries', 'create {{ handle }} entries', 'delete {{ handle }} entries', 'publish {{ handle }} entries', 'reorder {{ handle }} entries', 'edit other authors {{ handle }} entries', 'publish other authors {{ handle }} entries', 'delete other authors {{ handle }} entries']
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Events\n'events_all' => 'All events',\n'events_date' => 'Date',\n'events_date_start' => 'Start date',\n'events_date_end' => 'End date',\n'events_more' => 'More events',\n'events_when' => 'When',\n'events_where' => 'Where',\n'events_organizer' => 'Organizer',\n'events_tickets' => 'Tickets',"
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_all' => 'All {{ name }}',\n'{{ handle }}_date' => 'Date',\n'{{ handle }}_date_start' => 'Start date',\n'{{ handle }}_date_end' => 'End date',\n'{{ handle }}_more' => 'More {{ name }}',\n'{{ handle }}_when' => 'When',\n'{{ handle }}_where' => 'Where',\n'{{ handle }}_organizer' => 'Organizer',\n'{{ handle }}_tickets' => 'Tickets',"
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => 'events',\n\t'width' => 50\n],"
+                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{{ handle }}',\n\t'width' => 50\n],"
                     ]
                 ]
             ],

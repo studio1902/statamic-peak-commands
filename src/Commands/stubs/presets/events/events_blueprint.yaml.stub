@@ -1,13 +1,8 @@
-title: Events
+title: {{ name }}
 sections:
   main:
     display: Main
     fields:
-      -
-        handle: events
-        field:
-          default: events
-          type: hidden
       -
         handle: title
         field:
@@ -29,22 +24,22 @@ sections:
           character_limit: '250'
       -
         import: page_builder
-  event:
-    display: Event
+  {{ singular_handle }}:
+    display: {{ singular_name }}
     fields:
       -
         handle: section_date
         field:
-          display: 'Event date'
+          display: '{{ singular_name }} date'
           type: section
           icon: section
-          instructions: 'Event date or dates.'
+          instructions: '{{ singular_name }} date or dates.'
           listable: hidden
           instructions_position: above
           visibility: visible
           always_save: false
       -
-        handle: event_date_start
+        handle: {{ singular_handle }}_date_start
         field:
           time_enabled: false
           time_seconds_enabled: false
@@ -52,7 +47,7 @@ sections:
           inline: false
           columns: 1
           rows: 1
-          display: 'Event date (start)'
+          display: '{{ singular_name }} date (start)'
           type: date
           icon: date
           listable: true
@@ -63,7 +58,7 @@ sections:
           validate:
             - required
       -
-        handle: event_date_end
+        handle: {{ singular_handle }}_date_end
         field:
           time_enabled: false
           time_seconds_enabled: false
@@ -71,7 +66,7 @@ sections:
           inline: false
           columns: 1
           rows: 1
-          display: 'Event date (end)'
+          display: '{{ singular_name }} date (end)'
           type: date
           icon: date
           listable: true
@@ -87,13 +82,13 @@ sections:
           display: 'Status en location'
           type: section
           icon: section
-          instructions: 'Event status and location details.'
+          instructions: '{{ singular_name }} status and location details.'
           listable: hidden
           instructions_position: above
           visibility: visible
           always_save: false
       -
-        handle: event_type
+        handle: {{ singular_handle }}_type
         field:
           options:
             offline: Offline
@@ -105,7 +100,7 @@ sections:
           push_tags: false
           cast_booleans: false
           default: offline
-          display: 'Event type'
+          display: '{{ singular_name }} type'
           type: select
           icon: select
           listable: hidden
@@ -116,14 +111,14 @@ sections:
             - required
           width: 50
       -
-        handle: event_status
+        handle: {{ singular_handle }}_status
         field:
           options:
-            EventScheduled: 'Event scheduled as planned'
-            EventRescheduled: 'Event rescheduled (enter new dates)'
-            EventPostponed: 'Event postponed (new date not yet known)'
-            EventMovedOnline: 'Event moved to online (update location)'
-            EventCancelled: 'Event cancelled (keep values as is)'
+            EventScheduled: '{{ singular_name }} scheduled as planned'
+            EventRescheduled: '{{ singular_name }} rescheduled (enter new dates)'
+            EventPostponed: '{{ singular_name }} postponed (new date not yet known)'
+            EventMovedOnline: '{{ singular_name }} moved to online (update location)'
+            EventCancelled: '{{ singular_name }} cancelled (keep values as is)'
           multiple: false
           clearable: false
           searchable: false
@@ -131,7 +126,7 @@ sections:
           push_tags: false
           cast_booleans: false
           default: EventScheduled
-          display: 'Event status'
+          display: '{{ singular_name }} status'
           type: select
           icon: select
           width: 50
@@ -155,7 +150,7 @@ sections:
             - required
             - sometimes
           if:
-            event_type: 'equals offline'
+            {{ singular_handle }}_type: 'equals offline'
       -
         handle: location_address
         field:
@@ -173,7 +168,7 @@ sections:
             - required
             - sometimes
           if:
-            event_type: 'equals offline'
+            {{ singular_handle }}_type: 'equals offline'
       -
         handle: location_locality
         field:
@@ -191,13 +186,13 @@ sections:
             - required
             - sometimes
           if:
-            event_type: 'equals offline'
+            {{ singular_handle }}_type: 'equals offline'
       -
-        handle: event_url
+        handle: {{ singular_handle }}_url
         field:
           input_type: url
           antlers: false
-          display: 'Event URL'
+          display: '{{ singular_name }} URL'
           type: text
           icon: text
           listable: hidden
@@ -208,14 +203,14 @@ sections:
             - required
             - sometimes
           if:
-            event_type: 'equals online'
+            {{ singular_handle }}_type: 'equals online'
       -
         handle: section_organizer
         field:
           display: 'Organizer'
           type: section
           icon: section
-          instructions: 'Event organizer details.'
+          instructions: '{{ singular_name }} organizer details.'
           listable: hidden
           instructions_position: above
           visibility: visible

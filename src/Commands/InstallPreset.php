@@ -20,6 +20,8 @@ class InstallPreset extends Command
     protected $rename = false;
     protected $rename_handle = '';
     protected $rename_name = '';
+    protected $rename_singular_name = '';
+    protected $rename_singular_handle = '';
     protected $choices = '';
     protected $description = "Install premade collections and page builder blocks into your site.";
     protected $handle = '';
@@ -48,7 +50,7 @@ class InstallPreset extends Command
                 return $preset['handle'] == $this->handle;
             })->first();
 
-            collect($preset['operations'])->each(function ($operation, $key) use ($target) {
+            collect($preset['operations'])->each(function ($operation, $key) use ($target, $preset) {
                 if ($operation['type'] == 'copy') {
                     $this->rename
                         ? $output = Str::of($operation['output'])->replace('{{ handle }}',$this->rename_handle)
@@ -57,7 +59,9 @@ class InstallPreset extends Command
                     $stub = File::get(__DIR__."/stubs/presets/{$this->handle}/{$operation['input']}");
                     $contents = Str::of($stub)
                         ->replace('{{ handle }}', $this->rename_handle)
-                        ->replace('{{ name }}', $this->rename_name);
+                        ->replace('{{ name }}', $this->rename_name)
+                        ->replace('{{ singular_handle }}', $this->rename_singular_handle)
+                        ->replace('{{ singular_name }}', $this->rename_singular_name);
 
                     $target->put($output, $contents);
                     $this->info("Installed file: '{$output}'.");
@@ -65,8 +69,10 @@ class InstallPreset extends Command
 
                 elseif ($operation['type'] == 'rename') {
                     $this->rename = true;
-                    $this->rename_name = $this->ask('What should be the collection name?');
+                    $this->rename_name = $this->ask("What should be the collection name for '{$preset['name']}'?");
                     $this->rename_handle = Str::slug($this->rename_name, '_');
+                    $this->rename_singular_name = ucfirst($this->ask("What is the singular name for this '{$this->rename_name}' collection?"));
+                    $this->rename_singular_handle = strtolower($this->rename_singular_name);
                 }
 
                 elseif ($operation['type'] == 'update_article_sets') {
