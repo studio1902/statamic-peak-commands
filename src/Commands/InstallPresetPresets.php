@@ -228,12 +228,25 @@ trait InstallPresetPresets {
                         'output' => 'resources/views/components/_modal.antlers.html'
                     ],
                     [
-                        'type' => 'notify',
-                        'content' => "Make sure to `{{ yield:modal }}` in your layout file before closing the `<body>`."
+                        'type' => 'copy',
+                        'input' => 'invoke_modal.antlers.html.stub',
+                        'output' => 'resources/views/components/_invoke_modal.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'invoke_modal.yaml.stub',
+                        'output' => 'resources/fieldsets/invoke_modal.yaml'
+                    ],
+                    [
+                        'type' => 'update_article_sets',
+                        'block' => [
+                            'name' => 'Invoke modal',
+                            'handle' => 'invoke_modal',
+                        ]
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Invoke by calling:\n\n{{ partial:components/modal label_open=\"Open modal label\" label_close=\"Close modal label\" label_aria=\"Modal aria-label\" }}\n\t{{ slot:content }}\n\t\t{{# Add modal content here. #}}\n\t{{ /slot:content }}\n{{ /partial:components/modal }}."
+                        'content' => "Make sure to `{{ yield:modal }}` in your layout file before closing the `<body>`."
                     ]
                 ]
             ],

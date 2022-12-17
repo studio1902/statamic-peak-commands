@@ -25,20 +25,20 @@ trait SharedFunctions {
      *
      * @return bool|null
      */
-    protected function updateArticleSets()
+    protected function updateArticleSets($name, $filename)
     {
         $fieldset = Yaml::parseFile(base_path('resources/fieldsets/article.yaml'));
         $newSet = [
-            'display' => $this->set_name,
+            'display' => $name,
             'fields' => [
                 [
-                    'import' => $this->filename
+                    'import' => $filename
                 ]
             ]
         ];
 
         $existingSets = Arr::get($fieldset, 'fields.0.field.sets');
-        $existingSets[$this->filename] = $newSet;
+        $existingSets[$filename] = $newSet;
         $existingSets = collect($existingSets)->sortBy(function ($value, $key) {
             return $key;
         })->all();

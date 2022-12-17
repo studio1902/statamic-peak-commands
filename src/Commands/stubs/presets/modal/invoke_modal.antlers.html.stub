@@ -1,0 +1,17 @@
+{{#
+    @name Invoke modal
+    @desc The Invoke modal component.
+    @set page.article.invoke_modal
+#}}
+
+<!-- /components/_invoke_modal.antlers.html -->
+<div class="not-prose size-md flex">
+    {{ partial:components/modal :label_open="label_open" :label_close="label_close" :label_aria="label_aria" }}
+        {{ slot:content }}
+            {{ partial:typography/prose }}
+                {{ text }}
+            {{ /partial:typography/prose }}
+        {{ /slot:content }}
+    {{ /partial:components/modal }}
+</div>
+<!-- End: /components/_invoke_modal.antlers.html -->
