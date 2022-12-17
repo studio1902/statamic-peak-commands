@@ -3,7 +3,7 @@
 ## v1.4 (2022-12-17)
 
 ### What's new
-- Add an `Invoke modal` set to the `Article` field. 762ea70d by @robdekort
+- Add an `Invoke modal` set to the `Article` field. f4a3769f by @robdekort
 
 ## v1.3 (2022-12-15)
 
