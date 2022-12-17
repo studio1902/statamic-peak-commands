@@ -21,81 +21,87 @@ trait InstallPresetPresets {
             [
                 'handle' => 'clients',
                 'name' => 'Clients',
-                'description' => 'A routeless client collection with a logo cloud page builder block.',
+                'description' => 'A routeless renamable client/partner collection with a logo cloud page builder block.',
                 'operations' => [
+                    [
+                        'type' => 'rename'
+                    ],
                     [
                         'type' => 'copy',
                         'input' => 'clients_blueprint.yaml.stub',
-                        'output' => 'resources/blueprints/collections/clients/clients.yaml'
+                        'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'clients_collection.yaml.stub',
-                        'output' => 'content/collections/clients.yaml'
+                        'output' => 'content/collections/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'clients.antlers.html.stub',
-                        'output' => 'resources/views/page_builder/_clients.antlers.html'
+                        'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'clients_fieldset.yaml.stub',
-                        'output' => 'resources/fieldsets/clients.yaml'
+                        'output' => 'resources/fieldsets/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'update_page_builder',
                         'block' => [
-                            'name' => 'Clients',
-                            'instructions' => 'A client logo cloud.',
-                            'handle' => 'clients',
+                            'name' => '{{ name }}',
+                            'instructions' => 'A {{ name }} logo cloud.',
+                            'handle' => '{{ handle }}',
                         ]
                     ],
                     [
                         'type' => 'update_role',
                         'role' => 'editor',
-                        'permissions' => ['view clients entries', 'edit clients entries', 'create clients entries', 'delete clients entries', 'publish clients entries', 'reorder clients entries', 'edit other authors clients entries', 'publish other authors clients entries', 'delete other authors clients entries']
+                        'permissions' => ['view {{ handle }} entries', 'edit {{ handle }} entries', 'create {{ handle }} entries', 'delete {{ handle }} entries', 'publish {{ handle }} entries', 'reorder {{ handle }} entries', 'edit other authors {{ handle }} entries', 'publish other authors {{ handle }} entries', 'delete other authors {{ handle }} entries']
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => 'clients',\n\t'width' => 50\n],"
+                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{{ handle }}',\n\t'width' => 50\n],"
                     ]
                 ]
             ],
             [
                 'handle' => 'events',
                 'name' => 'Events',
-                'description' => 'A dated events collection with index and show templates (including JSON-ld) and a page builder set.',
+                'description' => 'A dated renamable events collection with index and show templates (including JSON-ld) and a page builder set.',
                 'operations' => [
+                    [
+                        'type' => 'rename'
+                    ],
                     [
                         'type' => 'copy',
                         'input' => 'events_blueprint.yaml.stub',
-                        'output' => 'resources/blueprints/collections/events/events.yaml'
+                        'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events_collection.yaml.stub',
-                        'output' => 'content/collections/events.yaml'
+                        'output' => 'content/collections/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events_fieldset.yaml.stub',
-                        'output' => 'resources/fieldsets/events.yaml'
+                        'output' => 'resources/fieldsets/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events_item.antlers.html.stub',
-                        'output' => 'resources/views/components/_events_item.antlers.html'
+                        'output' => 'resources/views/components/_{{ handle }}_item.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events.antlers.html.stub',
-                        'output' => 'resources/views/page_builder/_events.antlers.html'
+                        'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'events.md.stub',
-                        'output' => 'content/collections/pages/events.md'
+                        'output' => 'content/collections/pages/{{ handle }}.md'
                     ],
                     [
                         'type' => 'copy',
@@ -110,12 +116,12 @@ trait InstallPresetPresets {
                     [
                         'type' => 'copy',
                         'input' => 'index.antlers.html.stub',
-                        'output' => 'resources/views/events/index.antlers.html'
+                        'output' => 'resources/views/{{ handle }}/index.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'show.antlers.html.stub',
-                        'output' => 'resources/views/events/show.antlers.html'
+                        'output' => 'resources/views/{{ handle }}/show.antlers.html'
                     ],
                     [
                         'type' => 'update_page_builder',
@@ -128,23 +134,23 @@ trait InstallPresetPresets {
                     [
                         'type' => 'update_page_builder',
                         'block' => [
-                            'name' => 'Events',
-                            'instructions' => 'List upcoming events.',
-                            'handle' => 'events',
+                            'name' => '{{ name }}',
+                            'instructions' => 'List upcoming {{ name }}.',
+                            'handle' => '{{ handle }}',
                         ]
                     ],
                     [
                         'type' => 'update_role',
                         'role' => 'editor',
-                        'permissions' => ['view events entries', 'edit events entries', 'create events entries', 'delete events entries', 'publish events entries', 'reorder events entries', 'edit other authors events entries', 'publish other authors events entries', 'delete other authors events entries']
+                        'permissions' => ['view {{ handle }} entries', 'edit {{ handle }} entries', 'create {{ handle }} entries', 'delete {{ handle }} entries', 'publish {{ handle }} entries', 'reorder {{ handle }} entries', 'edit other authors {{ handle }} entries', 'publish other authors {{ handle }} entries', 'delete other authors {{ handle }} entries']
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Events\n'events_all' => 'All events',\n'events_date' => 'Date',\n'events_date_start' => 'Start date',\n'events_date_end' => 'End date',\n'events_more' => 'More events',\n'events_when' => 'When',\n'events_where' => 'Where',\n'events_organizer' => 'Organizer',\n'events_tickets' => 'Tickets',"
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_all' => 'All {{ name }}',\n'{{ handle }}_date' => 'Date',\n'{{ handle }}_date_start' => 'Start date',\n'{{ handle }}_date_end' => 'End date',\n'{{ handle }}_more' => 'More {{ name }}',\n'{{ handle }}_when' => 'When',\n'{{ handle }}_where' => 'Where',\n'{{ handle }}_organizer' => 'Organizer',\n'{{ handle }}_tickets' => 'Tickets',"
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => 'events',\n\t'width' => 50\n],"
+                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{{ handle }}',\n\t'width' => 50\n],"
                     ]
                 ]
             ],
@@ -253,8 +259,11 @@ trait InstallPresetPresets {
             [
                 'handle' => 'news',
                 'name' => 'News',
-                'description' => 'A dated news collection with index and show templates (including JSON-ld) and a page builder set.',
+                'description' => 'A dated renamable news/blog collection with index and show templates (including JSON-ld) and a page builder set.',
                 'operations' => [
+                    [
+                        'type' => 'rename'
+                    ],
                     [
                         'type' => 'copy',
                         'input' => 'index_content.antlers.html.stub',
@@ -268,42 +277,42 @@ trait InstallPresetPresets {
                     [
                         'type' => 'copy',
                         'input' => 'index.antlers.html.stub',
-                        'output' => 'resources/views/news/index.antlers.html'
+                        'output' => 'resources/views/{{ handle }}/index.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'news_blueprint.yaml.stub',
-                        'output' => 'resources/blueprints/collections/news/news.yaml'
+                        'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'news_collection.yaml.stub',
-                        'output' => 'content/collections/news.yaml'
+                        'output' => 'content/collections/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'news_fieldset.yaml.stub',
-                        'output' => 'resources/fieldsets/news.yaml'
+                        'output' => 'resources/fieldsets/{{ handle }}.yaml'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'news_item.antlers.html.stub',
-                        'output' => 'resources/views/components/_news_item.antlers.html'
+                        'output' => 'resources/views/components/_{{ handle }}_item.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'news.antlers.html.stub',
-                        'output' => 'resources/views/page_builder/_news.antlers.html'
+                        'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'news.md.stub',
-                        'output' => 'content/collections/pages/news.md'
+                        'output' => 'content/collections/pages/{{ handle }}.md'
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'show.antlers.html.stub',
-                        'output' => 'resources/views/news/show.antlers.html'
+                        'output' => 'resources/views/{{ handle }}/show.antlers.html'
                     ],
                     [
                         'type' => 'update_page_builder',
@@ -316,23 +325,23 @@ trait InstallPresetPresets {
                     [
                         'type' => 'update_page_builder',
                         'block' => [
-                            'name' => 'News',
-                            'instructions' => 'List the most recent news.',
-                            'handle' => 'news',
+                            'name' => '{{ name }}',
+                            'instructions' => 'List the most recent {{ name }}.',
+                            'handle' => '{{ handle }}',
                         ]
                     ],
                     [
                         'type' => 'update_role',
                         'role' => 'editor',
-                        'permissions' => ['view news entries', 'edit news entries', 'create news entries', 'delete news entries', 'publish news entries', 'reorder news entries', 'edit other authors news entries', 'publish other authors news entries', 'delete other authors news entries']
+                        'permissions' => ['view {{ handle }} entries', 'edit {{ handle }} entries', 'create {{ handle }} entries', 'delete {{ handle }} entries', 'publish {{ handle }} entries', 'reorder {{ handle }} entries', 'edit other authors {{ handle }} entries', 'publish other authors {{ handle }} entries', 'delete other authors {{ handle }} entries']
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// News\n'news_all' => 'All news',\n'news_more' => 'More news',"
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_all' => 'All {{ name }}',\n'{{ handle }}_more' => 'More {{ name }}',"
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => 'news',\n\t'width' => 50\n],"
+                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{{ handle }}',\n\t'width' => 50\n],"
                     ]
                 ]
             ],

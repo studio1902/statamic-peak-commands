@@ -1,4 +1,4 @@
-title: 'News'
+title: '{{ name }}'
 fields:
   -
     handle: title

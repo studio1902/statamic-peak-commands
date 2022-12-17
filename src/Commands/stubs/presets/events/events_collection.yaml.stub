@@ -1,5 +1,5 @@
-title: Events
-template: events/show
+title: {{ name }}
+template: {{ handle }}/show
 layout: layout
 revisions: false
 route: '/{mount}/{slug}'

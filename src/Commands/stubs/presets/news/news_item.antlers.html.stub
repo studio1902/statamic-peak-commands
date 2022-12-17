@@ -1,10 +1,10 @@
 {{#
-	@name News item
-	@desc A news item component.
+	@name {{ handle }} item
+	@desc A {{ name }} item component.
 	@param class Add optional CSS classes.
 #}}
 
-<!-- /components/_news_item.antlers.html -->
+<!-- /components/_{{ handle }}_item.antlers.html -->
 <article class="flex flex-col {{ class }}">
 	<figure class="aspect-[3/2] mb-4">
 		{{ partial:components/picture :image="image" sizes="(min-width: 1280px) 430px, (min-width: 768px) 30vw, 90vw" aspect_ratio="3/2" lazy="true" cover="true" }}
@@ -20,4 +20,4 @@
 		{{ partial:typography/p :content="teaser" }}
 	</div>
 </article>
-<!-- End: /components/_news_item.antlers.html -->
+<!-- End: /components/_{{ handle }}_item.antlers.html -->

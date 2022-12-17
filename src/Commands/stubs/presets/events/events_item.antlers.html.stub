@@ -1,23 +1,23 @@
 {{#
-	@name Events item
-	@desc A events item component.
+	@name {{ name }} item
+	@desc A {{ name }} item component.
 	@param class Add optional CSS classes.
 #}}
 
-<!-- /components/_events_item.antlers.html -->
+<!-- /components/_{{ handle }}_item.antlers.html -->
 <article class="flex flex-col {{ class }}">
 	<figure class="aspect-[3/2] mb-4">
 		{{ partial:components/picture :image="image" sizes="(min-width: 1280px) 430px, (min-width: 768px) 30vw, 90vw" aspect_ratio="3/2" lazy="true" cover="true" }}
 	</figure>
 
 	<div class="flex flex-col gap-y-2">
-		{{ if event_date_start != event_date_end }}
+		{{ if {{ singular_handle }}_date_start != {{ singular_handle }}_date_end }}
 			<time>
-				{{ partial:typography/time as="span" class="inline text-sm" :content="event_date_start" }} -
-				{{ partial:typography/time as="span" class="inline text-sm" :content="event_date_end" }}
+				{{ partial:typography/time as="span" class="inline text-sm" :content="{{ singular_handle }}_date_start" }} -
+				{{ partial:typography/time as="span" class="inline text-sm" :content="{{ singular_handle }}_date_end" }}
 			</time>
 		{{ else }}
-			{{ partial:typography/time class="inline text-sm" :content="event_date_start" }}
+			{{ partial:typography/time class="inline text-sm" :content="{{ singular_handle }}_date_start" }}
 		{{ /if }}
 
 		<a href="{{ url }}" class="group p-1 -m-1 focus:outline-none focus-visible:ring-2 ring-primary group">
@@ -27,4 +27,4 @@
 		{{ partial:typography/p :content="teaser" }}
 	</div>
 </article>
-<!-- End: /components/_events_item.antlers.html -->
+<!-- End: /components/_{{ handle }}_item.antlers.html -->

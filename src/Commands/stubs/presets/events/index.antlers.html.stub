@@ -1,24 +1,24 @@
 {{#
-	@name Events index
-	@desc The Events index template.
+	@name {{ name }} index
+	@desc The {{ name }} index template.
 #}}
 
-<!-- /events/index.antlers.html -->
+<!-- /{{ handle }}/index.antlers.html -->
 <main class="outer-grid" id="content">
     {{ page_builder scope="block" }}
         {{ partial src="page_builder/{type}" }}
     {{ /page_builder }}
 </main>
-<!-- End: /events/index.antlers.html -->
+<!-- End: /{{ handle }}/index.antlers.html -->
 
 {{ section:index_content }}
-    <!-- /events/index.antlers.html -->
+    <!-- /{{ handle }}/index.antlers.html -->
     <div class="fluid-container self-start grid md:grid-cols-12 gap-8">
         {{ partial:typography/h1 as="h2" :content="title" class="md:col-span-12" }}
-        {{ collection:events sort="event_date_start:asc" event_date_end:is_after="{ today }" paginate="true" limit="12" as="items" }}
+        {{ collection:{{ handle }} sort="{{ singular_handle }}_date_start:asc" {{ singular_handle }}_date_end:is_after="{ today }" paginate="true" limit="12" as="items" }}
             {{ unless no_results }}
                 {{ items }}
-                    {{ partial:components/events_item class="md:col-span-4" }}
+                    {{ partial:components/{{ handle }}_item class="md:col-span-4" }}
                 {{ /items }}
             {{ else }}
                 <div class="md:col-span-6">
@@ -27,7 +27,7 @@
             {{ /unless }}
 
             {{ partial:components/pagination class="md:col-span-12" }}
-        {{ /collection:events }}
+        {{ /collection:{{ handle }} }}
     </div>
-    <!-- End: /events/index.antlers.html -->
+    <!-- End: /{{ handle }}/index.antlers.html -->
 {{ /section:index_content }}
