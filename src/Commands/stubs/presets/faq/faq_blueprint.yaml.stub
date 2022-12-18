@@ -11,7 +11,7 @@ sections:
           validate:
             - required
           instructions_position: above
-          listable: hidden
+          listable: true
           visibility: visible
           always_save: false
           input_type: text
