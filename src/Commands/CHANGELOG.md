@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.6 (2022-12-18)
+
+### What's improved
+- Show FAQ title by default in collection listings. d373a452 by @robdekort
+- Update news strings. 399e7238 by @robdekort
+
 ## v1.5 (2022-12-17)
 
 ### What's new
