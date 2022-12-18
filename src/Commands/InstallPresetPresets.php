@@ -337,7 +337,7 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_all' => 'All {{ name }}',\n'{{ handle }}_more' => 'More {{ name }}',"
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_all' => 'All articles',\n'{{ handle }}_more' => 'More articles',"
                     ],
                     [
                         'type' => 'notify',
