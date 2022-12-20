@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.7 (2022-12-20)
+
+### What's fixed
+- Fix error in `peak:add-collection` when you don't use a mount and try to set an index template. f2694ce1 by @robdekort
+
 ## v1.6 (2022-12-18)
 
 ### What's improved
