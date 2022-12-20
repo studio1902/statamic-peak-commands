@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.9 (2022-12-20)
+
+### What's improved
+- Check file existence when running `install-preset` and `install-block` and present an overwrite or abort option. 1d66c6c6 by @robdekort
+
 ## v1.8 (2022-12-20)
 
 ### What's improved
