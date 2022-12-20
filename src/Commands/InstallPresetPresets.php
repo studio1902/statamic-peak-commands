@@ -101,7 +101,7 @@ trait InstallPresetPresets {
                     [
                         'type' => 'copy',
                         'input' => 'events.md.stub',
-                        'output' => 'content/collections/pages/{{ handle }}.md'
+                        'output' => 'content/collections/pages/{{ multisite_handle }}/{{ handle }}.md'
                     ],
                     [
                         'type' => 'copy',
@@ -307,7 +307,7 @@ trait InstallPresetPresets {
                     [
                         'type' => 'copy',
                         'input' => 'news.md.stub',
-                        'output' => 'content/collections/pages/{{ handle }}.md'
+                        'output' => 'content/collections/pages/{{ multisite_handle }}/{{ handle }}.md'
                     ],
                     [
                         'type' => 'copy',

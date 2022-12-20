@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Statamic\Console\RunsInPlease;
+use Statamic\Facades\Site;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
 use Symfony\Component\Yaml\Yaml;
@@ -55,6 +56,13 @@ class InstallPreset extends Command
                     $this->rename
                         ? $output = Str::of($operation['output'])->replace('{{ handle }}',$this->rename_handle)
                         : $output = $operation['output'];
+
+                    $multisite = Site::hasMultiple();
+                    $handle = Site::default()->handle;
+
+                    $multisite
+                        ? $output = Str::of($output)->replace('{{ multisite_handle }}', $handle)
+                        : $output = Str::of($output)->replace('{{ multisite_handle }}/', '');
 
                     $stub = File::get(__DIR__."/stubs/presets/{$this->handle}/{$operation['input']}");
                     $contents = Str::of($stub)
