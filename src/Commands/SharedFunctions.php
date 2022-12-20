@@ -16,7 +16,11 @@ trait SharedFunctions {
     public function checkExistence($type, $path)
     {
         if (File::exists(base_path($path))) {
-            throw new \Exception("{$type} '{$path}' already exists.");
+            if ($this->confirm("{$type} '{$path}' already exists. Do you want to continue and overwrite this file?", true)) {
+                return false;
+            } else {
+                throw new \Exception("Aborted. {$type} '{$path}' already exists.");
+            }
         }
     }
 

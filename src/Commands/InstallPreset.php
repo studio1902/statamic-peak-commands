@@ -71,7 +71,13 @@ class InstallPreset extends Command
                         ->replace('{{ singular_handle }}', $this->rename_singular_handle)
                         ->replace('{{ singular_name }}', $this->rename_singular_name);
 
-                    $target->put($output, $contents);
+                    try {
+                        $this->checkExistence('File', "{$output}");
+                        $target->put($output, $contents);
+                    } catch (\Exception $e) {
+                        exit($this->error($e->getMessage()));
+                    }
+
                     $this->info("Installed file: '{$output}'.");
                 }
 
