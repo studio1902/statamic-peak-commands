@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.8 (2022-12-20)
+
+### What's improved
+- Copy `*.md` files to the right location on multisite environments when installing presets. b09468b7 by @robdekort
+
 ## v1.7 (2022-12-20)
 
 ### What's fixed
