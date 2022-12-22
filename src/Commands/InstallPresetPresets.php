@@ -402,7 +402,7 @@ trait InstallPresetPresets {
                         'type' => 'update_page_builder',
                         'block' => [
                             'name' => '{{ name }}',
-                            'instructions' => 'A {{ name }} logo cloud.',
+                            'instructions' => 'List {{ name }}.',
                             'handle' => '{{ handle }}',
                         ]
                     ],
