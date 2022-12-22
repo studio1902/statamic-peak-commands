@@ -86,7 +86,7 @@ class InstallPreset extends Command
                     $this->rename_name = $this->ask("What should be the collection name for '{$preset['name']}'?");
                     $this->rename_handle = Str::slug($this->rename_name, '_');
                     $this->rename_singular_name = ucfirst($this->ask("What is the singular name for this '{$this->rename_name}' collection?"));
-                    $this->rename_singular_handle = strtolower($this->rename_singular_name);
+                    $this->rename_singular_handle = Str::slug($this->rename_singular_name, '_');
                 }
 
                 elseif ($operation['type'] == 'update_article_sets') {

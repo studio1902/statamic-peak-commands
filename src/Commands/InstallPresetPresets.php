@@ -371,6 +371,53 @@ trait InstallPresetPresets {
                 ]
             ],
             [
+                'handle' => 'team_members',
+                'name' => 'Team members',
+                'description' => 'A routeless renamable team member collection with a team member page builder block.',
+                'operations' => [
+                    [
+                        'type' => 'rename'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'team_members_blueprint.yaml.stub',
+                        'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'team_members_collection.yaml.stub',
+                        'output' => 'content/collections/{{ handle }}.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'team_members.antlers.html.stub',
+                        'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'team_members_fieldset.yaml.stub',
+                        'output' => 'resources/fieldsets/{{ handle }}.yaml'
+                    ],
+                    [
+                        'type' => 'update_page_builder',
+                        'block' => [
+                            'name' => '{{ name }}',
+                            'instructions' => 'A {{ name }} logo cloud.',
+                            'handle' => '{{ handle }}',
+                        ]
+                    ],
+                    [
+                        'type' => 'update_role',
+                        'role' => 'editor',
+                        'permissions' => ['view {{ handle }} entries', 'edit {{ handle }} entries', 'create {{ handle }} entries', 'delete {{ handle }} entries', 'publish {{ handle }} entries', 'reorder {{ handle }} entries', 'edit other authors {{ handle }} entries', 'publish other authors {{ handle }} entries', 'delete other authors {{ handle }} entries']
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{{ handle }}',\n\t'width' => 50\n],"
+                    ]
+                ]
+            ],
+            [
                 'handle' => 'theme_toggle',
                 'name' => 'Theme toggle',
                 'description' => 'A theme toggle typically used for a Tailwind class based dark mode.',
