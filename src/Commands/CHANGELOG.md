@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.10 (2022-12-22)
+
+### What's new
+- A renamable `Team members` preset with a routeless collection and a Team members page builder block. 26b9c006 by @robdekort
+
 ## v1.9 (2022-12-20)
 
 ### What's improved
