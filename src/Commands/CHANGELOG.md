@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.11 (2023-10-01)
+
+### What's new
+- Replace full page page builder with the article block in the news preset. 2a38c486 by @robdekort
+
 ## v1.10 (2022-12-22)
 
 ### What's new
