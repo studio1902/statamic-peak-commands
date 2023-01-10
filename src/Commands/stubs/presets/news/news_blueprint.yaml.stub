@@ -23,7 +23,21 @@ sections:
             - required
           character_limit: '250'
       -
-        import: page_builder
+        handle: article
+        field: article.article
+        config:
+          buttons:
+            - h2
+            - h3
+            - bold
+            - italic
+            - unorderedlist
+            - orderedlist
+            - quote
+            - removeformat
+            - anchor
+          validate:
+            - required
   seo:
     display: SEO
     fields:

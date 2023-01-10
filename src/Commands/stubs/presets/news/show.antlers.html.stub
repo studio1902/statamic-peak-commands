@@ -43,9 +43,13 @@
         </header>
     </div>
 
-    {{ page_builder scope="block" }}
-        {{ partial src="page_builder/{type}" }}
-    {{ /page_builder }}
+    <section class="fluid-container grid grid-cols-12">
+        {{ partial:typography/prose as="article" class="contents" }}
+            {{ article }}
+                {{ partial src="components/{type}" }}
+            {{ /article }}
+        {{ /partial:typography/prose }}
+    </section>
 
     {{ collection:previous in="{{ handle }}" sort="date:asc" limit="1" as="items" }}
         {{ unless no_results }}
