@@ -81,7 +81,7 @@ sections:
           rows: 1
       -
         handle: image
-        field: figure.image
+        field: common.image
         config:
           mode: grid
           width: 100
