@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.12 (2023-15-01)
+
+### What's fixed
+- Reference image field in the news preset from the common fieldset. cfa86c53 by @robdekort
+
 ## v1.11 (2023-10-01)
 
 ### What's new
