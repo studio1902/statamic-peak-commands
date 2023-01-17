@@ -19,6 +19,45 @@ trait InstallPresetPresets {
                 ]
             ],
             [
+                'handle' => 'business_hours',
+                'name' => 'Business hours',
+                'description' => 'A business hours global and a component that shows if the business is currently open / available.',
+                'operations' => [
+                    [
+                        'type' => 'copy',
+                        'input' => 'business_hours_blueprint.yaml.stub',
+                        'output' => 'resources/blueprints/globals/business_hours.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'business_hours_global.yaml.stub',
+                        'output' => 'content/globals/business_hours.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'business_hours.antlers.html.stub',
+                        'output' => 'resources/views/components/_business_hours.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'phone.svg.stub',
+                        'output' => 'resources/svg/phone.svg'
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Business hours\n'business_hours_can_reach' => 'Available now',\n'business_hours_cant_reach' => 'Not available now',"
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Make sure to set the correct timezone in `config/app.php`."
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Import the following partial where needed: `{{ partial:components/business_hours }}`."
+                    ]
+                ]
+            ],
+            [
                 'handle' => 'clients',
                 'name' => 'Clients',
                 'description' => 'A routeless renamable client/partner collection with a logo cloud page builder block.',
