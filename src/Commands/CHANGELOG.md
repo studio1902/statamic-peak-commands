@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.14 (2023-17-01)
+
+### What's new
+- Add a business hours preset with a global and an Antlers component to dynamically show business availability. 68195223 by @robdekort
+
 ## v1.13 (2023-17-01)
 
 ### What's changed
