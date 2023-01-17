@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.13 (2023-17-01)
+
+### What's changed
+- Add route information when installing the search preset. 30fc641e by @robdekort
+
 ## v1.12 (2023-15-01)
 
 ### What's fixed
