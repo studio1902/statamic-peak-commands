@@ -1,0 +1,77 @@
+{{#
+    @name Call now
+    @desc The call now component tied to the business hours global.
+#}}
+
+<!-- /components/_call_now.antlers.html -->
+<div class="flex justify-start">
+    <a
+        x-data="businessHours()"
+        class="flex p-1 -m-1 items-center gap-2 leading-none focus:outline-none focus-visible:ring ring-primary"
+        href="tel:{{ business_hours:phone_number }}"
+        :aria-label="
+            open
+                ? '{{ business_hours:label }}. {{ trans:strings.business_hours_can_reach }}. {{ business_hours:phone_number }}'
+                : '{{ business_hours:label }}. {{ trans:strings.business_hours_cant_reach }}. {{ business_hours:phone_number }}'
+        "
+        :title="
+            open
+                ? '{{ trans:strings.business_hours_can_reach }}'
+                : '{{ trans:strings.business_hours_cant_reach }}'
+        "
+        x-cloak
+    >
+        <span class="text-neutral-500">{{ business_hours:label }}</span>
+        {{ svg:phone class="w-4 h-4 fill-current" aria-hidden="true" }}
+        <span class="">{{ business_hours:phone_number }}</span>
+        <span x-show="open" class="w-3 h-3 rounded-full bg-green-600"></span>
+        <span x-show="closed" class="w-3 h-3 rounded-full bg-red-600"></span>
+        <span x-text="
+            open
+                ? '{{ trans:strings.business_hours_can_reach }}'
+                : '{{ trans:strings.business_hours_cant_reach }}'
+            "
+        >{{ business_hours:phone_number }}</span>
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('businessHours', () => ({
+                    now: Math.floor(Date.now() / 1000),
+                    businessHours:  JSON.parse('{{ (business_hours:dates ?? false) | to_json }}'),
+                    exceptions: JSON.parse('{{ (business_hours:exceptions ?? false) | to_json }}'),
+                    weekDays: ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
+                    currentWeekDay: null,
+                    businessHoursToday: null,
+                    closed: null,
+                    open: null,
+                    startTime: null,
+                    endTime: null,
+                    localTime: null,
+                    init() {
+                        this.currentWeekDay = this.weekDays[new Date().getDay()]
+                        this.businessHoursToday = this.businessHours.find((day) => day.weekday['value'] === this.currentWeekDay)
+                        this.closed = !this.businessHoursToday['open']
+                        if (this.exceptions !== false && !this.closed ) {
+                            this.localDate = new Date(new Date().toLocaleString('en-US', {dateStyle: 'short', timeZone: 'Europe/Amsterdam' })).getTime() / 1000
+                            this.exceptions = this.exceptions.find((exception) => {
+                                return exception.active === true
+                                    && (new Date(exception.start_date).getTime() / 1000 <= this.localDate)
+                                    && (new Date(exception.end_date).getTime() / 1000 >= this.localDate)
+                            })
+                            this.closed = this.exceptions ? true : false
+                        }
+                        if (!this.closed) {
+                            this.startTime = this.businessHoursToday['start_time'].replace(':', '')
+                            this.endTime = this.businessHoursToday['end_time'].replace(':', '')
+                            this.localTime = new Date().toLocaleString('en-US', {timeStyle: 'short', hour12: false, timeZone: '{{ config:app:timezone }}' }).replace(':', '')
+                            this.localTime > this.startTime && this.localTime < this.endTime
+                                ? this.open = true
+                                : this.closed = true
+                        }
+                    }
+                }))
+            })
+        </script>
+    </a>
+    {{ partial:snippets/business_hours }}
+</div>
+<!-- End: /components/_call_now.antlers.html -->

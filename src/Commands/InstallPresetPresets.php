@@ -35,8 +35,18 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'copy',
+                        'input' => 'business_hours_snippet.antlers.html.stub',
+                        'output' => 'resources/views/snippets/_business_hours.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
                         'input' => 'business_hours.antlers.html.stub',
                         'output' => 'resources/views/components/_business_hours.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'call_now.antlers.html.stub',
+                        'output' => 'resources/views/components/_call_now.antlers.html'
                     ],
                     [
                         'type' => 'copy',
@@ -45,7 +55,7 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Business hours\n'business_hours_can_reach' => 'Available now',\n'business_hours_cant_reach' => 'Not available now',"
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Business hours\n'business_hours_can_reach' => 'Available now',\n'business_hours_cant_reach' => 'Not available now',\n'business_hours_closed' => 'Closed',\n'business_hours_open_now' => 'Open now',\n'business_hours_closed_now' => 'Closed now',\n'business_hours_monday' => 'Monday',\n'business_hours_tuesday' => 'Tuesday',\n'business_hours_wednesday' => 'Wednesday',\n'business_hours_thursday' => 'Thursday',\n'business_hours_friday' => 'Friday',\n'business_hours_saturday' => 'Saturday',\n'business_hours_sunday' => 'Sunday',"
                     ],
                     [
                         'type' => 'notify',
@@ -53,7 +63,7 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Import the following partial where needed: `{{ partial:components/business_hours }}`."
+                        'content' => "Import the following partials where needed: `{{ partial:components/business_hours }}` and `{{ partial:components/call_now }}`."
                     ]
                 ]
             ],

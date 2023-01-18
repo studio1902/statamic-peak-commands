@@ -4,39 +4,39 @@ data:
     -
       id: KcwMv4Y3
       weekday: monday
-      closed: false
+      open: true
       start_time: '08:30'
       end_time: '17:00'
     -
       id: RwZ13bUE
       weekday: tuesday
-      closed: false
+      open: true
       start_time: '08:30'
       end_time: '17:00'
     -
       id: AlCrWZYJ
       weekday: wednesday
-      closed: false
+      open: true
       start_time: '08:30'
       end_time: '17:00'
     -
       id: OdYNnHKv
       weekday: thursday
-      closed: false
+      open: true
       start_time: '08:30'
       end_time: '17:00'
     -
       id: vbusJ5GT
       weekday: friday
-      closed: false
+      open: true
       start_time: '08:30'
       end_time: '17:00'
     -
       id: 3HjTxO3Y
       weekday: saturday
-      closed: true
+      open: false
     -
       id: YKXcMIJA
       weekday: sunday
-      closed: true
+      open: false
   phone_number: '06 12 34 56 78'
