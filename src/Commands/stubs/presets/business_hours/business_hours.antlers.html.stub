@@ -49,7 +49,7 @@
                     init() {
                         this.currentWeekDay = this.weekDays[new Date().getDay()]
                         this.businessHoursToday = this.businessHours.find((day) => day.weekday['value'] === this.currentWeekDay)
-                        this.closed = this.businessHoursToday['closed']
+                        this.closed = !this.businessHoursToday['open']
                         if (this.exceptions !== false && !this.closed ) {
                             this.localDate = new Date(new Date().toLocaleString('en-US', {dateStyle: 'short', timeZone: 'Europe/Amsterdam' })).getTime() / 1000
                             this.exceptions = this.exceptions.find((exception) => {

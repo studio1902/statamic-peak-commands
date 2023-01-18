@@ -42,16 +42,17 @@ sections:
                   - required
                 width: 25
             -
-              handle: closed
+              handle: open
               field:
-                default: false
-                display: Closed
+                default: true
+                display: Open
                 type: toggle
                 icon: toggle
                 listable: hidden
                 instructions_position: above
-                read_only: false
                 width: 25
+                visibility: visible
+                always_save: false
             -
               handle: start_time
               field:
@@ -67,7 +68,7 @@ sections:
                   - required
                   - sometimes
                 if:
-                  closed: 'equals false'
+                  open: 'equals true'
                 width: 25
             -
               handle: end_time
@@ -84,7 +85,7 @@ sections:
                   - required
                   - sometimes
                 if:
-                  closed: 'equals false'
+                  open: 'equals true'
                 width: 25
           mode: table
           reorderable: false
