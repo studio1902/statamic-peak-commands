@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.15 (2023-18-01)
+
+### What's new
+- Invert business hours open/closed logic, add a component to list business hours, split JS logic in partial loaded only once. e9f8c93c by @robdekort
+
 ## v1.14 (2023-17-01)
 
 ### What's new

@@ -21,7 +21,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'business_hours',
                 'name' => 'Business hours',
-                'description' => 'A business hours global and a component that shows if the business is currently open / available.',
+                'description' => 'A business hours global and a list and call component that shows the business hours and if the business is currently open / available.',
                 'operations' => [
                     [
                         'type' => 'copy',
