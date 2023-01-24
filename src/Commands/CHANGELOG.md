@@ -2,6 +2,9 @@
 
 ## v1.16 (2023-24-01)
 
+### What's new
+- Add RSS feed to news preset. 32788860 by @robdekort
+
 ### What's improved
 - Update theme toggle preset install instructions. f0de50be by @robdekort
 
