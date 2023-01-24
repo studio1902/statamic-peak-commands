@@ -308,10 +308,15 @@ trait InstallPresetPresets {
             [
                 'handle' => 'news',
                 'name' => 'News',
-                'description' => 'A dated renamable news/blog collection with index and show templates (including JSON-ld) and a page builder set.',
+                'description' => 'A dated renamable news/blog collection with index and show templates (including JSON-ld), a page builder set and an RSS feed.',
                 'operations' => [
                     [
                         'type' => 'rename'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'feed.antlers.xml.stub',
+                        'output' => 'resources/views/feed/feed.antlers.xml'
                     ],
                     [
                         'type' => 'copy',
@@ -386,11 +391,23 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_all' => 'All articles',\n'{{ handle }}_more' => 'More articles',"
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_all' => 'All articles',\n'{{ handle }}_more' => 'More articles',\n'{{ handle }}_read_more' => 'Read more',"
                     ],
                     [
                         'type' => 'notify',
                         'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{{ handle }}',\n\t'width' => 50\n],"
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `routes/web.php` file:\n\n// The route to the RSS feed.\nRoute::statamic('/feed/blog', 'feed/feed', [\n\t'layout' => null,\n\t'content_type' => 'application/xml',\n]);"
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to the `<head>` in your `views/layout.antlers.html` file:\n\n<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{{ name }} Feed\" href=\"{{ config:app:url }}/feed/{{ handle }}\"/>"
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to the `exclude` array in your `config/statamic/static_caching.php` file:\n\n'/feed*',"
                     ]
                 ]
             ],
