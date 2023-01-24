@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.16 (2023-24-01)
+
+### What's improved
+- Update theme toggle preset install instructions. f0de50be by @robdekort
+
 ## v1.15 (2023-18-01)
 
 ### What's new
