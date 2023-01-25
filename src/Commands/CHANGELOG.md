@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.17 (2023-25-01)
+
+### What's changed
+- Remove section field from call to action block. bd9436f9 by @robdekort
+
 ## v1.16 (2023-24-01)
 
 ### What's new
