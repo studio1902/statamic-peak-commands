@@ -1,6 +1,6 @@
 <?php
 
-namespace Studio1902\Peak;
+namespace Studio1902\PeakCommands;
 
 use Statamic\Providers\AddonServiceProvider;
 

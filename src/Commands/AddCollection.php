@@ -1,6 +1,6 @@
 <?php
 
-namespace Studio1902\Peak\Commands;
+namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
