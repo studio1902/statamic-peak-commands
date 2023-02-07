@@ -5,7 +5,7 @@
          <title> {{ seo:site_name ? seo:site_name : config:app:name }} {{ seo:title_separator ? seo:title_separator : " &#124; " }} {{ title }}</title>
          <link>{{ permalink }}</link>
          <atom:link href="{{ config:app:url }}/feed" rel="self" type="application/rss+xml" />
-         <description>{{ if seo_description }}{{ seo_description | strip_tags | entities | trim }}{{ elseif seo:collection_defaults }}{{ partial:snippets/fallback_description }}{{ /if }}</description>
+         <description>{{ if seo_description }}{{ seo_description | strip_tags | entities | trim }}{{ elseif seo:collection_defaults }}{{ partial src="statamic-peak-seo::snippets/fallback_description" }}{{ /if }}</description>
       {{ /get_content }}
       <language>{{ site:locale | replace('_', '-') }}</language>
       <lastBuildDate>{{ now iso_format="ddd, DD MMM GGGG HH:mm:ss UT" }}</lastBuildDate>
