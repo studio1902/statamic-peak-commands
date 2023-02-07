@@ -2,7 +2,7 @@
     "name": "studio1902/statamic-peak-commands",
     "autoload": {
         "psr-4": {
-            "Studio1902\\Peak\\": "src"
+            "Studio1902\\PeakCommands\\": "src"
         }
     },
     "extra": {
@@ -12,7 +12,7 @@
         },
         "laravel": {
             "providers": [
-                "Studio1902\\Peak\\ServiceProvider"
+                "Studio1902\\PeakCommands\\ServiceProvider"
             ]
         }
     }
