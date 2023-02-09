@@ -22,7 +22,8 @@
 
         {{ {{ handle }} scope="{{ singular_handle }}" }}
             <article class="md:col-span-4 flex flex-col gap-3 aspect-[4/3]">
-                {{ partial:components/picture
+                {{ partial
+                    src="statamic-peak-tools::components/picture"
                     :image="{{ singular_handle }}:image:url"
                     aspect_ratio="4/3"
                     sizes="(min-width: 1280px) 430px, (min-width: 768px) 33vw, 90vw"
