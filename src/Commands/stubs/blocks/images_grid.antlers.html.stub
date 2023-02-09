@@ -15,7 +15,8 @@
                     (total_results == 3) => 'md:col-span-4',
                 )}}
             ">
-                {{ partial:components/picture
+                {{ partial
+                    src="statamic-peak-tools::components/picture"
                     :image="url"
                     sizes="
                         { switch(
