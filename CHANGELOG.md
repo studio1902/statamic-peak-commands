@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.20 (2023-02-09)
+
+### What's new
+- Use new search snippets in search preset. f81bbf1c by @marcorieser
+
 ## v1.19 (2023-02-09)
 
 ### What's new
