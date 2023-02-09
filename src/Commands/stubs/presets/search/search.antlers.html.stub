@@ -36,20 +36,7 @@
                         {{ partial:typography/h2 class="mt-0" color="text-primary" :content="title" }}
                     </a>
                     <p>
-                        {{# Sow the SEO meta description if available. #}}
-                        {{ if seo_description }}
-                            {{ seo_description | entities | mark }}
-                        {{# Fall back to the bard field. #}}
-                        {{ elseif page_builder }}
-                            {{ page_builder limit="1" }}
-                                {{ if article }}
-                                    {{ article | raw | where('type', 'paragraph') | bard_text | safe_truncate(180, '...') | entities | mark }}
-                                {{# Or a field called `text`. #}}
-                                {{ elseif text }}
-                                    {{ text | safe_truncate(180, '...') | entities | mark }}
-                                {{ /if }}
-                            {{ /page_builder }}
-                        {{ /if }}
+                        {{ search_snippets | flatten | implode(' … ') | mark }}
                     </p>
                 </article>
             {{ /if }}
