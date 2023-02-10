@@ -150,8 +150,8 @@ class AddCollection extends Command
                 ? '/collection_blueprint_public_dated.yaml.stub'
                 : '/collection_blueprint_public.yaml.stub')
             : ($this->dated
-                ? '/collection_blueprint_public_dated.yaml.stub'
-                : '/collection_blueprint_public.yaml.stub');
+                ? '/collection_blueprint_private_dated.yaml.stub'
+                : '/collection_blueprint_private.yaml.stub');
 
         $stub = $this->getStub($stub);
         $contents = Str::of($stub)
