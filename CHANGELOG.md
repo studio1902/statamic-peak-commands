@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.21 (2023-02-10)
+
+### What's new
+- Make stubs publishable. #7 by @marcorieser
+
 ## v1.20 (2023-02-09)
 
 ### What's new
