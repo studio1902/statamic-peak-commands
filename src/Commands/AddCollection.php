@@ -242,8 +242,8 @@ class AddCollection extends Command
      */
     protected function installAndSetIndexContentBlock()
     {
-        File::put(base_path("resources/fieldsets/index_content.yaml"), File::get(__DIR__."/stubs/blocks/index_content.yaml.stub"));
-        File::put(base_path("resources/views/page_builder/_index_content.antlers.html"), File::get(__DIR__."/stubs/blocks/index_content.antlers.html.stub"));
+        File::put(base_path("resources/fieldsets/index_content.yaml"), File::get(__DIR__."/../../resources/stubs/blocks/index_content.yaml.stub"));
+        File::put(base_path("resources/views/page_builder/_index_content.antlers.html"), File::get(__DIR__."/../../resources/stubs/blocks/index_content.antlers.html.stub"));
         $this->updatePageBuilder('Index content', 'Render the currently mounted entries if available.', 'index_content');
 
         $pageBuilder = Entry::find($this->mount)

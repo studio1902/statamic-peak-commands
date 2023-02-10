@@ -53,7 +53,7 @@ class InstallBlock extends Command
      */
     protected function copyStubs()
     {
-        File::put(base_path("resources/fieldsets/{$this->filename}.yaml"), File::get(__DIR__."/stubs/blocks/{$this->filename}.yaml.stub"));
-        File::put(base_path("resources/views/page_builder/_{$this->filename}.antlers.html"), File::get(__DIR__."/stubs/blocks/{$this->filename}.antlers.html.stub"));
+        File::put(base_path("resources/fieldsets/{$this->filename}.yaml"), File::get(__DIR__."/../../resources/stubs/blocks/{$this->filename}.yaml.stub"));
+        File::put(base_path("resources/views/page_builder/_{$this->filename}.antlers.html"), File::get(__DIR__."/../../resources/stubs/blocks/{$this->filename}.antlers.html.stub"));
     }
 }
