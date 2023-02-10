@@ -46,7 +46,7 @@ class AddBlock extends Command
      */
     protected function createFieldset()
     {
-        $stub = File::get(__DIR__.'/stubs/fieldset_block.yaml.stub');
+        $stub = $this->getStub('/fieldset_block.yaml.stub');
         $contents = Str::of($stub)
             ->replace('{{ name }}', str_replace('"','\'', $this->block_name));
 
@@ -60,7 +60,7 @@ class AddBlock extends Command
      */
     protected function createPartial()
     {
-        $stub = File::get(__DIR__.'/stubs/block.antlers.html.stub');
+        $stub = $this->getStub('/block.antlers.html.stub');
         $contents = Str::of($stub)
             ->replace('{{ name }}', $this->block_name)
             ->replace('{{ filename }}', $this->filename);

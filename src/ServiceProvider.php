@@ -18,6 +18,13 @@ class ServiceProvider extends AddonServiceProvider
 
     public function bootAddon()
     {
-        //
+        $this->registerPublishableStubs();
+    }
+
+    protected function registerPublishableStubs()
+    {
+        $this->publishes([
+            __DIR__ . '/../resources/stubs' => resource_path('stubs/vendor/statamic-peak-commands'),
+        ], 'statamic-peak-commands-stubs');
     }
 }

@@ -55,7 +55,7 @@ class AddPartial extends Command
      */
     protected function createPartial()
     {
-        $stub = File::get(__DIR__.'/stubs/partial.antlers.html.stub');
+        $stub = $this->getStub('/partial.antlers.html.stub');
         $contents = Str::of($stub)
             ->replace('{{ partial_name }}', $this->partial_name)
             ->replace('{{ partial_description }}', $this->partial_description)

@@ -80,4 +80,13 @@ trait SharedFunctions {
 
         File::put(base_path('resources/fieldsets/page_builder.yaml'), Yaml::dump($fieldset, 99, 2));
     }
+
+
+    protected function getStub(string $stubPath): string
+    {
+        $publishedStubPath = resource_path("stubs/vendor/statamic-peak-commands/" . ltrim($stubPath, " /\t\n\r\0\x0B"));
+        $addonStubPath = __DIR__ . "/../../resources/stubs/" . ltrim($stubPath, " /\t\n\r\0\x0B");
+
+        return File::get(File::exists($publishedStubPath) ? $publishedStubPath : $addonStubPath);
+    }
 }

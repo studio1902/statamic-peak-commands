@@ -46,7 +46,7 @@ class AddSet extends Command
      */
     protected function createFieldset()
     {
-        $stub = File::get(__DIR__.'/stubs/fieldset_set.yaml.stub');
+        $stub = $this->getStub('/fieldset_set.yaml.stub');
         $contents = Str::of($stub)
             ->replace('{{ name }}', $this->set_name);
 
@@ -60,7 +60,7 @@ class AddSet extends Command
      */
     protected function createPartial()
     {
-        $stub = File::get(__DIR__.'/stubs/set.html.stub');
+        $stub = $this->getStub('/set.html.stub');
         $contents = Str::of($stub)
             ->replace('{{ name }}', $this->set_name)
             ->replace('{{ filename }}', $this->filename);
