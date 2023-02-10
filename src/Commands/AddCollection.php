@@ -120,7 +120,7 @@ class AddCollection extends Command
     {
         $this->checkExistence('Collection', "content/collections/{$this->filename}.yaml");
 
-        $stub = File::get(__DIR__.'/stubs/collection.yaml.stub');
+        $stub = $this->getStub('/collection.yaml.stub');
         $contents = Str::of($stub)
             ->replace('{{ collection_name }}', $this->collection_name)
             ->replace('{{ route }}', $this->route)
@@ -147,13 +147,13 @@ class AddCollection extends Command
 
         $stub = ($this->public)
             ? ($this->dated
-                ? '/stubs/collection_blueprint_public_dated.yaml.stub'
-                : '/stubs/collection_blueprint_public.yaml.stub')
+                ? '/collection_blueprint_public_dated.yaml.stub'
+                : '/collection_blueprint_public.yaml.stub')
             : ($this->dated
-                ? '/stubs/collection_blueprint_public_dated.yaml.stub'
-                : '/stubs/collection_blueprint_public.yaml.stub');
+                ? '/collection_blueprint_public_dated.yaml.stub'
+                : '/collection_blueprint_public.yaml.stub');
 
-        $stub = File::get(__DIR__.$stub);
+        $stub = $this->getStub($stub);
         $contents = Str::of($stub)
             ->replace('{{ collection_name }}', $this->collection_name);
 
@@ -179,7 +179,7 @@ class AddCollection extends Command
     {
         $this->checkExistence('Template', "resources/views/{$this->filename}/index.antlers.html");
 
-        $stub = File::get(__DIR__.'/stubs/index.antlers.html.stub');
+        $stub = $this->getStub('/index.antlers.html.stub');
         $contents = Str::of($stub)
             ->replace('{{ collection_name }}', $this->collection_name)
             ->replace('{{ handle }}', $this->filename)
@@ -198,7 +198,7 @@ class AddCollection extends Command
     {
         $this->checkExistence('Template', "resources/views/{$this->filename}/show.antlers.html");
 
-        $stub = File::get(__DIR__.'/stubs/show.antlers.html.stub');
+        $stub = $this->getStub('/show.antlers.html.stub');
         $contents = Str::of($stub)
             ->replace('{{ collection_name }}', $this->collection_name)
             ->replace('{{ filename }}', $this->filename);
@@ -242,8 +242,8 @@ class AddCollection extends Command
      */
     protected function installAndSetIndexContentBlock()
     {
-        File::put(base_path("resources/fieldsets/index_content.yaml"), File::get(__DIR__."/../../resources/stubs/blocks/index_content.yaml.stub"));
-        File::put(base_path("resources/views/page_builder/_index_content.antlers.html"), File::get(__DIR__."/../../resources/stubs/blocks/index_content.antlers.html.stub"));
+        File::put(base_path("resources/fieldsets/index_content.yaml"), $this->getStub('/blocks/index_content.yaml.stub'));
+        File::put(base_path("resources/views/page_builder/_index_content.antlers.html"), $this->getStub('/blocks/index_content.antlers.html.stub'));
         $this->updatePageBuilder('Index content', 'Render the currently mounted entries if available.', 'index_content');
 
         $pageBuilder = Entry::find($this->mount)

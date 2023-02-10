@@ -69,7 +69,7 @@ class ClearSite extends Command
     protected function clearHomePage()
     {
         // Note: we can't use Entry::query()->save() when running from the PostInstallHook.
-        $stub = File::get(__DIR__.'/stubs/home.md.stub');
+        $stub = $this->getStub('/home.md.stub');
         File::put(base_path('content/collections/pages/home.md'), $stub);
     }
 

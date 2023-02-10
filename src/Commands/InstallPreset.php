@@ -64,7 +64,7 @@ class InstallPreset extends Command
                         ? $output = Str::of($output)->replace('{{ multisite_handle }}', $handle)
                         : $output = Str::of($output)->replace('{{ multisite_handle }}/', '');
 
-                    $stub = File::get(__DIR__."/../../resources/stubs/presets/{$this->handle}/{$operation['input']}");
+                    $stub = $this->getStub("/presets/{$this->handle}/{$operation['input']}");
                     $contents = Str::of($stub)
                         ->replace('{{ handle }}', $this->rename_handle)
                         ->replace('{{ name }}', $this->rename_name)
