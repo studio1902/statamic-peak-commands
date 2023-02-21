@@ -43,39 +43,21 @@
 </script>
 
 <main class="outer-grid" id="content">
-    <section class="fluid-container grid md:grid-cols-12 gap-4">
-        {{ partial:typography/h1 :content="title" class="md:col-span-6 md:mb-4" }}
+    <section class="fluid-container grid md:grid-cols-12 gap-12">
+        {{ partial:typography/h1 :content="title" class="md:col-span-12" }}
 
-        <div class="md:col-span-6 md:col-start-2 md:pr-4">
-            {{ partial:typography/eyebrow content="{trans:strings.{{ handle }}_published }: { date | iso_format('D MMMM YYYY') }" color="text-neutral-700" }}
-            {{ partial:typography/eyebrow content="{trans:strings.{{ handle }}_expires }: { expires | iso_format('D MMMM YYYY') }"  color="text-neutral-700" }}
-            {{ partial:typography/introduction :content="teaser" class="mt-4" }}
+        <div class="md:col-span-6">
+            {{ partial:typography/p :content="teaser" }}
         </div>
 
-        <aside class="md:col-span-5">
-            {{
-                data = [
-                    [ 'title' => '{ trans:strings.{{ handle }}_region }', 'label' => '{ region }' ],
-                    [ 'title' => '{ trans:strings.{{ handle }}_employment_type }', 'label' => '{ employment_type == 'FULL_TIME' ? { trans:strings.{{ handle }}_full_time } : { trans:strings.{{ handle }}_part_time } }' ],
-                    [ 'title' => '{ trans:strings.{{ handle }}_hours }', 'label' => '{ hours }' ],
-                    [ 'title' => '{ trans:strings.{{ handle }}_salary_min }', 'label' => '{ salary_min ?= '€ { salary_min | format_number('0', ',', '.') }' }' ],
-                    [ 'title' => '{ trans:strings.{{ handle }}_salary_max }', 'label' => '{ salary_max ?= '€ { salary_max | format_number('0', ',', '.') }' }' ],
-                ]
-            }}
-            <table class="w-full bg-light ">
-                {{ data }}
-                    {{ if label }}
-                        <tr>
-                            <th class="px-3 py-2.5 text-sm font-bold text-left text-white border-y-2 border-white bg-black">
-                                <span class="{{ prev:title == title ?= 'sr-only' }}">
-                                    {{ title }}
-                                </span>
-                            </th>
-                            <td class="px-3 py-2.5 text-sm xl:px-6 border-y-2 border-white">{{ label }}</td>
-                        </tr>
-                    {{ /if }}
-                {{ /data }}
-            </table>
+         <aside class="md:col-span-6">
+            {{ trans:strings.{{ handle }}_published }}: {{ partial:typography/time :content="date" }}<br>
+            {{ trans:strings.{{ handle }}_expires }}: {{ partial:typography/time :content="expires" }}<br>
+            {{ trans:strings.{{ handle }}_region }}: {{ region }}<br>
+            {{ trans:strings.{{ handle }}_employment_type }}: {{ employment_type == 'FULL_TIME' ? { trans:strings.{{ handle }}_full_time } : { trans:strings.{{ handle }}_part_time } }}<br>
+            {{ trans:strings.{{ handle }}_hours }}: {{ hours }}<br>
+            {{ trans:strings.{{ handle }}_salary_min }}: {{ salary_min ?= '€ { salary_min | format_number('0', ',', '.') }' }}<br>
+            {{ trans:strings.{{ handle }}_salary_max }}: {{ salary_max ?= '€ { salary_max | format_number('0', ',', '.') }' }}<br>
         </aside>
     </section>
 

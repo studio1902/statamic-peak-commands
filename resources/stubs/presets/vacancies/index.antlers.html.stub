@@ -17,7 +17,7 @@
         {{ collection:{{ handle }} sort="date:desc" paginate="true" limit="12" as="items" expires:is_after="{today}" }}
             {{ unless no_results }}
                 {{ items }}
-                    {{ partial:components/card class="md:col-span-12" }}
+                    {{ partial:components/{{ handle }}_item class="md:col-span-6" }}
                 {{ /items }}
             {{ else }}
                 <div class="md:col-span-6">
