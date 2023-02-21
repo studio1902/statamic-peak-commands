@@ -399,7 +399,7 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add this to your `routes/web.php` file:\n\n// The route to the RSS feed.\nRoute::statamic('/feed/blog', 'feed/feed', [\n\t'layout' => null,\n\t'content_type' => 'application/xml',\n]);"
+                        'content' => "Add this to your `routes/web.php` file:\n\n// The route to the RSS feed.\nRoute::statamic('/feed/{{ handle }}', 'feed/feed', [\n\t'layout' => null,\n\t'content_type' => 'application/xml',\n]);"
                     ],
                     [
                         'type' => 'notify',
