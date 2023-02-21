@@ -1,6 +1,9 @@
 # Changelog
 
-## Unreleased
+## v1.23 (2023-02-21)
+
+### What's new
+- Add vacancies preset with a collection, mounted entry, index and show templates including jSON-ld support. #8 by @robdekort
 
 ### What's improved
 - Limit related news articles to 3 instead of 1 by default. b9344562 by @robdekort
