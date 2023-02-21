@@ -51,7 +51,7 @@
         {{ /partial:typography/prose }}
     </section>
 
-    {{ collection:previous in="{{ handle }}" sort="date:asc" limit="1" as="items" }}
+    {{ collection:previous in="{{ handle }}" sort="date:asc" limit="3" as="items" }}
         {{ unless no_results }}
             <section class="fluid-container grid md:grid-cols-12 gap-8">
                 {{ partial:typography/h1 as="h2" content="{ trans:strings.{{ handle }}_more }" class="md:col-span-12" }}
