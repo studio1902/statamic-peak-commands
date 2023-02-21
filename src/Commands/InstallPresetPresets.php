@@ -503,6 +503,66 @@ trait InstallPresetPresets {
                     ]
                 ]
             ],
+            [
+                'handle' => 'vacancies',
+                'name' => 'Vacancies',
+                'description' => 'A dated renamable vacancies collection with index and show templates (including JSON-ld).',
+                'operations' => [
+                    [
+                        'type' => 'copy',
+                        'input' => 'index.antlers.html.stub',
+                        'output' => 'resources/views/{{ handle }}/index.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'index_content.antlers.html.stub',
+                        'output' => 'resources/views/page_builder/_index_content.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'index_content.yaml.stub',
+                        'output' => 'resources/fieldsets/index_content.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'show.antlers.html.stub',
+                        'output' => 'resources/views/{{ handle }}/show.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'vacancies.md.stub',
+                        'output' => 'content/collections/pages/{{ multisite_handle }}/{{ handle }}.md'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'vacancies_item.antlers.html.stub',
+                        'output' => 'resources/views/components/_{{ handle }}_item.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'vacancies_blueprint.yaml.stub',
+                        'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'vacancies_collection.yaml.stub',
+                        'output' => 'content/collections/{{ handle }}.yaml'
+                    ],
+                    [
+                        'type' => 'update_role',
+                        'role' => 'editor',
+                        'permissions' => ['view {{ handle }} entries', 'edit {{ handle }} entries', 'create {{ handle }} entries', 'delete {{ handle }} entries', 'publish {{ handle }} entries', 'reorder {{ handle }} entries', 'edit other authors {{ handle }} entries', 'publish other authors {{ handle }} entries', 'delete other authors {{ handle }} entries']
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_expires' => 'Expires',\n'{{ handle }}_hours' => 'hours',\n'{{ handle }}_published' => 'Published',\n'{{ handle }}_region' => 'Region',\n'{{ handle }}_employment_type' => 'Employment type',\n'{{ handle }}_part_time' => 'Part time',\n'{{ handle }}_full_time' => 'Full time',\n'{{ handle }}_salary_min' => 'Minimum salary',\n'{{ handle }}_salary_max' => 'Maximum salary',"
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{{ handle }}',\n\t'width' => 50\n],"
+                    ],
+                ]
+            ],
         ]);
     }
 }
