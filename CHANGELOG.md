@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.22 (2023-02-21)
+
+### What's improved
+- Make feed route notification dynamic for the news preset. cc08bdf0 by @robdekort
+
 ## v1.21 (2023-02-10)
 
 ### What's new
