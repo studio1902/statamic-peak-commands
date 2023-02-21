@@ -1,5 +1,5 @@
 {{#
-	@name {{ handle }} item
+	@name {{ name }} item
 	@desc A {{ name }} item component.
 	@param class Add optional CSS classes.
 #}}
