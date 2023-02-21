@@ -509,6 +509,9 @@ trait InstallPresetPresets {
                 'description' => 'A dated renamable vacancies collection with index and show templates (including JSON-ld).',
                 'operations' => [
                     [
+                        'type' => 'rename'
+                    ],
+                    [
                         'type' => 'copy',
                         'input' => 'index.antlers.html.stub',
                         'output' => 'resources/views/{{ handle }}/index.antlers.html'
