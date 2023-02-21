@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### What's improved
+- Limit related news articles to 3 instead of 1 by default. b9344562 by @robdekort
+
 ## v1.22 (2023-02-21)
 
 ### What's improved
