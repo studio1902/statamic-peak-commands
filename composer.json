@@ -5,6 +5,11 @@
             "Studio1902\\PeakCommands\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Studio1902\\PeakCommands\\Tests\\": "tests"
+        }
+    },
     "extra": {
         "statamic": {
             "name": "Statamic Peak Commands",
@@ -14,6 +19,20 @@
             "providers": [
                 "Studio1902\\PeakCommands\\ServiceProvider"
             ]
+        }
+    },
+    "require": {
+        "statamic/cms": "~3.3.0 || ~3.4.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.22",
+        "pestphp/pest": "^1.22",
+        "pestphp/pest-plugin-laravel": "^1.4"
+    },
+    "config": {
+        "allow-plugins": {
+            "pixelfear/composer-dist-plugin": true,
+            "pestphp/pest-plugin": true
         }
     }
 }
