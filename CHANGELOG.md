@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.24 (2023-03-11)
+
+### What's improved
+- Remove hard coded path in news stub comment #10 by @hgrimelid
+- Convert tabs to spaces in template stubs #11 by @hgrimelid
+
 ## v1.23 (2023-02-21)
 
 ### What's new
