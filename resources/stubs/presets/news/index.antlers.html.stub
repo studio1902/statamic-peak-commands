@@ -9,7 +9,7 @@
         {{ partial src="page_builder/{type}" }}
     {{ /page_builder }}
 </main>
-<!-- End: /events/index.antlers.html -->
+<!-- End: /{{ handle }}/index.antlers.html -->
 
 {{ section:index_content }}
     <!-- /{{ handle }}/index.antlers.html -->
