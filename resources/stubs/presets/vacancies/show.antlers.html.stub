@@ -1,6 +1,6 @@
 {{#
-	@name {{ name }} show
-	@desc The {{ name }} show template.
+    @name {{ name }} show
+    @desc The {{ name }} show template.
 #}}
 
 <!-- /{{ handle }}/show.antlers.html -->
