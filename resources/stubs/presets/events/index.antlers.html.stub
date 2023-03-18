@@ -26,7 +26,7 @@
                 </div>
             {{ /unless }}
 
-            {{ partial src="statamic-peak-tools::components/pagination" class="md:col-span-12" }}
+            {{ partial:statamic-peak-tools::components/pagination class="md:col-span-12" }}
         {{ /collection:{{ handle }} }}
     </div>
     <!-- End: /{{ handle }}/index.antlers.html -->

@@ -38,7 +38,7 @@
             {{ partial:typography/h1 :content="title" class="mt-4 text-center" }}
 
             <figure class="aspect-[3/2] mt-4">
-                {{ partial src="statamic-peak-tools::components/picture" :image="image" sizes="(min-width: 1280px) 1150px, (min-width: 768px) 90vw" aspect_ratio="3/2" lazy="true" cover="true" }}
+                {{ partial:statamic-peak-tools::components/picture :image="image" sizes="(min-width: 1280px) 1150px, (min-width: 768px) 90vw" aspect_ratio="3/2" lazy="true" cover="true" }}
             </figure>
         </header>
     </div>

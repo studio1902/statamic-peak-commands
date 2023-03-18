@@ -7,7 +7,7 @@
 <!-- /components/_{{ handle }}_item.antlers.html -->
 <article class="flex flex-col {{ class }}">
     <figure class="aspect-[3/2] mb-4">
-        {{ partial src="statamic-peak-tools::components/picture" :image="image" sizes="(min-width: 1280px) 430px, (min-width: 768px) 30vw, 90vw" aspect_ratio="3/2" lazy="true" cover="true" }}
+        {{ partial:statamic-peak-tools::components/picture :image="image" sizes="(min-width: 1280px) 430px, (min-width: 768px) 30vw, 90vw" aspect_ratio="3/2" lazy="true" cover="true" }}
     </figure>
 
     <div class="flex flex-col gap-y-2">

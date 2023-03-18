@@ -7,7 +7,7 @@
 <!-- /page_builder/_full_width_image.antlers.html -->
 <section class="relative w-full min-h-[14rem] py-12 md:py-16 lg:py-24">
     <figure class="absolute inset-0">
-        {{ partial src="statamic-peak-tools::components/picture" :image="block:image" aspect_ratio="2/1 large:3/1" cover="true" lazy="true" sizes="100vw" }}
+        {{ partial:statamic-peak-tools::components/picture :image="block:image" aspect_ratio="2/1 large:3/1" cover="true" lazy="true" sizes="100vw" }}
     </figure>
     {{ if block:title || block:text || block:buttons }}
         <div class="absolute inset-0 bg-primary/80 mix-blend-multiply">
