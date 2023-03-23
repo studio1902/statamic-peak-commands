@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.26 (2023-03-23)
+
+### What's fixed
+- Properly render plus/minus in FAQ based on state. 1e7dde24 by @robdekort
+
 ## v1.25 (2023-03-18)
 
 ### What's improved
