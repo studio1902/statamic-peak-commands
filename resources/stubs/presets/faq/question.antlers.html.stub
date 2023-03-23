@@ -40,8 +40,8 @@
         x-cloak
     >
         {{ partial:typography/h2 :content="title" color="text-current" class="my-2" }}
-        <span x-show="expanded" aria-hidden="true" class="font-bold text-lg ml-4">&minus;</span>
-        <span x-show="!expanded" aria-hidden="true" class="font-bold text-lg ml-4">&plus;</span>
+        <span x-show="expanded === id" aria-hidden="true" class="font-bold text-lg ml-4">&minus;</span>
+        <span x-show="expanded !== id" aria-hidden="true" class="font-bold text-lg ml-4">&plus;</span>
     </button>
     <div
         x-show="expanded === id"
