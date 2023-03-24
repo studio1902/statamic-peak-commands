@@ -1,0 +1,33 @@
+{{#
+    @name Image credits
+    @desc The Image credits page builder block.
+    @set page.page_builder.image_credits
+#}}
+
+<!-- /page_builder/_image_credits.antlers.html -->
+<section class="fluid-container grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-8">
+    {{ if block:title || block:text }}
+        <header class="col-span-2 md:col-span-8 md:col-start-3 text-center flex flex-col items-center">
+            {{ block:title ?= { partial:typography/h2 class="mb-4" :content="block:title" } }}
+            {{ block:text ?= { partial:typography/p class="mb-4" :content="block:text" } }}
+        </header>
+    {{ /if }}
+
+    {{ assets container="images" as="images" }}
+        {{ images where (copyright.name !== null) orderby (copyright.name 'asc') }}
+            <figure class="md:col-span-3">
+                <div class="aspect-square">
+                    {{ partial:statamic-peak-tools::components/picture :image="url" sizes="(min-width: 1280px) 1280px, (min-width: 768px) 20vw, 50vw" aspect_ratio="1/1" cover="true" }}
+                </div>
+                <figcaption class="mt-4">
+                    {{ if copyright:url }}
+                        {{ partial:components/button :label="copyright:name" button_type="inline" link_type="url" :url="copyright:url" target_blank="true" }}
+                    {{ else }}
+                        {{ copyright:name }}
+                    {{ /if  }}
+                </figcaption>
+            </figure>
+        {{ /images }}
+    {{ /assets }}
+</section>
+<!-- End: /page_builder/_image_credits.antlers.html -->

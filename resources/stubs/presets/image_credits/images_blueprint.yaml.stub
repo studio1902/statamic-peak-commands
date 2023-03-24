@@ -1,0 +1,24 @@
+title: Image
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: alt
+        field:
+          display: 'Alt Text'
+          type: textarea
+          instructions: 'Description of the image'
+      -
+        handle: copyright
+        field:
+          mode: keyed
+          keys:
+            name: Name
+            url: URL
+          display: Copyright
+          type: array
+          icon: array
+          instructions_position: above
+          visibility: visible
+          instructions: 'Will be automatically added to the sites credits when filled.'
