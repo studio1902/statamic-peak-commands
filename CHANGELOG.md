@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.27 (2023-03-23)
+
+### What's new
+- Add an image credits presets that lists all images with copyright information. 0816a4a0 by @robdekort
+
 ## v1.26 (2023-03-23)
 
 ### What's fixed
