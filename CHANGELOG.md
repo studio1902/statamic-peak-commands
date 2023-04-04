@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0 (unreleased)
+
+### What's new
+- Statamic v4 support including group support when creating/installing page builder blocks and/or sets. #12 by @robdekort
+
 ## v1.27 (2023-03-23)
 
 ### What's new
