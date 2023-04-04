@@ -42,15 +42,21 @@ trait SharedFunctions {
         ];
 
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
-        $lastGroup = $existingGroups[array_key_last($existingGroups)];
-        $existingSets = Arr::get($lastGroup, 'sets');
+        $group = $this->choice(
+            "In which group of sets do you want to install: '{$name}'?",
+            array_keys($existingGroups),
+            null, null, false
+        );
+
+        $groupSets = $existingGroups[$group];
+        $existingSets = Arr::get($groupSets, 'sets');
         $existingSets[$filename] = $newSet;
         $existingSets = collect($existingSets)->sortBy(function ($value, $key) {
             return $key;
         })->all();
 
-        Arr::set($lastGroup, 'sets', $existingSets);
-        $existingGroups[array_key_last($existingGroups)] = $lastGroup;
+        Arr::set($groupSets, 'sets', $existingSets);
+        $existingGroups[$group] = $groupSets;
         Arr::set($fieldset, 'fields.0.field.sets', $existingGroups);
 
         File::put(base_path('resources/fieldsets/article.yaml'), Yaml::dump($fieldset, 99, 2));
@@ -75,15 +81,21 @@ trait SharedFunctions {
         ];
 
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
-        $lastGroup = $existingGroups[array_key_last($existingGroups)];
-        $existingSets = Arr::get($lastGroup, 'sets');
+        $group = $this->choice(
+            "In which group of page builder blocks do you want to install: '{$name}'?",
+            array_keys($existingGroups),
+            null, null, false
+        );
+
+        $groupSets = $existingGroups[$group];
+        $existingSets = Arr::get($groupSets, 'sets');
         $existingSets[$filename] = $newSet;
         $existingSets = collect($existingSets)->sortBy(function ($value, $key) {
             return $key;
         })->all();
 
-        Arr::set($lastGroup, 'sets', $existingSets);
-        $existingGroups[array_key_last($existingGroups)] = $lastGroup;
+        Arr::set($groupSets, 'sets', $existingSets);
+        $existingGroups[$group] = $groupSets;
         Arr::set($fieldset, 'fields.0.field.sets', $existingGroups);
 
         File::put(base_path('resources/fieldsets/page_builder.yaml'), Yaml::dump($fieldset, 99, 2));
