@@ -70,13 +70,18 @@ trait SharedFunctions {
             ]
         ];
 
-        $existingSets = Arr::get($fieldset, 'fields.0.field.sets');
+
+        $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
+        $lastGroup = $existingGroups[array_key_last($existingGroups)];
+        $existingSets = Arr::get($lastGroup, 'sets');
         $existingSets[$filename] = $newSet;
         $existingSets = collect($existingSets)->sortBy(function ($value, $key) {
             return $key;
         })->all();
 
-        Arr::set($fieldset, 'fields.0.field.sets', $existingSets);
+        Arr::set($lastGroup, 'sets', $existingSets);
+        $existingGroups[array_key_last($existingGroups)] = $lastGroup;
+        Arr::set($fieldset, 'fields.0.field.sets', $existingGroups);
 
         File::put(base_path('resources/fieldsets/page_builder.yaml'), Yaml::dump($fieldset, 99, 2));
     }
