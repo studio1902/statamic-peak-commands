@@ -3,7 +3,7 @@
 ## v2.0 (unreleased)
 
 ### What's new
-- Statamic v4 support including group support when creating/installing page builder blocks and/or sets. #12 by @robdekort
+- Statamic v4 support including group support when creating/installing page builder blocks and/or sets and all stub blueprints have been updated to use the new blueprint sections. #12 by @robdekort
 
 ## v1.27 (2023-03-23)
 
