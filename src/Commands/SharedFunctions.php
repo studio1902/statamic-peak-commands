@@ -43,7 +43,7 @@ trait SharedFunctions {
 
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
         $group = $this->choice(
-            "In which group of sets do you want to install: '{$name}'?",
+            "In which group of article sets do you want to install: '{$name}'?",
             array_keys($existingGroups),
             null, null, false
         );
