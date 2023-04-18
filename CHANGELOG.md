@@ -5,6 +5,7 @@
 ### What's new
 - Statamic v4 support including group support when creating/installing page builder blocks and/or sets and all stub blueprints have been updated to use the new blueprint sections. #12 by @robdekort
 - Add snippet option to `add-partial` command. 9483b17a by @robdekort
+- Add option for a different filename to `add-block` command. 49dbf6e6 by @robdekort
 
 ## v1.27 (2023-03-23)
 
