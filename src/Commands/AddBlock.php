@@ -22,7 +22,7 @@ class AddBlock extends Command
     public function handle()
     {
         $this->block_name = $this->ask('What should be the name for this block?');
-        $this->filename = Stringy::slugify($this->block_name, '_', Config::getShortLocale());
+        $this->filename = $this->ask('What should be the filename for this block?', Stringy::slugify($this->block_name, '_', Config::getShortLocale()));
         $this->instructions = $this->ask('What should be the instructions for this block?');
 
         try {
