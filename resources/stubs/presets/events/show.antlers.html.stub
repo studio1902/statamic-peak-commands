@@ -73,7 +73,7 @@
             {{ if sign_up_label }}
                 {{ partial:typography/h3 content="{trans:strings.{{ handle }}_tickets}" }}
                 <div class="md:col-span-2">
-                    {{ partial:components/button :label="sign_up_label" link_type :target_blank="sign_up_target_blank" :entry="sign_up_entry" :url="sign_up_url" :email="sign_up_email" :tel="sign_up_tel" :asset="sign_up_asset" :button_type="sign_up_button_type" :attr_title="sign_up_attr_title" :attr_aria="sign_up_attr_aria" }}
+                    {{ partial:components/button :label="sign_up_label" :link_type="sign_up_link_type" :target_blank="sign_up_target_blank" :entry="sign_up_entry" :url="sign_up_url" :email="sign_up_email" :tel="sign_up_tel" :asset="sign_up_asset" :button_type="sign_up_button_type" :attr_title="sign_up_attr_title" :attr_aria="sign_up_attr_aria" }}
                 </div>
             {{ /if }}
         </aside>
