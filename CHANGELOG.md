@@ -7,6 +7,9 @@
 - Add snippet option to `add-partial` command. 9483b17a by @robdekort
 - Add option for a different filename to `add-block` command. 49dbf6e6 by @robdekort
 
+### What's fixed
+- Update link_type with prefix sign_up_ in Events preset stub. #14 by @bygstudio
+
 ## v1.27 (2023-03-23)
 
 ### What's new
