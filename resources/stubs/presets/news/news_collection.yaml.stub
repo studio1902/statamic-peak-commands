@@ -9,3 +9,8 @@ date_behavior:
     past: public
     future: private
 mount: d11a5ec8-9915-4528-8cfe-e282362ef9ee
+preview_targets:
+  -
+    label: Entry
+    url: '{permalink}'
+    refresh: false

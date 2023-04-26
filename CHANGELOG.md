@@ -4,8 +4,9 @@
 
 ### What's new
 - Statamic v4 support including group support when creating/installing page builder blocks and/or sets and all stub blueprints have been updated to use the new blueprint sections. #12 by @robdekort
-- Add snippet option to `add-partial` command. 9483b17a by @robdekort
-- Add option for a different filename to `add-block` command. 49dbf6e6 by @robdekort
+- Add snippet option to `add-partial` command. #12 by @robdekort
+- Add option for a different filename to `add-block` command. #12 by @robdekort
+- Add morphing Live Preview support to preset collections. #12 by @robdekort
 
 ### What's fixed
 - Update `link_type` with prefix `sign_up_` in Events preset stub. #14 by @bygstudio
