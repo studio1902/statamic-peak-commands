@@ -28,11 +28,13 @@ class AddPartial extends Command
             [
                 'Component',
                 'Layout',
+                'Snippet',
                 'Typography'
             ]
         );
         $this->folder = strtolower($this->type);
         if ($this->folder == 'component') $this->folder = 'components';
+        if ($this->folder == 'snippet') $this->folder = 'snippets';
         $this->partial_name = $this->ask('What should be the name for this partial?');
         $this->partial_description = $this->ask('What should be the description for this partial?');
         $this->filename = Stringy::slugify($this->partial_name, '_', Config::getShortLocale());

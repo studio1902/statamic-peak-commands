@@ -41,13 +41,23 @@ trait SharedFunctions {
             ]
         ];
 
-        $existingSets = Arr::get($fieldset, 'fields.0.field.sets');
+        $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
+        $group = $this->choice(
+            "In which group of article sets do you want to install: '{$name}'?",
+            array_keys($existingGroups),
+            null, null, false
+        );
+
+        $groupSets = $existingGroups[$group];
+        $existingSets = Arr::get($groupSets, 'sets');
         $existingSets[$filename] = $newSet;
         $existingSets = collect($existingSets)->sortBy(function ($value, $key) {
             return $key;
         })->all();
 
-        Arr::set($fieldset, 'fields.0.field.sets', $existingSets);
+        Arr::set($groupSets, 'sets', $existingSets);
+        $existingGroups[$group] = $groupSets;
+        Arr::set($fieldset, 'fields.0.field.sets', $existingGroups);
 
         File::put(base_path('resources/fieldsets/article.yaml'), Yaml::dump($fieldset, 99, 2));
     }
@@ -70,13 +80,23 @@ trait SharedFunctions {
             ]
         ];
 
-        $existingSets = Arr::get($fieldset, 'fields.0.field.sets');
+        $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
+        $group = $this->choice(
+            "In which group of page builder blocks do you want to install: '{$name}'?",
+            array_keys($existingGroups),
+            null, null, false
+        );
+
+        $groupSets = $existingGroups[$group];
+        $existingSets = Arr::get($groupSets, 'sets');
         $existingSets[$filename] = $newSet;
         $existingSets = collect($existingSets)->sortBy(function ($value, $key) {
             return $key;
         })->all();
 
-        Arr::set($fieldset, 'fields.0.field.sets', $existingSets);
+        Arr::set($groupSets, 'sets', $existingSets);
+        $existingGroups[$group] = $groupSets;
+        Arr::set($fieldset, 'fields.0.field.sets', $existingGroups);
 
         File::put(base_path('resources/fieldsets/page_builder.yaml'), Yaml::dump($fieldset, 99, 2));
     }
