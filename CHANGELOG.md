@@ -2,6 +2,8 @@
 
 ## v2.0 (2023-05-09)
 
+**Breaking changes**: If you upgrade an existing site make sure to apply the [changes made to Peak Core in v12](https://github.com/studio1902/statamic-peak/releases/tag/v12.0).
+
 ### What's new
 - Statamic v4 support including group support when creating/installing page builder blocks and/or sets and all stub blueprints have been updated to use the new blueprint sections. #12 by @robdekort
 - Add snippet option to `add-partial` command. #12 by @robdekort
