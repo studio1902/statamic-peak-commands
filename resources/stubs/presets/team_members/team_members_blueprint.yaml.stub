@@ -46,7 +46,6 @@ tabs:
     sections:
       -
         display: Meta
-        instructions: "This entry's meta data."
         fields:
           -
             handle: image

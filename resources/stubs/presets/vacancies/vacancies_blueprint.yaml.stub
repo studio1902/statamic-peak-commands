@@ -25,7 +25,6 @@ tabs:
               validate: required
       -
         display: 'Page builder'
-        instructions: 'Build your page by using various predefined content models.'
         fields:
           -
             import: page_builder
@@ -193,7 +192,6 @@ tabs:
     sections:
       -
         display: Meta
-        instructions: "This entry's meta data."
         fields:
           -
             handle: slug
