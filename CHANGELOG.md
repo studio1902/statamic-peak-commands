@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1 (2023-05-11)
+
+### What's changed
+- Delete redundant section instructions from preset stubs. 5d699849 by @robdekort
+
 ## v2.0 (2023-05-09)
 
 **Breaking changes**: If you upgrade an existing site make sure to apply the [changes made to Peak Core in v12](https://github.com/studio1902/statamic-peak/releases/tag/v12.0).
