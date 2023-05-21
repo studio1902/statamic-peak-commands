@@ -175,7 +175,7 @@ tabs:
                     instructions_position: above
                     validate:
                       - required
-                      - 'after:{this}.start_date'
+                      - 'after_or_equal:{this}.start_date'
                     visibility: visible
               mode: table
               add_row: 'Add exception'
