@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.2 (2023-08-04)
+
+### What's improved
+- Update aspect ratio markup in a few stubs. a19edc39 by @robdekort
+
 ## v2.1 (2023-05-11)
 
 ### What's changed
