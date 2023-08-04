@@ -11,6 +11,7 @@ use Statamic\Facades\Entry;
 use Statamic\Facades\GlobalSet;
 use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
+use function Laravel\Prompts\confirm;
 
 class ClearSite extends Command
 {
@@ -21,7 +22,10 @@ class ClearSite extends Command
 
     public function handle()
     {
-        $clear_site = ($this->confirm('Do you want to clear all default Peak content?', false)) ? true : false;
+        $clear_site = $this->public = confirm(
+            label: 'Do you want to clear all default Peak content?',
+            default: false
+        );
 
         if ($clear_site) {
             $this->trashAssets();

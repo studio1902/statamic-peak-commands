@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Stringy\StaticStringy as Stringy;
+use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
 
 class AddPartial extends Command
 {
@@ -23,20 +25,28 @@ class AddPartial extends Command
 
     public function handle()
     {
-        $this->type = $this->choice(
-            'What type of partial do you want to add?',
-            [
-                'Component',
-                'Layout',
-                'Snippet',
-                'Typography'
-            ]
+        $this->type = select(
+            label: 'What type of partial do you want to add?',
+            options: ['Component', 'Layout', 'Snippet', 'Typography'],
+            default: 'Component'
         );
+
         $this->folder = strtolower($this->type);
         if ($this->folder == 'component') $this->folder = 'components';
         if ($this->folder == 'snippet') $this->folder = 'snippets';
-        $this->partial_name = $this->ask('What should be the name for this partial?');
-        $this->partial_description = $this->ask('What should be the description for this partial?');
+
+        $this->partial_name = text(
+            label: 'What should be the name for this partial?',
+            placeholder: 'E.g. Card',
+            required: true
+        );
+
+        $this->partial_description = text(
+            label: 'What should be the description for this partial?',
+            placeholder: 'E.g. A card component.',
+            required: true
+        );
+
         $this->filename = Stringy::slugify($this->partial_name, '_', Config::getShortLocale());
 
         try {

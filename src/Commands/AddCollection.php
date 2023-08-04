@@ -12,6 +12,9 @@ use Statamic\Facades\Entry;
 use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
 use Stringy\StaticStringy as Stringy;
+use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
 
 class AddCollection extends Command
 {
@@ -40,39 +43,117 @@ class AddCollection extends Command
 
     public function handle()
     {
-        $this->collection_name = $this->ask('What should be the name for this collection?');
+        $this->collection_name = text(
+            label: 'What should be the name for this collection?',
+            placeholder: 'E.g. News',
+            required: true
+        );
+
         $this->filename = Str::slug($this->collection_name, '_');
-        $this->public = ($this->confirm('Should this be a public collection with a route?', true)) ? true : false;
+
+        $this->public = confirm(
+            label: 'Should this be a public collection with a route?',
+            default: true
+        );
+
         if ($this->public) {
-            $this->mount_collection = ($this->confirm('Do you want to mount this collection on an entry?', true)) ? true: false;
+            $this->mount_collection = confirm(
+                label: 'Do you want to mount this collection on an entry?',
+                default: true
+            );
+
             if ($this->mount_collection) {
-                $this->add_page = ($this->confirm('Do you want to create a new page to mount this collection on?', true)) ? true : false;
+                $this->add_page = confirm(
+                    label: 'Do you want to create a new page to mount this collection on?',
+                    default: true
+                );
+
                 if ($this->add_page) {
-                    $this->page_title = $this->ask('What should be the page title for this mount?');
+                    $this->page_title = text(
+                        label: 'What should be the page title for this mount?',
+                        placeholder: 'E.g. News',
+                        required: true
+                    );
                     $this->mount = $this->addPage();
                 } else {
-                    $choice = $this->choice('On which page existing page do you want to mount this collection?', $this->getPages());
+                    $choice = select(
+                        label: 'On which page existing page do you want to mount this collection?',
+                        options:  $this->getPages()
+                    );
                     preg_match('/\[(.*?)\]/', $choice, $id);
                     $this->mount = $id[1];
                 }
             }
-            $this->route = $this->ask('What should be the route for this collection?', '/{mount}/{slug}');
+            $this->route = text(
+                label: 'What should be the route for this collection?',
+                default: '/{mount}/{slug}',
+                required: true
+            );
         }
-        $this->layout = $this->ask('What should be the layout file for this collection?', 'layout');
-        $this->revisions = ($this->confirm('Should revisions be enabled?', false)) ? true : false;
-        $this->sort_dir = ($this->confirm('Should the sort direction be ascending?', true)) ? 'asc' : 'desc';
-        $this->dated = ($this->confirm('Should this be a dated collection?', false)) ? true : false;
+
+        $this->layout = text(
+            label: 'What should be the layout file for this collection?',
+            default: 'layout',
+            required: true
+        );
+
+        $this->revisions = confirm(
+            label: 'Should revisions be enabled?',
+            default: false
+        );
+
+        $this->sort_dir = select(
+            label: 'What should the sort direction be?',
+            options: [
+                'asc' => 'Ascending',
+                'desc' => 'Descending',
+            ],
+            default: 'asc'
+        );
+
+        $this->dated = confirm(
+            label: 'Should this be a dated collection?',
+            default: false
+        );
+
         if ($this->dated) {
-            $this->date_past = $this->ask('What should be the date behavior for entries in the past?', 'public');
-            $this->date_future = $this->ask('What should be the date behavior for entries in the future?', 'private');
+            $this->date_past = select(
+                label: 'What should be the date behavior for entries in the past?',
+                options: [
+                    'public' => 'Public',
+                    'private' => 'Private',
+                ],
+                default: 'public'
+            );
+
+            $this->date_future = select(
+                label: 'What should be the date behavior for entries in the future?',
+                options: [
+                    'public' => 'Public',
+                    'private' => 'Private',
+                ],
+                default: 'private'
+            );
         }
+
         if ($this->public && $this->mount) {
-            $this->index = ($this->confirm('Generate and apply index template?', true)) ? true : false;
+            $this->index = confirm(
+                label: 'Generate and apply index template?',
+                default: true
+            );
         }
+
         if ($this->public) {
-            $this->show = ($this->confirm('Generate and apply show template?', true)) ? true : false;
+            $this->show = confirm(
+                label: 'Generate and apply show template?',
+                default: true
+            );
         }
-        $this->permissions = ($this->confirm('Grant edit permissions to editor role?', true)) ? true : false;
+
+        $this->permissions = confirm(
+            label: 'Grant edit permissions to editor role?',
+            default: true
+        );
 
         try {
             $this->createCollection();

@@ -5,6 +5,8 @@ namespace Studio1902\PeakCommands\Commands;
 use Illuminate\Support\Facades\File;
 use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
+use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\select;
 
 trait SharedFunctions {
 
@@ -16,7 +18,10 @@ trait SharedFunctions {
     public function checkExistence($type, $path)
     {
         if (File::exists(base_path($path))) {
-            if ($this->confirm("{$type} '{$path}' already exists. Do you want to continue and overwrite this file?", true)) {
+            if (confirm(
+                    label: "{$type} '{$path}' exists. Continue and overwrite?",
+                    default: true
+            )) {
                 return false;
             } else {
                 throw new \Exception("Aborted. {$type} '{$path}' already exists.");
@@ -42,10 +47,9 @@ trait SharedFunctions {
         ];
 
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
-        $group = $this->choice(
-            "In which group of article sets do you want to install: '{$name}'?",
-            array_keys($existingGroups),
-            null, null, false
+        $group = select(
+            label: "In which group of article sets do you want to install: '{$name}'?",
+            options: array_keys($existingGroups)
         );
 
         $groupSets = $existingGroups[$group];
@@ -81,10 +85,9 @@ trait SharedFunctions {
         ];
 
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
-        $group = $this->choice(
-            "In which group of page builder blocks do you want to install: '{$name}'?",
-            array_keys($existingGroups),
-            null, null, false
+        $group = select(
+            label: "In which group of page builder blocks do you want to install: '{$name}'?",
+            options: array_keys($existingGroups)
         );
 
         $groupSets = $existingGroups[$group];

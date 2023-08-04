@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
+use function Laravel\Prompts\multiselect;
 
 class InstallBlock extends Command
 {
@@ -21,10 +22,10 @@ class InstallBlock extends Command
 
     public function handle()
     {
-        $this->choices = $this->choice(
-            'Which blocks do you want to install into your page builder? You can separate multiple answers with a comma',
-            $this->getBlocks(),
-            null, null, true
+        $this->choices = multiselect(
+            label: 'Which blocks do you want to install into your page builder?',
+            options: $this->getBlocks(),
+            scroll: 15
         );
 
         foreach($this->choices as $choice) {

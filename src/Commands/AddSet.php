@@ -9,7 +9,7 @@ use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
-use Symfony\Component\Yaml\Yaml;
+use function Laravel\Prompts\text;
 
 class AddSet extends Command
 {
@@ -22,7 +22,11 @@ class AddSet extends Command
 
     public function handle()
     {
-        $this->set_name = $this->ask('What should be the name for this set?');
+        $this->set_name = text(
+            label: 'What should be the name for this set?',
+            placeholder: 'E.g. Card',
+            required: true
+        );
         $this->filename = Stringy::slugify($this->set_name, '_', Config::getShortLocale());
 
         try {

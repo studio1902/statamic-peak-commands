@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Stringy\StaticStringy as Stringy;
+use function Laravel\Prompts\text;
 
 class AddBlock extends Command
 {
@@ -21,9 +22,21 @@ class AddBlock extends Command
 
     public function handle()
     {
-        $this->block_name = $this->ask('What should be the name for this block?');
-        $this->filename = $this->ask('What should be the filename for this block?', Stringy::slugify($this->block_name, '_', Config::getShortLocale()));
-        $this->instructions = $this->ask('What should be the instructions for this block?');
+        $this->block_name = text(
+            label: 'What should be the name for this block?',
+            placeholder: 'E.g. Text and image',
+            required: true
+        );
+        $this->filename = text(
+            label: 'What should be the filename for this block?',
+            default: Stringy::slugify($this->block_name, '_', Config::getShortLocale()),
+            required: true
+        );
+        $this->instructions = text(
+            label: 'What should be the instructions for this block?',
+            placeholder: 'E.g. Renders text and an image.',
+            required: true
+        );
 
         try {
             $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");

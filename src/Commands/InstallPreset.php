@@ -3,7 +3,6 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -13,6 +12,7 @@ use Statamic\Facades\Site;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
 use Symfony\Component\Yaml\Yaml;
+use function Laravel\Prompts\multiselect;
 
 class InstallPreset extends Command
 {
@@ -32,12 +32,12 @@ class InstallPreset extends Command
     {
         $this->getPresets();
 
-        $this->choices = $this->choice(
-            'Which presets do you want to install into your site? You can separate multiple answers with a comma',
-            $this->presets->map(function ($preset, $key) {
+        $this->choices = multiselect(
+            label: 'Which presets do you want to install into your site?',
+            options: $this->presets->map(function ($preset, $key) {
                 return "{$preset['name']}: {$preset['description']} [{$preset['handle']}]";
             })->toArray(),
-            null, null, true
+            scroll: 15
         );
 
         $target = Storage::build([

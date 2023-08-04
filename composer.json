@@ -15,5 +15,8 @@
                 "Studio1902\\PeakCommands\\ServiceProvider"
             ]
         }
+    },
+    "require": {
+        "laravel/prompts": "^0.1"
     }
 }
