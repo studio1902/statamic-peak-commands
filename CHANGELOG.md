@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.3 (2023-08-04)
+
+### What's new
+- Use Laravel Prompts. e7771296 by @robdekort
+
 ## v2.2 (2023-08-04)
 
 ### What's improved
