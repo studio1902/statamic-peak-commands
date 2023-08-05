@@ -21,7 +21,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'business_hours',
                 'name' => 'Business hours',
-                'description' => 'A business hours global and a list and call component that shows the business hours and if the business is currently open / available.',
+                'description' => 'Configure and list business hours, live open/not open component',
                 'operations' => [
                     [
                         'type' => 'copy',
@@ -70,7 +70,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'clients',
                 'name' => 'Clients',
-                'description' => 'A routeless renamable client/partner collection with a logo cloud page builder block.',
+                'description' => 'A renamable client/partner collection.',
                 'operations' => [
                     [
                         'type' => 'rename'
@@ -117,7 +117,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'events',
                 'name' => 'Events',
-                'description' => 'A dated renamable events collection with index and show templates (including JSON-ld) and a page builder set.',
+                'description' => 'A dated renamable events collection.',
                 'operations' => [
                     [
                         'type' => 'rename'
@@ -206,7 +206,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'faq',
                 'name' => 'FAQ',
-                'description' => 'A FAQ collection with a page builder set (including JSON-ld).',
+                'description' => 'A FAQ collection.',
                 'operations' => [
                     [
                         'type' => 'copy',
@@ -255,7 +255,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'image_credits',
                 'name' => 'Image credits',
-                'description' => 'List images and their credits when copyright information has been added to an asset.',
+                'description' => 'List images and their credits.',
                 'operations' => [
                     [
                         'type' => 'copy',
@@ -285,7 +285,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'language_picker',
                 'name' => 'Language picker',
-                'description' => 'A language picker for when you use multisite.',
+                'description' => 'A multisite language picker.',
                 'operations' => [
                     [
                         'type' => 'copy',
@@ -305,7 +305,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'modal',
                 'name' => 'Modal',
-                'description' => 'A modal that only has to be rendered once but can be used multiple times with different content.',
+                'description' => 'A re-usable modal.',
                 'operations' => [
                     [
                         'type' => 'copy',
@@ -338,7 +338,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'news',
                 'name' => 'News',
-                'description' => 'A dated renamable news/blog collection with index and show templates (including JSON-ld), a page builder set and an RSS feed.',
+                'description' => 'A dated renamable news/blog collection with feed.',
                 'operations' => [
                     [
                         'type' => 'rename'
@@ -444,7 +444,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'search',
                 'name' => 'Search',
-                'description' => 'A search form component and a styled search results template.',
+                'description' => 'Search form search results.',
                 'operations' => [
                     [
                         'type' => 'copy',
@@ -469,7 +469,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'team_members',
                 'name' => 'Team members',
-                'description' => 'A routeless renamable team member collection with a team member page builder block.',
+                'description' => 'A renamable team member collection.',
                 'operations' => [
                     [
                         'type' => 'rename'
@@ -516,7 +516,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'theme_toggle',
                 'name' => 'Theme toggle',
-                'description' => 'A theme toggle typically used for a Tailwind class based dark mode.',
+                'description' => 'Theme toggle for dark mode.',
                 'operations' => [
                     [
                         'type' => 'copy',
@@ -536,7 +536,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'vacancies',
                 'name' => 'Vacancies',
-                'description' => 'A dated renamable vacancies collection with index and show templates (including JSON-ld).',
+                'description' => 'A dated renamable vacancies collection.',
                 'operations' => [
                     [
                         'type' => 'rename'

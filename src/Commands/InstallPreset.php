@@ -34,8 +34,8 @@ class InstallPreset extends Command
 
         $this->choices = multiselect(
             label: 'Which presets do you want to install into your site?',
-            options: $this->presets->map(function ($preset, $key) {
-                return "{$preset['name']}: {$preset['description']} [{$preset['handle']}]";
+            options: $this->presets->mapWithKeys(function ($preset, $key) {
+                return [$preset['handle'] => "{$preset['name']}: {$preset['description']}"];
             })->toArray(),
             scroll: 15
         );
@@ -46,7 +46,7 @@ class InstallPreset extends Command
         ]);
 
         foreach($this->choices as $choice) {
-            $this->handle = Stringy::between($choice, '[', ']');
+            $this->handle = $choice;
             $preset = $this->presets->filter(function ($preset, $key) {
                 return $preset['handle'] == $this->handle;
             })->first();

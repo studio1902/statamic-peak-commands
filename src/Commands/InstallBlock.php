@@ -29,9 +29,9 @@ class InstallBlock extends Command
         );
 
         foreach($this->choices as $choice) {
-            $this->block_name = Stringy::split($choice, ':')[0];
-            $this->filename = Stringy::between($choice, '[', ']');
-            $this->instructions = Stringy::between($choice, ': ', ' [');
+            $this->block_name = Stringy::split($this->getBlocks()[$choice], ':')[0];
+            $this->filename = $choice;
+            $this->instructions = Stringy::split($this->getBlocks()[$choice], ': ')[1];
 
             try {
                 $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");
