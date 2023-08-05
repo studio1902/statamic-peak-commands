@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.3.1 (2023-08-05)
+
+### What's new
+- Improve Install Block and Install Preset command UI. 10a78768 by @robdekort
+
 ## v2.3 (2023-08-04)
 
 ### What's new
