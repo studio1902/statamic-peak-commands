@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.3.2 (2023-08-08)
+
+### What's improved
+- Use text() prompts in preset rename operation. e38f2a7e by @robdekort
+
 ## v2.3.1 (2023-08-05)
 
 ### What's improved
