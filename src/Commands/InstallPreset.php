@@ -13,6 +13,7 @@ use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\text;
 
 class InstallPreset extends Command
 {
@@ -83,9 +84,17 @@ class InstallPreset extends Command
 
                 elseif ($operation['type'] == 'rename') {
                     $this->rename = true;
-                    $this->rename_name = $this->ask("What should be the collection name for '{$preset['name']}'?");
+                    $this->rename_name = text(
+                        label: "What should be the collection name for '{$preset['name']}'?",
+                        placeholder: "E.g. Events",
+                        required: true
+                    );
                     $this->rename_handle = Str::slug($this->rename_name, '_');
-                    $this->rename_singular_name = ucfirst($this->ask("What is the singular name for this '{$this->rename_name}' collection?"));
+                    $this->rename_singular_name = ucfirst(text(
+                        label: "What is the singular name for this '{$this->rename_name}' collection?",
+                        placeholder: "E.g. Event",
+                        required: true
+                    ));
                     $this->rename_singular_handle = Str::slug($this->rename_singular_name, '_');
                 }
 
