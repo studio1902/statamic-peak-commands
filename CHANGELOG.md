@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.3.3 (2023-08-14)
+
+### What's improved
+- Validate preset and block installer multiselects. #18 by @mikemartin
+
 ## v2.3.2 (2023-08-08)
 
 ### What's improved
