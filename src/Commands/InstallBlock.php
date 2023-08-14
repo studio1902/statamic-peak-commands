@@ -25,7 +25,11 @@ class InstallBlock extends Command
         $this->choices = multiselect(
             label: 'Which blocks do you want to install into your page builder?',
             options: $this->getBlocks(),
-            scroll: 15
+            scroll: 15,
+            validate: fn ($values) => match (true) {
+                empty($values) => 'Please select at least one block. (Space)',
+                default => null,
+            }
         );
 
         foreach($this->choices as $choice) {

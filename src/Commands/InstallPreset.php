@@ -38,7 +38,11 @@ class InstallPreset extends Command
             options: $this->presets->mapWithKeys(function ($preset, $key) {
                 return [$preset['handle'] => "{$preset['name']}: {$preset['description']}"];
             })->toArray(),
-            scroll: 15
+            scroll: 15,
+            validate: fn ($values) => match (true) {
+                empty($values) => 'Please select at least one preset. (Space)',
+                default => null,
+            }
         );
 
         $target = Storage::build([
