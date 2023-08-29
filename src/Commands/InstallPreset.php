@@ -50,7 +50,7 @@ class InstallPreset extends Command
             'root' => base_path(),
         ]);
 
-        foreach($this->choices as $choice) {
+        foreach($this->choices as $key => $choice) {
             $this->handle = $choice;
             $preset = $this->presets->filter(function ($preset, $key) {
                 return $preset['handle'] == $this->handle;
@@ -140,9 +140,11 @@ class InstallPreset extends Command
                 }
             });
 
-            Artisan::call('cache:clear');
-
             $this->info("<info>[✓]</info> Peak preset '{$preset['name']}' installed.");
+
+            if ($key === array_key_last($this->choices)) {
+                Artisan::call('cache:clear');
+            }
         }
     }
 }
