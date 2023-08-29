@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.3.4 (2023-08-29)
+
+### What's fixed
+- Issue when installing multiple presets at once. 7a512f04 by @robdekort
+
 ## v2.3.3 (2023-08-14)
 
 ### What's improved
