@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.4 (2023-08-30)
+
+### What's new
+- Add start/end time feature to events preset. 9af5dbdd by @robdekort
+
 ## v2.3.4 (2023-08-29)
 
 ### What's fixed
