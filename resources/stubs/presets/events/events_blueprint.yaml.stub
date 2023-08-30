@@ -40,7 +40,7 @@ tabs:
           -
             handle: {{ singular_handle }}_date_start
             field:
-              time_enabled: false
+              time_enabled: true
               time_seconds_enabled: false
               full_width: false
               inline: false
@@ -59,7 +59,7 @@ tabs:
           -
             handle: {{ singular_handle }}_date_end
             field:
-              time_enabled: false
+              time_enabled: true
               time_seconds_enabled: false
               full_width: false
               inline: false
