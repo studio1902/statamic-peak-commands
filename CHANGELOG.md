@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.5 (2023-08-30)
+
+### What's new
+- Use replicators in link blocks and columns instead of grids. 8b150b37 by @robdekort
+
 ## v2.4 (2023-08-30)
 
 ### What's new
