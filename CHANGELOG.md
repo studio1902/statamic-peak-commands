@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.5.1 (2023-08-31)
+
+### What's improved
+- Rename link blocks to cards and update logic. 574fe8c2 by @robdekort
+
 ## v2.5 (2023-08-30)
 
 ### What's new
