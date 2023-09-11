@@ -1,9 +1,9 @@
 # Changelog
 
-## v2.5.1 (2023-08-31)
+## v2.5.2 (2023-09-11)
 
 ### What's improved
-- Rename link blocks to cards and update logic. 574fe8c2 by @robdekort
+- Change closing conditional and remove duplicate class in news stubs. #19 by @hgrimelid
 
 ## v2.5 (2023-08-30)
 
