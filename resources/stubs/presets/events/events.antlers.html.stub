@@ -17,7 +17,7 @@
             <div class="md:col-span-6">
                 {{ trans:strings.no_results }}
             </div>
-        {{ /if }}
+        {{ /unless }}
     {{ /collection:{{ handle }} }}
 
     <nav class="md:col-span-12 text-right">
