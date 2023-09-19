@@ -21,7 +21,10 @@
     <button
         @click="open = !open, setTimeout(() => {$refs.input.focus()}, 200)"
         class="text-neutral hover:text-primary"
-        aria-label="{{ trans:strings.search }}"
+        :aria-label="open
+            ? '{{ trans:strings.search_close }}'
+            : '{{ trans:strings.search_open }}'"
+        :aria-expanded="open"
     >
         {{ svg:search class="w-5 h-5 fill-current motion-safe:transition-colors" alt="" aria-hidden="true" }}
     </button>
@@ -31,12 +34,13 @@
         x-show="open"
         x-transition.origin.right.duration.200ms
         class="absolute inset-y-0 right-0 -mr-2 flex"
+        role="search"
     >
         <input
             x-ref="input"
             class="w-52 h-full pr-10 rounded border-neutral focus-visible:border-primary focus-visible:ring focus-visible:ring-primary motion-safe:transition"
             placeholder="{{ trans:strings.search }}"
-            type="text"
+            type="search"
             x-model="value"
             value="{{ get:q }}"
             name="q"
