@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.6 (2023-09-19)
+
+### What's new
+- Improve search preset accessibility. 2e3afb17 by @robdekort
+
 ## v2.5.2 (2023-09-11)
 
 ### What's improved
