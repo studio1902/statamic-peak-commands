@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.6.1 (2023-10-13)
+
+### What's improved
+- Remove date field from non dated collection blueprints. f62c3549 by @robdekort
+- Curly quotes in search string. 271807d5 by @robdekort
+
 ## v2.6 (2023-09-19)
 
 ### What's new
