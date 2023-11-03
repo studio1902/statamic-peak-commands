@@ -1,11 +1,11 @@
 # Changelog
 
-## v2.7 (2023-11-03)
+## v2.7.0 (2023-11-03)
 
 ### What's improved
 - Set interactivity to use commands in the starter kit post install script. 5aed72b7 by @robdekort
 
-## v2.6 (2023-10-13)
+## v2.6.0 (2023-10-13)
 
 ### What's improved
 - Remove date field from non dated collection blueprints. f62c3549 by @robdekort
