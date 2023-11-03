@@ -4,7 +4,6 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Laravel\Prompts\Prompt;
 use Statamic\Console\RunsInPlease;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
@@ -23,8 +22,6 @@ class InstallBlock extends Command
 
     public function handle()
     {
-        Prompt::interactive(!$this->option('no-interaction'));
-
         $this->choices = multiselect(
             label: 'Which blocks do you want to install into your page builder?',
             options: $this->getBlocks(),

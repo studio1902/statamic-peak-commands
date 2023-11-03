@@ -1,10 +1,5 @@
 # Changelog
 
-## v2.7.0 (2023-11-03)
-
-### What's improved
-- Set interactivity to use commands in the starter kit post install script. 5aed72b7 by @robdekort
-
 ## v2.6.0 (2023-10-13)
 
 ### What's improved
