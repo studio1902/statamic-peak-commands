@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Prompts\Prompt;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Site;
 use Statamic\Support\Arr;
@@ -31,6 +32,8 @@ class InstallPreset extends Command
 
     public function handle()
     {
+        Prompt::interactive(!$this->option('no-interaction'));
+
         $this->getPresets();
 
         $this->choices = multiselect(

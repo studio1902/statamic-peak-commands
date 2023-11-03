@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Laravel\Prompts\Prompt;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Entry;
 use Statamic\Facades\GlobalSet;
@@ -22,6 +23,8 @@ class ClearSite extends Command
 
     public function handle()
     {
+        Prompt::interactive(!$this->option('no-interaction'));
+
         $clear_site = $this->public = confirm(
             label: 'Do you want to clear all default Peak content?',
             default: false
