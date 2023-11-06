@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Stringy\StaticStringy as Stringy;
+use function Laravel\Prompts\suggest;
 use function Laravel\Prompts\text;
 
 class AddBlock extends Command
@@ -38,10 +39,13 @@ class AddBlock extends Command
             placeholder: 'E.g. Renders text and an image.',
             required: true
         );
-        $this->icon = text(
+
+        $this->icon = suggest(
             label: 'Which icon do you want to use for this block?',
+            options: collect(File::allFiles(base_path('/vendor/statamic/cms/resources/svg/icons/plump')))->map(function ($file) {
+                return str_replace('.svg', '', $file->getBasename('.'.$file->getExtension()));
+            })->toArray(),
             placeholder: 'file-content-list',
-            default: 'file-content-list',
             required: true
         );
 
