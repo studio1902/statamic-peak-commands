@@ -112,10 +112,11 @@ class InstallPreset extends Command
                         ->replace('{{ name }}', $this->rename_name);
                     $instructions = (string)Str::of($operation['block']['instructions'])
                         ->replace('{{ name }}', $this->rename_name);
+                    $icon = (string)Str::of($operation['block']['icon']);
                     $handle = (string)Str::of($operation['block']['handle'])
                         ->replace('{{ handle }}', $this->rename_handle);
 
-                    $this->updatePageBuilder($name, $instructions, $handle);
+                    $this->updatePageBuilder($name, $instructions, $icon, $handle);
                     $this->info("Installed page builder block: '{$name}'.");
                 }
 

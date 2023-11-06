@@ -100,6 +100,7 @@ trait InstallPresetPresets {
                         'block' => [
                             'name' => '{{ name }}',
                             'instructions' => 'A {{ name }} logo cloud.',
+                            'icon' => 'favorite-award',
                             'handle' => '{{ handle }}',
                         ]
                     ],
@@ -177,6 +178,7 @@ trait InstallPresetPresets {
                         'block' => [
                             'name' => 'Index content',
                             'instructions' => 'Render the currently mounted entries if available.',
+                            'icon' => 'file-content-list',
                             'handle' => 'index_content',
                         ]
                     ],
@@ -185,6 +187,7 @@ trait InstallPresetPresets {
                         'block' => [
                             'name' => '{{ name }}',
                             'instructions' => 'List upcoming {{ name }}.',
+                            'icon' => 'calendar-date',
                             'handle' => '{{ handle }}',
                         ]
                     ],
@@ -238,6 +241,7 @@ trait InstallPresetPresets {
                         'block' => [
                             'name' => 'FAQ',
                             'instructions' => 'List frequently asked questions in an accordion.',
+                            'icon' => 'alert-help-question',
                             'handle' => 'faq',
                         ]
                     ],
@@ -277,6 +281,7 @@ trait InstallPresetPresets {
                         'block' => [
                             'name' => 'Image credits',
                             'instructions' => 'List images with their credits.',
+                            'icon' => 'content-book-open',
                             'handle' => 'image_credits',
                         ]
                     ],
@@ -326,6 +331,7 @@ trait InstallPresetPresets {
                         'type' => 'update_article_sets',
                         'block' => [
                             'name' => 'Invoke modal',
+                            'icon' => 'alert-warning-exclamation-mark',
                             'handle' => 'invoke_modal',
                         ]
                     ],
@@ -403,6 +409,7 @@ trait InstallPresetPresets {
                         'block' => [
                             'name' => 'Index content',
                             'instructions' => 'Render the currently mounted entries if available.',
+                            'icon' => 'file-content-list',
                             'handle' => 'index_content',
                         ]
                     ],
@@ -411,6 +418,7 @@ trait InstallPresetPresets {
                         'block' => [
                             'name' => '{{ name }}',
                             'instructions' => 'List the most recent {{ name }}.',
+                            'icon' => 'share-mega-phone',
                             'handle' => '{{ handle }}',
                         ]
                     ],
@@ -499,6 +507,7 @@ trait InstallPresetPresets {
                         'block' => [
                             'name' => '{{ name }}',
                             'instructions' => 'List {{ name }}.',
+                            'icon' => 'user-multiple',
                             'handle' => '{{ handle }}',
                         ]
                     ],
@@ -580,6 +589,15 @@ trait InstallPresetPresets {
                         'type' => 'copy',
                         'input' => 'vacancies_collection.yaml.stub',
                         'output' => 'content/collections/{{ handle }}.yaml'
+                    ],
+                    [
+                        'type' => 'update_page_builder',
+                        'block' => [
+                            'name' => 'Index content',
+                            'instructions' => 'Render the currently mounted entries if available.',
+                            'icon' => 'file-content-list',
+                            'handle' => 'index_content',
+                        ]
                     ],
                     [
                         'type' => 'update_role',

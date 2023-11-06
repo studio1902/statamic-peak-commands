@@ -19,6 +19,7 @@ class AddBlock extends Command
     protected $block_name = '';
     protected $filename = '';
     protected $instructions = '';
+    protected $icon = '';
 
     public function handle()
     {
@@ -37,6 +38,12 @@ class AddBlock extends Command
             placeholder: 'E.g. Renders text and an image.',
             required: true
         );
+        $this->icon = text(
+            label: 'Which icon do you want to use for this block?',
+            placeholder: 'file-content-list',
+            default: 'file-content-list',
+            required: true
+        );
 
         try {
             $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");
@@ -44,7 +51,7 @@ class AddBlock extends Command
 
             $this->createFieldset();
             $this->createPartial();
-            $this->updatePageBuilder($this->block_name, $this->instructions, $this->filename);
+            $this->updatePageBuilder($this->block_name, $this->instructions, $this->icon, $this->filename);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }

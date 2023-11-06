@@ -71,12 +71,13 @@ trait SharedFunctions {
      *
      * @return bool|null
      */
-    protected function updatePageBuilder($name, $instructions, $filename)
+    protected function updatePageBuilder($name, $instructions, $icon, $filename)
     {
         $fieldset = Yaml::parseFile(base_path('resources/fieldsets/page_builder.yaml'));
         $newSet = [
             'display' => $name,
             'instructions' => $instructions,
+            'icon' => $icon,
             'fields' => [
                 [
                     'import' => $filename

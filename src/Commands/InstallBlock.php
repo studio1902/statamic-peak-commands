@@ -19,6 +19,7 @@ class InstallBlock extends Command
     protected $choices = '';
     protected $filename = '';
     protected $instructions = '';
+    protected $icon = '';
 
     public function handle()
     {
@@ -35,14 +36,16 @@ class InstallBlock extends Command
         foreach($this->choices as $choice) {
             $this->block_name = Stringy::split($this->getBlocks()[$choice], ':')[0];
             $this->filename = $choice;
-            $this->instructions = Stringy::split($this->getBlocks()[$choice], ': ')[1];
+            $description = Stringy::split($this->getBlocks()[$choice], ': ')[1];
+            $this->instructions = Stringy::split($description, ' \[')[0];
+            $this->icon = rtrim(Stringy::split($description, ' \[')[1], "]");
 
             try {
                 $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");
                 $this->checkExistence('Partial', "resources/views/page_builder/_{$this->filename}.antlers.html");
 
                 $this->copyStubs();
-                $this->updatePageBuilder($this->block_name, $this->instructions, $this->filename);
+                $this->updatePageBuilder($this->block_name, $this->instructions, $this->icon, $this->filename);
             } catch (\Exception $e) {
                 return $this->error($e->getMessage());
             }

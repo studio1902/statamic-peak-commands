@@ -325,7 +325,7 @@ class AddCollection extends Command
     {
         File::put(base_path("resources/fieldsets/index_content.yaml"), $this->getStub('/blocks/index_content.yaml.stub'));
         File::put(base_path("resources/views/page_builder/_index_content.antlers.html"), $this->getStub('/blocks/index_content.antlers.html.stub'));
-        $this->updatePageBuilder('Index content', 'Render the currently mounted entries if available.', 'index_content');
+        $this->updatePageBuilder('Index content', 'Render the currently mounted entries if available.', 'file-content-list', 'index_content');
 
         $pageBuilder = Entry::find($this->mount)
             ->get('page_builder');
