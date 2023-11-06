@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.6.1 (2023-11-06)
+
+### What's new
+- Support icons for `add-block`, `add-collection`, `install-preset`, and `install-block`. 7cc48d9a by @robdekort
+
+### What's fixed
+- Added missing `index_content` to page builder for the Vacancies preset. 7cc48d9a by @robdekort
+
 ## v2.6.0 (2023-10-13)
 
 ### What's improved
