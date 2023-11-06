@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.6.2 (2023-11-06)
+
+### What's improved
+- Usee Prompts Suggest for icons when running `add-block`. 3f2d4256 by @robdekort
+
 ## v2.6.1 (2023-11-06)
 
 ### What's new
