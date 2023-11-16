@@ -1,9 +1,14 @@
 # Changelog
 
+## v2.6.3 (2023-11-16)
+
+### What's improved
+- Use fuzzy search for icons when running `add-block`. 42f2b882 by @robdekort
+
 ## v2.6.2 (2023-11-06)
 
 ### What's improved
-- Usee Prompts Suggest for icons when running `add-block`. 3f2d4256 by @robdekort
+- Use Prompts Suggest for icons when running `add-block`. 3f2d4256 by @robdekort
 
 ## v2.6.1 (2023-11-06)
 
