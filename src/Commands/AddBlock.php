@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Stringy\StaticStringy as Stringy;
-use function Laravel\Prompts\suggest;
+use function Laravel\Prompts\search;
 use function Laravel\Prompts\text;
 
 class AddBlock extends Command
@@ -29,22 +29,37 @@ class AddBlock extends Command
             placeholder: 'E.g. Text and image',
             required: true
         );
+
         $this->filename = text(
             label: 'What should be the filename for this block?',
             default: Stringy::slugify($this->block_name, '_', Config::getShortLocale()),
             required: true
         );
+
         $this->instructions = text(
             label: 'What should be the instructions for this block?',
             placeholder: 'E.g. Renders text and an image.',
             required: true
         );
 
-        $this->icon = suggest(
+        $icons = collect(File::allFiles(base_path('/vendor/statamic/cms/resources/svg/icons/plump')))->map(function ($file) {
+            return str_replace('.svg', '', $file->getBasename('.'.$file->getExtension()));
+        });
+
+        $this->icon = search(
             label: 'Which icon do you want to use for this block?',
-            options: collect(File::allFiles(base_path('/vendor/statamic/cms/resources/svg/icons/plump')))->map(function ($file) {
-                return str_replace('.svg', '', $file->getBasename('.'.$file->getExtension()));
-            })->toArray(),
+            options: function (string $value) use ($icons) {
+                if (!$value) {
+                    return $icons
+                        ->values()
+                        ->all();
+                }
+
+                return $icons
+                    ->filter(fn(string $item) => Str::contains($item, $value, true))
+                    ->values()
+                    ->all();
+            },
             placeholder: 'file-content-list',
             required: true
         );
