@@ -42,7 +42,11 @@ class AddBlock extends Command
             required: true
         );
 
-        $icons = collect(File::allFiles(base_path('/vendor/statamic/cms/resources/svg/icons/plump')))->map(function ($file) {
+        $reflection = new \ReflectionClass(\Statamic\Fieldtypes\Sets::class);
+        $iconsDirectory = $reflection->getStaticPropertyValue('iconsDirectory') ?? base_path('/vendor/statamic/cms/resources/svg/icons');
+        $iconsFolder = $reflection->getStaticPropertyValue('iconsFolder');
+
+        $icons = collect(File::allFiles("$iconsDirectory/$iconsFolder"))->map(function ($file) {
             return str_replace('.svg', '', $file->getBasename('.'.$file->getExtension()));
         });
 
