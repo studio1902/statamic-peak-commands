@@ -2,7 +2,7 @@
 
 ## v2.7.0 (2023-11-17)
 
-### What's improved
+### What's new
 - Support [custom icons](https://github.com/statamic/cms/pull/8931) for Replicators and Bards when running `php please peak:add-block`. 7a631585 by @robdekort
 
 ## v2.6.3 (2023-11-16)
