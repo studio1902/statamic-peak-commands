@@ -4,7 +4,7 @@
 #}}
 
 <!-- /{{ filename }}/show.antlers.html -->
-<main class="outer-grid" id="content">
+<main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
     <div class="fluid-container">
         {{ partial:typography/h1 :content="title" }}
     </div>

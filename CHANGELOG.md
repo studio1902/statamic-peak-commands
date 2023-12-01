@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.0.0 (2023-12-01)
+
+### What's new
+- Replace `outer-grid` with `stack` utilities in all stubs. See [this PR](https://github.com/studio1902/statamic-peak/pull/363) for more information. 7a631585 by @robdekort
+
 ## v2.7.0 (2023-11-17)
 
 ### What's new
