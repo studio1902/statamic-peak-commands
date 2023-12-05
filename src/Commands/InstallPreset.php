@@ -103,7 +103,7 @@ class InstallPreset extends Command
                 }
 
                 elseif ($operation['type'] == 'update_article_sets') {
-                    $this->updateArticleSets($operation['block']['name'], $operation['block']['handle']);
+                    $this->updateArticleSets($operation['block']['name'], $operation['block']['handle'], $operation['block']['description'], $operation['block']['icon']);
                     $this->info("Installed article set: '{$operation['block']['name']}'.");
                 }
 

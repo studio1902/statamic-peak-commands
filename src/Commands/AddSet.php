@@ -7,8 +7,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
-use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
+use function Laravel\Prompts\search;
 use function Laravel\Prompts\text;
 
 class AddSet extends Command
@@ -19,6 +19,8 @@ class AddSet extends Command
     protected $description = "Add an Article (Bard) set.";
     protected $set_name = '';
     protected $filename = '';
+    protected $instructions = '';
+    protected $icon = '';
 
     public function handle()
     {
@@ -27,7 +29,16 @@ class AddSet extends Command
             placeholder: 'E.g. Card',
             required: true
         );
+
         $this->filename = Stringy::slugify($this->set_name, '_', Config::getShortLocale());
+
+        $this->instructions = text(
+            label: 'What should be the instructions for this set?',
+            placeholder: 'E.g. Lead text that renders big and bold.',
+            required: true
+        );
+
+        $this->icon = $this->promptsIconPicker('Which icon do you want to use for this set?');
 
         try {
             $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");
@@ -35,7 +46,7 @@ class AddSet extends Command
 
             $this->createFieldset();
             $this->createPartial();
-            $this->updateArticleSets($this->set_name, $this->filename);
+            $this->updateArticleSets($this->set_name, $this->filename, $this->instructions, $this->icon);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }

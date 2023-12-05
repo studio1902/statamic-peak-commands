@@ -2,10 +2,12 @@
 
 namespace Studio1902\PeakCommands\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 
 trait SharedFunctions {
@@ -30,15 +32,51 @@ trait SharedFunctions {
     }
 
     /**
+     * Prompt a search dialogue requesting an icon.
+     *
+     * @return string|null
+     */
+    protected function promptsIconPicker($label)
+    {
+        $reflection = new \ReflectionClass(\Statamic\Fieldtypes\Sets::class);
+        $iconsDirectory = $reflection->getStaticPropertyValue('iconsDirectory') ?? base_path('/vendor/statamic/cms/resources/svg/icons');
+        $iconsFolder = $reflection->getStaticPropertyValue('iconsFolder');
+
+        $icons = collect(File::allFiles("$iconsDirectory/$iconsFolder"))->map(function ($file) {
+            return str_replace('.svg', '', $file->getBasename('.'.$file->getExtension()));
+        });
+
+        return $this->icon = search(
+            label: $label,
+            options: function (string $value) use ($icons) {
+                if (!$value) {
+                    return $icons
+                        ->values()
+                        ->all();
+                }
+
+                return $icons
+                    ->filter(fn(string $item) => Str::contains($item, $value, true))
+                    ->values()
+                    ->all();
+            },
+            placeholder: 'file-content-list',
+            required: true
+        );
+    }
+
+    /**
      * Update article.yaml.
      *
      * @return bool|null
      */
-    protected function updateArticleSets($name, $filename)
+    protected function updateArticleSets($name, $filename, $instructions, $icon)
     {
         $fieldset = Yaml::parseFile(base_path('resources/fieldsets/article.yaml'));
         $newSet = [
             'display' => $name,
+            'instructions' => $instructions,
+            'icon' => $icon,
             'fields' => [
                 [
                     'import' => $filename

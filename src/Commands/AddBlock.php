@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Stringy\StaticStringy as Stringy;
-use function Laravel\Prompts\search;
 use function Laravel\Prompts\text;
 
 class AddBlock extends Command
@@ -42,31 +41,7 @@ class AddBlock extends Command
             required: true
         );
 
-        $reflection = new \ReflectionClass(\Statamic\Fieldtypes\Sets::class);
-        $iconsDirectory = $reflection->getStaticPropertyValue('iconsDirectory') ?? base_path('/vendor/statamic/cms/resources/svg/icons');
-        $iconsFolder = $reflection->getStaticPropertyValue('iconsFolder');
-
-        $icons = collect(File::allFiles("$iconsDirectory/$iconsFolder"))->map(function ($file) {
-            return str_replace('.svg', '', $file->getBasename('.'.$file->getExtension()));
-        });
-
-        $this->icon = search(
-            label: 'Which icon do you want to use for this block?',
-            options: function (string $value) use ($icons) {
-                if (!$value) {
-                    return $icons
-                        ->values()
-                        ->all();
-                }
-
-                return $icons
-                    ->filter(fn(string $item) => Str::contains($item, $value, true))
-                    ->values()
-                    ->all();
-            },
-            placeholder: 'file-content-list',
-            required: true
-        );
+        $this->icon = $this->promptsIconPicker('Which icon do you want to use for this block?');
 
         try {
             $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");

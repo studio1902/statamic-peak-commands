@@ -332,6 +332,7 @@ trait InstallPresetPresets {
                         'block' => [
                             'name' => 'Invoke modal',
                             'icon' => 'alert-warning-exclamation-mark',
+                            'description' => 'Invokes a modal.',
                             'handle' => 'invoke_modal',
                         ]
                     ],
