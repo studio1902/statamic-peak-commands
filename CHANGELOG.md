@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.1.0 (2023-12-05)
+
+### What's new
+- Add instructions and icon prompts to `add-set` command. dec5ba0b by @robdekort
+
+### What's improved
+- Add `py-8` to `add-set` Antlers stub. 7c924d52 by @robdekort
+
 ## v3.0.0 (2023-12-01)
 
 ### What's new
