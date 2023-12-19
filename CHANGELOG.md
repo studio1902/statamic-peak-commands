@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.2.0 (2023-12-19)
+
+### What's improved
+- Return the first icon on non WSL Windows and skip the Laravel Search Prompt. 4a15f77d by @robdekort
+- Use button attributes from Tools addon in cards stub. 0d488b6a by @robdekort
+
 ## v3.1.0 (2023-12-05)
 
 ### What's new
