@@ -46,6 +46,10 @@ trait SharedFunctions {
             return str_replace('.svg', '', $file->getBasename('.'.$file->getExtension()));
         });
 
+        if (DIRECTORY_SEPARATOR === '\\') {
+            return $icons->first();
+        }
+
         return $this->icon = search(
             label: $label,
             options: function (string $value) use ($icons) {

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Stringy\StaticStringy as Stringy;
-use function Laravel\Prompts\search;
 use function Laravel\Prompts\text;
 
 class AddSet extends Command
