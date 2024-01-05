@@ -43,14 +43,14 @@
 </script>
 
 <main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
-    <section class="fluid-container grid md:grid-cols-12 gap-12">
-        {{ partial:typography/h1 :content="title" class="md:col-span-12" }}
+    <section class="fluid-grid stack-12">
+        {{ partial:typography/h1 :content="title" class="span-content" }}
 
-        <div class="md:col-span-6">
+        <div class="span-content md:col-start-[col-1] md:col-span-6">
             {{ partial:typography/p :content="teaser" }}
         </div>
 
-         <aside class="md:col-span-6">
+         <aside class="span-content md:col-start-[col-1] md:col-span-6">
             {{ trans:strings.{{ handle }}_published }}: {{ partial:typography/time :content="date" }}<br>
             {{ trans:strings.{{ handle }}_expires }}: {{ partial:typography/time :content="expires" }}<br>
             {{ trans:strings.{{ handle }}_region }}: {{ region }}<br>
