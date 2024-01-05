@@ -9,6 +9,7 @@ sections:
           display: 'Alt Text'
           type: textarea
           instructions: 'Description of the image'
+          focus: true
       -
         handle: copyright
         field:

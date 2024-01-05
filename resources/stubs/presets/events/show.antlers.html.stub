@@ -42,16 +42,16 @@
 </script>
 
 <main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
-    <section class="fluid-container grid md:grid-cols-12 gap-8 lg:-mb-12">
-        <header class="md:col-span-8 md:col-start-3">
+    <section class="fluid-grid stack-8">
+        <header class="md:col-start-[col-3] md:col-span-8 stack-4">
             {{ partial:typography/h1 :content="title" class="mt-4 text-center" }}
 
-            <figure class="mt-4">
+            <figure>
                 {{ partial:statamic-peak-tools::components/picture :image="image" sizes="(min-width: 1280px) 1150px, (min-width: 768px) 90vw" aspect_ratio="3/1" lazy="true" cover="true" class="aspect-[3/1]" }}
             </figure>
         </header>
 
-        <aside class="size-md p-6 md:p-8 grid md:grid-cols-3 gap-2 md:gap-8 border border-neutral/10 shadow-lg rounded">
+        <aside class="md:col-start-[col-3] md:col-span-8 p-6 md:p-8 grid md:grid-cols-3 gap-2 md:gap-8 border border-neutral/10 shadow-lg rounded">
             {{ partial:typography/h3 content="{trans:strings.{{ handle }}_when}" }}
             <time class="md:col-span-2 mb-4 md:mb-0" lang="{{ site:short_locale }}">
                 {{ partial:typography/time as="span" :content="{{ singular_handle }}_date_start" }}
@@ -92,12 +92,14 @@
 
     {{ collection:{{ handle }} sort="{{ singular_handle }}_date_start:asc" {{ singular_handle }}_date_end:is_after="{ today }" :id:isnt="id" limit="3" as="items" }}
         {{ unless no_results }}
-            <section class="fluid-container grid md:grid-cols-12 gap-8">
-                {{ partial:typography/h1 as="h2" content="{ trans:strings.{{ handle }}_more }" class="md:col-span-12" }}
+            <section class="fluid-grid">
+                <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
+                    {{ partial:typography/h1 as="h2" content="{ trans:strings.{{ handle }}_more }" class="md:col-span-12" }}
 
-                {{ items }}
-                    {{ partial:components/{{ handle }}_item class="md:col-span-4" }}
-                {{ /items }}
+                    {{ items }}
+                        {{ partial:components/{{ handle }}_item class="md:col-span-4" }}
+                    {{ /items }}
+                </div>
             </section>
         {{ /unless }}
     {{ /collection:{{ handle }} }}

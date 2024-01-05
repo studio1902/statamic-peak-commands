@@ -5,19 +5,19 @@
 #}}
 
 <!-- /page_builder/_image_and_text.antlers.html -->
-<section class="fluid-container grid md:grid-cols-12 gap-8 items-center">
-    <article class="md:col-span-6 {{ image_position == 'left' ?= 'order-2' }}">
-        {{ block:title ?= { partial:typography/h2 :content="block:title" class="mb-4" } }}
+<section class="fluid-grid gap-y-8 items-center grid-flow-col">
+    <article class="span-content md:col-span-6 stack-4 {{ image_position == 'left' ? 'md:col-start-[col-7]' : 'md:col-start-[content-start]' }}">
+        {{ block:title ?= { partial:typography/h2 :content="block:title" } }}
 
-        {{ partial:typography/prose class="{ buttons ?= 'mb-4' }" }}
+        {{ partial:typography/prose }}
             {{ block:text }}
         {{ /partial:typography/prose }}
 
         {{ partial:components/buttons }}
     </article>
 
-    <figure class="md:col-span-6">
-        {{ partial:statamic-peak-tools::components/picture :image="block:image" sizes="(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw" }}
+    <figure class="span-content md:col-span-6 {{ image_position == 'left' ? 'md:col-start-[content-start]' : 'md:col-start-[col-7]' }}">
+        {{ partial:statamic-peak-tools::components/picture :image="block:image" cover="true" sizes="(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw" }}
     </figure>
 </section>
 <!-- End: /page_builder/_image_and_text.antlers.html -->

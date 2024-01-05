@@ -5,23 +5,25 @@
 #}}
 
 <!-- /page_builder/_{{ handle }}.antlers.html -->
-<section class="fluid-container grid md:grid-cols-12 gap-8">
-    {{ title ?= { partial:typography/h1 as="h2" :content="title" class="md:col-span-12" } }}
+<section class="fluid-grid">
+    <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
+        {{ title ?= { partial:typography/h1 as="h2" :content="title" class="md:col-span-12" } }}
 
-    {{ collection:{{ handle }} sort="date:desc" limit="3" as="items" }}
-        {{ unless no_results }}
-            {{ items }}
-                {{ partial:components/{{ handle }}_item class="md:col-span-4" }}
-            {{ /items }}
-        {{ else }}
-            <div class="md:col-span-6">
-                {{ trans:strings.no_results }}
-            </div>
-        {{ /if }}
-    {{ /collection:{{ handle }} }}
+        {{ collection:{{ handle }} sort="date:desc" limit="3" as="items" }}
+            {{ unless no_results }}
+                {{ items }}
+                    {{ partial:components/{{ handle }}_item class="md:col-span-4" }}
+                {{ /items }}
+            {{ else }}
+                <div class="md:col-span-6">
+                    {{ trans:strings.no_results }}
+                </div>
+            {{ /if }}
+        {{ /collection:{{ handle }} }}
 
-    <nav class="md:col-span-12 text-right">
-        {{ partial:components/button label="{trans:strings.{{ handle }}_all}" button_type="inline" link_type="url" url="{mount_url:{{ handle }}}" }}
-    </nav>
+        <nav class="md:col-span-12 text-right">
+            {{ partial:components/button label="{trans:strings.{{ handle }}_all}" button_type="inline" link_type="url" url="{mount_url:{{ handle }}}" }}
+        </nav>
+    </div>
 </section>
 <!-- End: /page_builder/_{{ handle }}.antlers.html -->
