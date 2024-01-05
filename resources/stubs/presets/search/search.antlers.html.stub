@@ -10,12 +10,12 @@
 
 <!-- /search.antlers.html -->
 <main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
-    <section class="fluid-container grid grid-cols-12 gap-y-6">
-        <div class="col-span-12 md:col-span-8 md:col-start-3">
+    <section class="fluid-grid stack-6">
+        <div class="span-content md:col-start-[col-3] md:col-span-8">
             {{ partial:typography/h1 class="mb-2" content="{trans:strings.search_results_for} &OpenCurlyDoubleQuote;<span class='italic'>{get:q}</span>&CloseCurlyDoubleQuote;" }}
         </div>
 
-        <form class="relative col-span-12 md:col-span-8 md:col-start-3" action="/search" role="search">
+        <form class="relative span-content md:col-start-[col-3] md:col-span-8" action="/search" role="search">
             <input class="w-full pr-10 rounded border-neutral focus-visible:border-primary focus-visible:ring focus-visible:ring-primary motion-safe:transition" placeholder="{{ trans:strings.search }}" type="search" value="{{ get:q }}" name="q"/>
 
             <button class="absolute inset-y-0 right-0 flex mr-1 items-center text-neutral hover:text-primary rounded focus:outline-none focus-visible:ring-2 ring-secondary ring-offset-4 ring-offset-white" aria-label="{{ trans:strings.search }}">
@@ -25,11 +25,11 @@
 
         {{ search:results }}
             {{ if no_results }}
-                <article class="col-span-12 md:col-span-8 md:col-start-3">
+                <article class="span-content md:col-start-[col-3] md:col-span-8">
                     {{ partial:typography/p content="{trans:strings.search_no_results}" }}
                 </article>
             {{ else }}
-                <article class="col-span-12 md:col-span-8 md:col-start-3">
+                <article class="span-content md:col-start-[col-3] md:col-span-8">
                     <a class="flex flex-col" href="{{ url }}">
                         <span class="text-neutral underline decoration-primary mb-1 break-words">{{ permalink }}</span>
 
