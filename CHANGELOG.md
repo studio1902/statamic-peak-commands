@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.0.0 (2024-01-05)
+
+### What's new
+- Support for the [`fluid-grid`](https://github.com/studio1902/statamic-peak/pull/373) component in all stubs. #20 by @robdekort
+
 ## v3.2.0 (2023-12-19)
 
 ### What's improved
