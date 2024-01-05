@@ -5,15 +5,15 @@
 #}}
 
 <!-- /page_builder/_{{ handle }}.antlers.html -->
-<section class="fluid-container grid md:grid-cols-12 gap-8">
+<section class="fluid-grid gap-y-8">
     {{ if block:title or block:text }}
-        <header class="md:col-span-6">
-            {{ block:title ?= { partial:typography/h2 :content="block:title" class="mb-4" } }}
+        <header class="span-content stack-4">
+            {{ block:title ?= { partial:typography/h2 :content="block:title" } }}
             {{ block:text ?= { partial:typography/p :content="block:text" } }}
         </header>
     {{ /if }}
 
-    <div class="md:col-span-12 grid md:grid-cols-12 gap-8">
+    <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
         {{
             {{ handle }} = block:{{ handle }}
                 ? block:{{ handle }}
