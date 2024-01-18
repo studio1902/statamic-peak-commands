@@ -10,7 +10,7 @@ trait InstallBlockBlocks {
                 'call_to_action' => 'Call to action: Show a call to action. [alert-alarm-bell]',
                 'cards' => 'Cards: Cards that link using the button fieldset. [link]',
                 'collection' => 'Collection: Show collection entries. [file-content-list]',
-                'columns' => 'Columns: Text columns with optional images and buttons. [layout-three-columns]',
+                'columns' => 'Columns: Text columns with optional images and buttons. [layout-two-columns]',
                 'divider' => 'Divider: A visual divider between blocks. [layout-table-row-insert]',
                 'full_width_image' => 'Full width image: A full width image with optional text and button(s). [media-image-picture-orientation]',
                 'index_content' => 'Index content: Render the currently mounted entries if available. [file-content-list]',
