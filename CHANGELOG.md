@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.2.0 (2024-01-21)
+
+### What's improved
+- Make some more stubs compatible with the fluid grid. bb30f29e by @robdekort
+
 ## v4.1.0 (2024-01-18)
 
 ### What's new
