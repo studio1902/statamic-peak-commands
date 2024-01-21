@@ -5,7 +5,7 @@
 #}}
 
 <!-- /components/_invoke_modal.antlers.html -->
-<div class="not-prose size-md flex">
+<div class="not-prose span-md flex">
     {{ partial:components/modal :label_open="label_open" :label_close="label_close" :label_aria="label_aria" }}
         {{ slot:content }}
             {{ partial:typography/prose }}
