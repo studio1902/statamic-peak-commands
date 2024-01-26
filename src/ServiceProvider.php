@@ -16,6 +16,10 @@ class ServiceProvider extends AddonServiceProvider
         Commands\InstallPreset::class,
     ];
 
+    protected $updateScripts = [
+        \Studio1902\PeakCommands\Updates\UpdateRSSFeed::class,
+    ];
+
     public function bootAddon()
     {
         $this->registerPublishableStubs();
