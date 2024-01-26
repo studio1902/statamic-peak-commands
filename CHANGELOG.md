@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.0.0 (2024-01-26)
+
+### What's new
+- Update page builder stubs to extend block partial. 4bf9d113 by @robdekort
+
 ## v4.4.0 (2024-01-26)
 
 ### What's new
