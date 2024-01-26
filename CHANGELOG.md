@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.2.1 (2024-01-26)
+
+### What's fixed
+- Use proper date formatting and crop asset in RSS feed. 0c7e5c1c by @robdekort
+
 ## v4.2.0 (2024-01-21)
 
 ### What's improved
