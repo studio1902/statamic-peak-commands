@@ -19,21 +19,23 @@
     </script>
 {{ /once }}
 
-<section class="fluid-grid stack-8">
-    {{ if block:title || block:text }}
-        <header class="span-content md:col-start-[col-3] md:col-span-8">
-            {{ block:title ?= { partial:typography/h1 as="h2" :content="block:title" class="mb-4" } }}
-            {{ block:text ?= { partial:typography/p :content="block:text" } }}
-        </header>
-    {{ /if }}
+{{ partial:page_builder/block }}
+    <div class="contents stack-8">
+        {{ if block:title || block:text }}
+            <header class="span-content md:col-start-[col-3] md:col-span-8">
+                {{ block:title ?= { partial:typography/h1 as="h2" :content="block:title" class="mb-4" } }}
+                {{ block:text ?= { partial:typography/p :content="block:text" } }}
+            </header>
+        {{ /if }}
 
-    <div
-        x-data="{ expanded: null }"
-        class="span-content md:col-start-[col-3] md:col-span-8 flex flex-col gap-4"
-    >
-        {{ block:questions }}
-            {{ partial:components/question }}
-        {{ /block:questions }}
+        <div
+            x-data="{ expanded: null }"
+            class="span-content md:col-start-[col-3] md:col-span-8 flex flex-col gap-4"
+        >
+            {{ block:questions }}
+                {{ partial:components/question }}
+            {{ /block:questions }}
+        </div>
     </div>
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_faq.antlers.html -->

@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_text_columns.antlers.html -->
-<section class="fluid-grid">
+{{ partial:page_builder/block }}
     <div class="span-content">
         {{ block:title ?= { partial:typography/h3 as="h2" :content="block:title" class="mb-2 md:max-w-[1/2]" } }}
 
@@ -14,5 +14,5 @@
             {{ block:text }}
         {{ /partial:typography/prose }}
     </div>
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_text_columns.antlers.html -->

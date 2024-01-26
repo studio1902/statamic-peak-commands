@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_columns.antlers.html -->
-<section class="fluid-grid">
+{{ partial:page_builder/block }}
     <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
         {{ block:columns }}
             <div
@@ -40,5 +40,5 @@
             </div>
         {{ /block:columns }}
     </div>
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_columns.antlers.html -->

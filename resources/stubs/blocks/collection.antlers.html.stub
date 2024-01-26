@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_collection.antlers.html -->
-<section class="fluid-grid">
+{{ partial:page_builder/block }}
     <div class="span-content md:col-start-[col-3] md:col-span-8">
         {{ partial:typography/h2 class="mb-4" :content="block:title" }}
         <ul class="list-inside list-disc">
@@ -18,5 +18,5 @@
             {{ /block:collection }}
         </ul>
     </div>
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_collection.antlers.html -->

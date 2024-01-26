@@ -13,7 +13,7 @@
 
 {{ section:index_content }}
     <!-- /{{ filename }}/index.antlers.html -->
-    <section class="fluid-grid">
+    {{ partial:page_builder/block }}
         <div class="span-content grid grid-cols-12 gap-fluid-grid-gap">
             {{ collection:{{ handle }} sort="{{ sort }}" paginate="true" limit="10" as="items" }}
                 {{ unless no_results }}
@@ -30,6 +30,6 @@
                 {{ partial:statamic-peak-tools::components/pagination class="col-span-12" }}
             {{ /collection:{{ handle }} }}
         </div>
-    </section>
+    {{ /partial:page_builder/block }}
     <!-- End: /{{ filename }}/index.antlers.html -->
 {{ /section:index_content }}

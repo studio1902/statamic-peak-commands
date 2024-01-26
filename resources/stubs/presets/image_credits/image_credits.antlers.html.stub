@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_image_credits.antlers.html -->
-<section class="fluid-grid">
+{{ partial:page_builder/block }}
     {{ if block:title || block:text }}
         <header class="span-content text-center stack-4">
             {{ block:title ?= { partial:typography/h2 :content="block:title" } }}
@@ -31,5 +31,5 @@
             {{ /images }}
         {{ /assets }}
     </div>
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_image_credits.antlers.html -->

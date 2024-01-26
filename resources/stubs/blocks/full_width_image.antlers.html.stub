@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_full_width_image.antlers.html -->
-<section class="fluid-grid w-full min-h-[14rem]">
+{{ partial:page_builder/block class="min-h-[14rem]" }}
     <figure class="row-start-1 span-full">
         {{ partial:statamic-peak-tools::components/picture :image="block:image" aspect_ratio="2/1 large:3/1" cover="true" lazy="true" sizes="100vw" }}
     </figure>
@@ -20,5 +20,5 @@
         {{ text ?= { partial:typography/p :content="block:text" color="text-white" class="text-center" } }}
         {{ partial:components/buttons inverted="true" class="justify-center" }}
     </article>
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_full_width_image.antlers.html -->

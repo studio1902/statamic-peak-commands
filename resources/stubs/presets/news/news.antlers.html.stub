@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_{{ handle }}.antlers.html -->
-<section class="fluid-grid">
+{{ partial:page_builder/block }}
     <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
         {{ title ?= { partial:typography/h1 as="h2" :content="title" class="md:col-span-12" } }}
 
@@ -25,5 +25,5 @@
             {{ partial:components/button label="{trans:strings.{{ handle }}_all}" button_type="inline" link_type="url" url="{mount_url:{{ handle }}}" }}
         </nav>
     </div>
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_{{ handle }}.antlers.html -->

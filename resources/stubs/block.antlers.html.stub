@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_{{ filename }}.antlers.html -->
-<section class="fluid-grid">
+{{ partial:page_builder/block }}
     {{ partial:typography/h3 content="🔧<br>{{ name }}" class="span-content text-center" }}
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_{{ filename }}.antlers.html -->

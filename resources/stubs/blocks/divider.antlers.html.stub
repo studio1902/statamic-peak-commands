@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_divider.antlers.html -->
-<section class="fluid-grid">
+{{ partial:page_builder/block }}
     <hr class="span-content border-b-1 border-neutral">
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_divider.antlers.html -->

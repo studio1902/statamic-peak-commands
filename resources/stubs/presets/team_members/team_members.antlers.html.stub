@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_{{ handle }}.antlers.html -->
-<section class="fluid-grid gap-y-8">
+{{ partial:page_builder/block class="gap-y-8" }}
     {{ if block:title or block:text }}
         <header class="span-content stack-4">
             {{ block:title ?= { partial:typography/h2 :content="block:title" } }}
@@ -37,5 +37,5 @@
             </article>
         {{ /{{ handle }} }}
     </div>
-</section>
+{{ /partial:page_builder/block }}
 <!-- End: /page_builder/_{{ handle }}.antlers.html -->

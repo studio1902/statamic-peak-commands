@@ -43,22 +43,24 @@
 </script>
 
 <main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
-    <section class="fluid-grid stack-12">
-        {{ partial:typography/h1 :content="title" class="span-content" }}
+    <section class="fluid-grid">
+        <div class="contents stack-12">
+            {{ partial:typography/h1 :content="title" class="span-content" }}
 
-        <div class="span-content md:col-start-[col-1] md:col-span-6">
-            {{ partial:typography/p :content="teaser" }}
+            <div class="span-content md:col-start-[col-1] md:col-span-6">
+                {{ partial:typography/p :content="teaser" }}
+            </div>
+
+            <aside class="span-content md:col-start-[col-1] md:col-span-6">
+                {{ trans:strings.{{ handle }}_published }}: {{ partial:typography/time :content="date" }}<br>
+                {{ trans:strings.{{ handle }}_expires }}: {{ partial:typography/time :content="expires" }}<br>
+                {{ trans:strings.{{ handle }}_region }}: {{ region }}<br>
+                {{ trans:strings.{{ handle }}_employment_type }}: {{ employment_type == 'FULL_TIME' ? { trans:strings.{{ handle }}_full_time } : { trans:strings.{{ handle }}_part_time } }}<br>
+                {{ trans:strings.{{ handle }}_hours }}: {{ hours }}<br>
+                {{ trans:strings.{{ handle }}_salary_min }}: {{ salary_min ?= '€ { salary_min | format_number('0', ',', '.') }' }}<br>
+                {{ trans:strings.{{ handle }}_salary_max }}: {{ salary_max ?= '€ { salary_max | format_number('0', ',', '.') }' }}<br>
+            </aside>
         </div>
-
-         <aside class="span-content md:col-start-[col-1] md:col-span-6">
-            {{ trans:strings.{{ handle }}_published }}: {{ partial:typography/time :content="date" }}<br>
-            {{ trans:strings.{{ handle }}_expires }}: {{ partial:typography/time :content="expires" }}<br>
-            {{ trans:strings.{{ handle }}_region }}: {{ region }}<br>
-            {{ trans:strings.{{ handle }}_employment_type }}: {{ employment_type == 'FULL_TIME' ? { trans:strings.{{ handle }}_full_time } : { trans:strings.{{ handle }}_part_time } }}<br>
-            {{ trans:strings.{{ handle }}_hours }}: {{ hours }}<br>
-            {{ trans:strings.{{ handle }}_salary_min }}: {{ salary_min ?= '€ { salary_min | format_number('0', ',', '.') }' }}<br>
-            {{ trans:strings.{{ handle }}_salary_max }}: {{ salary_max ?= '€ { salary_max | format_number('0', ',', '.') }' }}<br>
-        </aside>
     </section>
 
     {{ page_builder scope="block" }}
