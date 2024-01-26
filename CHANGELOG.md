@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.3.0 (2024-01-26)
+
+### What's new
+- Let's fix those RSS feeds automatically with an update script. It'll save us both time. cb911645 by @robdekort
+
 ## v4.2.1 (2024-01-26)
 
 ### What's fixed
