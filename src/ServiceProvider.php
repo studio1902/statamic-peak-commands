@@ -18,6 +18,7 @@ class ServiceProvider extends AddonServiceProvider
 
     protected $updateScripts = [
         \Studio1902\PeakCommands\Updates\UpdateRSSFeed::class,
+        \Studio1902\PeakCommands\Updates\UpdateJSONldDateFormatting::class,
     ];
 
     public function bootAddon()
