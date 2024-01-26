@@ -9,8 +9,8 @@
         "@context": "https://schema.org",
         "@type": "Event",
         "name": "{{ title }}",
-        "startDate": "{{ {{ singular_handle }}_date_start format="Y-m-d\TH:i:s" }}",
-        "endDate": "{{ {{ singular_handle }}_date_end format="Y-m-d\TH:i:s" }}",
+        "startDate": "{{ {{ singular_handle }}_date_start | format('c') }}",
+        "endDate": "{{ {{ singular_handle }}_date_end | format('c') }}",
         "eventStatus": "https://schema.org/{{ {{ singular_handle }}_status }}",
         {{ if {{ singular_handle }}_type.value == 'offline' }}
             "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",

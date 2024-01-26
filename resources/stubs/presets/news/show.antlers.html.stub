@@ -14,7 +14,7 @@
         },
         "headline": "{{ title }}",
         "image": "{{ config:app:url }}{{ image }}",
-        "datePublished": "{{ date format="Y-m-d\TH:i:s" }}",
+        "datePublished": "{{ date | format('c') }}",
         "author": {
             "@type": "Organization",
             "name": "{{ config:app:name }}",

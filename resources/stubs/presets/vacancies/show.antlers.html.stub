@@ -10,8 +10,8 @@
         "@type": "JobPosting",
         "title": "{{ title }}",
         "description": "{{ teaser }}",
-        "datePosted": "{{ date format="Y-m-d\TH:i:s" }}",
-        "validThrough": "{{ expires format="Y-m-d\TH:i:s" }}",
+        "datePosted": "{{ date | format('c') }}",
+        "validThrough": "{{ expires | format('c') }}",
         "employmentType": "{{ employment_type }}",
         "jobLocation": {
             "@type": "Place",
