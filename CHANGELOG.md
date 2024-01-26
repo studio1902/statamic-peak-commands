@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.4.0 (2024-01-26)
+
+### What's new
+- Use easier date formatting in JSON-ld sn snippets. 3f9ac1aa by @robdekort
+- Automatically fix date formatting on existing sites. 22a3328d by @robdekort
+
 ## v4.3.0 (2024-01-26)
 
 ### What's new
