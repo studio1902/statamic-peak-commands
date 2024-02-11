@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.0.1 (2024-02-11)
+
+### What's fixed
+- Events show stub on mobile. 45b20911 by @robdekort
+
 ## v5.0.0 (2024-01-26)
 
 ### What's new
