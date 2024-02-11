@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.0.2 (2024-02-11)
+
+### What's fixed
+- Typo in events show stub. 46b40bd8 by @robdekort
+
 ## v5.0.1 (2024-02-11)
 
 ### What's fixed
