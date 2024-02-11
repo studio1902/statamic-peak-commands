@@ -51,7 +51,7 @@
             </figure>
         </header>
 
-        <aside class="span-content  dmd:col-start-[col-3] md:col-span-8 p-6 md:p-8 grid md:grid-cols-3 gap-2 md:gap-8 border border-neutral/10 shadow-lg rounded">
+        <aside class="span-content md:col-start-[col-3] md:col-span-8 p-6 md:p-8 grid md:grid-cols-3 gap-2 md:gap-8 border border-neutral/10 shadow-lg rounded">
             {{ partial:typography/h3 content="{trans:strings.{{ handle }}_when}" }}
             <time class="md:col-span-2 mb-4 md:mb-0" lang="{{ site:short_locale }}">
                 {{ partial:typography/time as="span" :content="{{ singular_handle }}_date_start" }}
