@@ -43,7 +43,7 @@
 
 <main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
     <section class="fluid-grid stack-8">
-        <header class="md:col-start-[col-3] md:col-span-8 stack-4">
+        <header class="span-content md:col-start-[col-3] md:col-span-8 stack-4">
             {{ partial:typography/h1 :content="title" class="mt-4 text-center" }}
 
             <figure>
@@ -51,7 +51,7 @@
             </figure>
         </header>
 
-        <aside class="md:col-start-[col-3] md:col-span-8 p-6 md:p-8 grid md:grid-cols-3 gap-2 md:gap-8 border border-neutral/10 shadow-lg rounded">
+        <aside class="span-content  dmd:col-start-[col-3] md:col-span-8 p-6 md:p-8 grid md:grid-cols-3 gap-2 md:gap-8 border border-neutral/10 shadow-lg rounded">
             {{ partial:typography/h3 content="{trans:strings.{{ handle }}_when}" }}
             <time class="md:col-span-2 mb-4 md:mb-0" lang="{{ site:short_locale }}">
                 {{ partial:typography/time as="span" :content="{{ singular_handle }}_date_start" }}
