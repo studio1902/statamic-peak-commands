@@ -13,6 +13,7 @@ class ServiceProvider extends AddonServiceProvider
         Commands\AddCollection::class,
         Commands\AddPartial::class,
         Commands\AddSet::class,
+        Commands\ClearSite::class,
         Commands\InstallBlock::class,
         Commands\InstallPreset::class,
     ];
