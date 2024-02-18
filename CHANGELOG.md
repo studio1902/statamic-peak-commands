@@ -1,6 +1,6 @@
 # Changelog
 
-## v6.0.0 (unreleased)
+## v6.0.0 (2024-02-19)
 
 ### What's new
 - To fund ongoing development of Peak, I've decided to make this supplemental addon a paid product. To continue using it you need a valid license for it to work. Thanks for your support.
