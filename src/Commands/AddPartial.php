@@ -13,7 +13,7 @@ use function Laravel\Prompts\text;
 
 class AddPartial extends Command
 {
-    use RunsInPlease, SharedFunctions;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
     protected $name = 'statamic:peak:add-partial';
     protected $description = "Add a partial with IDE hinting and template paths.";
@@ -25,6 +25,8 @@ class AddPartial extends Command
 
     public function handle()
     {
+        $this->checkLicense();
+
         $this->type = select(
             label: 'What type of partial do you want to add?',
             options: ['Component', 'Layout', 'Snippet', 'Typography'],

@@ -11,7 +11,7 @@ use function Laravel\Prompts\multiselect;
 
 class InstallBlock extends Command
 {
-    use RunsInPlease, SharedFunctions, InstallBlockBlocks;
+    use RunsInPlease, SharedFunctions, InstallBlockBlocks, NeedsValidLicense;
 
     protected $name = 'statamic:peak:install-block';
     protected $description = "Install premade blocks into your page builder.";
@@ -23,6 +23,8 @@ class InstallBlock extends Command
 
     public function handle()
     {
+        $this->checkLicense();
+
         $this->choices = multiselect(
             label: 'Which blocks do you want to install into your page builder?',
             options: $this->getBlocks(),

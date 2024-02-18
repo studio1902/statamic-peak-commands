@@ -15,7 +15,7 @@ use function Laravel\Prompts\confirm;
 
 class ClearSite extends Command
 {
-    use RunsInPlease, SharedFunctions;
+    use RunsInPlease;
 
     protected $name = 'statamic:peak:clear-site';
     protected $description = "Clear all default Peak content.";
@@ -110,5 +110,16 @@ class ClearSite extends Command
         Arr::set($navigation, 'tree', $tree);
 
         File::put(base_path('content/trees/navigation/main.yaml'), Yaml::dump($navigation, 99, 2));
+    }
+
+    /**
+     * Get stub.
+     */
+    protected function getStub(string $stubPath): string
+    {
+        $publishedStubPath = resource_path("stubs/vendor/statamic-peak-commands/" . ltrim($stubPath, " /\t\n\r\0\x0B"));
+        $addonStubPath = __DIR__ . "/../../resources/stubs/" . ltrim($stubPath, " /\t\n\r\0\x0B");
+
+        return File::get(File::exists($publishedStubPath) ? $publishedStubPath : $addonStubPath);
     }
 }

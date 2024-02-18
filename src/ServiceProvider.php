@@ -6,6 +6,8 @@ use Statamic\Providers\AddonServiceProvider;
 
 class ServiceProvider extends AddonServiceProvider
 {
+    protected static $shouldBoot = false;
+
     protected $commands = [
         Commands\AddBlock::class,
         Commands\AddCollection::class,

@@ -12,7 +12,7 @@ use function Laravel\Prompts\text;
 
 class AddBlock extends Command
 {
-    use RunsInPlease, SharedFunctions;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
     protected $name = 'statamic:peak:add-block';
     protected $description = "Add a page builder block.";
@@ -23,6 +23,8 @@ class AddBlock extends Command
 
     public function handle()
     {
+        $this->checkLicense();
+
         $this->block_name = text(
             label: 'What should be the name for this block?',
             placeholder: 'E.g. Text and image',
