@@ -15,7 +15,7 @@ This is a paid addon for [Statamic Peak](https://github.com/studio1902/statamic-
 
 ## How to Install
 
-This addon is automatically installed when you install Peak via the Statamic CLI. If you want to install this addon manually on on older Peak install run:
+This addon is automatically installed when you install Peak via the Statamic CLI. If you want to install this addon manually on an older Peak install run:
 
 ``` bash
 composer require studio1902/statamic-peak-commands
