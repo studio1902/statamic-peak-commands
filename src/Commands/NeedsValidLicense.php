@@ -10,6 +10,8 @@ trait NeedsValidLicense {
 
     public function __construct()
     {
+        parent::__construct();
+
         $addonLicense = LicenseManager::addons()->first(function ($addonLicense) {
             return $addonLicense->addon()->id() === 'studio1902/statamic-peak-commands';
         });
