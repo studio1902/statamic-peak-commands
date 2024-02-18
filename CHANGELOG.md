@@ -4,7 +4,12 @@
 
 ### What's new
 - To fund ongoing development of Peak, I've decided to make this supplemental addon a paid product. To continue using it you need a valid license for it to work. Thanks for your support.
+
+### What's changed
 - The `clear-site` command moved to the free Statamic Peak Tools addon.
+
+### What's improved
+- Add excempt toggle to images blueprint in the Image credits preset. 63a4bbe1 by @robdekort.
 
 ## v5.0.2 (2024-02-11)
 
