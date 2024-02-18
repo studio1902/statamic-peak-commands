@@ -20,7 +20,7 @@ trait NeedsValidLicense {
     }
 
     public function checkLicense() {
-        if ( static::$licensed) {
+        if (! static::$licensed) {
             $this->info("You need a valid license to use this command.\nBuy one here: https://statamic.com/addons/studio1902/peak-commands");
             die;
         }
