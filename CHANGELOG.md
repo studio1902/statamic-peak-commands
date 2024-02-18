@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.0.0 (unreleased)
+
+### What's new
+- To fund ongoing development of Peak, I've decided to make this supplemental addon a paid product. To continue using it you need a valid license for it to work. Thanks for your support.
+- The `clear-site` command moved to the free Statamic Peak Tools addon.
+
 ## v5.0.2 (2024-02-11)
 
 ### What's fixed
