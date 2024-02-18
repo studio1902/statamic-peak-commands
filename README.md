@@ -2,19 +2,16 @@
 
 # Statamic Peak Commands
 
-This is an addon for [Statamic Peak](https://github.com/studio1902/statamic-peak) that contains the various Peak CLI commands.
+This is a paid addon for [Statamic Peak](https://github.com/studio1902/statamic-peak) that contains the various Peak CLI commands. The addon will only work when you have a valid license (also in development).
 
 * peak:add-block
 * peak:add-collection
 * peak:add-partial
 * peak:add-set
-* peak:clear-site
 * peak:install-block
 * peak:install-preset
 
-Maintaining Peak demands a lot of my time and it probably saves you a lot. Your sponsoring would mean a great deal to me as it makes it much easier for me to maintain this project and keep improving it. [Sponsor me](https://github.com/sponsors/studio1902).
-
-[Read the docs](https://peak.1902.studio).
+[Read the docs](https://peak.1902.studio/getting-started/commands.html).
 
 ## How to Install
 
@@ -30,4 +27,4 @@ Contributions and discussions are always welcome, no matter how large or small. 
 Read more about [how you can contribute](https://peak.1902.studio/other/contributing.html) here.
 
 ## License
-Statamic Peak is licensed under the GNU General Public License v3.0. Please see [License File](LICENSE.md) for more information. Statamic itself is commercial software and has its' own license.
+Statamic Peak Commands is paid software with an open-source codebase. If you want to use it, you’ll need to buy a license from the Statamic Marketplace. Statamic itself is commercial software and has its' own license.
