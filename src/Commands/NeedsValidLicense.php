@@ -19,10 +19,10 @@ trait NeedsValidLicense {
         static::$licensed = $addonLicense && $addonLicense->valid();
     }
 
-    public function handle() {
+    public function checkLicense() {
         if (! static::$licensed) {
             $this->info("You need a valid license to use this command.");
-            return;
+            die;
         }
     }
 }

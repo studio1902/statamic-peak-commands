@@ -31,6 +31,8 @@ class InstallPreset extends Command
 
     public function handle()
     {
+        $this->checkLicense();
+
         $this->getPresets();
 
         $this->choices = multiselect(

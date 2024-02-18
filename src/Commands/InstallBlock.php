@@ -23,6 +23,8 @@ class InstallBlock extends Command
 
     public function handle()
     {
+        $this->checkLicense();
+
         $this->choices = multiselect(
             label: 'Which blocks do you want to install into your page builder?',
             options: $this->getBlocks(),
