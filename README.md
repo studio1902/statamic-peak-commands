@@ -28,3 +28,5 @@ Read more about [how you can contribute](https://peak.1902.studio/other/contribu
 
 ## License
 Statamic Peak Commands is paid software with an open-source codebase. If you want to use it, you’ll need to buy a license from the Statamic Marketplace. The license is valid for only one project. Statamic itself is commercial software and has its' own license.
+
+[The Agency Sponsorship](https://github.com/sponsors/studio1902) tier grants you unlimited licenses for the duration of your sponsorship.
