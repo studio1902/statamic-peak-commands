@@ -25,6 +25,11 @@ class AddPartial extends Command
 
     public function handle()
     {
+        if (! static::$licensed) {
+            $this->info("You need a valid license to use this command.");
+            return;
+        }
+
         $this->type = select(
             label: 'What type of partial do you want to add?',
             options: ['Component', 'Layout', 'Snippet', 'Typography'],

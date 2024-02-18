@@ -23,6 +23,11 @@ class AddBlock extends Command
 
     public function handle()
     {
+        if (! static::$licensed) {
+            $this->info("You need a valid license to use this command.");
+            return;
+        }
+
         $this->block_name = text(
             label: 'What should be the name for this block?',
             placeholder: 'E.g. Text and image',

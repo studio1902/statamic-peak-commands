@@ -31,6 +31,11 @@ class InstallPreset extends Command
 
     public function handle()
     {
+        if (! static::$licensed) {
+            $this->info("You need a valid license to use this command.");
+            return;
+        }
+
         $this->getPresets();
 
         $this->choices = multiselect(
