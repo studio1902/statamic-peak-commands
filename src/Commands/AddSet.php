@@ -12,7 +12,7 @@ use function Laravel\Prompts\text;
 
 class AddSet extends Command
 {
-    use RunsInPlease, SharedFunctions;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
     protected $name = 'statamic:peak:add-set';
     protected $description = "Add an Article (Bard) set.";
@@ -23,11 +23,6 @@ class AddSet extends Command
 
     public function handle()
     {
-        if (! static::$licensed) {
-            $this->info("You need a valid license to use this command.");
-            return;
-        }
-
         $this->set_name = text(
             label: 'What should be the name for this set?',
             placeholder: 'E.g. Card',

@@ -2,7 +2,6 @@
 
 namespace Studio1902\PeakCommands\Commands;
 
-use Facades\Statamic\Licensing\LicenseManager;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Statamic\Support\Arr;
@@ -12,17 +11,6 @@ use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 
 trait SharedFunctions {
-
-    protected static $licensed = false;
-
-    public function __construct()
-    {
-        $addonLicense = LicenseManager::addons()->first(function ($addonLicense) {
-            return $addonLicense->addon()->id() === 'studio1902/statamic-peak-commands';
-        });
-
-        static::$licensed = $addonLicense && $addonLicense->valid();
-    }
 
     /**
      * Check if a file doesn't already exist.

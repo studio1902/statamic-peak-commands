@@ -17,7 +17,7 @@ use function Laravel\Prompts\text;
 
 class InstallPreset extends Command
 {
-    use RunsInPlease, SharedFunctions, InstallPresetPresets;
+    use RunsInPlease, SharedFunctions, InstallPresetPresets, NeedsValidLicense;
 
     protected $rename = false;
     protected $rename_handle = '';
@@ -31,11 +31,6 @@ class InstallPreset extends Command
 
     public function handle()
     {
-        if (! static::$licensed) {
-            $this->info("You need a valid license to use this command.");
-            return;
-        }
-
         $this->getPresets();
 
         $this->choices = multiselect(
