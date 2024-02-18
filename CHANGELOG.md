@@ -1,5 +1,10 @@
 # Changelog
 
+## v6.0.2 (2024-02-19)
+
+### What's fixed
+- Actually check for a valid license. 0139a58b by @robdekort
+
 ## v6.0.1 (2024-02-19)
 
 ### What's fixed
