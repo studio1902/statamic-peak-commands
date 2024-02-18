@@ -1,5 +1,10 @@
 # Changelog
 
+## v6.0.1 (2024-02-19)
+
+### What's fixed
+- Add back missing stub for the `clear-site` command. c3421a46 by @robdekort
+
 ## v6.0.0 (2024-02-19)
 
 ### What's new
