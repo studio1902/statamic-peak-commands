@@ -1,5 +1,10 @@
 # Changelog
 
+## v6.0.3 (2024-02-20)
+
+### What's changed
+- Change license alert styling. 0139a58b by @robdekort
+
 ## v6.0.2 (2024-02-19)
 
 ### What's fixed

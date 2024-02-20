@@ -3,6 +3,8 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Facades\Statamic\Licensing\LicenseManager;
+use function Laravel\Prompts\alert;
+use function Laravel\Prompts\info;
 
 trait NeedsValidLicense {
 
@@ -21,7 +23,8 @@ trait NeedsValidLicense {
 
     public function checkLicense() {
         if (! static::$licensed) {
-            $this->info("You need a valid license to use this command.\nBuy one here: https://statamic.com/addons/studio1902/peak-commands");
+            alert("You need a valid license to use this command.");
+            info("You can support Peak and buy one here: https://statamic.com/addons/studio1902/peak-commands");
             die;
         }
     }
