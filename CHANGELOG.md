@@ -1,5 +1,13 @@
 # Changelog
 
+## v6.1.0 (2024-02-25)
+
+### What's new
+- Add widgets instruction after running`peak:add-collection`. 54f7ed86 by @robdekort
+
+### What's improved
+- Extend block partials in index content stubs, as opposed to the index partials themselves. This way you can use optional index content fields. 5b7de500 by @robdekort
+
 ## v6.0.3 (2024-02-20)
 
 ### What's changed
