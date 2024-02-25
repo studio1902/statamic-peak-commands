@@ -167,6 +167,7 @@ class AddCollection extends Command
             if ($this->mount) $this->installAndSetIndexContentBlock();
             if ($this->show) $this->createShowTemplate();
             if ($this->permissions) $this->grantPermissionsToEditor();
+            $this->widgetNotice();
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
@@ -340,6 +341,7 @@ class AddCollection extends Command
             ->set('page_builder', $pageBuilder)
             ->save();
     }
+
     /**
      * Grant permissions to editor.
      *
@@ -366,5 +368,16 @@ class AddCollection extends Command
         Arr::set($roles, 'editor.permissions', $permissions);
 
         File::put(base_path('resources/users/roles.yaml'), Yaml::dump($roles, 99, 2));
+    }
+
+    /**
+     * Display CP widget notice.
+     *
+     * @return bool|null
+     */
+    protected function widgetNotice()
+    {
+        $this->warn("Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '$this->filename',\n\t'width' => 50\n],");
+        $this->newLine();
     }
 }
