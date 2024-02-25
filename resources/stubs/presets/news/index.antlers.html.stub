@@ -13,23 +13,21 @@
 
 {{ section:index_content }}
     <!-- /{{ handle }}/index.antlers.html -->
-    {{ partial:page_builder/block }}
-        <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
-            {{ partial:typography/h1 as="h2" :content="title" class="md:col-span-12" }}
-            {{ collection:{{ handle }} sort="date:desc" paginate="true" limit="12" as="items" }}
-                {{ unless no_results }}
-                    {{ items }}
-                        {{ partial:components/{{ handle }}_item class="md:col-span-4" }}
-                    {{ /items }}
-                {{ else }}
-                    <div class="md:col-span-6">
-                        {{ trans:strings.no_results }}
-                    </div>
-                {{ /unless }}
+    <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
+        {{ partial:typography/h1 as="h2" :content="title" class="md:col-span-12" }}
+        {{ collection:{{ handle }} sort="date:desc" paginate="true" limit="12" as="items" }}
+            {{ unless no_results }}
+                {{ items }}
+                    {{ partial:components/{{ handle }}_item class="md:col-span-4" }}
+                {{ /items }}
+            {{ else }}
+                <div class="md:col-span-6">
+                    {{ trans:strings.no_results }}
+                </div>
+            {{ /unless }}
 
-                {{ partial:statamic-peak-tools::components/pagination class="md:col-span-12" }}
-            {{ /collection:{{ handle }} }}
-        </div>
-    {{ /partial:page_builder/block }}
+            {{ partial:statamic-peak-tools::components/pagination class="md:col-span-12" }}
+        {{ /collection:{{ handle }} }}
+    </div>
     <!-- End: /{{ handle }}/index.antlers.html -->
 {{ /section:index_content }}

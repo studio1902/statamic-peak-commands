@@ -13,23 +13,21 @@
 
 {{ section:index_content }}
     <!-- /{{ filename }}/index.antlers.html -->
-    {{ partial:page_builder/block }}
-        <div class="span-content grid grid-cols-12 gap-fluid-grid-gap">
-            {{ collection:{{ handle }} sort="{{ sort }}" paginate="true" limit="10" as="items" }}
-                {{ unless no_results }}
-                    {{ items }}
-                        <div class="col-span-12 md:col-span-6">
-                            <a class="underline" href="{{ url }}">{{ title }}</a>
-                        </div>
-                    {{ /items }}
-                {{ else }}
-                    <div class="col-span-12">
-                        {{ trans:strings.no_results }}
+    <div class="span-content grid grid-cols-12 gap-fluid-grid-gap">
+        {{ collection:{{ handle }} sort="{{ sort }}" paginate="true" limit="10" as="items" }}
+            {{ unless no_results }}
+                {{ items }}
+                    <div class="col-span-12 md:col-span-6">
+                        <a class="underline" href="{{ url }}">{{ title }}</a>
                     </div>
-                {{ /unless }}
-                {{ partial:statamic-peak-tools::components/pagination class="col-span-12" }}
-            {{ /collection:{{ handle }} }}
-        </div>
-    {{ /partial:page_builder/block }}
+                {{ /items }}
+            {{ else }}
+                <div class="col-span-12">
+                    {{ trans:strings.no_results }}
+                </div>
+            {{ /unless }}
+            {{ partial:statamic-peak-tools::components/pagination class="col-span-12" }}
+        {{ /collection:{{ handle }} }}
+    </div>
     <!-- End: /{{ filename }}/index.antlers.html -->
 {{ /section:index_content }}

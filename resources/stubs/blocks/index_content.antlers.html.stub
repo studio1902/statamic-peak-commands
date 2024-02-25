@@ -4,4 +4,6 @@
     @set page.page_builder.index_content
 #}}
 
-{{ yield:index_content }}
+{{ partial:page_builder/block }}
+	{{ yield:index_content }}
+{{ /partial:page_builder/block }}
