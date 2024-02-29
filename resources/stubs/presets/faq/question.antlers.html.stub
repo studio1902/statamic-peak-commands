@@ -36,7 +36,7 @@
         @keyup.escape.window="expanded = null"
         x-init="window.location.hash === hash && (expanded = id)"
         :aria-expanded="expanded === id"
-        class="px-2 w-full flex items-center justify-between rounded text-neutral hover:text-primary focus:outline-none focus-visible:ring-2 ring-primary motion-safe:transition"
+        class="px-2 w-full flex items-center justify-between rounded text-neutral hover:text-primary motion-safe:transition"
         x-cloak
     >
         {{ partial:typography/h2 :content="title" color="text-current" class="my-2" }}

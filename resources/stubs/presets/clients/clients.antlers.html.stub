@@ -16,7 +16,7 @@
         }}
 
         {{ {{ handle }} }}
-            <a class="md:col-span-2 p-1 -m-1 hover:scale-105 motion-safe:transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-primary group" href="{{ website }}" target="_blank" rel="noopener" aria-label="{{ title }}">
+            <a class="md:col-span-2 hover:scale-105 motion-safe:transition-transform group" href="{{ website }}" target="_blank" rel="noopener" aria-label="{{ title }}">
                 {{ partial:statamic-peak-tools::components/picture :image="logo" class="grayscale group-focus-visible:grayscale-0 group-hover:grayscale-0 motion-safe:transition" }}
             </a>
         {{ /{{ handle }} }}
