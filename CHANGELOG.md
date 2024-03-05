@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.0.1 (2024-03-05)
+
+### What's improved
+- Only check for a valid license when it's actually needed. f363bcce by @robdekort
+
 ## v7.0.0 (2024-03-01)
 
 ### What's new
