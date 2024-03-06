@@ -3,7 +3,7 @@
 ## v7.1.0 (2024-03-06)
 
 ### What's new
-- When mounting a collection on a pase using `peak:add-collection` you can now search for a page to mount it on. f7a9179a by @robdekort
+- When mounting a collection on a page using `peak:add-collection`, you can now also search for a page to mount it on. f7a9179a by @robdekort
 
 ## v7.0.1 (2024-03-05)
 
