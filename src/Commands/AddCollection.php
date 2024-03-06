@@ -13,6 +13,7 @@ use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
 use Stringy\StaticStringy as Stringy;
 use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
@@ -78,9 +79,21 @@ class AddCollection extends Command
                     );
                     $this->mount = $this->addPage();
                 } else {
-                    $choice = select(
+                    $choice = search(
                         label: 'On which page existing page do you want to mount this collection?',
-                        options:  $this->getPages()
+                        options: function (string $value) {
+                            if (!$value) {
+                                return collect($this->getPages())
+                                    ->values()
+                                    ->all();
+                            }
+
+                            return collect($this->getPages())
+                                ->filter(fn(string $item) => Str::contains($item, $value, true))
+                                ->values()
+                                ->all();
+                        },
+                        required: true
                     );
                     preg_match('/\[(.*?)\]/', $choice, $id);
                     $this->mount = $id[1];
