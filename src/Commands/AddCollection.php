@@ -26,6 +26,7 @@ class AddCollection extends Command
     protected $collection_name = '';
     protected $filename = '';
     protected $public = false;
+    protected $slugs = true;
     protected $mount_collection = false;
     protected $route = '';
     protected $add_page = false;
@@ -58,6 +59,13 @@ class AddCollection extends Command
             label: 'Should this be a public collection with a route?',
             default: true
         );
+
+        if (! $this->public) {
+            $this->slugs = confirm(
+                label: 'Do you want to require slugs?',
+                default: true
+            );
+        }
 
         if ($this->public) {
             $this->mount_collection = confirm(
@@ -228,7 +236,8 @@ class AddCollection extends Command
             ->replace('{{ date_past }}', $this->date_past)
             ->replace('{{ date_future }}', $this->date_future)
             ->replace('{{ template }}', $this->show ? "{$this->filename}/show" : 'default' )
-            ->replace('{{ mount }}', $this->mount);
+            ->replace('{{ mount }}', $this->mount)
+            ->replace('{{ slugs }}', ($this->slugs) ? 'true' : 'false');
 
         File::put(base_path("content/collections/{$this->filename}.yaml"), $contents);
     }
@@ -242,13 +251,14 @@ class AddCollection extends Command
     {
         $this->checkExistence('Blueprint', "resources/blueprints/collections/{$this->filename}/{$this->filename}.yaml");
 
+        $append = !$this->slugs ? '_no_slug' : '';
         $stub = ($this->public)
             ? ($this->dated
-                ? '/collection_blueprint_public_dated.yaml.stub'
-                : '/collection_blueprint_public.yaml.stub')
+                ? "/collection_blueprint_public_dated{$append}.yaml.stub"
+                : "/collection_blueprint_public{$append}.yaml.stub")
             : ($this->dated
-                ? '/collection_blueprint_private_dated.yaml.stub'
-                : '/collection_blueprint_private.yaml.stub');
+                ? "/collection_blueprint_private_dated{$append}.yaml.stub"
+                : "/collection_blueprint_private{$append}.yaml.stub");
 
         $stub = $this->getStub($stub);
         $contents = Str::of($stub)

@@ -9,3 +9,4 @@ date_behavior:
   past: {{ date_past }}
   future: {{ date_future }}
 mount: {{ mount }}
+slugs: {{ slugs }}
