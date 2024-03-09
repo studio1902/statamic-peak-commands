@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.2.0 (2024-03-09)
+
+### What's new
+- An option to disable slugs when running `peak:add-collection`. 3055b187 by @robdekort
+
 ## v7.1.0 (2024-03-06)
 
 ### What's new
