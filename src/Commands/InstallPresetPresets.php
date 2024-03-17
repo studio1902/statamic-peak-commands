@@ -7,6 +7,37 @@ trait InstallPresetPresets {
     public function getPresets() {
         $this->presets = collect([
             [
+                'handle' => 'banner',
+                'name' => 'Banner',
+                'description' => 'A banner on top of your site users can click to hide.',
+                'operations' => [
+                    [
+                        'type' => 'copy',
+                        'input' => 'banner_blueprint.yaml.stub',
+                        'output' => 'resources/blueprints/globals/banner.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'banner_global.yaml.stub',
+                        'output' => 'content/globals/banner.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'banner.antlers.html.stub',
+                        'output' => 'resources/views/layout/_banner.antlers.html'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'close.svg.stub',
+                        'output' => 'resources/svg/close.svg'
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Make sure to add `{{ partial:layout/banner }}` to your layout file after opening the `<body>`."
+                    ]
+                ]
+            ],
+            [
                 'handle' => 'breadcrumbs',
                 'name' => 'Breadcrumbs',
                 'description' => 'A breadcrumbs partial using schema markup.',
