@@ -232,11 +232,6 @@ trait InstallPresetPresets {
                         'output' => 'resources/views/page_builder/_faq.antlers.html'
                     ],
                     [
-                        'type' => 'copy',
-                        'input' => 'question.antlers.html.stub',
-                        'output' => 'resources/views/components/_question.antlers.html'
-                    ],
-                    [
                         'type' => 'update_page_builder',
                         'block' => [
                             'name' => 'FAQ',

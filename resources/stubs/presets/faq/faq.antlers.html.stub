@@ -28,12 +28,56 @@
             </header>
         {{ /if }}
 
-        <div
-            x-data="{ expanded: null }"
-            class="span-content md:col-start-[col-3] md:col-span-8 flex flex-col gap-4"
-        >
+        <div class="span-content md:col-start-[col-3] md:col-span-8 flex flex-col gap-4">
             {{ block:questions }}
-                {{ partial:components/question }}
+                {{ push:questions }}
+                    {
+                        "@type": "Question",
+                        "name": "{{ title }}",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": " {{ text | raw | where('type', 'paragraph') | bard_text | entities }}"
+                        }
+                    }
+                {{ /push:questions }}
+
+                <article
+                    x-data="{
+                        expanded: {{ first ? true : false | bool_string }},
+                        hash: '#{{ title | slugify }}'
+                    }"
+                    role="region"
+                    class="flex flex-col rounded-lg bg-white shadow py-3 px-2 md:px-6"
+                    id="{{ title | slugify }}"
+                >
+                    <button
+                        @click="
+                            expanded = !expanded
+                            expanded
+                                ? history.pushState({}, '', hash)
+                                : history.pushState({}, '', window.location.pathname)
+                        "
+                        @keyup.escape.window="expanded = false"
+                        x-init="window.location.hash === hash && (expanded = true)"
+                        :aria-expanded="expanded"
+                        class="px-2 w-full flex items-center justify-between rounded text-neutral hover:text-primary motion-safe:transition"
+                        x-cloak
+                    >
+                        {{ partial:typography/h2 :content="title" color="text-current" class="my-2" }}
+                        <span x-show="expanded" aria-hidden="true" class="font-bold text-lg ml-4">&minus;</span>
+                        <span x-show="!expanded" aria-hidden="true" class="font-bold text-lg ml-4">&plus;</span>
+                    </button>
+                    <div
+                        x-show="expanded"
+                        x-collapse
+                        class="p-2"
+                    >
+                        {{ partial:typography/prose }}
+                            {{ text }}
+                        {{ /partial:typography/prose }}
+                    </div>
+                </article>
+
             {{ /block:questions }}
         </div>
     </div>
