@@ -1,5 +1,13 @@
 # Changelog
 
+## v7.3.0 (2024-03-17)
+
+### What's new
+- A banner preset that sits on top of your site users can click away. f1df4291 by @robdekort
+
+### What's improved
+- Simplified FAQ preset. Open state is not exclusive anymore. The first item is opened by default. f4df7680 by @robdekort
+
 ## v7.2.0 (2024-03-09)
 
 ### What's new
