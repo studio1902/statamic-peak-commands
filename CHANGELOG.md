@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### What's improved
+- Fix layout issue FAQ preset heading lines wrap. 925577f8 by @robdekort
+
 ## v7.3.0 (2024-03-17)
 
 ### What's new
