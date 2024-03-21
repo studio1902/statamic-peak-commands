@@ -60,12 +60,12 @@
                         @keyup.escape.window="expanded = false"
                         x-init="window.location.hash === hash && (expanded = true)"
                         :aria-expanded="expanded"
-                        class="px-2 w-full flex items-center justify-between rounded text-neutral hover:text-primary motion-safe:transition"
+                        class="px-2 w-full flex items-start justify-between rounded text-neutral hover:text-primary motion-safe:transition"
                         x-cloak
                     >
-                        {{ partial:typography/h2 :content="title" color="text-current" class="my-2" }}
-                        <span x-show="expanded" aria-hidden="true" class="font-bold text-lg ml-4">&minus;</span>
-                        <span x-show="!expanded" aria-hidden="true" class="font-bold text-lg ml-4">&plus;</span>
+                        {{ partial:typography/h2 :content="title" color="text-current text-left" class="my-2" }}
+                        <span x-show="expanded" aria-hidden="true" class="flex-shrink-0 font-bold text-lg ml-4">&minus;</span>
+                        <span x-show="!expanded" aria-hidden="true" class="flex-shrink-0 font-bold text-lg ml-4">&plus;</span>
                     </button>
                     <div
                         x-show="expanded"
