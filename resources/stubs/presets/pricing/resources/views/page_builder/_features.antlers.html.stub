@@ -25,7 +25,7 @@
                 "
                 role="row"
             >
-                <div class="hidden md:block" role="columneader"></div>
+                <div class="hidden md:block" role="columnheader"></div>
 
                 {{ block:tiers }}
                     <div class="py-6 flex justify-center {{ !first ?= 'border-l' }} md:border-l border-gray-150" role="columnheader">
