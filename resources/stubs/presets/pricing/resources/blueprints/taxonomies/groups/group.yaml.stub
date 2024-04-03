@@ -1,0 +1,32 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: Group
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              required: true
+              validate:
+                - required
+                - 'max:200'
+              display: Slug
+              instructions_position: above
+              listable: hidden
+              visibility: hidden
+              replicator_preview: true
+              from: title
+              generate: true
+              show_regenerate: false
+              hide_display: false
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+title: Group

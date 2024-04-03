@@ -1,0 +1,51 @@
+{{#
+    @name Tiers
+    @desc The Tiers page builder block.
+    @set page.page_builder.tiers
+#}}
+
+<!-- /page_builder/_tiers.antlers.html -->
+{{ partial:page_builder/block }}
+    <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
+        {{ block:tiers }}
+            <article
+                class="
+                    {{ total_results == 2 && first ?= 'md:col-start-3' }}
+                    {{ total_results == 1 ?= 'md:col-start-5' }}
+                    md:col-span-4 p-6 stack-6 rounded-lg shadow-lg border border-gray-200
+                "
+            >
+                <h2 class="rounded px-2 h-6 text-xs">
+                    {{ title }}
+                </h2>
+
+                <div class="stack-space-8 h-14 flex flex-col justify-end">
+                    {{ if pricing === 'fixed' }}
+                        <span class="text-6xl">€{{ price ?? custom }}</span>
+                    {{ else }}
+                        <span class="text-4xl">{{ custom }}</span>
+                    {{ /if }}
+                </div>
+
+                <span class="stack-space-0 text-lg font-medium">{{ detail }}</span>
+
+                {{ partial:components/buttons }}
+
+                {{ if benefits_title }}
+                    <h3 class="text-sm font-bold">{{ benefits_title }}</h3>
+                {{ /if }}
+
+                {{ partial:typography/prose :if="benefits" class="stack-space-2 prose-sm" }}
+                    {{ if benefits }}
+                        <ul class="stack-1">
+                            {{ benefits }}
+                                <li><p>{{ benefit }}</p></li>
+                            {{ /benefits }}
+                        </ul>
+                    {{ /if }}
+                {{ /partial:typography/prose }}
+            </article>
+        {{ /block:tiers }}
+    </div>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_tiers.antlers.html -->
