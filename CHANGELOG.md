@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.4.2 (2024-04-03)
+
+### What's fixed
+- Fix issue when creating new Article/Page builder groups. c2fff61d by @robdekort
+
 ## v7.4.1 (2024-04-03)
 
 ### What's improved
