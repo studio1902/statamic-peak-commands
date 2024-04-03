@@ -6,9 +6,12 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
+use function Laravel\Prompts\spin;
 
 trait SharedFunctions {
 
@@ -67,6 +70,58 @@ trait SharedFunctions {
             placeholder: 'file-content-list',
             required: true
         );
+    }
+
+    /**
+     * Run command.
+     *
+     * @return bool|null
+     */
+    protected function runCustomCommand(string $command, string $processingMessage = '', string $successMessage = '', ?string $errorMessage = null, bool $tty = false, bool $spinner = true, int $timeout = 120): bool
+    {
+        $process = new Process(explode(' ', $command));
+        $process->setTimeout($timeout);
+
+        if ($tty) {
+            $process->setTty(true);
+        }
+
+        try {
+            $spinner ?
+                $this->withSpinner(
+                    fn() => $process->mustRun(),
+                    $processingMessage,
+                    $successMessage
+                ) :
+                $this->withoutSpinner(
+                    fn() => $process->mustRun(),
+                    $successMessage
+                );
+
+            return true;
+        } catch (ProcessFailedException $exception) {
+            error($errorMessage ?? $exception->getMessage());
+
+            return false;
+        }
+    }
+
+    protected function withSpinner(callable $callback, string $processingMessage = '', string $successMessage = ''): void
+    {
+        spin($callback, $processingMessage);
+
+        if ($successMessage) {
+            info("[✓] $successMessage");
+        }
+    }
+
+    protected function withoutSpinner(callable $callback, string $successMessage = ''): void
+    {
+        $callback();
+
+        if ($successMessage) {
+            info("[✓] $successMessage");
+        }
     }
 
     /**

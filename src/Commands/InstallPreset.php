@@ -104,6 +104,10 @@ class InstallPreset extends Command
                     $this->rename_singular_handle = Str::slug($this->rename_singular_name, '_');
                 }
 
+                elseif ($operation['type'] == 'run') {
+                    $this->runCustomCommand($operation['command'], $operation['processing_message'], $operation['success_message']);
+                }
+
                 elseif ($operation['type'] == 'update_article_sets') {
                     $this->updateArticleSets($operation['block']['name'], $operation['block']['handle'], $operation['block']['description'], $operation['block']['icon']);
                     $this->info("Installed article set: '{$operation['block']['name']}'.");
