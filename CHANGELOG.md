@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.4.1 (2024-04-03)
+
+### What's improved
+- Update roles when installing the pricing preset. b62afa2a by @robdekort
+
 ## v7.4.0 (2024-04-03)
 
 ### What's new
