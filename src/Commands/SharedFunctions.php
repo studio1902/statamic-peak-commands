@@ -68,7 +68,8 @@ trait SharedFunctions {
                     ->all();
             },
             placeholder: 'file-content-list',
-            required: true
+            required: true,
+            scroll: 10
         );
     }
 
@@ -146,7 +147,8 @@ trait SharedFunctions {
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
         $group = select(
             label: "In which group of article sets do you want to install: '{$name}'?",
-            options: array_keys($existingGroups)
+            options: array_keys($existingGroups),
+            scroll: 10
         );
 
         $groupSets = $existingGroups[$group];
@@ -185,7 +187,8 @@ trait SharedFunctions {
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
         $group = select(
             label: "In which group of page builder blocks do you want to install: '{$name}'?",
-            options: array_keys($existingGroups)
+            options: array_keys($existingGroups),
+            scroll: 10
         );
 
         $groupSets = $existingGroups[$group];
