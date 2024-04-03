@@ -540,6 +540,11 @@ trait InstallPresetPresets {
                         ]
                     ],
                     [
+                        'type' => 'update_role',
+                        'role' => 'editor',
+                        'permissions' => ['view features entries', 'edit features entries', 'create features entries', 'delete features entries', 'publish features entries', 'reorder features entries', 'edit other authors features entries', 'publish other authors features entries', 'delete other authors features entries', 'view tiers entries', 'edit tiers entries', 'create tiers entries', 'delete tiers entries', 'publish tiers entries', 'reorder tiers entries', 'edit other authors tiers entries', 'publish other authors tiers entries', 'delete other authors tiers entries', 'view groups terms', 'edit groups terms', 'create groups terms', 'delete groups terms']
+                    ],
+                    [
                         'type' => 'notify',
                         'content' => "Make sure to add the following to boot method of your AppServiceProvider.php:\n\n// Bi-direcitonal relation between tears and features.\n\Stillat\Relationships\Support\Facades\Relate::manyToMany(\n\t'tiers.features',\n\t'features.tiers'\n);"
                     ],
