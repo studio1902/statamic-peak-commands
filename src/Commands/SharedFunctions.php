@@ -197,7 +197,7 @@ trait SharedFunctions {
                     'instructions' => $groupInstructions,
                     'icon' => $groupIcon,
                     'sets' => [
-                        $newSet
+                        $filename => $newSet
                     ]
                 ]
             ];
@@ -281,15 +281,16 @@ trait SharedFunctions {
                     'instructions' => $groupInstructions,
                     'icon' => $groupIcon,
                     'sets' => [
-                        $newSet
+                        $filename => $newSet
                     ]
                 ]
             ];
 
             $groups = array_merge($existingGroups, $newGroup);
-            $orderedGroups = collect($groups)->sortBy(function ($key) {
+            $orderedGroups = collect($groups)->sortBy(function ($value, $key) {
                 return $key;
             })->all();
+
             Arr::set($fieldset, 'fields.0.field.sets', $orderedGroups);
         }
 
