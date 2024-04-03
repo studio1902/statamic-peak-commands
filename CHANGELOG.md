@@ -1,9 +1,16 @@
 # Changelog
 
-## Unreleased
+## v7.4.0 (2024-04-03)
+
+### What's new
+- A pricing preset to display pricing tiers and a feature table matrix. 3f9ad8fe by @robdekort
+- An option to create page builder groups when adding blocks. 2b8143d7 by @robdekort
+- An option to create article/bard groups when adding sets. ab25aafa by @robdekort
+- The ability to run commands as part of presets. 83a2fbee by @robdekort
 
 ### What's improved
-- Fix layout issue FAQ preset heading lines wrap. 925577f8 by @robdekort
+- Bigger select and search prompts. 7194721e by @robdekort
+- Fix layout issue in FAQ preset when quesiton heading lines wrap. 925577f8 by @robdekort
 
 ## v7.3.0 (2024-03-17)
 
