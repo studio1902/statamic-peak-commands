@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.5.0 (2024-04-19)
+
+### What's improved
+- Add back banner preset and improve a11y. 10e23ac6 by @robdekort
+
 ## v7.4.2 (2024-04-03)
 
 ### What's fixed
