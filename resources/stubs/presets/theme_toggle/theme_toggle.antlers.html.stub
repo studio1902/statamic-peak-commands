@@ -13,14 +13,14 @@
     >
         {{ icon_classes = 'w-4 h-4 stroke-current overflow-visible' }}
         <div x-show="$store.theme.get() === 'light'">
-            {{ svg:sun class="{icon_classes}" alt="" aria-hidden="true" }}
+            {{ svg:sun attr:class="{icon_classes}" attr:alt="" attr:aria-hidden="true" }}
         </div>
         <div x-show="$store.theme.get() === 'dark'">
-            {{ svg:moon class="{icon_classes}" alt="" aria-hidden="true" }}
+            {{ svg:moon attr:class="{icon_classes}" attr:alt="" attr:aria-hidden="true" }}
         </div>
         <div x-show="$store.theme.get() === 'system'">
-            {{ svg:sun x-show="preferredColorScheme === 'light'" class="{icon_classes} opacity-50" alt="" aria-hidden="true" }}
-            {{ svg:moon x-show="preferredColorScheme === 'dark'" class="{icon_classes} opacity-50" alt="" aria-hidden="true" }}
+            {{ svg:sun attr:x-show="preferredColorScheme === 'light'" attr:class="{icon_classes} opacity-50" attr:alt="" attr:aria-hidden="true" }}
+            {{ svg:moon attr:x-show="preferredColorScheme === 'dark'" attr:class="{icon_classes} opacity-50" attr:alt="" attr:aria-hidden="true" }}
         </div>
     </button>
     <div
@@ -38,7 +38,7 @@
             title="{{ trans:strings.theme_toggle_light }}"
             class="{{ button_classes }}"
         >
-            {{ svg:sun class="{icon_classes}" alt="" aria-hidden="true" }}
+            {{ svg:sun attr:class="{icon_classes}" attr:alt="" attr:aria-hidden="true" }}
             <span class="{{ label_classes }}">{{ trans:strings.theme_toggle_light_short }}</span>
         </button>
         <button
@@ -48,7 +48,7 @@
             title="{{ trans:strings.theme_toggle_dark }}"
             class="{{ button_classes }}"
         >
-            {{ svg:moon class="{icon_classes}" alt="" aria-hidden="true" }}
+            {{ svg:moon attr:class="{icon_classes}" attr:alt="" attr:aria-hidden="true" }}
             <span class="{{ label_classes }}">{{ trans:strings.theme_toggle_dark_short }}</span>
         </button>
         <button
@@ -58,7 +58,7 @@
             title="{{ trans:strings.theme_toggle_system }}"
             class="{{ button_classes }}"
         >
-            {{ svg:cog class="{icon_classes}" alt="" aria-hidden="true" }}
+            {{ svg:cog attr:class="{icon_classes}" attr:alt="" attr:aria-hidden="true" }}
             <span class="{{ label_classes }}">{{ trans:strings.theme_toggle_system_short }}</span>
         </button>
     </div>

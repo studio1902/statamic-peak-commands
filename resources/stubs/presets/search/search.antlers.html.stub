@@ -19,7 +19,7 @@
             <input class="w-full pr-10 rounded border-neutral caret-primary focus-visible:ring-primary" placeholder="{{ trans:strings.search }}" type="search" value="{{ get:q }}" name="q"/>
 
             <button class="absolute inset-y-0 right-0 flex mr-1 items-center text-neutral hover:text-primary rounded" aria-label="{{ trans:strings.search }}">
-                {{ svg:search class="w-5 h-5 fill-current motion-safe:transition-colors" alt="" aria-hidden="true" }}
+                {{ svg:search attr:class="w-5 h-5 fill-current motion-safe:transition-colors" attr:alt="" attr:aria-hidden="true" }}
             </button>
         </form>
 
