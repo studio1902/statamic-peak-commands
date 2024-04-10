@@ -16,8 +16,8 @@
                 {{ banner:text }}
             {{ /partial:typography/prose }}
 
-            <button class="outline-white" @click="visible = false">
-                {{ svg:close class="w-4 h-4 fill-white" }}
+            <button class="outline-white" aria-label="{{ trans:strings.banner_close }}" @click="visible = false">
+                {{ svg:close class="w-4 h-4 fill-white" aria-hidden="true" }}
             </button>
         </div>
     </section>
