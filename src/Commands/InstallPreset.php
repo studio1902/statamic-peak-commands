@@ -11,7 +11,7 @@ use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Site;
 use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
-use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\multisearch;
 use function Laravel\Prompts\pause;
 use function Laravel\Prompts\text;
 
@@ -35,11 +35,15 @@ class InstallPreset extends Command
 
         $this->getPresets();
 
-        $this->choices = multiselect(
+        $options = collect($this->presets->mapWithKeys(function ($preset, $key) {
+            return [$preset['handle'] => "{$preset['name']}: {$preset['description']}"];
+        }));
+
+        $this->choices = multisearch(
             label: 'Which presets do you want to install into your site?',
-            options: $this->presets->mapWithKeys(function ($preset, $key) {
-                return [$preset['handle'] => "{$preset['name']}: {$preset['description']}"];
-            })->toArray(),
+            options: fn (string $value) => strlen($value) > 0
+                ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
+                : $options->toArray(),
             scroll: 15,
             validate: fn ($values) => match (true) {
                 empty($values) => 'Please select at least one preset. (Space)',

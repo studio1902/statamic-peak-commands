@@ -3,11 +3,11 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
-use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
-use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\multisearch;
 
 class InstallBlock extends Command
 {
@@ -25,9 +25,13 @@ class InstallBlock extends Command
     {
         $this->checkLicense();
 
-        $this->choices = multiselect(
+        $options = collect($this->getBlocks());
+
+        $this->choices = multisearch(
             label: 'Which blocks do you want to install into your page builder?',
-            options: $this->getBlocks(),
+            options: fn (string $value) => strlen($value) > 0
+                ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
+                : $options->toArray(),
             scroll: 15,
             validate: fn ($values) => match (true) {
                 empty($values) => 'Please select at least one block. (Space)',
