@@ -86,14 +86,17 @@
                     preferredColorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
                     themeColor: {{ theme_color ?? 'false' }},
                     themeLight: function() {
+                        this.themeToggleOpen = false
                         this.$store.theme.set('light')
                         this.setLightTheme()
                     },
                     themeDark: function() {
+                        this.themeToggleOpen = false
                         this.$store.theme.set('dark')
                         this.setDarkTheme()
                     },
                     themeSystem: function() {
+                        this.themeToggleOpen = false
                         this.$store.theme.set('system')
                         window.matchMedia('(prefers-color-scheme: light)').matches && this.setLightTheme()
                         window.matchMedia('(prefers-color-scheme: dark)').matches && this.setDarkTheme()
