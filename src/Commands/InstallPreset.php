@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Storage;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Site;
 use Statamic\Support\Arr;
-use Stringy\StaticStringy as Stringy;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\pause;
 use function Laravel\Prompts\text;
 
 class InstallPreset extends Command
@@ -144,6 +144,8 @@ class InstallPreset extends Command
                     $this->newLine();
                     $this->warn($message);
                     $this->newLine();
+
+                    pause('Follow the instructions and press ENTER to continue.');
                 }
             });
 
