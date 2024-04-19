@@ -22,7 +22,7 @@
         x-cloak
     >
         <span class="text-neutral-500">{{ business_hours:label }}</span>
-        {{ svg:phone class="w-4 h-4 fill-current" aria-hidden="true" }}
+        {{ svg:phone attr:class="w-4 h-4 fill-current" attr:aria-hidden="true" }}
         <span class="">{{ business_hours:phone_number }}</span>
         <span x-show="open" class="w-3 h-3 rounded-full bg-green-600"></span>
         <span x-show="closed" class="w-3 h-3 rounded-full bg-red-600"></span>

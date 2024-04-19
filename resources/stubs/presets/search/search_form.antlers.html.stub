@@ -26,7 +26,7 @@
             : '{{ trans:strings.search_open }}'"
         :aria-expanded="open"
     >
-        {{ svg:search class="w-5 h-5 fill-current motion-safe:transition-colors" alt="" aria-hidden="true" }}
+        {{ svg:search attr:class="w-5 h-5 fill-current motion-safe:transition-colors" attr:alt="" attr:aria-hidden="true" }}
     </button>
 
     <form
@@ -51,7 +51,7 @@
             :disabled="value.length === 0"
             :class="{ 'opacity-25 cursor-default': value.length === 0, 'opacity-100': value.length > 0 }"
         >
-            {{ svg:search class="w-5 h-5 fill-current motion-safe:transition-colors" alt="" aria-hidden="true" }}
+            {{ svg:search attr:class="w-5 h-5 fill-current motion-safe:transition-colors" attr:alt="" attr:aria-hidden="true" }}
         </button>
     </form>
 </li>
