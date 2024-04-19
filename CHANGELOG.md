@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.2.0 (2024-04-19)
+
+### What's new
+- An installable Read more preset to add a related article to Bard. 9f89e420 by @robdekort
+
 ## v8.1.0 (2024-04-19)
 
 ### What's new
