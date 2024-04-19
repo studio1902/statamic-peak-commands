@@ -46,10 +46,9 @@
             name="q"
         />
         <button
-            class="absolute inset-y-0 right-0 mr-2 flex items-center text-neutral hover:text-primary"
+            class="absolute inset-y-0 right-0 mr-2 flex items-center text-neutral hover:text-primary disabled:cursor-default disabled:opacity-25 motion-safe:transition-opacity"
             aria-label="{{ trans:strings.search }}"
             :disabled="value.length === 0"
-            :class="{ 'opacity-25 cursor-default': value.length === 0, 'opacity-100': value.length > 0 }"
         >
             {{ svg:search attr:class="w-5 h-5 fill-current motion-safe:transition-colors" attr:alt="" attr:aria-hidden="true" }}
         </button>
