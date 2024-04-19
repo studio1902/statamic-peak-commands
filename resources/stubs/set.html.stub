@@ -7,7 +7,7 @@
 <!-- /components/_{{ filename }}.antlers.html -->
 <div
     class="
-        not-prose py-8
+        not-prose my-8
         {{ switch(
             (size == 'md') => 'span-md',
             (size == 'lg') => 'span-lg',

@@ -602,6 +602,36 @@ trait InstallPresetPresets {
                 ]
             ],
             [
+                'handle' => 'read_more',
+                'name' => 'Read more',
+                'description' => 'A read more set in Bard.',
+                'operations' => [
+                    [
+                        'type' => 'copy',
+                        'input' => 'resources/fieldsets/read_more.yaml.stub',
+                        'output' => 'resources/fieldsets/read_more.yaml'
+                    ],
+                    [
+                        'type' => 'copy',
+                        'input' => 'resources/views/components/_read_more.antlers.html.stub',
+                        'output' => 'resources/views/components/_read_more.antlers.html'
+                    ],
+                    [
+                        'type' => 'update_article_sets',
+                        'block' => [
+                            'name' => 'Read more',
+                            'icon' => 'content-book-open',
+                            'description' => 'Link to a related article.',
+                            'handle' => 'read_more',
+                        ]
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n'read_more' => 'Read more',"
+                    ],
+                ]
+            ],
+            [
                 'handle' => 'search',
                 'name' => 'Search',
                 'description' => 'Search form search results.',

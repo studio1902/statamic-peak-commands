@@ -1,0 +1,7 @@
+title: 'Read more'
+fields:
+  -
+    handle: entry
+    field: common.entry
+    config:
+      width: 66

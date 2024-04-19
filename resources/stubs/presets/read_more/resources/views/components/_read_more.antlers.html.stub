@@ -1,0 +1,11 @@
+{{#
+    @name Read more
+    @desc The Read more component.
+    @set page.article.read_more
+#}}
+
+<!-- /components/_read_more.antlers.html -->
+<aside class="not-prose span-md my-3">
+    <b class="font-bold uppercase tracking-wide">{{ trans:strings.read_more }}:</b> <a href="{{ entry:url }}" class="underline decoration-2 underline-offset-2 decoration-primary">{{ entry:title }}</a>
+</aside>
+<!-- End: /components/_read_more.antlers.html -->
