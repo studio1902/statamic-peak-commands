@@ -27,12 +27,31 @@ trait SharedFunctions {
         if (File::exists(base_path($path))) {
             if (confirm(
                     label: "{$type} '{$path}' exists. Continue and overwrite?",
+                    yes: 'Overwrite',
+                    no: 'Abort',
                     default: true
             )) {
                 return false;
             } else {
                 throw new \Exception("Aborted. {$type} '{$path}' already exists.");
             }
+        }
+    }
+
+    /**
+     * Check if a file doesn't already exist.
+     *
+     * @return bool|null
+     */
+    public function checkExistenceAndSkip($type, $path)
+    {
+        if (File::exists(base_path($path))) {
+            return confirm(
+                label: "{$type} '{$path}' exists. Skip or overwrite?",
+                yes: 'Skip',
+                no: 'Overwrite',
+                default: true
+            );
         }
     }
 

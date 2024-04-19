@@ -191,12 +191,14 @@ trait InstallPresetPresets {
                     [
                         'type' => 'copy',
                         'input' => 'index_content.antlers.html.stub',
-                        'output' => 'resources/views/page_builder/_index_content.antlers.html'
+                        'output' => 'resources/views/page_builder/_index_content.antlers.html',
+                        'skippable' => true
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'index_content.yaml.stub',
-                        'output' => 'resources/fieldsets/index_content.yaml'
+                        'output' => 'resources/fieldsets/index_content.yaml',
+                        'skippable' => true
                     ],
                     [
                         'type' => 'copy',
@@ -388,12 +390,14 @@ trait InstallPresetPresets {
                     [
                         'type' => 'copy',
                         'input' => 'index_content.antlers.html.stub',
-                        'output' => 'resources/views/page_builder/_index_content.antlers.html'
+                        'output' => 'resources/views/page_builder/_index_content.antlers.html',
+                        'skippable' => true
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'index_content.yaml.stub',
-                        'output' => 'resources/fieldsets/index_content.yaml'
+                        'output' => 'resources/fieldsets/index_content.yaml',
+                        'skippable' => true
                     ],
                     [
                         'type' => 'copy',
@@ -706,12 +710,14 @@ trait InstallPresetPresets {
                     [
                         'type' => 'copy',
                         'input' => 'index_content.antlers.html.stub',
-                        'output' => 'resources/views/page_builder/_index_content.antlers.html'
+                        'output' => 'resources/views/page_builder/_index_content.antlers.html',
+                        'skippable' => true
                     ],
                     [
                         'type' => 'copy',
                         'input' => 'index_content.yaml.stub',
-                        'output' => 'resources/fieldsets/index_content.yaml'
+                        'output' => 'resources/fieldsets/index_content.yaml',
+                        'skippable' => true
                     ],
                     [
                         'type' => 'copy',
