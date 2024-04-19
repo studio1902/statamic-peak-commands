@@ -1,5 +1,12 @@
 # Changelog
 
+## v8.1.0 (2024-04-19)
+
+### What's new
+- Use multisearch for installing presets and blocks. 4cf11290 by @robdekort
+- Add an option to skip certain files when they already exist. b770a23b by @robdekort
+- Add a pause step when showing instructions. 5c980570 by @robdekort
+
 ## v8.0.0 (2024-04-19)
 
 ### What's new
