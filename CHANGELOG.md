@@ -1,6 +1,15 @@
 # Changelog
 
-## v7.5.0 (2024-04-19)
+## v8.0.0 (2024-04-19)
+
+### What's new
+- Support Statamic v5 and prefix SVG tag attributes. #23 by @robdekort
+
+### What's improved
+- Use disabled variant in search form. b403339e by @robdekort
+- Close theme toggle upon selecting a theme. 8ac7b637 by @robdekort
+
+## v7.5.0 (2024-04-10)
 
 ### What's improved
 - Add back banner preset and improve a11y. 10e23ac6 by @robdekort
