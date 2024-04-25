@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.3.0 (2024-04-25)
+
+### What's new
+- Adding article sets is more resilient when the article fieldset has more fields. cf98e5b0 by @robdekort
+
 ## v8.2.0 (2024-04-19)
 
 ### What's new
