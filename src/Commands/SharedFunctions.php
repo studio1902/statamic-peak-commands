@@ -165,7 +165,12 @@ trait SharedFunctions {
             ]
         ];
 
-        $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
+        $collection = collect(Arr::get($fieldset, 'fields'))
+            ->where('handle', 'article');
+        $first = $collection->first();
+        $key = array_search($first, $collection->toArray());
+
+        $existingGroups = Arr::get($fieldset, "fields.$key.field.sets");
 
         $useExistingGroup = confirm(
             label: 'Do you want to add this set to an existing or new group?',
@@ -175,7 +180,6 @@ trait SharedFunctions {
         );
 
         if ($useExistingGroup) {
-
             $group = select(
                 label: "In which group of article sets do you want to install: '{$name}'?",
                 options: array_keys($existingGroups),
@@ -191,7 +195,7 @@ trait SharedFunctions {
 
             Arr::set($groupSets, 'sets', $existingSets);
             $existingGroups[$group] = $groupSets;
-            Arr::set($fieldset, 'fields.0.field.sets', $existingGroups);
+            Arr::set($fieldset, "fields.$key.field.sets", $existingGroups);
 
         } else {
             $groupName = text(
@@ -225,7 +229,7 @@ trait SharedFunctions {
             $orderedGroups = collect($groups)->sortBy(function ($key) {
                 return $key;
             })->all();
-            Arr::set($fieldset, 'fields.0.field.sets', $orderedGroups);
+            Arr::set($fieldset, "fields.$key.field.sets", $orderedGroups);
         }
 
         File::put(base_path('resources/fieldsets/article.yaml'), Yaml::dump($fieldset, 99, 2));
