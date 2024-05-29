@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.3.1 (2024-05-29)
+
+### What's improved
+- Add button labels to replicators. 192437dc by @robdekort
+
 ## v8.3.0 (2024-04-25)
 
 ### What's new
