@@ -22,6 +22,7 @@ fields:
       collapse: accordion
       previews: true
       fullscreen: true
+      button_label: 'Add card'
       sets:
         cards:
           display: Cards
