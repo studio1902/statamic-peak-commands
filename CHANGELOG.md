@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.3.2 (2024-06-18)
+
+### What's improved
+- Improve a11y for clients preset. 625631df by @robdekort
+
 ## v8.3.1 (2024-05-29)
 
 ### What's improved
