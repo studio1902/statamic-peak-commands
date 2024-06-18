@@ -146,6 +146,10 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
+                        'content' => "Add this to your `lang/locale/strings.php` file:\n\n// 'clients_sr' => 'A list of the following clients',"
+                    ],
+                    [
+                        'type' => 'notify',
                         'content' => "Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{{ handle }}',\n\t'width' => 50\n],"
                     ]
                 ]

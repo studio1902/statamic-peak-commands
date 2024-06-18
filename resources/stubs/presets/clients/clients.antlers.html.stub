@@ -15,6 +15,8 @@
                 : { collection:{{ handle }} sort="order" }
         }}
 
+        <p class="sr-only">{{ trans:strings.clients_sr }}: {{ {{ handle }} | pluck('title') | sentence_list }}.</p>
+
         {{ {{ handle }} }}
             <a class="md:col-span-2 hover:scale-105 motion-safe:transition-transform group" href="{{ website }}" target="_blank" rel="noopener" aria-label="{{ title }}">
                 {{ partial:statamic-peak-tools::components/picture :image="logo" class="grayscale group-focus-visible:grayscale-0 group-hover:grayscale-0 motion-safe:transition" }}
