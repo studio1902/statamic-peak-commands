@@ -105,6 +105,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'clients',
                 'name' => 'Clients',
+                'singular_name' => 'Client',
                 'description' => 'A renamable client/partner collection.',
                 'operations' => [
                     [
@@ -157,6 +158,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'events',
                 'name' => 'Events',
+                'singular_name' => 'Event',
                 'description' => 'A dated renamable events collection.',
                 'operations' => [
                     [
@@ -381,6 +383,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'news',
                 'name' => 'News',
+                'singular_name' => 'Item',
                 'description' => 'A dated renamable news/blog collection with feed.',
                 'operations' => [
                     [
@@ -663,6 +666,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'team_members',
                 'name' => 'Team members',
+                'singular_name' => 'Member',
                 'description' => 'A renamable team member collection.',
                 'operations' => [
                     [
@@ -731,6 +735,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'vacancies',
                 'name' => 'Vacancies',
+                'singluar_name' => 'Vacancy',
                 'description' => 'A dated renamable vacancies collection.',
                 'operations' => [
                     [
