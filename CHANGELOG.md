@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.4.0 (2024-07-04)
+
+### What's new
+- Add singular names to the presets with type "rename". #25 by @sytheveenje
+
 ## v8.3.2 (2024-06-18)
 
 ### What's improved
