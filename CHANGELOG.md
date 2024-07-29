@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.4.1 (2024-07-29)
+
+### What's improved
+- Update Pricing tiers install instructions. a88c0ff0 by @robdekort
+
 ## v8.4.0 (2024-07-04)
 
 ### What's new
