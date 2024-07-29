@@ -604,7 +604,7 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "When you want to group your pricing related content, also add to or create and add to `resources/preferences.yaml`:\nnav:\n\040content:\n\040\040reorder: true\n\040\040items:\n\040\040\040'content::collections': '@inherit'\n\040\040\040'content::pricing':\n\040\040\040\040action: '@modify'\n\040\040\040\040url: collections/tiers\n\040\040\040\040children:\n\040\040\040\040\040'content::collections::tiers': '@move'\n\040\040\040\040\040'content::collections::features': '@move'\n\040\040\040\040\040'content::taxonomies::groups': '@move'"
+                        'content' => "When you want to group your pricing related content, also add to or create and add to `resources/preferences.yaml`:\nnav:\n\040content:\n\040\040reorder: true\n\040\040items:\n\040\040\040'content::collections': '@inherit'\n\040\040\040'content::pricing':\n\040\040\040\040action: '@modify'\n\040\040\040\040url: collections/tiers\n\040\040\040\040children:\n\040\040\040\040\040'content::collections::tiers': '@move'\n\040\040\040\040\040'content::collections::features': '@move'\n\040\040\040\040\040'content::taxonomies::groups': '@move'\n\040\040\040'content::navigation': '@inherit'\n\040\040\040'content::taxonomies': '@inherit'\n\040\040\040'content::assets':\n\040\040\040\040action: '@modify'\n\040\040\040\040reorder: true\n\040\040\040\040children:\n\040\040\040\040\040'content::assets::images': '@inherit'\n\040\040\040\040\040'content::assets::files': '@inherit'\n\040\040\040\040\040'content::assets::social_images': '@inherit'"
                     ],
                 ]
             ],
