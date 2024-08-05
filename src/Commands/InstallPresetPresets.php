@@ -735,7 +735,7 @@ trait InstallPresetPresets {
             [
                 'handle' => 'vacancies',
                 'name' => 'Vacancies',
-                'singluar_name' => 'Vacancy',
+                'singular_name' => 'Vacancy',
                 'description' => 'A dated renamable vacancies collection.',
                 'operations' => [
                     [
