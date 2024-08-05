@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.4.2 (2024-08-05)
+
+### What's fixed
+- Fix a tpyo that prevents the vacancies preset to install. 0b59c4fd by @robdekort
+
 ## v8.4.1 (2024-07-29)
 
 ### What's improved
