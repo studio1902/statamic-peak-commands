@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.4.3 (2024-08-23)
+
+### What's fixed
+- On a multisite environment the feature matrix from the pricing tiers preset wouldn't show any features. b00aa441 by @robdekort
+
 ## v8.4.2 (2024-08-05)
 
 ### What's fixed
