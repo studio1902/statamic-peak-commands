@@ -38,8 +38,8 @@
         </div>
 
 
-        {{# When this https://github.com/statamic/cms/pull/9491 gets merged we can do `tiers:includes="{ block:tiers | pluck('id') | piped }"` instead of the custom query scope. #}}
-        {{ collection:features sort="order" query_scope="multiselect" multiselect:tiers="{ block:tiers | pluck('id') | piped }" as="features"  }}
+        {{# When this https://github.com/statamic/cms/pull/9491 gets merged we can do `tiers:includes="{ block:tiers | raw | piped }"` instead of the custom query scope. #}}
+        {{ collection:features sort="order" query_scope="multiselect" multiselect:tiers="{ block:tiers | raw | piped }" as="features"  }}
             {{ features | group_by('group:title') }}
                 {{ groups }}
                     <div class="span-content border-b border-gray-150" role="rowgroup">
