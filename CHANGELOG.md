@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.4.4 (2024-09-04)
+
+### What's improved
+- Explicitely name a block when being asked to add it to a new or existing group. 385845cd by @robdekort
+
 ## v8.4.3 (2024-08-23)
 
 ### What's fixed
