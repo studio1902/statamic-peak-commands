@@ -257,7 +257,7 @@ trait SharedFunctions {
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
 
         $useExistingGroup = confirm(
-            label: 'Do you want to add this block to an existing or new group?',
+            label: "Do you want to add the block '{$name}' to an existing or new group?",
             yes: 'Existing',
             no: 'New',
             default: true
