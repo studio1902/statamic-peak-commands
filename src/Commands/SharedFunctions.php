@@ -55,6 +55,23 @@ trait SharedFunctions {
         }
     }
 
+     /**
+     * Grant permissions to editor.
+     *
+     * @return bool|null
+     */
+    protected function grantPermissionsToEditor($newPermissions)
+    {
+        $roles = Yaml::parseFile(base_path('resources/users/roles.yaml'));
+
+        $existingPermissions = Arr::get($roles, 'editor.permissions');
+        $permissions = array_merge($existingPermissions, $newPermissions);
+
+        Arr::set($roles, 'editor.permissions', $permissions);
+
+        File::put(base_path('resources/users/roles.yaml'), Yaml::dump($roles, 99, 2));
+    }
+
     /**
      * Prompt a search dialogue requesting an icon.
      *

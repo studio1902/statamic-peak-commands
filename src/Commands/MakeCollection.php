@@ -9,20 +9,18 @@ use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Statamic\Facades\Entry;
-use Statamic\Support\Arr;
-use Symfony\Component\Yaml\Yaml;
 use Stringy\StaticStringy as Stringy;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
-class AddCollection extends Command
+class MakeCollection extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:add-collection';
-    protected $description = "Add a collection.";
+    protected $name = 'statamic:peak:make-collection';
+    protected $description = "Make a collection.";
     protected $collection_name = '';
     protected $filename = '';
     protected $public = false;
@@ -187,7 +185,7 @@ class AddCollection extends Command
             if ($this->index) $this->setIndexTemplate();
             if ($this->mount) $this->installAndSetIndexContentBlock();
             if ($this->show) $this->createShowTemplate();
-            if ($this->permissions) $this->grantPermissionsToEditor();
+            $this->handlePermissions();
             $this->widgetNotice();
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
@@ -366,14 +364,17 @@ class AddCollection extends Command
     }
 
     /**
-     * Grant permissions to editor.
-     *
-     * @return bool|null
-     */
-    protected function grantPermissionsToEditor()
+    * Handle permissions
+    *
+    * @return bool|null
+    */
+    protected function handlePermissions()
     {
-        $roles = Yaml::parseFile(base_path('resources/users/roles.yaml'));
-        $newPermissions = [
+        if (! $this->permissions) {
+            return;
+        }
+
+        $permissions = [
             "view {$this->filename} entries",
             "edit {$this->filename} entries",
             "create {$this->filename} entries",
@@ -385,12 +386,7 @@ class AddCollection extends Command
             "delete other authors {$this->filename} entries",
         ];
 
-        $existingPermissions = Arr::get($roles, 'editor.permissions');
-        $permissions = array_merge($existingPermissions, $newPermissions);
-
-        Arr::set($roles, 'editor.permissions', $permissions);
-
-        File::put(base_path('resources/users/roles.yaml'), Yaml::dump($roles, 99, 2));
+        $this->grantPermissionsToEditor($permissions);
     }
 
     /**

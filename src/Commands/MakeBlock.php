@@ -10,12 +10,12 @@ use Statamic\Facades\Config;
 use Stringy\StaticStringy as Stringy;
 use function Laravel\Prompts\text;
 
-class AddBlock extends Command
+class MakeBlock extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:add-block';
-    protected $description = "Add a page builder block.";
+    protected $name = 'statamic:peak:make-block';
+    protected $description = "Make a page builder block.";
     protected $block_name = '';
     protected $filename = '';
     protected $instructions = '';

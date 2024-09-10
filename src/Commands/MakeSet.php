@@ -10,12 +10,12 @@ use Statamic\Facades\Config;
 use Stringy\StaticStringy as Stringy;
 use function Laravel\Prompts\text;
 
-class AddSet extends Command
+class MakeSet extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:add-set';
-    protected $description = "Add an Article (Bard) set.";
+    protected $name = 'statamic:peak:make-set';
+    protected $description = "Make an Article (Bard) set.";
     protected $set_name = '';
     protected $filename = '';
     protected $instructions = '';

@@ -11,12 +11,12 @@ use Stringy\StaticStringy as Stringy;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
-class AddPartial extends Command
+class MakePartial extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:add-partial';
-    protected $description = "Add a partial with IDE hinting and template paths.";
+    protected $name = 'statamic:peak:make-partial';
+    protected $description = "Make a partial with IDE hinting and template paths.";
     protected $partial_name = '';
     protected $partial_description = '';
     protected $filename = '';
