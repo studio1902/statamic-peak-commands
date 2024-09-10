@@ -178,9 +178,9 @@ class MakeCollection extends Command
 
         try {
             $this->createCollection();
-            $this->createDirectory("resources/blueprints/collections/{$this->filename}");
+            File::makeDirectory("resources/blueprints/collections/{$this->filename}");
             $this->createBlueprint();
-            if ($this->index || $this->show) $this->createDirectory("resources/views/{$this->filename}");
+            if ($this->index || $this->show) File::makeDirectory("resources/views/{$this->filename}");
             if ($this->index) $this->createIndexTemplate();
             if ($this->index) $this->setIndexTemplate();
             if ($this->mount) $this->installAndSetIndexContentBlock();
@@ -263,16 +263,6 @@ class MakeCollection extends Command
             ->replace('{{ collection_name }}', $this->collection_name);
 
         File::put(base_path("resources/blueprints/collections/{$this->filename}/{$this->filename}.yaml"), $contents);
-    }
-
-    /**
-     * Create dir.
-     *
-     * @return bool|null
-     */
-    protected function createDirectory($directory)
-    {
-        File::makeDirectory($directory);
     }
 
     /**
