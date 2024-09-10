@@ -9,10 +9,11 @@ class ServiceProvider extends AddonServiceProvider
     protected static $shouldBoot = false;
 
     protected $commands = [
-        Commands\AddBlock::class,
-        Commands\AddCollection::class,
-        Commands\AddPartial::class,
-        Commands\AddSet::class,
+        Commands\MakeBlock::class,
+        Commands\MakeCollection::class,
+        Commands\MakeGlobal::class,
+        Commands\MakePartial::class,
+        Commands\MakeSet::class,
         Commands\ClearSite::class,
         Commands\InstallBlock::class,
         Commands\InstallPreset::class,

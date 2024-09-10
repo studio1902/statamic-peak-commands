@@ -1,0 +1,7 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: {{ global_name }}
+        fields: [ ]
