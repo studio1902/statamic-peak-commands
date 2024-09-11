@@ -4,12 +4,15 @@
 
 This is a paid addon for [Statamic Peak](https://github.com/studio1902/statamic-peak) that contains the various Peak CLI commands. The addon will only work when you have a valid license (also in development).
 
-* peak:add-block
-* peak:add-collection
-* peak:add-partial
-* peak:add-set
+* peak:clear-site
 * peak:install-block
 * peak:install-preset
+* peak:make-block
+* peak:make-collection
+* peak:make-global
+* peak:make-partial
+* peak:make-set
+* peak:make-taxonomy
 
 [Read the docs](https://peak.1902.studio/getting-started/commands.html).
 
