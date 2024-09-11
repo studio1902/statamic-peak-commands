@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.6.0 (2024-09-11)
+
+### What's changed
+- IMPORTANT: Use `make:*` signature instead of `add-*` in Peak make commands. fbc0867a by @robdekort
+
 ## v8.5.0 (2024-09-11)
 
 ### What's new
