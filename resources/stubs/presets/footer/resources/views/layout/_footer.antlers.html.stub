@@ -1,0 +1,90 @@
+{{#
+    @name Footer
+    @desc The sites footer rendered on each page.
+#}}
+
+<!-- /layout/_footer.antlers.html -->
+<footer class="fluid-grid mt-auto bg-neutral pb-24 md:pb-0 text-white">
+    <nav class="span-content py-12 md:py-16 lg:py-24 grid md:grid-cols-4 gap-x-fluid-grid-gap gap-y-8 md:gap-y-16 text-sm hover:[&_a]:underline">
+        {{ nav:footer max_depth="2" select="title|url" }}
+            {{ unless no_results }}
+                <div class="stack-2">
+                    <h3 class="font-bold">{{ title }}</h3>
+
+                    <ul class="stack-0.5 md:stack-1.5">
+                        {{ children }}
+                            <li>
+                                <a class="py-1 md:py-0 inline-flex gap-1 items-baseline" href="{{ url }}" {{ (url | is_external_url) ?= 'target="_blank"'}}>
+                                    <span>{{ title }}</span>
+
+                                    {{ if url | is_external_url }}
+                                        <span class="sr-only">{{ trans:strings.external_link }}</span>
+                                        {{ svg:external attr:class="w-2 h-2 fill-current" attr:aria-hidden="true" attr:alt="" }}
+                                    {{ /if }}
+                                </a>
+                            </li>
+                        {{ /children }}
+                    </ul>
+                </div>
+            {{ /unless }}
+        {{ /nav:footer }}
+    </nav>
+
+    <div class="span-content py-4 grid md:grid-cols-[max-content,1fr,max-content] items-center gap-4 border-t border-white/40 text-sm md:text-xs [&_a]:underline [&_a]:py-1 md:[&_a]:py-0">
+        <div>
+            &copy; {{ configuration:copyright_since }}
+            {{ unless (now | format('Y')) == configuration:copyright_since }}
+                - {{ now | format('Y') }}
+                {{ /unless }}
+            {{ configuration:copyright_name ?? config:app:name }}
+        </div>
+
+        <div class="order-last md:order-none flex gap-x-3">
+            {{ if social_media:social_media }}
+                {{ social_media:social_media }}
+                    <a href="{{ prefix }}{{ handle }}" rel="noopener{{ type == 'mastodon' ?= ' me' }}" aria-label="{{ config:app:name }} {{ trans:strings.on }} {{ type | title }}" target="_blank">{{ svg :src="type" class="w-4 h-4 md:w-3 md:h-3 overflow-visible fill-current" alt="" aria-hidden="true" }}</a>
+                {{ /social_media:social_media }}
+            {{ /if }}
+        </div>
+
+        <ul class="inline-flex flex-wrap gap-2">
+            {{ if configuration:privacy_statement_type == 'entry' }}
+                <li>
+                    <a href="{{ configuration:privacy_statement_entry:url }}">{{ trans:strings.privacy_statement }}</a>
+                </li>
+
+            {{ elseif configuration:privacy_statement_type == 'pdf' }}
+                <li>
+                    <a href="{{ configuration:privacy_statement_asset }}" target="_blank">{{ trans:strings.privacy_statement }}</a>
+                </li>
+            {{ /if }}
+
+            {{ if configuration:cookie_notice_type == 'entry' }}
+                <li>
+                    <a href="{{ configuration:cookie_notice_entry:url }}">{{ trans:strings.cookie_notice }}</a>
+                </li>
+
+            {{ elseif configuration:cookie_notice_type == 'pdf' }}
+                <li>
+                    <a href="{{ configuration:cookie_notice_asset }}" target="_blank">{{ trans:strings.cookie_notice }}</a>
+                </li>
+            {{ /if }}
+
+            {{ nav:legal max_depth="1" select="title|url" }}
+                {{ unless no_results }}
+                    <li>
+                        <a href="{{ url }}">
+                            {{ title }}
+                        </a>
+                    </li>
+                {{ /unless }}
+            {{ /nav:legal }}
+
+            <li>
+                {{# Let's users reset consent when you use the consent banner. #}}
+                {{ yield:reset_consent }}
+            </li>
+        </ul>
+    </div>
+</footer>
+<!-- End: /layout/_footer.antlers.html -->
