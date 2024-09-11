@@ -10,6 +10,7 @@ This is a paid addon for [Statamic Peak](https://github.com/studio1902/statamic-
 * peak:make:block
 * peak:make:collection
 * peak:make:global
+* peak:make:nav
 * peak:make:partial
 * peak:make:set
 * peak:make:taxonomy
