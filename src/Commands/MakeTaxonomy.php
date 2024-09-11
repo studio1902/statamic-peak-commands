@@ -17,7 +17,7 @@ class MakeTaxonomy extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:make-taxonomy';
+    protected $name = 'statamic:peak:make:taxonomy';
     protected $description = "Make a taxonomy.";
     protected $taxonomy_name = '';
     protected $filename = '';

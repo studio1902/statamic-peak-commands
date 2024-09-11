@@ -14,7 +14,7 @@ class MakeBlock extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:make-block';
+    protected $name = 'statamic:peak:make:block';
     protected $description = "Make a page builder block.";
     protected $block_name = '';
     protected $filename = '';

@@ -14,7 +14,7 @@ class MakeSet extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:make-set';
+    protected $name = 'statamic:peak:make:set';
     protected $description = "Make an Article (Bard) set.";
     protected $set_name = '';
     protected $filename = '';

@@ -14,7 +14,7 @@ class MakeGlobal extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:make-global';
+    protected $name = 'statamic:peak:make:global';
     protected $description = "Make a global set.";
     protected $global_name = '';
     protected $filename = '';

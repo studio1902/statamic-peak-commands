@@ -13,7 +13,7 @@ class InstallBlock extends Command
 {
     use RunsInPlease, SharedFunctions, InstallBlockBlocks, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:install-block';
+    protected $name = 'statamic:peak:install:block';
     protected $description = "Install premade blocks into your page builder.";
     protected $block_name = '';
     protected $choices = '';

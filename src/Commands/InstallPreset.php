@@ -27,7 +27,7 @@ class InstallPreset extends Command
     protected $choices = '';
     protected $description = "Install premade collections and page builder blocks into your site.";
     protected $handle = '';
-    protected $name = 'statamic:peak:install-preset';
+    protected $name = 'statamic:peak:install:preset';
 
     public function handle()
     {

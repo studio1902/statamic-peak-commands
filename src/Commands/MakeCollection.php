@@ -19,7 +19,7 @@ class MakeCollection extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $name = 'statamic:peak:make-collection';
+    protected $name = 'statamic:peak:make:collection';
     protected $description = "Make a collection.";
     protected $collection_name = '';
     protected $filename = '';
