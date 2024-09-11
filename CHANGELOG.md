@@ -1,5 +1,11 @@
 # Changelog
 
+## v8.8.0 (2024-09-11)
+
+### What's new
+- A `peak:make:nav` command to make a navigation. db885302 by @robdekort
+- The ability to grant taxonomy permissions when running `peak:make:nav`. 6aa02a3d by @robdekort
+
 ## v8.7.0 (2024-09-11)
 
 ### What's new
