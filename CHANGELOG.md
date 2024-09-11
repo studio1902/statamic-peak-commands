@@ -1,5 +1,14 @@
 # Changelog
 
+## v8.5.0 (2024-09-11)
+
+### What's new
+- A `make-global` command to make a global. 0f1ef008 by @robdekort
+- A `make-taxonomy` command to make a taxonomy. 04912108 by @robdekort
+
+### What's changed
+- IMPORTANT: Use `make-*` signature instead of `add-*` in Peak make commands. 8692ea22 by @robdekort
+
 ## v8.4.4 (2024-09-04)
 
 ### What's improved
