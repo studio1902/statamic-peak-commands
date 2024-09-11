@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.7.0 (2024-09-11)
+
+### What's new
+- A mega footer preset with multiple navigations. 9eecc0ab by @robdekort
+
 ## v8.6.0 (2024-09-11)
 
 ### What's changed
