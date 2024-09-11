@@ -12,6 +12,7 @@ class ServiceProvider extends AddonServiceProvider
         Commands\MakeBlock::class,
         Commands\MakeCollection::class,
         Commands\MakeGlobal::class,
+        Commands\MakeNav::class,
         Commands\MakePartial::class,
         Commands\MakeSet::class,
         Commands\MakeTaxonomy::class,

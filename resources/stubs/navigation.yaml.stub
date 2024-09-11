@@ -1,0 +1,2 @@
+title: {{ navigation_name }}
+max_depth: {{ max_depth }}
