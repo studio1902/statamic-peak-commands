@@ -10,6 +10,7 @@ use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Collection;
 use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
+use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\multisearch;
 
@@ -22,6 +23,7 @@ class MakeTaxonomy extends Command
     protected $taxonomy_name = '';
     protected $filename = '';
     protected $collections = [];
+    protected $permissions = true;
 
     public function handle()
     {
@@ -45,10 +47,16 @@ class MakeTaxonomy extends Command
             scroll: 15
         );
 
+        $this->permissions = confirm(
+            label: 'Grant edit permissions to editor role?',
+            default: true
+        );
+
         try {
             $this->createTaxonomy();
             $this->createBlueprint();
             $this->attachTaxonomiesToCollections();
+            $this->handlePermissions();
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
@@ -119,5 +127,26 @@ class MakeTaxonomy extends Command
 
             File::put(base_path("content/collections/{$item}.yaml"), Yaml::dump($collection, 99, 2));
         });
+    }
+
+    /**
+     * Handle permissions
+     *
+     * @return bool|null
+     */
+    protected function handlePermissions()
+    {
+        if (! $this->permissions) {
+            return;
+        }
+
+        $permissions = [
+            "view $this->filename terms",
+            "edit $this->filename terms",
+            "create $this->filename terms",
+            "delete $this->filename terms",
+        ];
+
+        $this->grantPermissionsToEditor($permissions);
     }
 }
