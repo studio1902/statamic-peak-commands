@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.8.1 (2024-09-13)
+
+### What's changed
+- Remove microdata from the breadcrumbs preset to avoid collision with Peak's built in JSON-LD breadrumbs. 733a55ae by @robdekort
+
 ## v8.8.0 (2024-09-11)
 
 ### What's new
