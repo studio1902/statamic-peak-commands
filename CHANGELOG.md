@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.9.0 (2024-10-07)
+
+### What's changed
+- Remove vertical margin on set stub as we now use stacks to space them. 7d0ff66b by @robdekort
+
 ## v8.8.1 (2024-09-13)
 
 ### What's changed
