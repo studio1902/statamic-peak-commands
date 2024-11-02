@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.10.0 (2024-11-02)
+
+### What's improved
+- Update roles when installing banner preset. 11817bea by @robdekort
+
 ## v8.9.0 (2024-10-07)
 
 ### What's changed
