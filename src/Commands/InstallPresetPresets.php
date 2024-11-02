@@ -32,6 +32,11 @@ trait InstallPresetPresets {
                         'output' => 'resources/svg/close.svg'
                     ],
                     [
+                        'type' => 'update_role',
+                        'role' => 'editor',
+                        'permissions' => ['edit banner globals']
+                    ],
+                    [
                         'type' => 'notify',
                         'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Banner\n'banner_close' => 'Close banner',"
                     ],
