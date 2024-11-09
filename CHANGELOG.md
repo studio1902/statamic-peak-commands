@@ -1,5 +1,11 @@
 # Changelog
 
+## v8.11.0 (2024-11-09)
+
+### What's new
+- An `install-set` command with a self hosted video set with responsive sources, controls, autoplay, loop, muted and more options. ad62c12d by @robdekort
+- Move `Read more` preset to `install-set` command. ad62c12d by @robdekort
+
 ## v8.10.0 (2024-11-02)
 
 ### What's improved
