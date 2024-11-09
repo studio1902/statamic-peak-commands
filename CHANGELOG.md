@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.11.1 (2024-11-09)
+
+### What's fixed
+- Move set partials to the correct folder when installing a Bard set. 6caaba3c by @robdekort
+
 ## v8.11.0 (2024-11-09)
 
 ### What's new
