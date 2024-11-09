@@ -19,6 +19,7 @@ class ServiceProvider extends AddonServiceProvider
         Commands\ClearSite::class,
         Commands\InstallBlock::class,
         Commands\InstallPreset::class,
+        Commands\InstallSet::class,
     ];
 
     protected $updateScripts = [

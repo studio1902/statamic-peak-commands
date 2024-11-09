@@ -1,0 +1,90 @@
+title: 'Video self hosted'
+fields:
+  -
+    handle: size
+    field: common.size
+    config:
+      localizable: true
+      width: 100
+  -
+    handle: sources
+    field:
+      min_rows: 1
+      add_row: 'Add video source'
+      type: grid
+      display: Sources
+      fields:
+        -
+          handle: file
+          field:
+            max_files: 1
+            min_files: 1
+            container: images
+            show_set_alt: false
+            type: assets
+            display: File
+            width: 50
+            validate:
+              - required
+        -
+          handle: query
+          field:
+            placeholder: '(max-width: 599px)'
+            type: text
+            display: 'Media query'
+            instructions: "Use optional media queries to deliver responsive video's."
+            width: 50
+  -
+    handle: controls
+    field:
+      type: toggle
+      display: Controls
+      instructions: 'Show video UI controls'
+      width: 50
+      instructions_position: below
+  -
+    handle: plays_inline
+    field:
+      type: toggle
+      display: 'Plays inline'
+      instructions: "Play the video in it's inline area."
+      width: 50
+      instructions_position: below
+  -
+    handle: autoplay
+    field:
+      type: toggle
+      display: Autoplay
+      instructions: 'Autoplay the video, you might also want to enable muted.'
+      width: 50
+      instructions_position: below
+  -
+    handle: muted
+    field:
+      type: toggle
+      display: Muted
+      instructions: "Mute the video. Often required for autoplaying video's."
+      width: 50
+      instructions_position: below
+  -
+    handle: loop
+    field:
+      type: toggle
+      display: Loop
+      instructions: 'Loop the video.'
+      width: 50
+      instructions_position: below
+  -
+    handle: disablepictureinpicture
+    field:
+      type: toggle
+      display: 'Disable PiP'
+      instructions: 'Disable Picture in Picture.'
+      width: 50
+      instructions_position: below
+  -
+    handle: caption
+    field:
+      type: text
+      localizable: true
+      display: Caption

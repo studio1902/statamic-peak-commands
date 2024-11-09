@@ -1,0 +1,34 @@
+{{#
+    @name Video self hosted
+    @desc The Video self hosted component.
+    @set page.article.video_self_hosted
+#}}
+
+<!-- /components/_video_self_hosted.antlers.html -->
+<div
+    class="
+        not-prose
+        {{ switch(
+            (size == 'md') => 'span-md',
+            (size == 'lg') => 'span-lg',
+            (size == 'xl') => 'span-xl',
+            () => 'span-md'
+        )}}
+    "
+>
+    <video
+        class="w-full h-auto"
+        {{ controls ?= 'controls' }}
+        {{ autoplay ?= 'autoplay' }}
+        {{ loop ?= 'loop' }}
+        {{ muted ?= 'muted' }}
+        {{ disablepictureinpicture ?= 'disablepictureinpicture' }}
+    >
+        {{ sources }}
+            <source src="{{ file }}" type="{{ file:mime_type }}" {{ query ?= 'media="{{ query }}"' }}/>
+        {{ /sources }}
+    </video>
+
+    {{ partial:typography/caption }}
+</div>
+<!-- End: /components/_video_self_hosted.antlers.html -->
