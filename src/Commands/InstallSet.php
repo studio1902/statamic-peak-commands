@@ -48,7 +48,7 @@ class InstallSet extends Command
 
             try {
                 $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");
-                $this->checkExistence('Partial', "resources/views/page_builder/_{$this->filename}.antlers.html");
+                $this->checkExistence('Partial', "resources/views/components/_{$this->filename}.antlers.html");
 
                 $this->copyStubs();
                 $this->updateArticleSets($this->set_name, $this->filename, $this->instructions, $this->icon);
