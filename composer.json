@@ -17,7 +17,6 @@
         }
     },
     "require": {
-        "laravel/prompts": "^0.1.19",
         "statamic/cms": "^5.0"
     }
 }
