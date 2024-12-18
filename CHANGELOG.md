@@ -1,6 +1,6 @@
 # Changelog
 
-## v8.12.0 (2024-12-18)
+## v8.13.0 (2024-12-18)
 
 ### What's changed
 - Remove prompts dependency. 48e35510 by @robdekort
