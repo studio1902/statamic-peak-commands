@@ -1,9 +1,9 @@
 # Changelog
 
-## v8.13.0 (2024-12-18)
+## v8.13.0 (2025-01-06)
 
-### What's changed
-- Remove prompts dependency. 48e35510 by @robdekort
+### What's improved
+- Update theme toggle (dark mode) preset instructions for Tailwind v4. 91f034ff by @robdekort
 
 ## v8.12.0 (2024-12-06)
 
