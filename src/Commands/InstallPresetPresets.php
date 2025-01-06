@@ -749,7 +749,15 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "To enable this do the following:\n1. Add `darkMode: 'class'` to `tailwind.config.js`.\n2. Add `{{ partial:components/theme_toggle }}` as the last list item in the main ul in `resources/views/navigation/_main_desktop.antlers.html`. The `section:theme_toggle` is automatically yielded in `resources/views/snippets/_browser_appearance.antlers.html`."
+                        'content' => "Add `@variant dark (&:where(.dark, .dark *));` to `resources/css/site.css`."
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Add `{{ partial:components/theme_toggle }}` as the last list item in the main ul in `resources/views/navigation/_main_desktop.antlers.html`. The `section:theme_toggle` is automatically yielded in `resources/views/snippets/_browser_appearance.antlers.html`."
+                    ],
+                    [
+                        'type' => 'notify',
+                        'content' => "Optionally, add the classes `scheme-light dark:scheme-dark` your HTML element in `resources/views/layout.antlers.html`."
                     ]
                 ]
             ],
