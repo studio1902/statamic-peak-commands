@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.15.0 (2025-01-09)
+
+### What's improved
+- Use prompt steps for the search preset instructions to improve clarity when installing the preset. 8b8b9d38 by @robdekort
+
 ## v8.14.0 (2025-01-06)
 
 ### What's improved
