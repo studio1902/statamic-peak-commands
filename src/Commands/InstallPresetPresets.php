@@ -688,7 +688,7 @@ trait InstallPresetPresets {
                     ],
                     [
                         'type' => 'notify',
-                        'content' => "Add fields you want indexed to the index in config/statamic/search.php. The page_builder field is added by default.\n4. Update the search index by running php please search:update --all.\n5. Make sure you add the update command to your deployment script."
+                        'content' => "Add fields you want indexed to the index in config/statamic/search.php. The page_builder field is added by default."
                     ],
                     [
                         'type' => 'notify',
