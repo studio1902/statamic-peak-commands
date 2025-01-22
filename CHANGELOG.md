@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.15.1 (2025-01-09)
+
+### What's improved
+- Fix double instructions. 8d38ff91 by @robdekort
+
 ## v8.15.0 (2025-01-09)
 
 ### What's improved
