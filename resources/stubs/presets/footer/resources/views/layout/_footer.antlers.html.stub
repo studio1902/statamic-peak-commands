@@ -30,7 +30,7 @@
         {{ /nav:footer }}
     </nav>
 
-    <div class="span-content py-4 grid md:grid-cols-[max-content,1fr,max-content] items-center gap-4 border-t border-white/40 text-sm md:text-xs [&_a]:underline [&_a]:py-1 md:[&_a]:py-0">
+    <div class="span-content py-4 grid md:grid-cols-[max-content_1fr_max-content] items-center gap-4 border-t border-white/40 text-sm md:text-xs [&_a]:underline [&_a]:py-1 md:[&_a]:py-0">
         <div>
             &copy; {{ configuration:copyright_since }}
             {{ unless (now | format('Y')) == configuration:copyright_since }}
