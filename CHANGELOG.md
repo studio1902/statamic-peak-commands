@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.16.1 (2025-01-22)
+
+### What's fixed
+- Fix arbitrary value in footer preset for Tailwind v4. a35deaec by @robdekort
+
 ## v8.16.0 (2025-01-22)
 
 ### What's new
