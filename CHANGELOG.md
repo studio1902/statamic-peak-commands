@@ -1,5 +1,10 @@
 # Changelog
 
+## v8.16.0 (2025-01-22)
+
+### What's new
+- A mega menu preset. aa5566d7 by @robdekort
+
 ## v8.15.1 (2025-01-09)
 
 ### What's improved
