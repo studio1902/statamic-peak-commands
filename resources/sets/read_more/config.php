@@ -8,7 +8,12 @@ return [
         [
             'type' => 'copy',
             'input' => '_read_more.antlers.html',
-            'output' => 'resources/vies/page_builder/_read_more.antlers.html'
+            'output' => 'resources/views/components/_read_more.antlers.html'
+        ],
+        [
+            'type' => 'copy',
+            'input' => 'read_more.yaml',
+            'output' => 'resources/fieldsets/read_more.yaml'
         ],
         [
             'type' => 'update_article_sets',
