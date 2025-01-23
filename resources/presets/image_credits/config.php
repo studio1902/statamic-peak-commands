@@ -7,17 +7,17 @@ return [
     'operations' => [
         [
             'type' => 'copy',
-            'input' => 'image_credits.antlers.html.stub',
+            'input' => 'resources/views/page_builder/_image_credits.antlers.html',
             'output' => 'resources/views/page_builder/_image_credits.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'image_credits_fieldset.yaml.stub',
+            'input' => 'resources/fieldsets/image_credits.yaml',
             'output' => 'resources/fieldsets/image_credits.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'images_blueprint.yaml.stub',
+            'input' => 'resources/blueprints/assets/images.yaml',
             'output' => 'resources/blueprints/assets/images.yaml'
         ],
         [

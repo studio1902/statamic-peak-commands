@@ -7,32 +7,32 @@ return [
     'operations' => [
         [
             'type' => 'copy',
-            'input' => 'resources/views/layout/_footer.antlers.html.stub',
+            'input' => 'resources/views/layout/_footer.antlers.html',
             'output' => 'resources/views/layout/_footer.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'content/navigation/footer.yaml.stub',
+            'input' => 'content/navigation/footer.yaml',
             'output' => 'content/navigation/footer.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'content/navigation/legal.yaml.stub',
+            'input' => 'content/navigation/legal.yaml',
             'output' => 'content/navigation/legal.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/blueprints/navigation/footer.yaml.stub',
+            'input' => 'resources/blueprints/navigation/footer.yaml',
             'output' => 'resources/blueprints/navigation/footer.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/blueprints/navigation/legal.yaml.stub',
+            'input' => 'resources/blueprints/navigation/legal.yaml',
             'output' => 'resources/blueprints/navigation/legal.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/blueprints/navigation/footer.yaml.stub',
+            'input' => 'resources/blueprints/navigation/footer.yaml',
             'output' => 'resources/blueprints/navigation/footer.yaml'
         ],
         [

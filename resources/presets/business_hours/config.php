@@ -3,7 +3,7 @@
 return [
     'handle' => 'business_hours',
     'name' => 'Business hours',
-    'description' => 'Configure and list business hours, live open/not open component',
+    'description' => 'Configure and list business hours, live open/closed component',
     'operations' => [
         [
             'type' => 'copy',

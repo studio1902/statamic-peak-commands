@@ -7,17 +7,17 @@ return [
     'operations' => [
         [
             'type' => 'copy',
-            'input' => 'modal.antlers.html.stub',
+            'input' => 'resources/views/components/_modal.antlers.html',
             'output' => 'resources/views/components/_modal.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'invoke_modal.antlers.html.stub',
+            'input' => 'resources/views/components/_invoke_modal.antlers.html',
             'output' => 'resources/views/components/_invoke_modal.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'invoke_modal.yaml.stub',
+            'input' => 'resources/fieldsets/invoke_modal.yaml',
             'output' => 'resources/fieldsets/invoke_modal.yaml'
         ],
         [

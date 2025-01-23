@@ -11,22 +11,22 @@ return [
         ],
         [
             'type' => 'copy',
-            'input' => 'content/navigation/main.yaml.stub',
+            'input' => 'content/navigation/main.yaml',
             'output' => 'content/navigation/main.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/blueprints/navigation/main.yaml.stub',
+            'input' => 'resources/blueprints/navigation/main.yaml',
             'output' => 'resources/blueprints/navigation/main.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/views/navigation/_main_desktop.antlers.html.stub',
+            'input' => 'resources/views/navigation/_main_desktop.antlers.html',
             'output' => 'resources/views/navigation/_main_desktop.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/views/navigation/_main_mobile.antlers.html.stub',
+            'input' => 'resources/views/navigation/_main_mobile.antlers.html',
             'output' => 'resources/views/navigation/_main_mobile.antlers.html'
         ],
         [

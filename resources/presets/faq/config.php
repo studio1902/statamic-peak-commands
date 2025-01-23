@@ -7,22 +7,22 @@ return [
     'operations' => [
         [
             'type' => 'copy',
-            'input' => 'faq_blueprint.yaml.stub',
+            'input' => 'resources/blueprints/collections/faq/faq.yaml',
             'output' => 'resources/blueprints/collections/faq/faq.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'faq_collection.yaml.stub',
+            'input' => 'content/collections/faq.yaml',
             'output' => 'content/collections/faq.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'faq_fieldset.yaml.stub',
+            'input' => 'resources/fieldsets/faq.yaml',
             'output' => 'resources/fieldsets/faq.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'faq.antlers.html.stub',
+            'input' => 'resources/views/page_builder/_faq.antlers.html',
             'output' => 'resources/views/page_builder/_faq.antlers.html'
         ],
         [

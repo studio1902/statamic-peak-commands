@@ -13,67 +13,67 @@ return [
         ],
         [
             'type' => 'copy',
-            'input' => 'app/Scopes/Multiselect.php.stub',
+            'input' => 'app/Scopes/Multiselect.php',
             'output' => 'app/Scopes/Multiselect.php'
         ],
         [
             'type' => 'copy',
-            'input' => 'content/collections/features.yaml.stub',
+            'input' => 'content/collections/features.yaml',
             'output' => 'content/collections/features.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'content/collections/tiers.yaml.stub',
+            'input' => 'content/collections/tiers.yaml',
             'output' => 'content/collections/tiers.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'content/taxonomies/groups.yaml.stub',
+            'input' => 'content/taxonomies/groups.yaml',
             'output' => 'content/taxonomies/groups.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/blueprints/collections/features/feature.yaml.stub',
+            'input' => 'resources/blueprints/collections/features/feature.yaml',
             'output' => 'resources/blueprints/collections/features/feature.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/blueprints/collections/tiers/tier.yaml.stub',
+            'input' => 'resources/blueprints/collections/tiers/tier.yaml',
             'output' => 'resources/blueprints/collections/tiers/tier.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/blueprints/taxonomies/groups/group.yaml.stub',
+            'input' => 'resources/blueprints/taxonomies/groups/group.yaml',
             'output' => 'resources/blueprints/taxonomies/groups/group.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/fieldsets/features.yaml.stub',
+            'input' => 'resources/fieldsets/features.yaml',
             'output' => 'resources/fieldsets/features.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/fieldsets/tiers.yaml.stub',
+            'input' => 'resources/fieldsets/tiers.yaml',
             'output' => 'resources/fieldsets/tiers.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/svg/check.svg.stub',
+            'input' => 'resources/svg/check.svg',
             'output' => 'resources/svg/check.svg'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/svg/cross.svg.stub',
+            'input' => 'resources/svg/cross.svg',
             'output' => 'resources/svg/cross.svg'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/views/page_builder/_features.antlers.html.stub',
+            'input' => 'resources/views/page_builder/_features.antlers.html',
             'output' => 'resources/views/page_builder/_features.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/views/page_builder/_tiers.antlers.html.stub',
+            'input' => 'resources/views/page_builder/_tiers.antlers.html',
             'output' => 'resources/views/page_builder/_tiers.antlers.html'
         ],
         [

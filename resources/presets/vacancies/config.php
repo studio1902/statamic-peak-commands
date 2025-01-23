@@ -11,44 +11,44 @@ return [
         ],
         [
             'type' => 'copy',
-            'input' => 'index.antlers.html.stub',
+            'input' => 'resources/views/vacancies/index.antlers.html',
             'output' => 'resources/views/{{ handle }}/index.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'index_content.antlers.html.stub',
+            'input' => 'resources/views/page_builder/_index_content.antlers.html',
             'output' => 'resources/views/page_builder/_index_content.antlers.html',
             'skippable' => true
         ],
         [
             'type' => 'copy',
-            'input' => 'index_content.yaml.stub',
+            'input' => 'resources/fieldsets/index_content.yaml',
             'output' => 'resources/fieldsets/index_content.yaml',
             'skippable' => true
         ],
         [
             'type' => 'copy',
-            'input' => 'show.antlers.html.stub',
+            'input' => 'resources/views/vacancies/show.antlers.html',
             'output' => 'resources/views/{{ handle }}/show.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'vacancies.md.stub',
+            'input' => 'content/collections/pages/vacancies.md',
             'output' => 'content/collections/pages/{{ multisite_handle }}/{{ handle }}.md'
         ],
         [
             'type' => 'copy',
-            'input' => 'vacancies_item.antlers.html.stub',
+            'input' => 'resources/views/components/_vacancies_item.antlers.html',
             'output' => 'resources/views/components/_{{ handle }}_item.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'vacancies_blueprint.yaml.stub',
+            'input' => 'resources/blueprints/collections/vacancies/vacancies.yaml',
             'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'vacancies_collection.yaml.stub',
+            'input' => 'content/collections/vacancies.yaml',
             'output' => 'content/collections/{{ handle }}.yaml'
         ],
         [

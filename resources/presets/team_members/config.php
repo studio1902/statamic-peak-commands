@@ -11,22 +11,22 @@ return [
         ],
         [
             'type' => 'copy',
-            'input' => 'team_members_blueprint.yaml.stub',
+            'input' => 'resources/blueprints/collections/team_members/team_members.yaml',
             'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'team_members_collection.yaml.stub',
+            'input' => 'content/collections/team_members.yaml',
             'output' => 'content/collections/{{ handle }}.yaml'
         ],
         [
             'type' => 'copy',
-            'input' => 'team_members.antlers.html.stub',
+            'input' => 'resources/views/page_builder/_team_members.antlers.html',
             'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'team_members_fieldset.yaml.stub',
+            'input' => 'resources/fieldsets/team_members.yaml',
             'output' => 'resources/fieldsets/{{ handle }}.yaml'
         ],
         [

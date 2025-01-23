@@ -7,12 +7,12 @@ return [
     'operations' => [
         [
             'type' => 'copy',
-            'input' => 'search.antlers.html.stub',
+            'input' => 'resources/views/search.antlers.html',
             'output' => 'resources/views/search.antlers.html'
         ],
         [
             'type' => 'copy',
-            'input' => 'search_form.antlers.html.stub',
+            'input' => 'resources/views/components/_search_form.antlers.html',
             'output' => 'resources/views/components/_search_form.antlers.html'
         ],
         [

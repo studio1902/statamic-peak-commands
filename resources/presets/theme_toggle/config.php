@@ -7,12 +7,8 @@ return [
     'operations' => [
         [
             'type' => 'copy',
-            'input' => 'theme_toggle.antlers.html.stub',
+            'input' => 'resources/views/components/_theme_toggle.antlers.html',
             'output' => 'resources/views/components/_theme_toggle.antlers.html'
-        ],
-        [
-            'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Theme toggle\n'theme_toggle_dark' => 'Use dark theme.',\n'theme_toggle_light' => 'Use light theme.',\n'theme_toggle_system' => 'Use system preference.',\n'theme_toggle_dark_short' => 'Dark',\n'theme_toggle_light_short' => 'Light',\n'theme_toggle_system_short' => 'System',\n'theme_toggle_toggle_open' => 'Open dark mode picker.',\n'theme_toggle_toggle_close' => 'Close dark mode picker.',"
         ],
         [
             'type' => 'notify',
@@ -21,6 +17,10 @@ return [
         [
             'type' => 'notify',
             'content' => "Add `{{ partial:components/theme_toggle }}` as the last list item in the main ul in `resources/views/navigation/_main_desktop.antlers.html`. The `section:theme_toggle` is automatically yielded in `resources/views/snippets/_browser_appearance.antlers.html`."
+        ],
+        [
+            'type' => 'notify',
+            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Theme toggle\n'theme_toggle_dark' => 'Use dark theme.',\n'theme_toggle_light' => 'Use light theme.',\n'theme_toggle_system' => 'Use system preference.',\n'theme_toggle_dark_short' => 'Dark',\n'theme_toggle_light_short' => 'Light',\n'theme_toggle_system_short' => 'System',\n'theme_toggle_toggle_open' => 'Open dark mode picker.',\n'theme_toggle_toggle_close' => 'Close dark mode picker.',"
         ],
         [
             'type' => 'notify',
