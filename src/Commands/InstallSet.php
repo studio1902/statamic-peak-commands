@@ -4,88 +4,57 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
-use Stringy\StaticStringy as Stringy;
-use function Laravel\Prompts\multisearch;
+use Studio1902\PeakCommands\Commands\Traits\Operations;
 
 class InstallSet extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense, Operations;
 
     protected $name = 'statamic:peak:install:set';
     protected $description = "Install premade sets into your article field.";
 
-    protected string $set_name = '';
+    protected bool $rename = false;
+    protected string $rename_handle = '';
+    protected string $rename_name = '';
+    protected string $rename_singular_name = '';
+    protected string $rename_singular_handle = '';
     protected array $choices = [];
-    protected string $filename = '';
-    protected string $instructions = '';
-    protected $icon = '';
-    protected ?Collection $sets = null;
+    protected string $handle = '';
+    protected ?Collection $items = null;
 
-    public function handle()
+    public function handle(): void
     {
         $this->checkLicense();
 
-        $this->loadSets();
+        $this->loadItems('sets');
 
-        $options = $this->sets->mapWithKeys(fn($set) => [$set['handle'] => "{$set['name']}: {$set['description']}"]);
-
-        $this->choices = multisearch(
+        $this->collectChoices(
             label: 'Which sets do you want to install into your article field?',
-            options: fn (string $value) => strlen($value) > 0
-                ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
-                : $options->toArray(),
-            scroll: 15,
-            validate: fn ($values) => match (true) {
-                empty($values) => 'Please select at least one set. (Space)',
-                default => null,
-            }
+            emptyValidation: 'Please select at least one set. (Space)',
         );
 
-        foreach($this->choices as $choice) {
-            $this->set_name = Stringy::split($this->loadSets()[$choice], ':')[0];
-            $this->filename = $choice;
-            $description = Stringy::split($this->loadSets()[$choice], ': ')[1];
-            $this->instructions = Stringy::split($description, ' \[')[0];
-            $this->icon = rtrim(Stringy::split($description, ' \[')[1], "]");
+        $this->handleChoices();
+    }
 
-            try {
-                $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");
-                $this->checkExistence('Partial', "resources/views/components/_{$this->filename}.antlers.html");
+    protected function handleChoices(): void
+    {
+        collect($this->choices)->each(function ($choice, $key) {
+            $this->handle = $choice;
+            $item = $this->items->get($this->handle);
 
-                $this->copyStubs();
-                $this->updateArticleSets($this->set_name, $this->filename, $this->instructions, $this->icon);
-            } catch (\Exception $e) {
-                return $this->error($e->getMessage());
+            collect($item['operations'])->each(function ($operation) use ($item) {
+                $method = Str::camel('operation_' . $operation['type']);
+                $this->$method($operation, $item);
+            });
+
+            $this->info("<info>[✓]</info> Peak Article Set '{$item['name']}' installed.");
+
+            if ($key === array_key_last($this->choices)) {
+                Artisan::call('cache:clear');
             }
-
-            $this->info("<info>[✓]</info> Peak Article Set '{$this->set_name}' installed.");
-        }
-    }
-
-    /**
-     * Copy yaml and html stubs.
-     *
-     * @return bool|null
-     */
-    protected function copyStubs()
-    {
-        File::put(base_path("resources/fieldsets/{$this->filename}.yaml"), $this->getStub("/sets/{$this->filename}.yaml.stub"));
-        File::put(base_path("resources/views/components/_{$this->filename}.antlers.html"), $this->getStub("/sets/{$this->filename}.antlers.html.stub"));
-    }
-
-    protected function loadSets(): void
-    {
-        $this->sets = collect(config('statamic-peak-commands.paths.sets'))
-            ->map(fn($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
-            ->flatMap(fn(string $path) => File::glob($path . '*/config.php'))
-            ->unique()
-            ->map(fn(string $path) => collect(['path' => \Statamic\Support\Str::removeRight($path, DIRECTORY_SEPARATOR . 'config.php')])
-                ->merge(include $path)
-                ->all()
-            )
-            ->mapWithKeys(fn(array $set) => [$set['handle'] => $set]);
+        });
     }
 }
