@@ -20,7 +20,7 @@ return [
             'block' => [
                 'name' => 'Read more',
                 'icon' => 'content-book-open',
-                'description' => 'Link to a related article.',
+                'instructions' => 'Link to a related article.',
                 'handle' => 'read_more',
             ]
         ],

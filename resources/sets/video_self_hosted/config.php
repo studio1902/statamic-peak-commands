@@ -20,7 +20,7 @@ return [
             'block' => [
                 'name' => 'Video self hosted',
                 'icon' => 'media-webcam-video',
-                'description' => 'Add a self hosted video.',
+                'instructions' => 'Add a self hosted video.',
                 'handle' => 'video_self_hosted',
             ]
         ],

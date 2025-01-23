@@ -115,7 +115,7 @@ class InstallPreset extends Command
                 } elseif ($operation['type'] == 'run') {
                     $this->runCustomCommand($operation['command'], $operation['processing_message'], $operation['success_message']);
                 } elseif ($operation['type'] == 'update_article_sets') {
-                    $this->updateArticleSets($operation['block']['name'], $operation['block']['handle'], $operation['block']['description'], $operation['block']['icon']);
+                    $this->updateArticleSets($operation['block']['name'], $operation['block']['handle'], $operation['block']['instructions'], $operation['block']['icon']);
                     $this->info("Installed article set: '{$operation['block']['name']}'.");
                 } elseif ($operation['type'] == 'update_page_builder') {
                     $name = (string)Str::of($operation['block']['name'])

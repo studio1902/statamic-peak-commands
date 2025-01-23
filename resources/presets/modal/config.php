@@ -25,7 +25,7 @@ return [
             'block' => [
                 'name' => 'Invoke modal',
                 'icon' => 'alert-warning-exclamation-mark',
-                'description' => 'Invokes a modal.',
+                'instructions' => 'Invokes a modal.',
                 'handle' => 'invoke_modal',
             ]
         ],
