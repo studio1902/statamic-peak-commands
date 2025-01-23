@@ -11,7 +11,7 @@ use function Laravel\Prompts\multisearch;
 
 class InstallSet extends Command
 {
-    use RunsInPlease, SharedFunctions, InstallSetSets, NeedsValidLicense;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
     protected $name = 'statamic:peak:install:set';
     protected $description = "Install premade sets into your article field.";

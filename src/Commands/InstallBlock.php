@@ -11,7 +11,7 @@ use function Laravel\Prompts\multisearch;
 
 class InstallBlock extends Command
 {
-    use RunsInPlease, SharedFunctions, InstallBlockBlocks, NeedsValidLicense;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
     protected $name = 'statamic:peak:install:block';
     protected $description = "Install premade blocks into your page builder.";
