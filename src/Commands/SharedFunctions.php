@@ -2,20 +2,23 @@
 
 namespace Studio1902\PeakCommands\Commands;
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
-use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\multisearch;
 use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\spin;
 use function Laravel\Prompts\text;
 
-trait SharedFunctions {
+trait SharedFunctions
+{
 
     /**
      * Check if a file doesn't already exist.
@@ -26,10 +29,10 @@ trait SharedFunctions {
     {
         if (File::exists(base_path($path))) {
             if (confirm(
-                    label: "{$type} '{$path}' exists. Continue and overwrite?",
-                    yes: 'Overwrite',
-                    no: 'Abort',
-                    default: true
+                label: "{$type} '{$path}' exists. Continue and overwrite?",
+                yes: 'Overwrite',
+                no: 'Abort',
+                default: true
             )) {
                 return false;
             } else {
@@ -55,7 +58,7 @@ trait SharedFunctions {
         }
     }
 
-     /**
+    /**
      * Grant permissions to editor.
      *
      * @return bool|null
@@ -84,7 +87,7 @@ trait SharedFunctions {
         $iconsFolder = $reflection->getStaticPropertyValue('iconsFolder');
 
         $icons = collect(File::allFiles("$iconsDirectory/$iconsFolder"))->map(function ($file) {
-            return str_replace('.svg', '', $file->getBasename('.'.$file->getExtension()));
+            return str_replace('.svg', '', $file->getBasename('.' . $file->getExtension()));
         });
 
         if (DIRECTORY_SEPARATOR === '\\') {
@@ -345,5 +348,41 @@ trait SharedFunctions {
         $addonPath = $basePath . DIRECTORY_SEPARATOR . ltrim($stubPath, " /\t\n\r\0\x0B");
 
         return File::get(File::exists($publishedPath) ? $publishedPath : $addonPath);
+    }
+
+    protected function collectOptions(): Collection
+    {
+        return $this->items->mapWithKeys(fn(array $item) => [$item['handle'] => "{$item['name']}: {$item['description']}"]);
+    }
+
+    protected function collectChoices(string $label, string $emptyValidation): void
+    {
+        $options = $this->collectOptions();
+
+        $this->choices = multisearch(
+            label: $label,
+            options: fn(string $value) => strlen($value) > 0
+                ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
+                : $options->toArray(),
+            scroll: 15,
+            validate: fn($values) => match (true) {
+                empty($values) => $emptyValidation,
+                default => null,
+            }
+        );
+    }
+
+    protected function loadItems(string $type): void
+    {
+        $this->items = collect(config('statamic-peak-commands.paths.' . $type))
+            ->map(fn($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
+            ->flatMap(fn(string $path) => File::glob($path . '*/config.php'))
+            ->unique()
+            ->map(fn(string $path) => collect(['path' => \Statamic\Support\Str::removeRight($path, DIRECTORY_SEPARATOR . 'config.php')])
+                ->merge(include $path)
+                ->sort()
+                ->all()
+            )
+            ->mapWithKeys(fn(array $preset) => [$preset['handle'] => $preset]);
     }
 }
