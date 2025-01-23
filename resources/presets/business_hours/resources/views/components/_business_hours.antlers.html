@@ -1,0 +1,36 @@
+{{#
+    @name Business hours
+    @desc The list business hours component tied to the business hours global.
+#}}
+
+<!-- /components/_business_hours.antlers.html -->
+<div>
+    <div x-data="businessHours()" class="flex gap-2 items-baseline mb-2" x-cloak>
+        <span x-show="open" class="w-3 h-3 rounded-full bg-green-600"></span>
+        <span x-show="closed" class="w-3 h-3 rounded-full bg-red-600"></span>
+        <span
+            x-text="
+                open
+                    ? '{{ trans:strings.business_hours_open_now }}'
+                    : '{{ trans:strings.business_hours_closed_now }}'
+            "
+            class="font-bold"
+        ></span>
+    </div>
+    <table>
+        {{ business_hours:dates }}
+            <tr>
+                <th class="py-1 pr-2 text-left">{{ trans:strings.business_hours_{weekday} }}</th>
+                <td>
+                    {{ if open }}
+                        {{ start_time }} - {{ end_time }}
+                    {{ else }}
+                        {{ trans:strings.business_hours_closed }}
+                    {{ /if }}
+                </td>
+            </tr>
+        {{ /business_hours:dates }}
+    </table>
+    {{ partial:snippets/business_hours }}
+</div>
+<!-- End: /components/_business_hours.antlers.html -->

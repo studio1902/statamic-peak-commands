@@ -1,0 +1,318 @@
+title: {{ name }}
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: News
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              input_type: text
+              localizable: true
+              listable: true
+              display: Title
+              validate:
+                - required
+          -
+            handle: teaser
+            field: common.text_plain
+            config:
+              display: Teaser
+              validate:
+                - required
+              character_limit: '250'
+      -
+        display: 'Page builder'
+        fields:
+          -
+            import: page_builder
+  {{ singular_handle }}:
+    display: {{ singular_name }}
+    sections:
+      -
+        display: '{{ singular_name }} date'
+        instructions: '{{ singular_name }} date or dates.'
+        fields:
+          -
+            handle: {{ singular_handle }}_date_start
+            field:
+              time_enabled: true
+              time_seconds_enabled: false
+              full_width: false
+              inline: false
+              columns: 1
+              rows: 1
+              display: '{{ singular_name }} date (start)'
+              type: date
+              icon: date
+              listable: true
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              width: 50
+              validate:
+                - required
+          -
+            handle: {{ singular_handle }}_date_end
+            field:
+              time_enabled: true
+              time_seconds_enabled: false
+              full_width: false
+              inline: false
+              columns: 1
+              rows: 1
+              display: '{{ singular_name }} date (end)'
+              type: date
+              icon: date
+              listable: true
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              width: 50
+              validate:
+                - required
+      -
+        display: 'Status and location'
+        instructions: '{{ singular_name }} status and location details.'
+        fields:
+          -
+            handle: {{ singular_handle }}_type
+            field:
+              options:
+                offline: Offline
+                online: Online
+              multiple: false
+              clearable: false
+              searchable: false
+              taggable: false
+              push_tags: false
+              cast_booleans: false
+              default: offline
+              display: '{{ singular_name }} type'
+              type: select
+              icon: select
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              validate:
+                - required
+              width: 50
+          -
+            handle: {{ singular_handle }}_status
+            field:
+              options:
+                EventScheduled: '{{ singular_name }} scheduled as planned'
+                EventRescheduled: '{{ singular_name }} rescheduled (enter new dates)'
+                EventPostponed: '{{ singular_name }} postponed (new date not yet known)'
+                EventMovedOnline: '{{ singular_name }} moved to online (update location)'
+                EventCancelled: '{{ singular_name }} cancelled (keep values as is)'
+              multiple: false
+              clearable: false
+              searchable: false
+              taggable: false
+              push_tags: false
+              cast_booleans: false
+              default: EventScheduled
+              display: '{{ singular_name }} status'
+              type: select
+              icon: select
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+          -
+            handle: location_name
+            field:
+              input_type: text
+              antlers: false
+              display: 'Location name'
+              type: text
+              icon: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              validate:
+                - required
+                - sometimes
+              if:
+                {{ singular_handle }}_type: 'equals offline'
+          -
+            handle: location_address
+            field:
+              input_type: text
+              antlers: false
+              display: Address
+              type: text
+              icon: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              width: 50
+              validate:
+                - required
+                - sometimes
+              if:
+                {{ singular_handle }}_type: 'equals offline'
+          -
+            handle: location_locality
+            field:
+              input_type: text
+              antlers: false
+              display: City
+              type: text
+              icon: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              width: 50
+              validate:
+                - required
+                - sometimes
+              if:
+                {{ singular_handle }}_type: 'equals offline'
+          -
+            handle: {{ singular_handle }}_url
+            field:
+              input_type: url
+              antlers: false
+              display: '{{ singular_name }} URL'
+              type: text
+              icon: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              validate:
+                - required
+                - sometimes
+              if:
+                {{ singular_handle }}_type: 'equals online'
+      -
+        display: 'Organizer'
+        instructions: '{{ singular_name }} organizer details.'
+        fields:
+          -
+            handle: organizer_name
+            field:
+              input_type: text
+              antlers: false
+              display: Organizer name
+              type: text
+              icon: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              width: 50
+              validate:
+                - required
+          -
+            handle: organizer_url
+            field:
+              input_type: text
+              antlers: false
+              display: Organizer URL
+              type: text
+              icon: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              width: 50
+              validate:
+                - required
+      -
+        display: 'Sign up'
+        instructions: 'Buttons to an entry, email address or external URL where visitors can sign up.'
+        fields:
+          -
+            import: button
+            prefix: sign_up_
+  seo:
+    display: SEO
+    sections:
+      -
+        display: Basic
+        instructions: 'Basic SEO settings.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_basic'
+      -
+        display: Advanced
+        instructions: 'Advanced SEO settings.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_advanced'
+      -
+        display: 'Open Graph'
+        instructions: 'Open Graph meta tags for social sharing.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_open_graph'
+      -
+        display: Sitemap
+        instructions: 'Sitemap configuration.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_sitemap'
+      -
+        display: 'JSON-ld Schema'
+        instructions: 'Custom JSON-ld schema objects.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_jsonld'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        display: Meta
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              generate: true
+              listable: hidden
+              display: Slug
+              validate:
+                - required
+          -
+            handle: date
+            field:
+              type: date
+              required: true
+              listable: hidden
+              validate:
+                - required
+              display: 'Publication date'
+              mode: single
+              time_enabled: false
+              time_required: false
+              earliest_date: '2021-01-01'
+              full_width: false
+              inline: false
+              columns: 1
+              rows: 1
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              time_seconds_enabled: false
+          -
+            handle: image
+            field: common.image
+            config:
+              listable: true
+              instructions: 'Will also be used in image links to this page.'
+              instructions_position: below
+              validate:
+                - required

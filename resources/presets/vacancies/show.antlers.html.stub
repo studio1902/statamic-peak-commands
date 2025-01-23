@@ -1,0 +1,70 @@
+{{#
+    @name {{ name }} show
+    @desc The {{ name }} show template.
+#}}
+
+<!-- /{{ handle }}/show.antlers.html -->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
+        "title": "{{ title }}",
+        "description": "{{ teaser }}",
+        "datePosted": "{{ date | format('c') }}",
+        "validThrough": "{{ expires | format('c') }}",
+        "employmentType": "{{ employment_type }}",
+        "jobLocation": {
+            "@type": "Place",
+            "address": {
+                "@type": "PostalAddress",
+                {{ if address }}"streetAddress": "{{ address }}",{{ /if }}
+                {{ if city }}"addressLocality": "{{ city }}",{{ /if }}
+                {{ if zip_code }}"postalCode": "{{ zip_code }}",{{ /if }}
+                "addressRegion": "{{ region }}",
+                "addressCountry": "{{ country }}"
+            }
+        },{{ if salary_min && salary_max }}
+        "baseSalary": {
+            "@type": "MonetaryAmount",
+            "currency": "{{ currency }}",
+            "value": {
+                "@type": "QuantitativeValue",
+                "minValue": {{ salary_min }},
+                "maxValue": {{ salary_max }},
+                "unitText": "MONTH"
+            }
+        },{{ /if }}
+        "hiringOrganization": {
+            "@type": "Organization",
+            "name": "{{ config:app:name }}"{{ if seo:organization_logo }},
+            "logo": "{{ config:app:url }}{{ glide:seo:organization_logo width='336' height='336' fit='contain' }}"{{ /if }}
+        }
+    }
+</script>
+
+<main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
+    <section class="fluid-grid">
+        <div class="contents stack-12">
+            {{ partial:typography/h1 :content="title" class="span-content" }}
+
+            <div class="span-content md:col-start-[col-1] md:col-span-6">
+                {{ partial:typography/p :content="teaser" }}
+            </div>
+
+            <aside class="span-content md:col-start-[col-1] md:col-span-6">
+                {{ trans:strings.{{ handle }}_published }}: {{ partial:typography/time :content="date" }}<br>
+                {{ trans:strings.{{ handle }}_expires }}: {{ partial:typography/time :content="expires" }}<br>
+                {{ trans:strings.{{ handle }}_region }}: {{ region }}<br>
+                {{ trans:strings.{{ handle }}_employment_type }}: {{ employment_type == 'FULL_TIME' ? { trans:strings.{{ handle }}_full_time } : { trans:strings.{{ handle }}_part_time } }}<br>
+                {{ trans:strings.{{ handle }}_hours }}: {{ hours }}<br>
+                {{ trans:strings.{{ handle }}_salary_min }}: {{ salary_min ?= '€ { salary_min | format_number('0', ',', '.') }' }}<br>
+                {{ trans:strings.{{ handle }}_salary_max }}: {{ salary_max ?= '€ { salary_max | format_number('0', ',', '.') }' }}<br>
+            </aside>
+        </div>
+    </section>
+
+    {{ page_builder scope="block" }}
+        {{ partial src="page_builder/{type}" }}
+    {{ /page_builder }}
+</main>
+<!-- /{{ handle }}/show.antlers.html -->

@@ -1,0 +1,179 @@
+title: Tier
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: General
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              input_type: text
+              localizable: true
+              listable: true
+              display: Title
+              validate:
+                - required
+          -
+            handle: pricing
+            field:
+              options:
+                fixed: Fixed
+                custom: Custom
+              default: fixed
+              type: button_group
+              display: Pricing
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+          -
+            handle: price
+            field:
+              input_type: number
+              prepend: €
+              antlers: false
+              type: text
+              display: Price
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+              validate:
+                - sometimes
+                - required
+                - integer
+              if:
+                pricing: 'equals fixed'
+          -
+            handle: custom
+            field:
+              input_type: text
+              antlers: false
+              type: text
+              display: Custom
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+              validate:
+                - sometimes
+                - required
+              if:
+                pricing: 'equals custom'
+          -
+            handle: detail
+            field:
+              input_type: text
+              placeholder: '/user per month'
+              antlers: false
+              type: text
+              display: Detail
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+              validate:
+                - required
+          -
+            handle: buttons
+            field: buttons.buttons
+            config:
+              display: Button
+              max_rows: 1
+      -
+        display: Benefits
+        fields:
+          -
+            handle: benefits_title
+            field:
+              input_type: text
+              antlers: false
+              type: text
+              display: Title
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+          -
+            handle: benefits
+            field:
+              fields:
+                -
+                  handle: benefit
+                  field:
+                    buttons:
+                      - bold
+                      - unorderedlist
+                      - anchor
+                    smart_typography: false
+                    save_html: false
+                    inline: true
+                    toolbar_mode: floating
+                    reading_time: false
+                    word_count: false
+                    fullscreen: true
+                    allow_source: true
+                    enable_input_rules: true
+                    enable_paste_rules: true
+                    remove_empty_nodes: trim
+                    antlers: false
+                    link_noopener: false
+                    link_noreferrer: false
+                    target_blank: false
+                    always_show_set_button: false
+                    collapse: false
+                    previews: true
+                    type: bard
+                    display: Benefit
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    replicator_preview: true
+                    hide_display: false
+                    validate:
+                      - required
+              mode: table
+              add_row: 'Add benefit'
+              reorderable: true
+              fullscreen: true
+              type: grid
+              display: Benefits
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        display: Features
+        fields:
+          -
+            handle: features
+            field:
+              mode: default
+              create: true
+              collections:
+                - features
+              type: entries
+              display: Features
+              listable: true
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+              validate:
+                - required

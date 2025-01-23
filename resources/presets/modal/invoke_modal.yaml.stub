@@ -1,0 +1,67 @@
+title: 'Invoke modal'
+fields:
+  -
+    handle: label_open
+    field:
+      input_type: text
+      antlers: false
+      display: 'Label open'
+      type: text
+      icon: text
+      localizable: true
+      width: 50
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      always_save: false
+      validate:
+        - required
+  -
+    handle: label_close
+    field:
+      input_type: text
+      antlers: false
+      display: 'Label close'
+      type: text
+      icon: text
+      localizable: true
+      width: 50
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      always_save: false
+      validate:
+        - required
+  -
+    handle: label_aria
+    field:
+      input_type: text
+      antlers: false
+      display: 'Label aria'
+      type: text
+      icon: text
+      localizable: true
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      always_save: false
+      validate:
+        - required
+  -
+    handle: text
+    field: common.text_rich
+    config:
+      buttons:
+        - h2
+        - h3
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - removeformat
+        - anchor
+      fullscreen: false
+      allow_source: false
+      display: Text
+      validate:
+        - required

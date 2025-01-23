@@ -1,0 +1,46 @@
+{{#
+    @name Search
+    @desc The search template showing search results, if you enable the search form partial in `views/navigation/_main.antlers.html` and the route in `routes/web.php`.
+#}}
+
+{{# Yield a title to the SEO partial. #}}
+{{ section:seo_title }}
+    {{ trans:strings.search }}
+{{ /section:seo_title }}
+
+<!-- /search.antlers.html -->
+<main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
+    <section class="fluid-grid stack-6">
+        <div class="span-content md:col-start-[col-3] md:col-span-8">
+            {{ partial:typography/h1 class="mb-2" content="{trans:strings.search_results_for} &OpenCurlyDoubleQuote;<span class='italic'>{get:q}</span>&CloseCurlyDoubleQuote;" }}
+        </div>
+
+        <form class="relative span-content md:col-start-[col-3] md:col-span-8" action="/search" role="search">
+            <input class="w-full pr-10 rounded border-neutral caret-primary focus-visible:ring-primary" placeholder="{{ trans:strings.search }}" type="search" value="{{ get:q }}" name="q"/>
+
+            <button class="absolute inset-y-0 right-0 flex mr-1 items-center text-neutral hover:text-primary rounded" aria-label="{{ trans:strings.search }}">
+                {{ svg:search attr:class="w-5 h-5 fill-current motion-safe:transition-colors" attr:alt="" attr:aria-hidden="true" }}
+            </button>
+        </form>
+
+        {{ search:results }}
+            {{ if no_results }}
+                <article class="span-content md:col-start-[col-3] md:col-span-8">
+                    {{ partial:typography/p content="{trans:strings.search_no_results}" }}
+                </article>
+            {{ else }}
+                <article class="span-content md:col-start-[col-3] md:col-span-8">
+                    <a class="flex flex-col" href="{{ url }}">
+                        <span class="text-neutral underline decoration-primary mb-1 break-words">{{ permalink }}</span>
+
+                        {{ partial:typography/h2 class="mt-0" color="text-primary" :content="title" }}
+                    </a>
+                    <p>
+                        {{ search_snippets | flatten | implode(' … ') | mark }}
+                    </p>
+                </article>
+            {{ /if }}
+        {{ /search:results }}
+    </section>
+</main>
+<!-- End: /search.antlers.html -->

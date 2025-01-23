@@ -1,0 +1,48 @@
+title: Image
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: 'Alternative text'
+        instructions: "Alt texts are important for users who depend on assistive technology."
+        fields:
+          -
+            handle: alt
+            field:
+              display: 'Alt Text'
+              type: textarea
+              instructions: 'Description of the image'
+              instructions_position: below
+              focus: true
+          -
+            handle: exempt_from_alt
+            field:
+              inline_label: "This image doesn't need an alt text."
+              default: false
+              type: toggle
+              display: Exempt
+              icon: toggle
+              listable: hidden
+              instructions_position: below
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+              instructions: "When enabled, this image won't show up in the control panel dashboard as an image that misses alt text. Images without an alt text will automatically be hidden for screen readers."
+      -
+        display: 'Copyright'
+        instructions: "Copyright information for use in the image credits block."
+        fields:
+          -
+            handle: copyright
+            field:
+              mode: keyed
+              keys:
+                name: Name
+                url: URL
+              display: Copyright
+              type: array
+              icon: array
+              instructions_position: above
+              visibility: visible
+              instructions: 'This image will be automatically added to the sites credits when this data is provided.'

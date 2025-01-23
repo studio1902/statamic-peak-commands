@@ -1,0 +1,188 @@
+tabs:
+  general:
+    display: General
+    sections:
+      -
+        display: 'Business hours'
+        instructions: 'Configure the business hours'
+        fields:
+          -
+            handle: dates
+            field:
+              fields:
+                -
+                  handle: weekday
+                  field:
+                    options:
+                      monday: Monday
+                      tuesday: Tuesday
+                      wednesday: Wednesday
+                      thursday: Thursday
+                      friday: Friday
+                      saturday: Saturday
+                      sunday: Sunday
+                    multiple: false
+                    clearable: false
+                    searchable: true
+                    taggable: false
+                    push_tags: false
+                    cast_booleans: false
+                    display: Weekday
+                    type: select
+                    icon: select
+                    listable: hidden
+                    instructions_position: above
+                    read_only: false
+                    validate:
+                      - required
+                    width: 25
+                -
+                  handle: open
+                  field:
+                    default: true
+                    display: Open
+                    type: toggle
+                    icon: toggle
+                    listable: hidden
+                    instructions_position: above
+                    width: 25
+                    visibility: visible
+                    always_save: false
+                -
+                  handle: start_time
+                  field:
+                    seconds_enabled: false
+                    default: '08:30'
+                    display: 'Start time'
+                    type: time
+                    icon: time
+                    listable: hidden
+                    instructions_position: above
+                    read_only: false
+                    validate:
+                      - required
+                      - sometimes
+                    if:
+                      open: 'equals true'
+                    width: 25
+                -
+                  handle: end_time
+                  field:
+                    seconds_enabled: false
+                    default: '17:00'
+                    display: 'End time'
+                    type: time
+                    icon: time
+                    listable: hidden
+                    instructions_position: above
+                    read_only: false
+                    validate:
+                      - required
+                      - sometimes
+                    if:
+                      open: 'equals true'
+                    width: 25
+              mode: table
+              reorderable: false
+              display: 'Business hours'
+              type: grid
+              icon: grid
+              listable: hidden
+              instructions_position: above
+              validate:
+                - required
+              max_rows: 7
+              min_rows: 7
+              add_row: 'Add day'
+          -
+            handle: phone_button
+            field:
+              type: section
+              listable: hidden
+              display: 'Phone number'
+              instructions: 'Confiugre a phone number.'
+              instructions_position: above
+              visibility: visible
+              always_save: false
+          -
+            handle: phone_number
+            field:
+              input_type: tel
+              antlers: false
+              display: 'Phone number'
+              type: text
+              icon: text
+              width: 50
+              listable: hidden
+              instructions_position: below
+              visibility: visible
+              always_save: false
+              validate:
+                - required
+  exceptions:
+    display: Exceptions
+    sections:
+      -
+        display: 'Exceptions'
+        instructions: 'Configure exceptions to the default business hours.'
+        fields:
+          -
+            handle: exceptions
+            field:
+              fields:
+                -
+                  handle: active
+                  field:
+                    default: true
+                    display: Active
+                    type: toggle
+                    icon: toggle
+                    listable: hidden
+                    instructions_position: above
+                    validate:
+                      - required
+                -
+                  handle: start_date
+                  field:
+                    mode: single
+                    time_enabled: false
+                    time_seconds_enabled: false
+                    full_width: false
+                    inline: false
+                    columns: 1
+                    rows: 1
+                    display: 'Start date'
+                    type: date
+                    icon: date
+                    listable: hidden
+                    instructions_position: above
+                    validate:
+                      - required
+                -
+                  handle: end_date
+                  field:
+                    mode: single
+                    time_enabled: false
+                    time_seconds_enabled: false
+                    full_width: false
+                    inline: false
+                    columns: 1
+                    rows: 1
+                    display: 'End date'
+                    type: date
+                    icon: date
+                    listable: hidden
+                    instructions_position: above
+                    validate:
+                      - required
+                      - 'after:{this}.start_date'
+                    visibility: visible
+              mode: table
+              add_row: 'Add exception'
+              reorderable: false
+              display: Exceptions
+              type: grid
+              icon: grid
+              listable: hidden
+              instructions_position: above
+              visibility: visible

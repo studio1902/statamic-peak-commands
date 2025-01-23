@@ -1,0 +1,27 @@
+{{#
+    @name {{ name }}
+    @desc The {{ name }} page builder block.
+    @set page.page_builder.{{ handle }}
+#}}
+
+<!-- /page_builder/_{{ handle }}.antlers.html -->
+{{ partial:page_builder/block }}
+    <div class="span-content grid grid-cols-2 md:grid-cols-10 gap-12 place-items-center">
+        {{ block:title ?= { partial:typography/h2 :content="block:title" class="col-span-2 md:col-span-12" } }}
+
+        {{
+            {{ handle }} = block:{{ handle }}
+                ? block:{{ handle }}
+                : { collection:{{ handle }} sort="order" }
+        }}
+
+        <p class="sr-only">{{ trans:strings.clients_sr }}: {{ {{ handle }} | pluck('title') | sentence_list }}.</p>
+
+        {{ {{ handle }} }}
+            <a class="md:col-span-2 hover:scale-105 motion-safe:transition-transform group" href="{{ website }}" target="_blank" rel="noopener" aria-label="{{ title }}">
+                {{ partial:statamic-peak-tools::components/picture :image="logo" class="grayscale group-focus-visible:grayscale-0 group-hover:grayscale-0 motion-safe:transition" }}
+            </a>
+        {{ /{{ handle }} }}
+    </div>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_{{ handle }}.antlers.html -->

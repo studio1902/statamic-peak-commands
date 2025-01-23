@@ -1,0 +1,77 @@
+title: Feature
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: Feature
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              input_type: text
+              localizable: true
+              listable: true
+              display: Title
+              validate:
+                - required
+          -
+            handle: explanation
+            field: common.text_basic
+            config:
+              display: Explanation
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        display: Meta
+        fields:
+          -
+            handle: group
+            field:
+              max_items: 1
+              mode: default
+              create: true
+              taxonomies:
+                - groups
+              type: terms
+              display: Group
+              listable: true
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+              validate:
+                - required
+          -
+            handle: list_as
+            field:
+              input_type: text
+              antlers: false
+              type: text
+              display: 'List as'
+              instructions: "If you don't want this feature listed as a checkmark icon, you can specify custom text here."
+              listable: true
+              instructions_position: below
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
+      -
+        display: Tiers
+        fields:
+          -
+            handle: tiers
+            field:
+              mode: default
+              create: true
+              collections:
+                - tiers
+              type: entries
+              display: Tiers
+              listable: true
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false

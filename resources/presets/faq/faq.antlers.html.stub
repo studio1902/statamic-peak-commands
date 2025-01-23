@@ -1,0 +1,85 @@
+{{#
+    @name FAQ
+    @desc The FAQ page builder block.
+    @set page.page_builder.faq
+#}}
+
+<!-- /page_builder/_faq.antlers.html -->
+{{ once }}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {{ stack:questions }}
+                    {{ value }}{{ !last ?= ',' }}
+                {{ /stack:questions }}
+            ]
+        }
+    </script>
+{{ /once }}
+
+{{ partial:page_builder/block }}
+    <div class="contents stack-8">
+        {{ if block:title || block:text }}
+            <header class="span-content md:col-start-[col-3] md:col-span-8">
+                {{ block:title ?= { partial:typography/h1 as="h2" :content="block:title" class="mb-4" } }}
+                {{ block:text ?= { partial:typography/p :content="block:text" } }}
+            </header>
+        {{ /if }}
+
+        <div class="span-content md:col-start-[col-3] md:col-span-8 flex flex-col gap-4">
+            {{ block:questions }}
+                {{ push:questions }}
+                    {
+                        "@type": "Question",
+                        "name": "{{ title }}",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": " {{ text | raw | where('type', 'paragraph') | bard_text | entities }}"
+                        }
+                    }
+                {{ /push:questions }}
+
+                <article
+                    x-data="{
+                        expanded: {{ first ? true : false | bool_string }},
+                        hash: '#{{ title | slugify }}'
+                    }"
+                    role="region"
+                    class="flex flex-col rounded-lg bg-white shadow py-3 px-2 md:px-6"
+                    id="{{ title | slugify }}"
+                >
+                    <button
+                        @click="
+                            expanded = !expanded
+                            expanded
+                                ? history.pushState({}, '', hash)
+                                : history.pushState({}, '', window.location.pathname)
+                        "
+                        @keyup.escape.window="expanded = false"
+                        x-init="window.location.hash === hash && (expanded = true)"
+                        :aria-expanded="expanded"
+                        class="px-2 w-full flex items-start justify-between rounded text-neutral hover:text-primary motion-safe:transition"
+                        x-cloak
+                    >
+                        {{ partial:typography/h2 :content="title" color="text-current text-left" class="my-2" }}
+                        <span x-show="expanded" aria-hidden="true" class="flex-shrink-0 font-bold text-lg ml-4">&minus;</span>
+                        <span x-show="!expanded" aria-hidden="true" class="flex-shrink-0 font-bold text-lg ml-4">&plus;</span>
+                    </button>
+                    <div
+                        x-show="expanded"
+                        x-collapse
+                        class="p-2"
+                    >
+                        {{ partial:typography/prose }}
+                            {{ text }}
+                        {{ /partial:typography/prose }}
+                    </div>
+                </article>
+
+            {{ /block:questions }}
+        </div>
+    </div>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_faq.antlers.html -->

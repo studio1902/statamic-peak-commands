@@ -1,0 +1,25 @@
+{{#
+    @name Breadcrumbs
+    @desc Breadcrumbs display the current page in it's page hierarcy.
+#}}
+
+<!-- /navigation/_breadcrumbs.antlers.html -->
+<nav aria-label="breadcrumb">
+    <ol class="flex">
+        {{ nav:breadcrumbs }}
+            <li class="flex">
+                {{ unless last }}
+                    <a href="{{ url }}">
+                        <span>{{ title }}</span>
+                    </a>
+                    <span class="px-2 text-neutral" aria-hidden>/</span>
+                {{ else }}
+                    <a href="{{ url }}" class="text-primary" aria-current="page">
+                        <span>{{ title }}</span>
+                    </a>
+                {{ /unless }}
+            </li>
+        {{ /nav:breadcrumbs }}
+    </ol>
+</nav>
+<!-- End: /navigation/_breadcrumbs.antlers.html -->

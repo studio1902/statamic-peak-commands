@@ -1,0 +1,253 @@
+title: {{ name }}
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: Vacancy
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              input_type: text
+              localizable: true
+              listable: true
+              display: Title
+              validate:
+                - required
+          -
+            handle: teaser
+            field: common.text_plain
+            config:
+              display: Teaser
+              validate: required
+      -
+        display: 'Page builder'
+        fields:
+          -
+            import: page_builder
+  vacancy:
+    display: Vacancy
+    sections:
+      -
+        display: Location
+        instructions: 'Most of this information will be used in this entries JSON-LD data for Google.'
+        fields:
+          -
+            handle: address
+            field:
+              input_type: text
+              antlers: false
+              display: Address
+              type: text
+              icon: text
+              width: 50
+              listable: hidden
+          -
+            handle: zip_code
+            field:
+              input_type: text
+              antlers: false
+              display: 'Zip code'
+              type: text
+              icon: text
+              width: 50
+              listable: hidden
+          -
+            handle: city
+            field:
+              input_type: text
+              antlers: false
+              display: City
+              type: text
+              icon: text
+              width: 50
+              listable: hidden
+          -
+            handle: region
+            field:
+              input_type: text
+              antlers: false
+              display: Region
+              type: text
+              icon: text
+              width: 50
+              listable: hidden
+              validate:
+                - required
+          -
+            handle: country
+            field:
+              input_type: text
+              antlers: false
+              display: Country
+              type: text
+              icon: text
+              width: 50
+              listable: hidden
+              validate:
+                - required
+      -
+        display: Employment
+        instructions: 'Most of this information will be used in this entries JSON-LD data for Google.'
+        fields:
+          -
+            handle: employment_type
+            field:
+              options:
+                PART_TIME: 'Part time'
+                FULL_TIME: 'Full time'
+              display: 'Employment type'
+              type: button_group
+              default: FULL_TIME
+              validate: required
+              icon: button_group
+              width: 50
+              listable: hidden
+          -
+            handle: hours
+            field:
+              input_type: text
+              antlers: false
+              display: Hours
+              type: text
+              icon: text
+              width: 50
+              listable: true
+              validate:
+                - required
+              append: hours
+          -
+            handle: salary_min
+            field:
+              input_type: number
+              append: 'per month'
+              antlers: false
+              display: 'Salary (min)'
+              type: text
+              icon: text
+              listable: hidden
+              width: 33
+          -
+            handle: salary_max
+            field:
+              input_type: number
+              append: 'per month'
+              antlers: false
+              display: 'Salary (max)'
+              type: text
+              icon: text
+              listable: hidden
+              width: 33
+          -
+            handle: currency
+            field:
+              input_type: text
+              antlers: false
+              display: Currency
+              type: text
+              icon: text
+              width: 33
+              listable: true
+              validate:
+                - required
+              default: EUR
+  seo:
+    display: SEO
+    sections:
+      -
+        display: Basic
+        instructions: 'Basic SEO settings.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_basic'
+      -
+        display: Advanced
+        instructions: 'Advanced SEO settings.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_advanced'
+      -
+        display: 'Open Graph'
+        instructions: 'Open Graph meta tags for social sharing.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_open_graph'
+      -
+        display: Sitemap
+        instructions: 'Sitemap configuration.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_sitemap'
+      -
+        display: 'JSON-ld Schema'
+        instructions: 'Custom JSON-ld schema objects.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_jsonld'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        display: Meta
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              generate: true
+              listable: hidden
+              display: Slug
+              validate:
+                - required
+          -
+            handle: date
+            field:
+              type: date
+              required: true
+              listable: true
+              validate:
+                - required
+              display: Publication date
+              mode: single
+              time_enabled: false
+              time_required: false
+              earliest_date: '2022-01-01'
+              full_width: false
+              inline: false
+              columns: 1
+              rows: 1
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              time_seconds_enabled: false
+          -
+            handle: expires
+            field:
+              mode: single
+              earliest_date: '2022-01-01'
+              time_enabled: false
+              time_seconds_enabled: false
+              full_width: false
+              inline: false
+              columns: 1
+              rows: 1
+              display: Expires
+              type: date
+              icon: date
+              listable: true
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              validate:
+                - required
+          -
+            handle: image
+            field: common.image
+            config:
+              listable: true
+              display: Image
+              validate: required

@@ -1,0 +1,45 @@
+title: {{ name }}
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: General
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              input_type: text
+              localizable: true
+              listable: true
+              display: Title
+              validate:
+                - required
+          -
+            handle: website
+            field:
+              input_type: url
+              antlers: false
+              display: Website
+              type: text
+              icon: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              validate:
+                - required
+          -
+            handle: logo
+            field: common.image
+            config:
+              mode: grid
+              listable: true
+              display: Logo
+              instructions_position: below
+              instructions: 'This should be an `svg` file.'
+              validate:
+                - required
+                - 'mimes:svg'

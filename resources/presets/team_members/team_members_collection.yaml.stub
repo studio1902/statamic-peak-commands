@@ -1,0 +1,10 @@
+title: {{ name }}
+template: default
+layout: layout
+revisions: false
+title_format: '{first_name} {last_name}'
+slugs: false
+sort_dir: asc
+structure:
+  root: false
+  max_depth: 1

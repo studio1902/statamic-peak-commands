@@ -1,0 +1,26 @@
+{{#
+    @name {{ name }} item
+    @desc A {{ name }} item component.
+    @param class Add optional CSS classes.
+#}}
+
+<!-- /components/_{{ handle }}.item.antlers.html -->
+<article class="flex flex-col {{ class }}">
+    <figure class="aspect-[3/2] mb-4">
+        {{ partial:statamic-peak-tools::components/picture :image="image" sizes="(min-width: 1280px) 430px, (min-width: 768px) 30vw, 90vw" aspect_ratio="3/2" lazy="true" cover="true" }}
+    </figure>
+
+    <div class="flex flex-col gap-y-2">
+        <a href="{{ url }}" class="group">
+            {{ partial:typography/h3 content="{ title } - { hours } { trans:strings.{{ handle }}_hours }" class="mb-4 underline decoration-primary decoration-2 underline-offset-2 group-hover:text-primary motion-safe:transition-colors" }}
+        </a>
+
+        <div class="flex flex-col">
+            <span>{{ trans:strings.{{ handle }}_published }}: {{ partial:typography/time :content="date" }}</span>
+            <span>{{ trans:strings.{{ handle }}_expires }}: {{ partial:typography/time :content="expires" }}</span>
+        </div>
+
+        {{ partial:typography/p :content="teaser" }}
+    </div>
+</article>
+<!-- End: /components/_{{ handle }}.item.antlers.html -->

@@ -1,0 +1,32 @@
+{{#
+    @name {{ name }} index
+    @desc The {{ name }} index template.
+#}}
+
+<!-- /{{ handle }}/index.antlers.html -->
+<main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
+    {{ page_builder scope="block" }}
+        {{ partial src="page_builder/{type}" }}
+    {{ /page_builder }}
+</main>
+<!-- End: /{{ handle }}/index.antlers.html -->
+
+{{ section:index_content }}
+    <!-- /{{ handle }}/index.antlers.html -->
+    <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
+        {{ collection:{{ handle }} sort="date:desc" paginate="true" limit="12" as="items" expires:is_after="{today}" }}
+            {{ unless no_results }}
+                {{ items }}
+                    {{ partial:components/{{ handle }}_item class="md:col-span-6" }}
+                {{ /items }}
+            {{ else }}
+                <div class="md:col-span-6">
+                    {{ trans:strings.no_results }}
+                </div>
+            {{ /unless }}
+            {{ partial:statamic-peak-tools::components/pagination class="md:col-span-12" }}
+        {{ /collection:{{ handle }} }}
+    </div>
+    <!-- End: /{{ handle }}/index.antlers.html -->
+{{ /section:index_content }}
+<!-- End: /{{ handle }}/index.antlers.html -->

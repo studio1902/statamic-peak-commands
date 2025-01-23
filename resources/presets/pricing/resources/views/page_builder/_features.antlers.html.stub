@@ -1,0 +1,100 @@
+{{#
+    @name Features
+    @desc The Features page builder block.
+    @set page.page_builder.features
+#}}
+
+<!-- /page_builder/_features.antlers.html -->
+{{ partial:page_builder/block  }}
+    <div
+        class="contents"
+        role="table"
+        style="--column-count: {{ block:tiers | length }}"
+        aria-label="{{ trans:strings.pricing_title }}"
+    >
+        <div
+            class="span-full fluid-grid sticky top-[-1px] bg-white/80 backdrop-blur-xl backdrop-saturate-200"
+            role="rowgroup"
+        >
+            <div
+                class="
+                    grid
+                    grid-cols-[repeat(var(--column-count),minmax(0,1fr))]
+                    md:grid-cols-[2fr_repeat(var(--column-count),minmax(0,1fr))]
+                    span-content border-y border-gray-150
+                "
+                role="row"
+            >
+                <div class="hidden md:block" role="columnheader"></div>
+
+                {{ block:tiers }}
+                    <div class="py-6 flex justify-center {{ !first ?= 'border-l' }} md:border-l border-gray-150" role="columnheader">
+                        <h3 class="relative text-gray font-bold">
+                            {{ title }}
+                        </h3>
+                    </div>
+                {{ /block:tiers }}
+            </div>
+        </div>
+
+
+        {{# When this https://github.com/statamic/cms/pull/9491 gets merged we can do `tiers:includes="{ block:tiers | raw | piped }"` instead of the custom query scope. #}}
+        {{ collection:features sort="order" query_scope="multiselect" multiselect:tiers="{ block:tiers | raw | piped }" as="features"  }}
+            {{ features | group_by('group:title') }}
+                {{ groups }}
+                    <div class="span-content border-b border-gray-150" role="rowgroup">
+                        <h2 class="pt-6 pb-2 text-2xl text-gray-950 text-center md:text-left" role="row">
+                            {{ group }}
+                        </h2>
+
+                        {{ items }}
+                            <div
+                                class="
+                                    grid
+                                    grid-cols-[repeat(var(--column-count),minmax(0,1fr))]
+                                    md:grid-cols-[2fr_repeat(var(--column-count),minmax(0,1fr))]
+                                    border-t border-gray-150 md:odd:bg-gray-100/50
+                                "
+                                role="row"
+                            >
+                                <div class="col-span-3 md:col-span-1 pt-6 pb-3 md:py-6 px-4 border-b md:border-b-0 border-gray-150" role="rowheader">
+                                    {{ partial:typography/prose :when="explanation" class="prose-sm text-gray-500 prose-h3:mb-0 text-center md:text-left" }}
+                                        <h3>{{ title }}</h3>
+
+                                        {{ explanation }}
+                                    {{ /partial:typography/prose }}
+                                </div>
+
+                                {{ _feature = id }}
+                                {{ block:tiers scope="tier" }}
+                                    <div class="py-8 flex justify-center items-center {{ !first ?= 'border-l' }} md:border-l border-gray-150" role="cell">
+                                        {{ if (tier:features | pluck('id') | flatten | in_array({_feature})) }}
+                                            {{ if list_as }}
+                                                <p class="text-sm text-gray-700">
+                                                    {{ list_as }}
+                                                </p>
+                                            {{ else }}
+                                                <p class="sr-only">{{ trans:strings.pricing_included_sr :tier="title" }}</p>
+
+                                                <div class="w-6 h-6 flex justify-center items-center rounded-full bg-green-200" aria-hidden="true">
+                                                    {{ svg:check attr:class="w-3 h-3 fill-green-900" }}
+                                                </div>
+                                            {{ /if }}
+                                        {{ else }}
+                                            <p class="sr-only">{{ trans:strings.pricing_excluded_sr :tier="title" }}</p>
+
+                                            <div class="w-6 h-6 flex justify-center items-center rounded-full bg-gray-200" aria-hidden="true">
+                                                {{ svg:cross attr:class="w-2 h-2 fill-gray-900" }}
+                                            </div>
+                                        {{ /if }}
+                                    </div>
+                                {{ /block:tiers }}
+                            </div>
+                        {{ /items }}
+                    </div>
+                {{ /groups }}
+            {{ /features }}
+        {{ /collection:features }}
+    </div>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_features.antlers.html -->

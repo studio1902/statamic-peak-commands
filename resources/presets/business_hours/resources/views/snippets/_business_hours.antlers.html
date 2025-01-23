@@ -1,0 +1,48 @@
+{{#
+    @name Business hours
+    @desc The business hours JS logic.
+#}}
+
+<!-- /snippets/_business_hours.antlers.html -->
+{{ once }}
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('businessHours', () => ({
+                now: Math.floor(Date.now() / 1000),
+                businessHours:  JSON.parse('{{ (business_hours:dates ?? false) | to_json }}'),
+                exceptions: JSON.parse('{{ (business_hours:exceptions ?? false) | to_json }}'),
+                weekDays: ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
+                currentWeekDay: null,
+                businessHoursToday: null,
+                closed: null,
+                open: null,
+                startTime: null,
+                endTime: null,
+                localTime: null,
+                init() {
+                    this.currentWeekDay = this.weekDays[new Date().getDay()]
+                    this.businessHoursToday = this.businessHours.find((day) => day.weekday['value'] === this.currentWeekDay)
+                    this.closed = !this.businessHoursToday['open']
+                    if (this.exceptions !== false && !this.closed ) {
+                        this.localDate = new Date(new Date().toLocaleString('en-US', {dateStyle: 'short', timeZone: 'Europe/Amsterdam' })).getTime() / 1000
+                        this.exceptions = this.exceptions.find((exception) => {
+                            return exception.active === true
+                                && (new Date(exception.start_date).getTime() / 1000 <= this.localDate)
+                                && (new Date(exception.end_date).getTime() / 1000 >= this.localDate)
+                        })
+                        this.closed = this.exceptions ? true : false
+                    }
+                    if (!this.closed) {
+                        this.startTime = this.businessHoursToday['start_time'].replace(':', '')
+                        this.endTime = this.businessHoursToday['end_time'].replace(':', '')
+                        this.localTime = new Date().toLocaleString('en-US', {timeStyle: 'short', hour12: false, timeZone: '{{ config:app:timezone }}' }).replace(':', '')
+                        this.localTime > this.startTime && this.localTime < this.endTime
+                            ? this.open = true
+                            : this.closed = true
+                    }
+                }
+            }))
+        })
+    </script>
+{{ /once }}
+<!-- End: /snippets/_business_hours.antlers.html -->

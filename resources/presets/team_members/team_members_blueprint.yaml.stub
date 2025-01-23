@@ -1,0 +1,57 @@
+title: {{ name }}
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: General
+        fields:
+          -
+            handle: first_name
+            field:
+              type: text
+              required: true
+              input_type: text
+              localizable: true
+              listable: true
+              display: First name
+              width: 50
+              validate:
+                - required
+          -
+            handle: last_name
+            field:
+              type: text
+              required: true
+              input_type: text
+              localizable: true
+              listable: true
+              display: Last name
+              width: 50
+              validate:
+                - required
+          -
+            handle: function
+            field:
+              type: text
+              required: true
+              input_type: text
+              localizable: true
+              listable: true
+              display: Function
+              validate:
+                - required
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        display: Meta
+        fields:
+          -
+            handle: image
+            field: common.image
+            config:
+              listable: true
+              instructions_position: below
+              validate:
+                - required

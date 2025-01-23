@@ -1,0 +1,42 @@
+title: 'Business hours'
+data:
+  dates:
+    -
+      id: KcwMv4Y3
+      weekday: monday
+      open: true
+      start_time: '08:30'
+      end_time: '17:00'
+    -
+      id: RwZ13bUE
+      weekday: tuesday
+      open: true
+      start_time: '08:30'
+      end_time: '17:00'
+    -
+      id: AlCrWZYJ
+      weekday: wednesday
+      open: true
+      start_time: '08:30'
+      end_time: '17:00'
+    -
+      id: OdYNnHKv
+      weekday: thursday
+      open: true
+      start_time: '08:30'
+      end_time: '17:00'
+    -
+      id: vbusJ5GT
+      weekday: friday
+      open: true
+      start_time: '08:30'
+      end_time: '17:00'
+    -
+      id: 3HjTxO3Y
+      weekday: saturday
+      open: false
+    -
+      id: YKXcMIJA
+      weekday: sunday
+      open: false
+  phone_number: '06 12 34 56 78'

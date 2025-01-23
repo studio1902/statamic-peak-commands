@@ -1,0 +1,16 @@
+title: {{ name }}
+route: '/{mount}/{slug}'
+layout: layout
+template: {{ handle }}/show
+revisions: false
+date: true
+sort_dir: desc
+date_behavior:
+    past: public
+    future: private
+mount: ee4ff0e0-8170-425c-be27-1de5c3ec4e2f
+preview_targets:
+  -
+    label: Entry
+    url: '{permalink}'
+    refresh: false

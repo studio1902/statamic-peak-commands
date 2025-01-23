@@ -1,0 +1,18 @@
+title: Tiers
+fields:
+  -
+    handle: tiers
+    field:
+      mode: default
+      create: true
+      collections:
+        - tiers
+      type: entries
+      display: Tiers
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+      validate:
+        - required
