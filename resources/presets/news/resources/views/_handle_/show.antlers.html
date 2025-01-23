@@ -1,0 +1,69 @@
+{{#
+    @name {{ name }} show
+    @desc The {{ name }} show template.
+#}}
+
+<!-- /{{ handle }}/show.antlers.html -->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ permalink }}"
+        },
+        "headline": "{{ title }}",
+        "image": "{{ config:app:url }}{{ image }}",
+        "datePublished": "{{ date | format('c') }}",
+        "author": {
+            "@type": "Organization",
+            "name": "{{ config:app:name }}",
+            "url": "{{ config:app:url }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ config:app:name }}"{{ if seo:organization_logo }},
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ config:app:url }}{{ glide:seo:organization_logo width='336' height='336' fit='contain' }}"
+            }{{ /if }}
+        }
+    }
+</script>
+
+<main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
+    <div class="fluid-grid stack-8">
+        <header class="md:col-start-[col-3] md:col-span-8 stack-4">
+            {{ partial:typography/time :content="date" class="block text-center" }}
+
+            {{ partial:typography/h1 :content="title" class="text-center" }}
+
+            <figure>
+                {{ partial:statamic-peak-tools::components/picture :image="image" sizes="(min-width: 1280px) 1150px, (min-width: 768px) 90vw" aspect_ratio="3/2" lazy="true" cover="true" class="aspect-[3/2]" }}
+            </figure>
+        </header>
+    </div>
+
+    <section class="fluid-grid">
+        {{ partial:typography/prose as="article" class="contents" }}
+            {{ article }}
+                {{ partial src="components/{type}" }}
+            {{ /article }}
+        {{ /partial:typography/prose }}
+    </section>
+
+    {{ collection:previous in="{{ handle }}" sort="date:asc" limit="3" as="items" }}
+        {{ unless no_results }}
+            <section class="fluid-grid">
+                <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
+                    {{ partial:typography/h1 as="h2" content="{ trans:strings.{{ handle }}_more }" class="md:col-span-12" }}
+
+                    {{ items }}
+                        {{ partial:components/{{ handle }}_item class="md:col-span-4" }}
+                    {{ /items }}
+                </div>
+            </section>
+        {{ /unless }}
+    {{ /collection:previous }}
+</main>
+<!-- /{{ handle }}/show.antlers.html -->

@@ -1,0 +1,22 @@
+{{ xml_header }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+   <channel>
+      {{ get_content from="{mount_url:{{ handle }}}" }}
+         <title> {{ seo:site_name ? seo:site_name : config:app:name }} {{ seo:title_separator ? seo:title_separator : " &#124; " }} {{ title }}</title>
+         <link>{{ permalink }}</link>
+         <atom:link href="{{ config:app:url }}/feed" rel="self" type="application/rss+xml" />
+         <description>{{ if seo_description }}{{ seo_description | strip_tags | entities | trim }}{{ elseif seo:collection_defaults }}{{ partial:statamic-peak-seo::snippets/fallback_description }}{{ /if }}</description>
+      {{ /get_content }}
+      <language>{{ site:locale | replace('_', '-') }}</language>
+      <lastBuildDate>{{ now | format('r') }}</lastBuildDate>
+      {{ collection:{{ handle }} sort="date:desc" limit="50" }}
+        <item>
+            <title>{{ title }}</title>
+            <link>{{ permalink }}</link>
+            <guid isPermaLink="true">{{ permalink }}</guid>
+            <description><![CDATA[<img align="left" hspace="5" src="{{ glide:image width="1200" height="900" fit="crop_focal" }}"/><p>{{ teaser | nl2br }}</p><a href="{{ permalink }}" rel="nofollow">{{ trans:strings.{{ handle }}_read_more }}</a>]]></description>
+            <pubDate>{{ date | format('r') }}</pubDate>
+        </item>
+      {{ /collection:{{ handle }} }}
+   </channel>
+</rss>
