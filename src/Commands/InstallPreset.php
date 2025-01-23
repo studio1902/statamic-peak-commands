@@ -3,6 +3,7 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -19,33 +20,33 @@ class InstallPreset extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
-    protected $rename = false;
-    protected $rename_handle = '';
-    protected $rename_name = '';
-    protected $rename_singular_name = '';
-    protected $rename_singular_handle = '';
-    protected $choices = '';
-    protected $description = "Install premade collections and page builder blocks into your site.";
-    protected $handle = '';
+    protected bool $rename = false;
+    protected string $rename_handle = '';
+    protected string $rename_name = '';
+    protected string $rename_singular_name = '';
+    protected string $rename_singular_handle = '';
+    protected array $choices = [];
+    protected string $handle = '';
+    protected ?Collection $presets = null;
+
     protected $name = 'statamic:peak:install:preset';
+    protected $description = "Install premade collections and page builder blocks into your site.";
 
     public function handle()
     {
         $this->checkLicense();
 
-        $this->getPresets();
+        $this->loadPresets();
 
-        $options = collect($this->presets->mapWithKeys(function ($preset, $key) {
-            return [$preset['handle'] => "{$preset['name']}: {$preset['description']}"];
-        }));
+        $options = $this->presets->mapWithKeys(fn($preset) => [$preset['handle'] => "{$preset['name']}: {$preset['description']}"]);
 
         $this->choices = multisearch(
             label: 'Which presets do you want to install into your site?',
-            options: fn (string $value) => strlen($value) > 0
+            options: fn(string $value) => strlen($value) > 0
                 ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
                 : $options->toArray(),
             scroll: 15,
-            validate: fn ($values) => match (true) {
+            validate: fn($values) => match (true) {
                 empty($values) => 'Please select at least one preset. (Space)',
                 default => null,
             }
@@ -56,16 +57,14 @@ class InstallPreset extends Command
             'root' => base_path(),
         ]);
 
-        foreach($this->choices as $key => $choice) {
+        foreach ($this->choices as $key => $choice) {
             $this->handle = $choice;
-            $preset = $this->presets->filter(function ($preset, $key) {
-                return $preset['handle'] == $this->handle;
-            })->first();
+            $preset = $this->presets->filter(fn($preset, $key) => $preset['handle'] == $this->handle)->first();
 
             collect($preset['operations'])->each(function ($operation, $key) use ($target, $preset) {
                 if ($operation['type'] == 'copy') {
                     $this->rename
-                        ? $output = Str::of($operation['output'])->replace('{{ handle }}',$this->rename_handle)
+                        ? $output = Str::of($operation['output'])->replace('{{ handle }}', $this->rename_handle)
                         : $output = $operation['output'];
 
                     $multisite = Site::hasMultiple();
@@ -99,9 +98,7 @@ class InstallPreset extends Command
 
                         $this->info("Installed file: '{$output}'.");
                     }
-                }
-
-                elseif ($operation['type'] == 'rename') {
+                } elseif ($operation['type'] == 'rename') {
                     $this->rename = true;
                     $this->rename_name = text(
                         label: "What should be the collection name for '{$preset['name']}'?",
@@ -115,18 +112,12 @@ class InstallPreset extends Command
                         required: true
                     ));
                     $this->rename_singular_handle = Str::slug($this->rename_singular_name, '_');
-                }
-
-                elseif ($operation['type'] == 'run') {
+                } elseif ($operation['type'] == 'run') {
                     $this->runCustomCommand($operation['command'], $operation['processing_message'], $operation['success_message']);
-                }
-
-                elseif ($operation['type'] == 'update_article_sets') {
+                } elseif ($operation['type'] == 'update_article_sets') {
                     $this->updateArticleSets($operation['block']['name'], $operation['block']['handle'], $operation['block']['description'], $operation['block']['icon']);
                     $this->info("Installed article set: '{$operation['block']['name']}'.");
-                }
-
-                elseif ($operation['type'] == 'update_page_builder') {
+                } elseif ($operation['type'] == 'update_page_builder') {
                     $name = (string)Str::of($operation['block']['name'])
                         ->replace('{{ name }}', $this->rename_name);
                     $instructions = (string)Str::of($operation['block']['instructions'])
@@ -137,9 +128,7 @@ class InstallPreset extends Command
 
                     $this->updatePageBuilder($name, $instructions, $icon, $handle);
                     $this->info("Installed page builder block: '{$name}'.");
-                }
-
-                elseif ($operation['type'] == 'update_role') {
+                } elseif ($operation['type'] == 'update_role') {
                     $roles = Yaml::parseFile(base_path('resources/users/roles.yaml'));
                     $existingPermissions = Arr::get($roles, "{$operation['role']}.permissions");
                     $permissions = array_merge($existingPermissions, str_replace('{{ handle }}', $this->rename_handle, $operation['permissions']));
@@ -147,9 +136,7 @@ class InstallPreset extends Command
                     Arr::set($roles, 'editor.permissions', $permissions);
 
                     File::put(base_path('resources/users/roles.yaml'), Yaml::dump($roles, 99, 2));
-                }
-
-                elseif($operation['type'] == 'notify') {
+                } elseif ($operation['type'] == 'notify') {
                     $message = (string)Str::of($operation['content'])
                         ->replace('{{ handle }}', $this->rename_handle)
                         ->replace('{{ name }}', $this->rename_name);
@@ -170,7 +157,7 @@ class InstallPreset extends Command
         }
     }
 
-    protected function getPresets()
+    protected function loadPresets(): void
     {
         $this->presets = collect(config('statamic-peak-commands.paths.presets'))
             ->map(fn($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
