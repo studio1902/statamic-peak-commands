@@ -20,6 +20,9 @@ class InstallPreset extends Command
 {
     use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
+    protected $name = 'statamic:peak:install:preset';
+    protected $description = "Install premade collections and page builder blocks into your site.";
+
     protected bool $rename = false;
     protected string $rename_handle = '';
     protected string $rename_name = '';
@@ -28,9 +31,6 @@ class InstallPreset extends Command
     protected array $choices = [];
     protected string $handle = '';
     protected ?Collection $presets = null;
-
-    protected $name = 'statamic:peak:install:preset';
-    protected $description = "Install premade collections and page builder blocks into your site.";
 
     public function handle()
     {
