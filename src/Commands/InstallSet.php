@@ -3,6 +3,7 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
@@ -15,17 +16,21 @@ class InstallSet extends Command
 
     protected $name = 'statamic:peak:install:set';
     protected $description = "Install premade sets into your article field.";
-    protected $set_name = '';
-    protected $choices = '';
-    protected $filename = '';
-    protected $instructions = '';
+
+    protected string $set_name = '';
+    protected array $choices = [];
+    protected string $filename = '';
+    protected string $instructions = '';
     protected $icon = '';
+    protected ?Collection $sets = null;
 
     public function handle()
     {
         $this->checkLicense();
 
-        $options = collect($this->getSets());
+        $this->loadSets();
+
+        $options = $this->sets->mapWithKeys(fn($set) => [$set['handle'] => "{$set['name']}: {$set['description']}"]);
 
         $this->choices = multisearch(
             label: 'Which sets do you want to install into your article field?',
@@ -40,9 +45,9 @@ class InstallSet extends Command
         );
 
         foreach($this->choices as $choice) {
-            $this->set_name = Stringy::split($this->getSets()[$choice], ':')[0];
+            $this->set_name = Stringy::split($this->loadSets()[$choice], ':')[0];
             $this->filename = $choice;
-            $description = Stringy::split($this->getSets()[$choice], ': ')[1];
+            $description = Stringy::split($this->loadSets()[$choice], ': ')[1];
             $this->instructions = Stringy::split($description, ' \[')[0];
             $this->icon = rtrim(Stringy::split($description, ' \[')[1], "]");
 
@@ -69,5 +74,18 @@ class InstallSet extends Command
     {
         File::put(base_path("resources/fieldsets/{$this->filename}.yaml"), $this->getStub("/sets/{$this->filename}.yaml.stub"));
         File::put(base_path("resources/views/components/_{$this->filename}.antlers.html"), $this->getStub("/sets/{$this->filename}.antlers.html.stub"));
+    }
+
+    protected function loadSets(): void
+    {
+        $this->sets = collect(config('statamic-peak-commands.paths.sets'))
+            ->map(fn($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
+            ->flatMap(fn(string $path) => File::glob($path . '*/config.php'))
+            ->unique()
+            ->map(fn(string $path) => collect(['path' => \Statamic\Support\Str::removeRight($path, DIRECTORY_SEPARATOR . 'config.php')])
+                ->merge(include $path)
+                ->all()
+            )
+            ->mapWithKeys(fn(array $set) => [$set['handle'] => $set]);
     }
 }
