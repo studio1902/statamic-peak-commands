@@ -59,7 +59,7 @@ class InstallPreset extends Command
 
         foreach ($this->choices as $key => $choice) {
             $this->handle = $choice;
-            $preset = $this->presets->filter(fn($preset, $key) => $preset['handle'] == $this->handle)->first();
+            $preset = $this->presets->get($this->handle);
 
             collect($preset['operations'])->each(function ($operation, $key) use ($target, $preset) {
                 if ($operation['type'] == 'copy') {
@@ -163,10 +163,10 @@ class InstallPreset extends Command
             ->map(fn($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
             ->flatMap(fn(string $path) => File::glob($path . '*/config.php'))
             ->unique()
-            ->map(fn(string $path) => array_merge(
-                ['path' => \Statamic\Support\Str::removeRight($path, DIRECTORY_SEPARATOR . 'config.php')],
-                include $path,
-            ))
+            ->map(fn(string $path) => collect(['path' => \Statamic\Support\Str::removeRight($path, DIRECTORY_SEPARATOR . 'config.php')])
+                ->merge(include $path)
+                ->all()
+            )
             ->mapWithKeys(fn(array $preset) => [$preset['handle'] => $preset]);
     }
 }
