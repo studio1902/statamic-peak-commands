@@ -29,6 +29,7 @@ class ServiceProvider extends AddonServiceProvider
 
     public function bootAddon()
     {
+        $this->registerConfig();
         $this->registerPublishableStubs();
     }
 
@@ -37,5 +38,16 @@ class ServiceProvider extends AddonServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/stubs' => resource_path('stubs/vendor/statamic-peak-commands'),
         ], 'statamic-peak-commands-stubs');
+    }
+
+    protected function registerConfig()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/statamic-peak-commands.php', 'statamic-peak-commands');
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/statamic-peak-commands.php' => config_path('statamic-peak-commands.php'),
+            ], 'statamic-peak-commands-config');
+        }
     }
 }
