@@ -163,6 +163,10 @@ class InstallPreset extends Command
             ->map(fn($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
             ->flatMap(fn(string $path) => File::glob($path . '*/config.php'))
             ->unique()
-            ->map(fn(string $path) => include $path);
+            ->map(fn(string $path) => array_merge(
+                ['path' => \Statamic\Support\Str::removeRight($path, DIRECTORY_SEPARATOR . 'config.php')],
+                include $path,
+            ))
+            ->mapWithKeys(fn(array $preset) => [$preset['handle'] => $preset]);
     }
 }
