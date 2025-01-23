@@ -3,10 +3,10 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Site;
 use Statamic\Support\Arr;
@@ -17,7 +17,7 @@ use function Laravel\Prompts\text;
 
 class InstallPreset extends Command
 {
-    use RunsInPlease, SharedFunctions, InstallPresetPresets, NeedsValidLicense;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense;
 
     protected $rename = false;
     protected $rename_handle = '';
@@ -168,5 +168,14 @@ class InstallPreset extends Command
                 Artisan::call('cache:clear');
             }
         }
+    }
+
+    protected function getPresets()
+    {
+        $this->presets = collect(config('statamic-peak-commands.paths.presets'))
+            ->map(fn($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
+            ->flatMap(fn(string $path) => File::glob($path . '*/config.php'))
+            ->unique()
+            ->map(fn(string $path) => include $path);
     }
 }
