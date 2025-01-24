@@ -29,7 +29,6 @@ class ServiceProvider extends AddonServiceProvider
 
     public function bootAddon()
     {
-        $this->registerConfig();
         $this->registerPublishableStubs();
     }
 
