@@ -343,7 +343,6 @@ trait SharedFunctions
 
     protected function getStub(string $stubPath, string $basePath): string
     {
-        //TODO[mr]: check with Rob if we support publishable stubs here (23.01.2025 mr)
         $publishedPath = resource_path("stubs/vendor/statamic-peak-commands/" . ltrim($stubPath, " /\t\n\r\0\x0B"));
         $addonPath = $basePath . DIRECTORY_SEPARATOR . ltrim($stubPath, " /\t\n\r\0\x0B");
 
