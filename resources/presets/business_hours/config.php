@@ -32,7 +32,7 @@ return [
         ],
         [
             'type' => 'copy',
-            'input' => 'resourcces/svg/phone.svg',
+            'input' => 'resources/svg/phone.svg',
             'output' => 'resources/svg/phone.svg'
         ],
         [
