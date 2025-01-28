@@ -4,6 +4,7 @@ namespace Studio1902\PeakCommands\Operations;
 
 use Illuminate\Support\Str;
 use Studio1902\PeakCommands\Models\Installable;
+use Studio1902\PeakCommands\Registry;
 
 abstract class Operation
 {
@@ -15,10 +16,7 @@ abstract class Operation
             return app($class, ['config' => $config]);
         }
 
-        $className = collect([
-            '\App\PeakCommands\Operations',
-            '\Studio1902\PeakCommands\Operations'
-        ])
+        $className = collect(Registry::getNamespaces())
             ->map(fn(string $namespace) => $namespace . '\\' . Str::studly($class))
             ->filter(fn(string $class) => class_exists($class))
             ->first();
