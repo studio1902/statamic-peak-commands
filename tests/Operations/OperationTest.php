@@ -1,9 +1,10 @@
 <?php
 
-namespace Studio1902\PeakCommands\Tests;
+namespace Studio1902\PeakCommands\Tests\Operations;
 
 
 use Studio1902\PeakCommands\Operations\Operation;
+use Studio1902\PeakCommands\Tests\TestCase;
 
 class OperationTest extends TestCase
 {
