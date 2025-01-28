@@ -5,6 +5,11 @@
             "Studio1902\\PeakCommands\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Studio1902\\PeakCommands\\Tests\\": "tests"
+        }
+    },
     "extra": {
         "statamic": {
             "name": "Statamic Peak Commands",
@@ -18,6 +23,10 @@
     },
     "require": {
         "statamic/cms": "^5.0"
+    },
+    "require-dev": {
+        "spatie/laravel-ray": "^1.39",
+        "orchestra/testbench": "^9.0"
     },
     "config": {
         "allow-plugins": {
