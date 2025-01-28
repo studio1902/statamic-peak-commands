@@ -11,7 +11,7 @@ abstract class Operation
 
     public static function resolve(string $class, array $config): Operation
     {
-        if (Str::startsWith($class, '\\')) {
+        if (Str::contains($class, '\\')) {
             return app($class, ['config' => $config]);
         }
 
