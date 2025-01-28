@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Commands\Traits\Operations;
+use Studio1902\PeakCommands\Registry;
 
 class InstallSet extends Command
 {
@@ -29,11 +30,12 @@ class InstallSet extends Command
     {
         $this->checkLicense();
 
-        $this->loadItems('sets');
+        $this->loadItems(Registry::SETS);
 
         $this->collectChoices(
             label: 'Which sets do you want to install into your article field?',
             emptyValidation: 'Please select at least one set. (Space)',
+            type: Registry::SETS,
         );
 
         $this->handleChoices();

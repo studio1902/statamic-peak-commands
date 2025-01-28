@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Commands\Traits\Operations;
 use Studio1902\PeakCommands\Models\Installable;
+use Studio1902\PeakCommands\Registry;
 
 class InstallBlock extends Command
 {
@@ -23,11 +24,12 @@ class InstallBlock extends Command
     {
         $this->checkLicense();
 
-        $this->loadItems('blocks');
+        $this->loadItems(Registry::BLOCKS);
 
         $this->collectChoices(
             label: 'Which blocks do you want to install into your page builder?',
             emptyValidation: 'Please select at least one block. (Space)',
+            type: Registry::BLOCKS,
         );
 
         $this->installChoices();

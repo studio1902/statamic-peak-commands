@@ -6,6 +6,7 @@ use Exception;
 
 class Registry
 {
+    //TODO[mr]: refactor to enums (28.01.2025 mr)
     const BLOCKS = 'blocks';
     const PRESETS = 'presets';
     const SETS = 'sets';

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
+use Studio1902\PeakCommands\Registry;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
@@ -16,6 +17,7 @@ use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\spin;
 use function Laravel\Prompts\text;
+use function Laravel\Prompts\warning;
 
 trait SharedFunctions
 {
@@ -354,8 +356,13 @@ trait SharedFunctions
         return $this->items->mapWithKeys(fn(array $item) => [$item['handle'] => "{$item['name']}: {$item['description']}"]);
     }
 
-    protected function collectChoices(string $label, string $emptyValidation): void
+    protected function collectChoices(string $label, string $emptyValidation, string $type): void
     {
+        if (!$this->items || $this->items->isEmpty()) {
+            warning("No $type found in provided paths.");
+            exit();
+        }
+
         $options = $this->collectOptions();
 
         $this->choices = multisearch(
@@ -373,7 +380,7 @@ trait SharedFunctions
 
     protected function loadItems(string $type): void
     {
-        $this->items = collect(config('statamic-peak-commands.paths.' . $type))
+        $this->items = collect(Registry::getPaths()[$type])
             ->map(fn($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
             ->flatMap(fn(string $path) => File::glob($path . '*/config.php'))
             ->unique()

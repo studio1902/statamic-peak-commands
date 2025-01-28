@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Commands\Traits\Operations;
+use Studio1902\PeakCommands\Registry;
 
 class InstallPreset extends Command
 {
@@ -29,11 +30,12 @@ class InstallPreset extends Command
     {
         $this->checkLicense();
 
-        $this->loadItems('presets');
+        $this->loadItems(Registry::PRESETS);
 
         $this->collectChoices(
             label: 'Which presets do you want to install into your site?',
             emptyValidation: 'Please select at least one preset. (Space)',
+            type: Registry::PRESETS,
         );
 
         $this->handleChoices();
