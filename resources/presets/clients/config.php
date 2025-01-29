@@ -45,7 +45,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// 'clients_sr' => 'A list of the following clients',"
+            'content' => "Add this to your `lang/locale/strings.php` file:\n\n'clients_sr' => 'A list of the following clients',"
         ],
         [
             'type' => 'notify',
