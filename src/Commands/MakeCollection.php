@@ -73,8 +73,10 @@ class MakeCollection extends Command
 
             if ($this->mount_collection) {
                 $this->add_page = confirm(
-                    label: 'Do you want to create a new page to mount this collection on?',
-                    default: true
+                    label: 'Do you want to mount on a new or existing page?',
+                    default: true,
+                    yes: 'New page',
+                    no: 'Existing page'
                 );
 
                 if ($this->add_page) {
