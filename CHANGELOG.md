@@ -1,5 +1,19 @@
 # Changelog
 
+## v8.17.0 (Unreleased)
+
+### What's new
+- The ability to load in your own private blocks, sets and presets to install. #28 by @marcorieser
+- Complete code refactor. #28 by @marcorieser
+
+### What's improved
+- The prompts presented during the `make:collection` regarding mounting are more clear. e6e64d79 by @robdekort
+- The banner presets now uses `x-collapse`. f11c7f67 by @robdekort
+
+### What's fixed
+- The width of the block title in the clients preset. faab4a6e by @robdekort
+- A comment in the clients preset notification. e411f1f8 by @robdekort
+
 ## v8.16.1 (2025-01-22)
 
 ### What's fixed
