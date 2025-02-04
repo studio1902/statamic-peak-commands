@@ -47,6 +47,7 @@
                         hash: '#{{ title | slugify }}'
                     }"
                     role="region"
+                    aria-label="{{ title }}"
                     class="flex flex-col rounded-lg bg-white shadow py-3 px-2 md:px-6"
                     id="{{ title | slugify }}"
                 >
@@ -63,7 +64,7 @@
                         class="px-2 w-full flex items-start justify-between rounded text-neutral hover:text-primary motion-safe:transition"
                         x-cloak
                     >
-                        {{ partial:typography/h2 :content="title" color="text-current text-left" class="my-2" }}
+                        {{ partial:typography/h2 as="span" :content="title" color="text-current text-left" class="my-2" }}
                         <span x-show="expanded" aria-hidden="true" class="flex-shrink-0 font-bold text-lg ml-4">&minus;</span>
                         <span x-show="!expanded" aria-hidden="true" class="flex-shrink-0 font-bold text-lg ml-4">&plus;</span>
                     </button>
@@ -72,6 +73,7 @@
                         x-collapse
                         class="p-2"
                     >
+                        <h2 class="sr-only">{{ label }}</h2>
                         {{ partial:typography/prose }}
                             {{ text }}
                         {{ /partial:typography/prose }}
