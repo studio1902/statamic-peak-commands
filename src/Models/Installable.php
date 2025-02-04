@@ -9,6 +9,7 @@ class Installable
 {
     public string $name = '';
     public string $handle = '';
+    public string $singularName = '';
     public string $path = '';
     public array $operations = [];
 
@@ -22,6 +23,7 @@ class Installable
     {
         $this->name = $config['name'];
         $this->handle = $config['handle'];
+        $this->singularName = $config['singular_name'] ?? '';
         $this->path = $config['path'];
         $this->operations = $config['operations'];
     }
