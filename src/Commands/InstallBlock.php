@@ -2,47 +2,25 @@
 
 namespace Studio1902\PeakCommands\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Artisan;
 use Statamic\Console\RunsInPlease;
-use Studio1902\PeakCommands\Commands\Traits\Operations;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Registry;
 
-class InstallBlock extends Command
+class InstallBlock extends InstallCommand
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense, Operations;
+    use RunsInPlease;
 
     protected $name = 'statamic:peak:install:block';
     protected $description = "Install premade blocks into your page builder.";
 
-    protected array $choices = [];
-    protected ?Collection $items = null;
+    protected string $type = Registry::BLOCKS;
 
     public function handle(): void
     {
-        $this->checkLicense();
-
-        $this->loadItems(Registry::BLOCKS);
-
-        $this->collectChoices(
+        $this->handleInstallation(
             label: 'Which blocks do you want to install into your page builder?',
             emptyValidation: 'Please select at least one block. (Space)',
-            type: Registry::BLOCKS,
+            successMessage: fn(Installable $installable) => info("<info>[✓]</info> Peak page builder block '$installable->name' installed.")
         );
-
-        $this->installChoices();
-    }
-
-    protected function installChoices(): void
-    {
-        collect($this->choices)->each(function (string $handle) {
-            $installable = app(Installable::class, ['config' => $this->items->get($handle)])->install();
-
-            $this->info("<info>[✓]</info> Peak page builder block '$installable->name' installed.");
-        });
-
-        Artisan::call('cache:clear');
     }
 }

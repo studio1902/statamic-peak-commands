@@ -8,6 +8,8 @@ use Studio1902\PeakCommands\Registry;
 
 abstract class Operation
 {
+    protected Installable $installable;
+
     abstract public function __construct(array $config);
 
     public static function resolve(string $class, array $config): Operation
@@ -24,5 +26,12 @@ abstract class Operation
         return app($className, ['config' => $config]);
     }
 
-    abstract public function run(Installable $installable): Installable;
+    public function hydrate(Installable $installable): self
+    {
+        $this->installable = $installable;
+
+        return $this;
+    }
+
+    abstract public function run(): Installable;
 }

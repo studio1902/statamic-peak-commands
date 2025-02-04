@@ -24,22 +24,22 @@ class UpdatePageBuilder extends Operation
         $this->block = new Block($config['block']);
     }
 
-    public function run(Installable $installable): Installable
+    public function run(): Installable
     {
-        $name = (string)Str::of($this->block->name)->replace('{{ name }}', $installable->renameName);
+        $name = (string)Str::of($this->block->name)->replace('{{ name }}', $this->installable->renameName);
 
-        $instructions = (string)Str::of($this->block->instructions)->replace('{{ name }}', $installable->renameName);
+        $instructions = (string)Str::of($this->block->instructions)->replace('{{ name }}', $this->installable->renameName);
 
         $icon = (string)Str::of($this->block->icon);
 
         $handle = (string)Str::of($this->block->handle)
-            ->replace('{{ handle }}', $installable->renameHandle);
+            ->replace('{{ handle }}', $this->installable->renameHandle);
 
         $this->updatePageBuilder($name, $instructions, $icon, $handle);
 
         info("Installed page builder block: '$name'.");
 
-        return $installable;
+        return  $this->installable;
     }
 
     protected function updatePageBuilder($name, $instructions, $icon, $filename): void

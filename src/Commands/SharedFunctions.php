@@ -350,45 +350,4 @@ trait SharedFunctions
 
         return File::get(File::exists($publishedPath) ? $publishedPath : $addonPath);
     }
-
-    protected function collectOptions(): Collection
-    {
-        return $this->items->mapWithKeys(fn(array $item) => [$item['handle'] => "{$item['name']}: {$item['description']}"]);
-    }
-
-    protected function collectChoices(string $label, string $emptyValidation, string $type): void
-    {
-        if (!$this->items || $this->items->isEmpty()) {
-            warning("No $type found in provided paths.");
-            exit();
-        }
-
-        $options = $this->collectOptions();
-
-        $this->choices = multisearch(
-            label: $label,
-            options: fn(string $value) => strlen($value) > 0
-                ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
-                : $options->toArray(),
-            scroll: 15,
-            validate: fn($values) => match (true) {
-                empty($values) => $emptyValidation,
-                default => null,
-            }
-        );
-    }
-
-    protected function loadItems(string $type): void
-    {
-        $this->items = collect(Registry::getPaths()[$type])
-            ->map(fn($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
-            ->flatMap(fn(string $path) => File::glob($path . '*/config.php'))
-            ->unique()
-            ->map(fn(string $path) => collect(['path' => \Statamic\Support\Str::removeRight($path, DIRECTORY_SEPARATOR . 'config.php')])
-                ->merge(include $path)
-                ->sort()
-                ->all()
-            )
-            ->mapWithKeys(fn(array $preset) => [$preset['handle'] => $preset]);
-    }
 }

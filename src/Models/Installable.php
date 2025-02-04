@@ -30,6 +30,6 @@ class Installable
     {
         return collect($this->operations)
             ->map(fn(array $operation) => Operation::resolve(Arr::get($operation, 'type'), $operation))
-            ->reduce(fn(Installable $installable, Operation $operation) => $operation->run($installable), $this);
+            ->reduce(fn(Installable $installable, Operation $operation) => $operation->hydrate($installable)->run(), $this);
     }
 }

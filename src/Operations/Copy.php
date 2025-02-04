@@ -31,44 +31,44 @@ class Copy extends Operation
         ]);
     }
 
-    public function run(Installable $installable): Installable
+    public function run(): Installable
     {
-        $installable->rename
-            ? $output = Str::of($this->output)->replace('{{ handle }}', $installable->renameHandle)
-            : $output = $this->output;
+        if ($this->installable->rename) {
+            $this->output = Str::of($this->output)->replace('{{ handle }}', $this->installable->renameHandle);
+        }
 
         Site::hasMultiple()
-            ? $output = Str::of($output)->replace('{{ multisite_handle }}', Site::default()->handle)
-            : $output = Str::of($output)->replace('{{ multisite_handle }}/', '');
+            ? $this->output = Str::of($this->output)->replace('{{ multisite_handle }}', Site::default()->handle)
+            : $this->output = Str::of($this->output)->replace('{{ multisite_handle }}/', '');
 
-        $stub = $this->getStub($this->input, $installable->path);
+        $stub = $this->getStub($this->input, $this->installable->path);
 
         $contents = Str::of($stub)
-            ->replace('{{ handle }}', $installable->renameHandle)
-            ->replace('{{ name }}', $installable->renameName)
-            ->replace('{{ singular_handle }}', $installable->renameSingularHandle)
-            ->replace('{{ singular_name }}', $installable->renameSingularName);
+            ->replace('{{ handle }}', $this->installable->renameHandle)
+            ->replace('{{ name }}', $this->installable->renameName)
+            ->replace('{{ singular_handle }}', $this->installable->renameSingularHandle)
+            ->replace('{{ singular_name }}', $this->installable->renameSingularName);
 
         if ($this->skippable) {
-            if ($this->checkExistenceAndSkip('File', "{$output}")) {
-                info("Skipped file: '{$output}'.");
+            if ($this->checkExistenceAndSkip('File', "{$this->output}")) {
+                info("Skipped file: '{$this->output}'.");
             } else {
-                $this->filesystem->put($output, $contents);
-                info("Installed file: '{$output}'.");
+                $this->filesystem->put($this->output, $contents);
+                info("Installed file: '{$this->output}'.");
             }
         } else {
             try {
-                $this->checkExistence('File', "{$output}");
-                $this->filesystem->put($output, $contents);
+                $this->checkExistence('File', "{$this->output}");
+                $this->filesystem->put($this->output, $contents);
             } catch (\Exception $e) {
                 error($e->getMessage());
                 exit();
             }
 
-            info("Installed file: '{$output}'.");
+            info("Installed file: '{$this->output}'.");
         }
 
-        return $installable;
+        return $this->installable;
     }
 
     protected function getStub(string $stubPath, string $basePath): string
