@@ -13,6 +13,7 @@ use function Laravel\Prompts\text;
 
 trait Operations
 {
+    //TODO[mr]: done (04.02.2025 mr)
     protected function operationRename(array $operation, array $preset): void
     {
         $this->rename = true;
@@ -33,6 +34,7 @@ trait Operations
         $this->rename_singular_handle = Str::slug($this->rename_singular_name, '_');
     }
 
+    //TODO[mr]: done (04.02.2025 mr)
     protected function operationCopy(array $operation, array $preset): void
     {
         $path = $preset['path'];
@@ -79,6 +81,7 @@ trait Operations
         }
     }
 
+    //TODO[mr]: done (04.02.2025 mr)
     protected function operationUpdateArticleSets(array $operation, array $preset): void
     {
         $block = $operation['block'];
@@ -86,6 +89,7 @@ trait Operations
         $this->info("Installed article set: '{$block['name']}'.");
     }
 
+    //TODO[mr]: done (04.02.2025 mr)
     protected function operationUpdatePageBuilder(array $operation, array $preset): void
     {
         $block = $operation['block'];
@@ -101,6 +105,7 @@ trait Operations
         $this->info("Installed page builder block: '{$name}'.");
     }
 
+    //TODO[mr]: done (04.02.2025 mr)
     protected function operationUpdateRole(array $operation, array $preset): void
     {
         $roles = Yaml::parseFile(base_path('resources/users/roles.yaml'));
@@ -113,6 +118,7 @@ trait Operations
         File::put(base_path('resources/users/roles.yaml'), Yaml::dump($roles, 99, 2));
     }
 
+    //TODO[mr]: done (04.02.2025 mr)
     protected function operationNotify(array $operation, array $preset): void
     {
         $content = $operation['content'];
