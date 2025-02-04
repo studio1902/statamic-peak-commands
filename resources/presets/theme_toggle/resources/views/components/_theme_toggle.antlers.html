@@ -129,9 +129,20 @@
                             this.themeToggleOpen = !this.themeToggleOpen
                         },
                         [':aria-label']() {
-                            return this.themeToggleOpen
-                                ? '{{ trans:strings.theme_toggle_toggle_close }}'
-                                : '{{ trans:strings.theme_toggle_toggle_open }}'
+                            switch (this.$store.theme.get()) {
+                                case 'dark':
+                                    return this.themeToggleOpen
+                                        ? '{{ trans:strings.theme_toggle_dark_toggle_close }}'
+                                        : '{{ trans:strings.theme_toggle_dark_toggle_open }}'
+                                case 'light':
+                                    return this.themeToggleOpen
+                                        ? '{{ trans:strings.theme_toggle_light_toggle_close }}'
+                                        : '{{ trans:strings.theme_toggle_light_toggle_open }}'
+                                case 'system':
+                                    return this.themeToggleOpen
+                                        ? '{{ trans:strings.theme_toggle_system_toggle_close }}'
+                                        : '{{ trans:strings.theme_toggle_system_toggle_open }}'
+                            }
                         },
                         [':aria-expanded']() {
                             return this.themeToggleOpen
