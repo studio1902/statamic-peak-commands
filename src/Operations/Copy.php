@@ -14,9 +14,9 @@ use function Laravel\Prompts\info as info;
 
 class Copy extends Operation
 {
-    protected string $input = '';
-    protected string $output = '';
-    protected bool $skippable = false;
+    protected string $input;
+    protected string $output;
+    protected bool $skippable;
     protected Filesystem $filesystem;
 
     public function __construct(array $config)

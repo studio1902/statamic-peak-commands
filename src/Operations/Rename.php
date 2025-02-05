@@ -8,7 +8,6 @@ use function Laravel\Prompts\text;
 
 class Rename extends Operation
 {
-
     public function __construct(array $config)
     {
     }

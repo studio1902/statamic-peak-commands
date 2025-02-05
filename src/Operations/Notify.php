@@ -9,7 +9,7 @@ use function Laravel\Prompts\warning;
 
 class Notify extends Operation
 {
-    protected string $content = '';
+    protected string $content;
 
     public function __construct(array $config)
     {

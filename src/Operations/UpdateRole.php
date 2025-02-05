@@ -9,8 +9,8 @@ use Symfony\Component\Yaml\Yaml;
 
 class UpdateRole extends Operation
 {
-    protected string $role = '';
-    protected array $permissions = [];
+    protected string $role;
+    protected array $permissions;
 
     public function __construct(array $config)
     {
