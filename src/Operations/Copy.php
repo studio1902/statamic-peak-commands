@@ -33,9 +33,7 @@ class Copy extends Operation
 
     public function run(): Installable
     {
-        if ($this->installable->rename) {
-            $this->output = Str::of($this->output)->replace('{{ handle }}', $this->installable->renameHandle);
-        }
+        $this->output = Str::of($this->output)->replace('{{ handle }}', $this->installable->renameHandle);
 
         Site::hasMultiple()
             ? $this->output = Str::of($this->output)->replace('{{ multisite_handle }}', Site::default()->handle)
@@ -45,6 +43,7 @@ class Copy extends Operation
 
         $contents = Str::of($stub)
             ->replace('{{ handle }}', $this->installable->renameHandle)
+            ->replace('{{ filename }}', $this->installable->renameHandle)
             ->replace('{{ name }}', $this->installable->renameName)
             ->replace('{{ singular_handle }}', $this->installable->renameSingularHandle)
             ->replace('{{ singular_name }}', $this->installable->renameSingularName);

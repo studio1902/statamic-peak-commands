@@ -4,19 +4,20 @@ namespace Studio1902\PeakCommands\Operations;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use ReflectionClass;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
 use Studio1902\PeakCommands\Models\Block;
 use Studio1902\PeakCommands\Models\Installable;
+use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
 class UpdatePageBuilder extends Operation
 {
+    use CanPickIcon;
+
     protected Block $block;
 
     public function __construct(array $config)
@@ -39,7 +40,7 @@ class UpdatePageBuilder extends Operation
 
         info("Installed page builder block: '$name'.");
 
-        return  $this->installable;
+        return $this->installable;
     }
 
     protected function updatePageBuilder($name, $instructions, $icon, $filename): void
@@ -99,7 +100,7 @@ class UpdatePageBuilder extends Operation
                 required: true
             );
 
-            $groupIcon = $this->promptsIconPicker('Which icon do you want to use for this group?');
+            $groupIcon = $this->pickIcon('Which icon do you want to use for this group?');
 
             $newGroup = [
                 $groupFilename => [
@@ -119,38 +120,5 @@ class UpdatePageBuilder extends Operation
         }
 
         File::put(base_path('resources/fieldsets/page_builder.yaml'), Yaml::dump($fieldset, 99, 2));
-    }
-
-    protected function promptsIconPicker($label)
-    {
-        $reflection = new ReflectionClass(\Statamic\Fieldtypes\Sets::class);
-        $iconsDirectory = $reflection->getStaticPropertyValue('iconsDirectory') ?? base_path('/vendor/statamic/cms/resources/svg/icons');
-        $iconsFolder = $reflection->getStaticPropertyValue('iconsFolder');
-
-        $icons = collect(File::allFiles("$iconsDirectory/$iconsFolder"))
-            ->map(fn($file) => str_replace('.svg', '', $file->getBasename('.' . $file->getExtension())));
-
-        if (DIRECTORY_SEPARATOR === '\\') {
-            return $icons->first();
-        }
-
-        return search(
-            label: $label,
-            options: function (string $value) use ($icons) {
-                if (!$value) {
-                    return $icons
-                        ->values()
-                        ->all();
-                }
-
-                return $icons
-                    ->filter(fn(string $item) => Str::contains($item, $value, true))
-                    ->values()
-                    ->all();
-            },
-            placeholder: 'file-content-list',
-            scroll: 10,
-            required: true
-        );
     }
 }
