@@ -8,12 +8,11 @@ use function Laravel\Prompts\info;
 
 trait NeedsValidLicense {
 
-    protected static $licensed = false;
+    protected static bool $licensed = false;
 
-    public function checkLicense() {
-        $addonLicense = LicenseManager::addons()->first(function ($addonLicense) {
-            return $addonLicense->addon()->id() === 'studio1902/statamic-peak-commands';
-        });
+    public function checkLicense(): void
+    {
+        $addonLicense = LicenseManager::addons()->first(fn($addonLicense) => $addonLicense->addon()->id() === 'studio1902/statamic-peak-commands');
 
         static::$licensed = $addonLicense && $addonLicense->valid();
 

@@ -2,20 +2,25 @@
 
 namespace Studio1902\PeakCommands\Commands;
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
-use Symfony\Component\Yaml\Yaml;
+use Studio1902\PeakCommands\Registry;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\multisearch;
 use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\spin;
 use function Laravel\Prompts\text;
+use function Laravel\Prompts\warning;
 
-trait SharedFunctions {
+trait SharedFunctions
+{
 
     /**
      * Check if a file doesn't already exist.
@@ -26,10 +31,10 @@ trait SharedFunctions {
     {
         if (File::exists(base_path($path))) {
             if (confirm(
-                    label: "{$type} '{$path}' exists. Continue and overwrite?",
-                    yes: 'Overwrite',
-                    no: 'Abort',
-                    default: true
+                label: "{$type} '{$path}' exists. Continue and overwrite?",
+                yes: 'Overwrite',
+                no: 'Abort',
+                default: true
             )) {
                 return false;
             } else {
@@ -55,7 +60,7 @@ trait SharedFunctions {
         }
     }
 
-     /**
+    /**
      * Grant permissions to editor.
      *
      * @return bool|null
@@ -84,7 +89,7 @@ trait SharedFunctions {
         $iconsFolder = $reflection->getStaticPropertyValue('iconsFolder');
 
         $icons = collect(File::allFiles("$iconsDirectory/$iconsFolder"))->map(function ($file) {
-            return str_replace('.svg', '', $file->getBasename('.'.$file->getExtension()));
+            return str_replace('.svg', '', $file->getBasename('.' . $file->getExtension()));
         });
 
         if (DIRECTORY_SEPARATOR === '\\') {
@@ -338,11 +343,11 @@ trait SharedFunctions {
     }
 
 
-    protected function getStub(string $stubPath): string
+    protected function getStub(string $stubPath, string $basePath): string
     {
-        $publishedStubPath = resource_path("stubs/vendor/statamic-peak-commands/" . ltrim($stubPath, " /\t\n\r\0\x0B"));
-        $addonStubPath = __DIR__ . "/../../resources/stubs/" . ltrim($stubPath, " /\t\n\r\0\x0B");
+        $publishedPath = resource_path("stubs/vendor/statamic-peak-commands/" . ltrim($stubPath, " /\t\n\r\0\x0B"));
+        $addonPath = $basePath . DIRECTORY_SEPARATOR . ltrim($stubPath, " /\t\n\r\0\x0B");
 
-        return File::get(File::exists($publishedStubPath) ? $publishedStubPath : $addonStubPath);
+        return File::get(File::exists($publishedPath) ? $publishedPath : $addonPath);
     }
 }
