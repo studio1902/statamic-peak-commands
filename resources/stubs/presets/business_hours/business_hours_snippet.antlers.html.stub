@@ -8,9 +8,11 @@
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('businessHours', () => ({
-                businessHours: JSON.parse('{{ (business_hours:dates ?? false) | to_json }}'),
-                exceptions: JSON.parse('{{ (business_hours:exceptions ?? false) | to_json }}'),
-                weekDays: ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
+                businessHours: JSON.parse('{{ (business_hours:dates ?? false ) | to_json }}'),
+                exceptions: JSON.parse('{{ (business_hours:exceptions ?? false ) | to_json }}'),
+                weekDays: ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',
+                    'saturday'
+                ],
                 currentWeekDay: null,
                 businessHoursToday: null,
                 closed: true,
@@ -20,8 +22,9 @@
                     return hours * 60 + minutes;
                 },
                 getCurrentMinutes() {
-                    const now = new Date();
-                    return now.getHours() * 60 + now.getMinutes();
+                    const localTime = new Date().toLocaleString('en-US', {timeStyle: 'short', hour12: false, timeZone: '{{ config:app:timezone }}' });
+                    const [hours, minutes] = localTime.split(':').map(Number);
+                    return hours * 60 + minutes;
                 },
                 spansMidnight(startTime, endTime) {
                     const startMinutes = this.timeToMinutes(startTime);
@@ -37,11 +40,11 @@
                 },
                 checkIfOpen() {
                     if (this.exceptions !== false) {
-                        const now = new Date().getTime() / 1000;
-                        const activeException = this.exceptions.find(exception => 
+                        const localDate = new Date(new Date().toLocaleString('en-US', {dateStyle: 'short', timeZone: '{{ config:app:timezone }}' })).getTime() / 1000;
+                        const activeException = this.exceptions.find(exception =>
                             exception.active === true &&
-                            new Date(exception.start_date).getTime() / 1000 <= now &&
-                            new Date(exception.end_date).getTime() / 1000 >= now
+                            new Date(exception.start_date).getTime() / 1000 <= localDate &&
+                            new Date(exception.end_date).getTime() / 1000 >= localDate
                         );
                         if (activeException) {
                             return false;
@@ -57,7 +60,8 @@
                         const startMinutes = this.timeToMinutes(yesterdayHours.start_time);
                         const endMinutes = this.timeToMinutes(yesterdayHours.end_time);
 
-                        if (this.spansMidnight(yesterdayHours.start_time, yesterdayHours.end_time)) {
+                        if (this.spansMidnight(yesterdayHours.start_time, yesterdayHours
+                            .end_time)) {
                             if (currentMinutes <= endMinutes) {
                                 return true;
                             }
@@ -67,7 +71,8 @@
                     if (this.businessHoursToday?.open) {
                         const startMinutes = this.timeToMinutes(this.businessHoursToday.start_time);
                         const endMinutes = this.timeToMinutes(this.businessHoursToday.end_time);
-                        const spansOvernight = this.spansMidnight(this.businessHoursToday.start_time, this.businessHoursToday.end_time);
+                        const spansOvernight = this.spansMidnight(this.businessHoursToday
+                            .start_time, this.businessHoursToday.end_time);
 
                         if (spansOvernight) {
                             return currentMinutes >= startMinutes;
