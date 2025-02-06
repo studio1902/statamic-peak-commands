@@ -3,86 +3,65 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Stringy\StaticStringy as Stringy;
+use Studio1902\PeakCommands\Models\Installable;
+use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use function Laravel\Prompts\text;
 
 class MakeSet extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use RunsInPlease, NeedsValidLicense, CanPickIcon;
 
     protected $name = 'statamic:peak:make:set';
     protected $description = "Make an Article (Bard) set.";
-    protected $set_name = '';
-    protected $filename = '';
-    protected $instructions = '';
-    protected $icon = '';
 
     public function handle()
     {
         $this->checkLicense();
 
-        $this->set_name = text(
+        $name = text(
             label: 'What should be the name for this set?',
             placeholder: 'E.g. Card',
             required: true
         );
 
-        $this->filename = Stringy::slugify($this->set_name, '_', Config::getShortLocale());
+        $handle = Stringy::slugify($name, '_', Config::getShortLocale());
 
-        $this->instructions = text(
+        $description = text(
             label: 'What should be the instructions for this set?',
             placeholder: 'E.g. Lead text that renders big and bold.',
             required: true
         );
 
-        $this->icon = $this->promptsIconPicker('Which icon do you want to use for this set?');
+        $path = base_path('vendor/studio1902/statamic-peak-commands/resources/stubs');
 
-        try {
-            $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");
-            $this->checkExistence('Partial', "resources/views/components/_{$this->filename}.antlers.html");
+        $operations = [
+            [
+                'type' => 'copy',
+                'input' => 'set.antlers.html.stub',
+                'output' => 'resources/views/components/_{{ handle }}.antlers.html'
+            ],
+            [
+                'type' => 'copy',
+                'input' => 'fieldset_set.yaml.stub',
+                'output' => 'resources/fieldsets/{{ handle }}.yaml'
+            ],
+            [
+                'type' => 'update_article_sets',
+                'block' => [
+                    'name' => $name,
+                    'instructions' => $description,
+                    'icon' => $this->pickIcon('Which icon do you want to use for this set?'),
+                    'handle' => $handle,
+                ]
+            ],
+        ];
 
-            $this->createFieldset();
-            $this->createPartial();
-            $this->updateArticleSets($this->set_name, $this->filename, $this->instructions, $this->icon);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
-        }
+        app()->make(Installable::class, ['config' => compact('name', 'handle', 'description', 'operations', 'path')])->install();
 
-        $this->info("<info>[✓]</info> Peak page builder Article set '{$this->set_name}' added.");
+        $this->info("<info>[✓]</info> Peak page builder Article set '$name' added.");
     }
-
-    /**
-     * Create fieldset.
-     *
-     * @return bool|null
-     */
-    protected function createFieldset()
-    {
-        $stub = $this->getStub('/fieldset_set.yaml.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ name }}', $this->set_name);
-
-        File::put(base_path("resources/fieldsets/{$this->filename}.yaml"), $contents);
-    }
-
-    /**
-     * Create partial.
-     *
-     * @return bool|null
-     */
-    protected function createPartial()
-    {
-        $stub = $this->getStub('/set.html.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ name }}', $this->set_name)
-            ->replace('{{ filename }}', $this->filename);
-
-        File::put(base_path("resources/views/components/_{$this->filename}.antlers.html"), $contents);
-    }
-
 
 }
