@@ -37,7 +37,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Make sure to set the correct timezone in `config/app.php`."
+            'content' => "Make sure to set the correct timezone in your environment file."
         ],
         [
             'type' => 'notify',
