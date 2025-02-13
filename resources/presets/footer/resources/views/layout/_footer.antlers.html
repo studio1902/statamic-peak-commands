@@ -5,7 +5,7 @@
 
 <!-- /layout/_footer.antlers.html -->
 <footer class="fluid-grid mt-auto bg-neutral pb-24 md:pb-0 text-white">
-    <nav class="span-content py-12 md:py-16 lg:py-24 grid md:grid-cols-4 gap-x-fluid-grid-gap gap-y-8 md:gap-y-16 text-sm hover:[&_a]:underline">
+    <nav class="span-content py-12 md:py-16 lg:py-24 grid md:grid-cols-4 gap-x-fluid-grid-gap gap-y-8 md:gap-y-16 text-sm [&_a:hover]:underline">
         {{ nav:footer max_depth="2" select="title|url" }}
             {{ unless no_results }}
                 <div class="stack-2">
