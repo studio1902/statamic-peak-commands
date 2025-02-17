@@ -17,7 +17,7 @@ return [
         ],
         [
             'type' => 'update_article_sets',
-            'block' => [
+            'set' => [
                 'name' => 'Read more',
                 'icon' => 'content-book-open',
                 'instructions' => 'Link to a related article.',

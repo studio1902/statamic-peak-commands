@@ -17,7 +17,7 @@ return [
         ],
         [
             'type' => 'update_article_sets',
-            'block' => [
+            'set' => [
                 'name' => 'Video self hosted',
                 'icon' => 'media-webcam-video',
                 'instructions' => 'Add a self hosted video.',
