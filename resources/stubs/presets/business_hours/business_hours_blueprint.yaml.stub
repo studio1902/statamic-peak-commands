@@ -100,7 +100,7 @@ tabs:
               type: section
               listable: hidden
               display: 'Phone number'
-              instructions: 'Confiugre a phone number.'
+              instructions: 'Configure a phone number.'
               instructions_position: above
               visibility: visible
               always_save: false
