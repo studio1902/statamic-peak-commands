@@ -4,11 +4,9 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
 use Statamic\Console\RunsInPlease;
-use Statamic\Facades\Config;
-use Stringy\StaticStringy as Stringy;
+use Studio1902\PeakCommands\Models\Block;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
-use function Laravel\Prompts\text;
 
 class MakeBlock extends Command
 {
@@ -21,25 +19,7 @@ class MakeBlock extends Command
     {
         $this->checkLicense();
 
-        $name = text(
-            label: 'What should be the name for this block?',
-            placeholder: 'E.g. Text and image',
-            required: true
-        );
-
-        $handle = text(
-            label: 'What should be the filename for this block?',
-            default: Stringy::slugify($name, '_', Config::getShortLocale()),
-            required: true
-        );
-
-        $description = text(
-            label: 'What should be the instructions for this block?',
-            placeholder: 'E.g. Renders text and an image.',
-            required: true
-        );
-
-        $path = base_path('vendor/studio1902/statamic-peak-commands/resources/stubs');
+        $block = app()->make(Block::class);
 
         $operations = [
             [
@@ -54,17 +34,23 @@ class MakeBlock extends Command
             ],
             [
                 'type' => 'update_page_builder',
-                'block' => [
-                    'name' => $name,
-                    'instructions' => $description,
-                    'icon' => $this->pickIcon('Which icon do you want to use for this block?'),
-                    'handle' => $handle,
-                ]
+                'block' => $block->toArray(),
             ],
         ];
 
-        app()->make(Installable::class, ['config' => compact('name', 'handle', 'description', 'operations', 'path')])->install();
+        $path = base_path('vendor/studio1902/statamic-peak-commands/resources/stubs');
 
-        $this->info("<info>[✓]</info> Peak page builder block '$name' added.");
+        app()
+            ->make(Installable::class, [
+                'config' => [
+                    'name' => $block->name,
+                    'handle' => $block->handle,
+                    'operations' => $operations,
+                    'path' => $path,
+                ]
+            ])
+            ->install();
+
+        $this->info("<info>[✓]</info> Peak page builder block '$block->name' added.");
     }
 }

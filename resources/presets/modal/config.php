@@ -22,7 +22,7 @@ return [
         ],
         [
             'type' => 'update_article_sets',
-            'block' => [
+            'set' => [
                 'name' => 'Invoke modal',
                 'icon' => 'alert-warning-exclamation-mark',
                 'instructions' => 'Invokes a modal.',

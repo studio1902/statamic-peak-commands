@@ -3,16 +3,13 @@
 namespace Studio1902\PeakCommands\Operations;
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
-use ReflectionClass;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
-use Studio1902\PeakCommands\Models\Block;
 use Studio1902\PeakCommands\Models\Installable;
+use Studio1902\PeakCommands\Models\Set;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
@@ -20,24 +17,24 @@ class UpdateArticleSets extends Operation
 {
     use CanPickIcon;
 
-    protected Block $block;
+    protected Set $set;
 
     public function __construct(array $config)
     {
-        $this->block = new Block($config['block']);
+        $this->set = app()->make(Set::class, ['config' => $config['set']]);
     }
 
     public function run(): Installable
     {
-        $name = $this->block->name;
-        $filename = $this->block->handle;
-        $instructions = $this->block->instructions;
-        $icon = $this->block->icon;
+        $name = $this->set->name;
+        $filename = $this->set->handle;
+        $instructions = $this->set->instructions;
+        $icon = $this->set->icon;
 
         $fieldset = Yaml::parseFile(base_path('resources/fieldsets/article.yaml'));
 
         $newSet = [
-            'display' => $this->block->name,
+            'display' => $this->set->name,
             'instructions' => $instructions,
             'icon' => $icon,
             'fields' => [
@@ -118,6 +115,6 @@ class UpdateArticleSets extends Operation
 
         info("Installed article set: '$name'.");
 
-        return  $this->installable;
+        return $this->installable;
     }
 }
