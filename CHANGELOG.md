@@ -17,6 +17,7 @@
 - The width of the block title in the clients preset. faab4a6e by @robdekort
 - A comment in the clients preset notification. e411f1f8 by @robdekort
 - A class used in the footer preset is now compatible with Tailwind 4. 6f77783f by @robdekort
+- A typo in the business hours preset. #32 by @porstendorfer
 
 ## v8.16.1 (2025-01-22)
 
