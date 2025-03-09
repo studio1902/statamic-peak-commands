@@ -12,7 +12,7 @@ use Statamic\Facades\Site;
 use Studio1902\PeakCommands\Models\Installable;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\error;
-use function Laravel\Prompts\info as info;
+use function Laravel\Prompts\info;
 
 class Copy extends Operation
 {

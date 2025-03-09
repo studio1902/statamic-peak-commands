@@ -5,6 +5,7 @@ namespace Studio1902\PeakCommands\Commands;
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Registry;
+use function Laravel\Prompts\info;
 
 class InstallSet extends InstallCommand
 {

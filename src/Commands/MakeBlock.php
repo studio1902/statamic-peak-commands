@@ -7,6 +7,7 @@ use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Models\Block;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
+use function Laravel\Prompts\info;
 
 class MakeBlock extends Command
 {
@@ -51,6 +52,6 @@ class MakeBlock extends Command
             ])
             ->install();
 
-        $this->info("<info>[✓]</info> Peak page builder block '$block->name' added.");
+        info("<info>[✓]</info> Peak page builder block '$block->name' added.");
     }
 }

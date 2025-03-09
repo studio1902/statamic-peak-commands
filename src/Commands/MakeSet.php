@@ -7,6 +7,7 @@ use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Set;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
+use function Laravel\Prompts\info;
 
 class MakeSet extends Command
 {
@@ -52,7 +53,7 @@ class MakeSet extends Command
             ])
             ->install();
 
-        $this->info("<info>[✓]</info> Peak page builder Article set '$set->name' added.");
+        info("<info>[✓]</info> Peak page builder Article set '$set->name' added.");
     }
 
 }
