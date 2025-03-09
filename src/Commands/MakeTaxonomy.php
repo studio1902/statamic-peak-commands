@@ -10,49 +10,63 @@ use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Collection;
 use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
+use Studio1902\PeakCommands\Models\Block;
+use Studio1902\PeakCommands\Models\Installable;
+use Studio1902\PeakCommands\Models\Taxonomy;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\info;
 use function Laravel\Prompts\multisearch;
 use function Laravel\Prompts\text;
 
 class MakeTaxonomy extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use RunsInPlease, NeedsValidLicense;
 
     protected $name = 'statamic:peak:make:taxonomy';
     protected $description = "Make a taxonomy.";
-    protected $taxonomy_name = '';
-    protected $filename = '';
-    protected $collections = [];
-    protected $permissions = true;
 
     public function handle()
     {
         $this->checkLicense();
 
-        $this->taxonomy_name = text(
-            label: 'What should be the name for this taxonomy?',
-            placeholder: 'E.g. Tags',
-            required: true
-        );
+        $taxonomy = app()->make(Taxonomy::class);
 
-        $this->filename = Str::slug($this->taxonomy_name, '_');
+        $operations = [
+            [
+                'type' => 'copy',
+                'input' => 'taxonomy.yaml.stub',
+                'output' => "content/taxonomies/$taxonomy->filename.yaml",
+                'replacements' => [
+                    '{{ taxonomy_name }}' => $taxonomy->name,
+                ]
+            ],
+            [
+                'type' => 'copy',
+                'input' => 'taxonomy_blueprint.yaml.stub',
+                'output' => "resources/blueprints/taxonomies/$taxonomy->filename/$taxonomy->filename.yaml",
+                'replacements' => [
+                    '{{ taxonomy_name }}' => $taxonomy->name,
+                ]
+            ],
+            //TODO[mr]: add missing operations (09.03.2025 mr)
+        ];
+        
+        $path = base_path('vendor/studio1902/statamic-peak-commands/resources/stubs');
 
-        $options = collect(Collection::all())->pluck('title', 'handle');
+        app()
+            ->make(Installable::class, [
+                'config' => [
+                    'name' => $taxonomy->name,
+                    'handle' => $taxonomy->filename,
+                    'operations' => $operations,
+                    'path' => $path,
+                ]
+            ])
+            ->install();
 
-        $this->collections = multisearch(
-            label: "Which collection(s) do you want to attach $this->taxonomy_name to?",
-            options: fn (string $value) => strlen($value) > 0
-                ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
-                : $options->toArray(),
-            scroll: 15
-        );
-
-        $this->permissions = confirm(
-            label: 'Grant edit permissions to editor role?',
-            default: true
-        );
-
+        info("<info>[✓]</info> Taxonomy '$taxonomy->name' created.");
+        return;
         try {
             $this->createTaxonomy();
             $this->createBlueprint();
