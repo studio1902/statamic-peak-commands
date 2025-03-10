@@ -7,6 +7,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\spin;
+use function Laravel\Prompts\info;
 
 class Run extends Operation
 {

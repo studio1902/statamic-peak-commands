@@ -3,79 +3,52 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
-use Statamic\Facades\Config;
-use Stringy\StaticStringy as Stringy;
-use function Laravel\Prompts\select;
-use function Laravel\Prompts\text;
+use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
+use Studio1902\PeakCommands\Models\Installable;
+use Studio1902\PeakCommands\Models\Partial;
+use function Laravel\Prompts\info;
 
 class MakePartial extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use RunsInPlease, NeedsValidLicense;
 
     protected $name = 'statamic:peak:make:partial';
     protected $description = "Make a partial with IDE hinting and template paths.";
-    protected $partial_name = '';
-    protected $partial_description = '';
-    protected $filename = '';
-    protected $folder = '';
-    protected $type = '';
 
-    public function handle()
+
+    public function handle(): void
     {
         $this->checkLicense();
 
-        $this->type = select(
-            label: 'What type of partial do you want to add?',
-            options: ['Component', 'Layout', 'Snippet', 'Typography'],
-            default: 'Component'
-        );
+        $partial = app()->make(Partial::class);
 
-        $this->folder = strtolower($this->type);
-        if ($this->folder == 'component') $this->folder = 'components';
-        if ($this->folder == 'snippet') $this->folder = 'snippets';
+        $operations = [
+            [
+                'type' => 'copy',
+                'input' => 'partial.antlers.html.stub',
+                'output' => "resources/views/$partial->folder/_$partial->filename.antlers.html",
+                'replacements' => [
+                    '{{ partial_name }}' => $partial->name,
+                    '{{ partial_description }}' => $partial->description,
+                    '{{ folder }}' => $partial->folder,
+                ]
+            ]
+        ];
 
-        $this->partial_name = text(
-            label: 'What should be the name for this partial?',
-            placeholder: 'E.g. Card',
-            required: true
-        );
+        $path = base_path('vendor/studio1902/statamic-peak-commands/resources/stubs');
 
-        $this->partial_description = text(
-            label: 'What should be the description for this partial?',
-            placeholder: 'E.g. A card component.',
-            required: true
-        );
+        app()
+            ->make(Installable::class, [
+                'config' => [
+                    'name' => $partial->name,
+                    'handle' => $partial->filename,
+                    'operations' => $operations,
+                    'path' => $path,
+                ]
+            ])
+            ->install();
 
-        $this->filename = Stringy::slugify($this->partial_name, '_', Config::getShortLocale());
-
-        try {
-            $this->checkExistence('Partial', "resources/views/{$this->folder}/_{$this->filename}.antlers.html");
-
-            $this->createPartial();
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
-        }
-
-        $this->info("<info>[✓]</info> {$this->type} '{$this->filename}' added.");
-    }
-
-    /**
-     * Create partial.
-     *
-     * @return bool|null
-     */
-    protected function createPartial()
-    {
-        $stub = $this->getStub('/partial.antlers.html.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ partial_name }}', $this->partial_name)
-            ->replace('{{ partial_description }}', $this->partial_description)
-            ->replace('{{ folder }}', $this->folder)
-            ->replace('{{ filename }}', $this->filename);
-
-        File::put(base_path("resources/views/{$this->folder}/_{$this->filename}.antlers.html"), $contents);
+        info("<info>[✓]</info> $partial->type '$partial->filename' added.");
     }
 }

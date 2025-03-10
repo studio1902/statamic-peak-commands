@@ -3,20 +3,23 @@
 namespace Studio1902\PeakCommands\Operations;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 use Statamic\Facades\Site;
 use Studio1902\PeakCommands\Models\Installable;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\error;
-use function Laravel\Prompts\info as info;
+use function Laravel\Prompts\info;
 
 class Copy extends Operation
 {
     protected string $input;
     protected string $output;
     protected bool $skippable;
+    protected array $replacements;
     protected Filesystem $filesystem;
 
     public function __construct(array $config)
@@ -24,6 +27,7 @@ class Copy extends Operation
         $this->input = $config['input'];
         $this->output = $config['output'];
         $this->skippable = $config['skippable'] ?? false;
+        $this->replacements = $config['replacements'] ?? [];
 
         $this->filesystem = Storage::build([
             'driver' => 'local',
@@ -41,12 +45,11 @@ class Copy extends Operation
 
         $stub = $this->getStub($this->input, $this->installable->path);
 
-        $contents = Str::of($stub)
-            ->replace('{{ handle }}', $this->installable->renameHandle)
-            ->replace('{{ filename }}', $this->installable->renameHandle)
-            ->replace('{{ name }}', $this->installable->renameName)
-            ->replace('{{ singular_handle }}', $this->installable->renameSingularHandle)
-            ->replace('{{ singular_name }}', $this->installable->renameSingularName);
+        $contents = $this->mergedReplacements()
+            ->reduce(
+                fn(Stringable $contents, $replacement, $placeholder) => $contents->replace($placeholder, $replacement),
+                Str::of($stub)
+            );
 
         if ($this->skippable) {
             if ($this->checkExistenceAndSkip('File', "{$this->output}")) {
@@ -106,5 +109,18 @@ class Copy extends Operation
             }
         }
         return false;
+    }
+
+    protected function mergedReplacements(): Collection
+    {
+        $defaultReplacements = [
+            '{{ handle }}' => $this->installable->renameHandle,
+            '{{ filename }}' => $this->installable->renameHandle,
+            '{{ name }}' => $this->installable->renameName,
+            '{{ singular_handle }}' => $this->installable->renameSingularHandle,
+            '{{ singular_name }}' => $this->installable->renameSingularName,
+        ];
+
+        return collect(array_merge($this->replacements, $defaultReplacements));
     }
 }

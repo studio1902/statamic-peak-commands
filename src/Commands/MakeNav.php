@@ -3,16 +3,17 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Collection;
 use Statamic\Support\Arr;
+use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\text;
 use function Laravel\Prompts\multisearch;
+use function Laravel\Prompts\text;
 
 class MakeNav extends Command
 {

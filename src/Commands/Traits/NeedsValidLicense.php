@@ -1,6 +1,6 @@
 <?php
 
-namespace Studio1902\PeakCommands\Commands;
+namespace Studio1902\PeakCommands\Commands\Traits;
 
 use Facades\Statamic\Licensing\LicenseManager;
 use function Laravel\Prompts\alert;
