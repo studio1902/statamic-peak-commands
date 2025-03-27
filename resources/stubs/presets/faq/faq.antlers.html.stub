@@ -70,11 +70,12 @@
                     <div
                         x-show="expanded"
                         x-collapse
-                        class="p-2"
                     >
-                        {{ partial:typography/prose }}
-                            {{ text }}
-                        {{ /partial:typography/prose }}
+                        <div class="p-2">
+                            {{ partial:typography/prose }}
+                                {{ text }}
+                            {{ /partial:typography/prose }}
+                        </div>
                     </div>
                 </article>
 
