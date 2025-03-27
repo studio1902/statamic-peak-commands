@@ -11,6 +11,7 @@
 - The prompts presented during the `make:collection` regarding mounting are more clear. e6e64d79 by @robdekort
 - The banner presets now uses `x-collapse`. f11c7f67 by @robdekort
 - Accessibility and semantics in the FAQ preset. 0ce0b1b4 by @robdekort
+- FAQ sections to close smoothly. #33 by @podrabinek
 - Accessibility in the theme toggle preset. 6a6156a9 by @robdekort
 
 ### What's fixed
