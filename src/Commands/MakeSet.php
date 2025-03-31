@@ -17,43 +17,66 @@ class MakeSet extends Command
     protected $name = 'statamic:peak:make:set';
     protected $description = "Make an Article (Bard) set.";
 
+    protected array $operations = [];
+    protected ?Set $model;
+
+
     public function handle()
     {
         $this->checkLicense();
 
-        $set = app()->make(Set::class);
+        $this->createModel();
+        $this->createTemplate();
+        $this->createFieldset();
+        $this->updateArticleSets();
 
+        $this->runOperations();
 
-        $operations = [
-            [
-                'type' => 'copy',
-                'input' => 'set.antlers.html.stub',
-                'output' => 'resources/views/components/_{{ handle }}.antlers.html'
-            ],
-            [
-                'type' => 'copy',
-                'input' => 'fieldset_set.yaml.stub',
-                'output' => 'resources/fieldsets/{{ handle }}.yaml'
-            ],
-            [
-                'type' => 'update_article_sets',
-                'set' => $set->toArray(),
-            ],
+        info("<info>[✓]</info> Peak page builder Article set '{$this->model->name}' added.");
+    }
+
+    protected function createModel(): void
+    {
+        $this->model = app()->make(Set::class);
+    }
+
+    protected function createTemplate(): void
+    {
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'set.antlers.html.stub',
+            'output' => 'resources/views/components/_{{ handle }}.antlers.html'
         ];
+    }
 
-        $path = base_path('vendor/studio1902/statamic-peak-commands/resources/stubs');
+    protected function createFieldset(): void
+    {
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'fieldset_set.yaml.stub',
+            'output' => 'resources/fieldsets/{{ handle }}.yaml'
+        ];
+    }
 
+    protected function updateArticleSets(): void
+    {
+        $this->operations[] = [
+            'type' => 'update_article_sets',
+            'set' => $this->model->toArray(),
+        ];
+    }
+
+    protected function runOperations(): void
+    {
         app()
             ->make(Installable::class, [
                 'config' => [
-                    'name' => $set->name,
-                    'handle' => $set->handle,
-                    'operations' => $operations,
-                    'path' => $path,
+                    'name' => $this->model->name,
+                    'handle' => $this->model->handle,
+                    'operations' => $this->operations,
+                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources/stubs'),
                 ]
             ])
             ->install();
-
-        info("<info>[✓]</info> Peak page builder Article set '$set->name' added.");
     }
 }
