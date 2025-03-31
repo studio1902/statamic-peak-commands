@@ -4,6 +4,7 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
 use Statamic\Console\RunsInPlease;
+use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Set;
@@ -12,7 +13,7 @@ use function Laravel\Prompts\info;
 
 class MakeSet extends Command
 {
-    use RunsInPlease, NeedsValidLicense, CanPickIcon;
+    use RunsInPlease, NeedsValidLicense, CanPickIcon, HandleWithCatch;
 
     protected $name = 'statamic:peak:make:set';
     protected $description = "Make an Article (Bard) set.";
@@ -21,7 +22,7 @@ class MakeSet extends Command
     protected ?Set $model;
 
 
-    public function handle()
+    public function handleWithCatch(): void
     {
         $this->checkLicense();
 

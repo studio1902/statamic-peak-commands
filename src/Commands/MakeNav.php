@@ -5,13 +5,14 @@ namespace Studio1902\PeakCommands\Commands;
 use Illuminate\Console\Command;
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
+use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Nav;
 
 class MakeNav extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense, CanClearCache;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense, CanClearCache, HandleWithCatch;
 
     protected $name = 'statamic:peak:make:nav';
     protected $description = "Make a navigation.";
@@ -19,7 +20,7 @@ class MakeNav extends Command
     protected array $operations = [];
     protected ?Nav $model = null;
 
-    public function handle()
+    public function handleWithCatch(): void
     {
         $this->checkLicense();
 

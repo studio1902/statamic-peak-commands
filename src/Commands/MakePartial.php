@@ -4,6 +4,7 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
 use Statamic\Console\RunsInPlease;
+use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Partial;
@@ -11,7 +12,7 @@ use function Laravel\Prompts\info;
 
 class MakePartial extends Command
 {
-    use RunsInPlease, NeedsValidLicense;
+    use RunsInPlease, NeedsValidLicense, HandleWithCatch;
 
     protected $name = 'statamic:peak:make:partial';
     protected $description = "Make a partial with IDE hinting and template paths.";
@@ -19,7 +20,7 @@ class MakePartial extends Command
     protected array $operations = [];
     protected ?Partial $model;
 
-    public function handle(): void
+    public function handleWithCatch(): void
     {
         $this->checkLicense();
 

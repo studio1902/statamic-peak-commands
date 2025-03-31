@@ -5,6 +5,7 @@ namespace Studio1902\PeakCommands\Commands;
 use Illuminate\Console\Command;
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
+use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Taxonomy;
@@ -12,7 +13,7 @@ use function Laravel\Prompts\info;
 
 class MakeTaxonomy extends Command
 {
-    use RunsInPlease, NeedsValidLicense, CanClearCache;
+    use RunsInPlease, NeedsValidLicense, CanClearCache, HandleWithCatch;
 
     protected $name = 'statamic:peak:make:taxonomy';
     protected $description = "Make a taxonomy.";
@@ -20,7 +21,7 @@ class MakeTaxonomy extends Command
     protected array $operations = [];
     protected ?Taxonomy $model = null;
 
-    public function handle(): void
+    public function handleWithCatch(): void
     {
         $this->checkLicense();
 

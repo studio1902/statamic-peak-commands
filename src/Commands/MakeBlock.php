@@ -4,6 +4,7 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
 use Statamic\Console\RunsInPlease;
+use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Block;
 use Studio1902\PeakCommands\Models\Installable;
@@ -12,7 +13,7 @@ use function Laravel\Prompts\info;
 
 class MakeBlock extends Command
 {
-    use RunsInPlease, NeedsValidLicense, CanPickIcon;
+    use RunsInPlease, NeedsValidLicense, CanPickIcon, HandleWithCatch;
 
     protected $name = 'statamic:peak:make:block';
     protected $description = "Make a page builder block.";
@@ -20,7 +21,7 @@ class MakeBlock extends Command
     protected array $operations = [];
     protected ?Block $model;
 
-    public function handle(): void
+    public function handleWithCatch(): void
     {
         $this->checkLicense();
 
