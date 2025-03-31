@@ -2,9 +2,9 @@
 
 namespace Studio1902\PeakCommands\Models;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Statamic\Facades\Config;
+use Statamic\Support\Arr;
+use Statamic\Support\Str;
 use Studio1902\PeakCommands\Operations\Operation;
 
 class Installable
@@ -22,11 +22,11 @@ class Installable
 
     public function __construct(array $config)
     {
-        $this->name = $config['name'];
-        $this->handle = $config['handle'];
-        $this->path = $config['path'];
-        $this->operations = $config['operations'];
-        $this->singularName = $config['singular_name'] ?? '';
+        $this->name = Arr::get($config, 'name');
+        $this->handle = Arr::get($config, 'handle');
+        $this->path = Arr::get($config, 'path');
+        $this->operations = Arr::get($config, 'operations');
+        $this->singularName = Arr::get($config, 'singular_name', '');
 
         // Apply fallbacks
         $this->renameName = $this->name;

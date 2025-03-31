@@ -2,12 +2,13 @@
 
 namespace Studio1902\PeakCommands\Operations;
 
+use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use function Laravel\Prompts\error;
-use function Laravel\Prompts\spin;
 use function Laravel\Prompts\info;
+use function Laravel\Prompts\spin;
 
 class Run extends Operation
 {
@@ -21,13 +22,13 @@ class Run extends Operation
 
     public function __construct(array $config)
     {
-        $this->command = $config['command'];
-        $this->processingMessage = $config['processing_message'] ?? '';
-        $this->successMessage = $config['success_message'] ?? '';
-        $this->errorMessage = $config['error_message'] ?? '';
-        $this->tty = $config['tty'] ?? false;
-        $this->spinner = $config['spinner'] ?? true;
-        $this->timeout = $config['timeout'] ?? 120;
+        $this->command = Arr::get($config, 'command');
+        $this->processingMessage = Arr::get($config, 'processing_message', '');
+        $this->successMessage = Arr::get($config, 'success_message', '');
+        $this->errorMessage = Arr::get($config, 'error_message', '');
+        $this->tty = Arr::get($config, 'tty', false);
+        $this->spinner = Arr::get($config, 'spinner', true);
+        $this->timeout = Arr::get($config, 'timeout', 120);
     }
 
     public function run(): Installable

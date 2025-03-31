@@ -11,9 +11,9 @@ use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\info;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
-use function Laravel\Prompts\info;
 
 class UpdatePageBuilder extends Operation
 {
@@ -23,7 +23,7 @@ class UpdatePageBuilder extends Operation
 
     public function __construct(array $config)
     {
-        $this->block = app()->make(Block::class, ['config' => $config['block']]);
+        $this->block = app()->make(Block::class, ['config' => Arr::get($config, 'block')]);
     }
 
     public function run(): Installable

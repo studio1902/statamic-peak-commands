@@ -14,8 +14,8 @@ class UpdateRole extends Operation
 
     public function __construct(array $config)
     {
-        $this->role = $config['role'];
-        $this->permissions = $config['permissions'];
+        $this->role = Arr::get($config, 'role');
+        $this->permissions = Arr::get($config, 'permissions');
     }
 
     public function run(): Installable

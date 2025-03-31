@@ -10,9 +10,9 @@ use Studio1902\PeakCommands\Models\Set;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\info;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
-use function Laravel\Prompts\info;
 
 class UpdateArticleSets extends Operation
 {
@@ -22,7 +22,7 @@ class UpdateArticleSets extends Operation
 
     public function __construct(array $config)
     {
-        $this->set = app()->make(Set::class, ['config' => $config['set']]);
+        $this->set = app()->make(Set::class, ['config' => Arr::get($config, 'set')]);
     }
 
     public function run(): Installable

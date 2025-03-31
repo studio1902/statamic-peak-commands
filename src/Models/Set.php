@@ -3,6 +3,7 @@
 namespace Studio1902\PeakCommands\Models;
 
 use Statamic\Facades\Config;
+use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use function Laravel\Prompts\text;
@@ -18,10 +19,10 @@ class Set
 
     public function __construct(array $config = [])
     {
-        $this->name = $config['name'] ?? $this->promptForName();
-        $this->handle = $config['handle'] ?? $this->promptForHandle();
-        $this->instructions = $config['instructions'] ?? $this->promptForInstructions();
-        $this->icon = $config['icon'] ?? $this->promptForIcon();
+        $this->name = Arr::get($config, 'name', $this->promptForName());
+        $this->handle = Arr::get($config, 'handle', $this->promptForHandle());
+        $this->instructions = Arr::get($config, 'instructions', $this->promptForInstructions());
+        $this->icon = Arr::get($config, 'icon', $this->promptForIcon());
     }
 
     public function toArray(): array

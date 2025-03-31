@@ -15,6 +15,7 @@ class Rename extends Operation
 
     public function run(): Installable
     {
+        //TODO[mr]: generalize or pass in texts? (31.03.2025 mr)
         $this->installable->renameName = text(
             label: "What should be the collection name for '{$this->installable->name}'?",
             placeholder: "E.g. '{$this->installable->name}'",

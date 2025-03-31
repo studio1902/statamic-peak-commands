@@ -10,8 +10,6 @@ abstract class Operation
 {
     protected Installable $installable;
 
-    abstract public function __construct(array $config);
-
     public static function resolve(string $class, array $config): Operation
     {
         if (Str::contains($class, '\\')) {

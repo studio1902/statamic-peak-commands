@@ -3,6 +3,7 @@
 namespace Studio1902\PeakCommands\Operations;
 
 use Illuminate\Support\Str;
+use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use function Laravel\Prompts\pause;
 use function Laravel\Prompts\warning;
@@ -13,7 +14,7 @@ class Notify extends Operation
 
     public function __construct(array $config)
     {
-        $this->content = $config['content'];
+        $this->content = Arr::get($config, 'content');
     }
 
     public function run(): Installable

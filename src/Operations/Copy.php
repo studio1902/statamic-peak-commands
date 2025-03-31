@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Statamic\Facades\Site;
+use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\error;
@@ -24,10 +25,10 @@ class Copy extends Operation
 
     public function __construct(array $config)
     {
-        $this->input = $config['input'];
-        $this->output = $config['output'];
-        $this->skippable = $config['skippable'] ?? false;
-        $this->replacements = $config['replacements'] ?? [];
+        $this->input = Arr::get($config, 'input');
+        $this->output = Arr::get($config, 'output');
+        $this->skippable = Arr::get($config, 'skippable', false);
+        $this->replacements = Arr::get($config, 'replacements', []);
 
         $this->filesystem = Storage::build([
             'driver' => 'local',

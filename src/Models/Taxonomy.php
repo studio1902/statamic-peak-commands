@@ -5,6 +5,7 @@ namespace Studio1902\PeakCommands\Models;
 use Illuminate\Support\Str;
 use Statamic\Facades\Collection;
 use Statamic\Facades\Config;
+use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multisearch;
@@ -15,13 +16,13 @@ class Taxonomy
     public string $name;
     public string $filename;
     public array $collections;
-    public bool $permissions;
+    public bool $grantPermissions;
 
     public function __construct(array $config = [])
     {
-        $this->name = $config['name'] ?? $this->promptForName();
-        $this->collections = $config['collections'] ?? $this->promptForCollections();
-        $this->permissions = $config['permissions'] ?? $this->promptForPermissions();
+        $this->name = Arr::get($config, 'name', $this->promptForName());
+        $this->collections = Arr::get($config, 'collections', $this->promptForCollections());
+        $this->grantPermissions = Arr::get($config, 'permissions', $this->promptForPermissions());
         $this->filename = $this->generateFilename();
     }
 

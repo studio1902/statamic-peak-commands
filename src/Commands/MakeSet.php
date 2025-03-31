@@ -56,5 +56,4 @@ class MakeSet extends Command
 
         info("<info>[✓]</info> Peak page builder Article set '$set->name' added.");
     }
-
 }
