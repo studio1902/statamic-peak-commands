@@ -23,6 +23,7 @@ class MakeBlock extends Command
     public function handle(): void
     {
         $this->checkLicense();
+
         $this->createModel();
         $this->createTemplate();
         $this->createFieldset();
