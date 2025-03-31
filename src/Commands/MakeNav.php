@@ -12,7 +12,7 @@ use Studio1902\PeakCommands\Models\Nav;
 
 class MakeNav extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense, CanClearCache, HandleWithCatch;
+    use RunsInPlease, NeedsValidLicense, CanClearCache, HandleWithCatch;
 
     protected $name = 'statamic:peak:make:nav';
     protected $description = "Make a navigation.";
