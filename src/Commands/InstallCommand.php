@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Registry;
@@ -15,7 +16,7 @@ use function Laravel\Prompts\warning;
 
 abstract class InstallCommand extends Command
 {
-    use NeedsValidLicense;
+    use NeedsValidLicense, CanClearCache;
 
     protected array $choices = [];
     protected ?Collection $items = null;
@@ -70,8 +71,6 @@ abstract class InstallCommand extends Command
                 app()->make(Installable::class, ['config' => $this->items->get($handle)])->install()
             )
         );
-
-        Artisan::call('cache:clear');
     }
 
     protected function handleInstallation(string $label, string $emptyValidation, \Closure $successMessage): void
@@ -83,5 +82,7 @@ abstract class InstallCommand extends Command
         $this->collectChoices($label, $emptyValidation);
 
         $this->installChoices($successMessage);
+
+        $this->clearCache();
     }
 }

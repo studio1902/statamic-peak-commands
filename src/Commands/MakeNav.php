@@ -3,12 +3,12 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Collection;
 use Statamic\Support\Arr;
+use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
@@ -17,7 +17,7 @@ use function Laravel\Prompts\text;
 
 class MakeNav extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense, CanClearCache;
 
     protected $name = 'statamic:peak:make:nav';
     protected $description = "Make a navigation.";
@@ -49,7 +49,7 @@ class MakeNav extends Command
 
         $this->collections = multisearch(
             label: "Enable linking to entries from these collections:",
-            options: fn (string $value) => strlen($value) > 0
+            options: fn(string $value) => strlen($value) > 0
                 ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
                 : $options->toArray(),
             scroll: 15
@@ -69,7 +69,7 @@ class MakeNav extends Command
             return $this->error($e->getMessage());
         }
 
-        Artisan::call('cache:clear');
+        $this->clearCache();
 
         $this->info("<info>[✓]</info> Navigation '{$this->navigation_name}' created.");
     }
@@ -102,7 +102,7 @@ class MakeNav extends Command
 
         $contents = Str::of(Str::of($this->getStub('/navigation_blueprint.yaml.stub')));
 
-        if (! File::exists("resources/blueprints/navigation")) File::makeDirectory("resources/blueprints/navigation");
+        if (!File::exists("resources/blueprints/navigation")) File::makeDirectory("resources/blueprints/navigation");
 
         File::put(base_path("resources/blueprints/navigation/{$this->filename}.yaml"), $contents);
     }
@@ -114,7 +114,7 @@ class MakeNav extends Command
      */
     protected function attachCollections()
     {
-        if (! $this->collections) {
+        if (!$this->collections) {
             return;
         }
 
@@ -132,7 +132,7 @@ class MakeNav extends Command
      */
     protected function handlePermissions()
     {
-        if (! $this->permissions) {
+        if (!$this->permissions) {
             return;
         }
 

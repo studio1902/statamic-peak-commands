@@ -4,18 +4,18 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Entry;
 use Statamic\Facades\GlobalSet;
 use Statamic\Support\Arr;
+use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
 
 class ClearSite extends Command
 {
-    use RunsInPlease;
+    use RunsInPlease, CanClearCache;
 
     protected $name = 'statamic:peak:clear-site';
     protected $description = "Clear all default Peak content.";
@@ -34,8 +34,9 @@ class ClearSite extends Command
             $this->trashPagesButHomeAnd404();
             $this->clearNavigation();
 
-            Artisan::call('statamic:glide:clear');
-            Artisan::call('cache:clear');
+
+            $this->clearGlideCache();
+            $this->clearCache();
 
             $this->info("<info>[✓]</info> Your view from the peak is clear.");
         }
@@ -54,7 +55,7 @@ class ClearSite extends Command
             $files->cleanDirectory($path);
     }
 
-     /**
+    /**
      * Trash global social media data.
      *
      * @return bool|null

@@ -3,17 +3,17 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Statamic\Console\RunsInPlease;
+use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\text;
 
 class MakeGlobal extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense, CanClearCache;
 
     protected $name = 'statamic:peak:make:global';
     protected $description = "Make a global set.";
@@ -46,7 +46,7 @@ class MakeGlobal extends Command
             return $this->error($e->getMessage());
         }
 
-        Artisan::call('cache:clear');
+        $this->clearCache();
 
         $this->info("<info>[✓]</info> Global '{$this->global_name}' created.");
     }
@@ -91,7 +91,7 @@ class MakeGlobal extends Command
      */
     protected function handlePermissions()
     {
-        if (! $this->permissions) {
+        if (!$this->permissions) {
             return;
         }
 

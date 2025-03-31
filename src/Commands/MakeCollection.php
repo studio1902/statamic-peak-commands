@@ -3,13 +3,13 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Config;
 use Statamic\Facades\Entry;
 use Stringy\StaticStringy as Stringy;
+use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\search;
@@ -18,7 +18,7 @@ use function Laravel\Prompts\text;
 
 class MakeCollection extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use RunsInPlease, SharedFunctions, NeedsValidLicense, CanClearCache;
 
     protected $name = 'statamic:peak:make:collection';
     protected $description = "Make a collection.";
@@ -59,7 +59,7 @@ class MakeCollection extends Command
             default: true
         );
 
-        if (! $this->public) {
+        if (!$this->public) {
             $this->slugs = confirm(
                 label: 'Do you want to require slugs?',
                 default: true
@@ -194,7 +194,7 @@ class MakeCollection extends Command
             return $this->error($e->getMessage());
         }
 
-        Artisan::call('cache:clear');
+        $this->clearCache();
 
         $this->info("<info>[✓]</info> Collection '{$this->collection_name}' created.");
     }
@@ -211,8 +211,7 @@ class MakeCollection extends Command
             ->where('status', 'published')
             ->orderBy('title', 'asc')
             ->get()
-            ->map(fn($entry) =>
-               "{$entry->get('title')} [{$entry->id()}]"
+            ->map(fn($entry) => "{$entry->get('title')} [{$entry->id()}]"
             )
             ->toArray();
     }
@@ -236,7 +235,7 @@ class MakeCollection extends Command
             ->replace('{{ dated }}', ($this->dated) ? 'true' : 'false')
             ->replace('{{ date_past }}', $this->date_past)
             ->replace('{{ date_future }}', $this->date_future)
-            ->replace('{{ template }}', $this->show ? "{$this->filename}/show" : 'default' )
+            ->replace('{{ template }}', $this->show ? "{$this->filename}/show" : 'default')
             ->replace('{{ mount }}', $this->mount)
             ->replace('{{ slugs }}', ($this->slugs) ? 'true' : 'false');
 
@@ -357,13 +356,13 @@ class MakeCollection extends Command
     }
 
     /**
-    * Handle permissions
-    *
-    * @return bool|null
-    */
+     * Handle permissions
+     *
+     * @return bool|null
+     */
     protected function handlePermissions()
     {
-        if (! $this->permissions) {
+        if (!$this->permissions) {
             return;
         }
 
