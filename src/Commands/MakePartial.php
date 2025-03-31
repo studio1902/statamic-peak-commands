@@ -16,39 +16,51 @@ class MakePartial extends Command
     protected $name = 'statamic:peak:make:partial';
     protected $description = "Make a partial with IDE hinting and template paths.";
 
+    protected array $operations = [];
+    protected ?Partial $model;
 
     public function handle(): void
     {
         $this->checkLicense();
 
-        $partial = app()->make(Partial::class);
+        $this->createModel();
+        $this->createTemplate();
 
-        $operations = [
-            [
-                'type' => 'copy',
-                'input' => 'partial.antlers.html.stub',
-                'output' => "resources/views/$partial->folder/_$partial->filename.antlers.html",
-                'replacements' => [
-                    '{{ partial_name }}' => $partial->name,
-                    '{{ partial_description }}' => $partial->description,
-                    '{{ folder }}' => $partial->folder,
-                ]
+        $this->runOperations();
+
+        info("<info>[✓]</info> {$this->model->type} '{$this->model->filename}' added.");
+    }
+
+    protected function createModel(): void
+    {
+        $this->model = app()->make(Partial::class);
+    }
+
+    protected function createTemplate(): void
+    {
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'partial.antlers.html.stub',
+            'output' => "resources/views/{$this->model->folder}/_{$this->model->filename}.antlers.html",
+            'replacements' => [
+                '{{ partial_name }}' => $this->model->name,
+                '{{ partial_description }}' => $this->model->description,
+                '{{ folder }}' => $this->model->folder,
             ]
         ];
+    }
 
-        $path = base_path('vendor/studio1902/statamic-peak-commands/resources/stubs');
-
+    protected function runOperations(): void
+    {
         app()
             ->make(Installable::class, [
                 'config' => [
-                    'name' => $partial->name,
-                    'handle' => $partial->filename,
-                    'operations' => $operations,
-                    'path' => $path,
+                    'name' => $this->model->name,
+                    'handle' => $this->model->filename,
+                    'operations' => $this->operations,
+                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources/stubs'),
                 ]
             ])
             ->install();
-
-        info("<info>[✓]</info> $partial->type '$partial->filename' added.");
     }
 }
