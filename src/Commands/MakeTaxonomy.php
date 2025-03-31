@@ -27,7 +27,7 @@ class MakeTaxonomy extends Command
         $this->createModel();
         $this->createConfiguration();
         $this->createBlueprint();
-        $this->attachTaxonomyToCollections();
+        $this->attachCollections();
         $this->grantPermissions();
 
         $this->runOperations();
@@ -65,7 +65,7 @@ class MakeTaxonomy extends Command
         ];
     }
 
-    protected function attachTaxonomyToCollections(): void
+    protected function attachCollections(): void
     {
         $this->operations[] = [
             'type' => 'attach_taxonomy_to_collections',
