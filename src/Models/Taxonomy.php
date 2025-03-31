@@ -20,9 +20,9 @@ class Taxonomy
 
     public function __construct(array $config = [])
     {
-        $this->name = Arr::get($config, 'name', $this->promptForName());
-        $this->collections = Arr::get($config, 'collections', $this->promptForCollections());
-        $this->grantPermissions = Arr::get($config, 'permissions', $this->promptForPermissions());
+        $this->name = Arr::get($config, 'name') ?? $this->promptForName();
+        $this->collections = Arr::get($config, 'collections') ?? $this->promptForCollections();
+        $this->grantPermissions = Arr::get($config, 'permissions') ?? $this->promptForPermissions();
         $this->filename = $this->generateFilename();
     }
 

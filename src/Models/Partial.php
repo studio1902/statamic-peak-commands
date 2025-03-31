@@ -18,9 +18,9 @@ class Partial
 
     public function __construct(array $config = [])
     {
-        $this->type = Arr::get($config, 'type', $this->promptForType());
-        $this->name = Arr::get($config, 'name', $this->promptForName());
-        $this->description = Arr::get($config, 'description', $this->promptForDescription());
+        $this->type = Arr::get($config, 'type') ?? $this->promptForType();
+        $this->name = Arr::get($config, 'name') ?? $this->promptForName();
+        $this->description = Arr::get($config, 'description') ?? $this->promptForDescription();
         $this->filename = $this->generateFilename();
         $this->folder = $this->generateFolderName();
     }

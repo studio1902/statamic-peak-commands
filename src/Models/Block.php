@@ -19,10 +19,10 @@ class Block
 
     public function __construct(array $config = [])
     {
-        $this->name = Arr::get($config, 'name', $this->promptForName());
-        $this->handle = Arr::get($config, 'handle', $this->promptForHandle());
-        $this->instructions = Arr::get($config, 'instructions', $this->promptForInstructions());
-        $this->icon = Arr::get($config, 'icon', $this->promptForIcon());
+        $this->name = Arr::get($config, 'name') ?? $this->promptForName();
+        $this->handle = Arr::get($config, 'handle') ?? $this->promptForHandle();
+        $this->instructions = Arr::get($config, 'instructions') ?? $this->promptForInstructions();
+        $this->icon = Arr::get($config, 'icon') ?? $this->promptForIcon();
     }
 
     public function toArray(): array
