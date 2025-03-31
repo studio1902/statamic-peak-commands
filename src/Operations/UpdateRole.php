@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use Symfony\Component\Yaml\Yaml;
+use function Laravel\Prompts\info;
 
 class UpdateRole extends Operation
 {
@@ -25,9 +26,11 @@ class UpdateRole extends Operation
         $existingPermissions = Arr::get($roles, "$this->role.permissions");
         $permissions = array_merge($existingPermissions, str_replace('{{ handle }}', $this->installable->renameHandle, $this->permissions));
 
-        Arr::set($roles, 'editor.permissions', $permissions);
+        Arr::set($roles, "$this->role.permissions", $permissions);
 
         File::put(base_path('resources/users/roles.yaml'), Yaml::dump($roles, 99, 2));
+
+        info("Permissions updated for '{$this->role}' role.");
 
         return $this->installable;
     }
