@@ -12,7 +12,7 @@ class InstallBlock extends InstallCommand
     use RunsInPlease;
 
     protected $name = 'statamic:peak:install:block';
-    protected $description = "Install premade blocks into your page builder.";
+    protected $description = "Install pre-made blocks into your page builder.";
 
     protected string $type = Registry::BLOCKS;
 
