@@ -12,6 +12,7 @@ use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
 use Symfony\Component\Yaml\Yaml;
 use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\info;
 
 class ClearSite extends Command
 {
@@ -38,7 +39,7 @@ class ClearSite extends Command
             $this->clearGlideCache();
             $this->clearCache();
 
-            $this->info("<info>[✓]</info> Your view from the peak is clear.");
+            info("<info>[✓]</info> Your view from the peak is clear.");
         }
     }
 

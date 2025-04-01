@@ -9,6 +9,7 @@ use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Nav;
+use function Laravel\Prompts\info;
 
 class MakeNav extends Command
 {
@@ -33,8 +34,7 @@ class MakeNav extends Command
         $this->runOperations();
         $this->clearCache();
 
-        //TODO[mr]: replace $this->info('s (01.04.2025 mr)
-        $this->info("<info>[✓]</info> Navigation '{$this->model->name}' created.");
+        info("<info>[✓]</info> Navigation '{$this->model->name}' created.");
     }
 
     protected function createConfiguration(): void

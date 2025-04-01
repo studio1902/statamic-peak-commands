@@ -15,6 +15,7 @@ use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
+use function Laravel\Prompts\info;
 
 class MakeCollection extends Command
 {
@@ -196,7 +197,7 @@ class MakeCollection extends Command
 
         $this->clearCache();
 
-        $this->info("<info>[✓]</info> Collection '{$this->collection_name}' created.");
+        info("<info>[✓]</info> Collection '{$this->collection_name}' created.");
     }
 
     /**
