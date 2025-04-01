@@ -18,6 +18,7 @@ class MakePartial extends Command
     protected $description = "Make a partial with IDE hinting and template paths.";
 
     protected array $operations = [];
+    //TODO[mr]: check if ? is needed (01.04.2025 mr)
     protected ?Partial $model;
 
     public function handleWithCatch(): void

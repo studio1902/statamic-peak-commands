@@ -33,6 +33,7 @@ class MakeNav extends Command
         $this->runOperations();
         $this->clearCache();
 
+        //TODO[mr]: replace $this->info('s (01.04.2025 mr)
         $this->info("<info>[✓]</info> Navigation '{$this->model->name}' created.");
     }
 
