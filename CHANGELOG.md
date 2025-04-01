@@ -1,6 +1,6 @@
 # Changelog
 
-## v8.17.0 (Unreleased)
+## v9.0.0 (Unreleased)
 
 ### What's new
 - The ability to load in your own private blocks, sets and presets to install. #28 by @marcorieser
