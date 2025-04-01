@@ -63,7 +63,6 @@ abstract class InstallCommand extends Command
             ->mapWithKeys(fn(array $preset) => [$preset['handle'] => $preset]);
     }
 
-
     protected function installChoices(\Closure $successCallback): void
     {
         collect($this->choices)->each(

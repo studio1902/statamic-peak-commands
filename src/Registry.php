@@ -17,7 +17,6 @@ class Registry
     protected array $namespaces = ['\Studio1902\PeakCommands\Operations'];
     protected array $paths = [self::BLOCKS => [], self::PRESETS => [], self::SETS => [],];
 
-
     protected function __construct()
     {
         $this->paths = array_merge($this->paths, config('statamic-peak-commands.paths', []));
