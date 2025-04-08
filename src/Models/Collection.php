@@ -271,7 +271,7 @@ class Collection
 
     protected function promptForIndex(): bool
     {
-        if (!$this->public || !$this->mount) {
+        if (!$this->public || !$this->shouldMount) {
             return false;
         }
 
