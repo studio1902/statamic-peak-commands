@@ -70,7 +70,7 @@ class MakeNav extends Command
 
     protected function createModel(): void
     {
-        $this->model = app()->make(Nav::class);
+        $this->model = app(Nav::class);
     }
 
     protected function grantPermissions(): void

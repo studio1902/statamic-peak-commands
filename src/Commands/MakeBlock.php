@@ -37,7 +37,7 @@ class MakeBlock extends Command
 
     protected function createModel(): void
     {
-        $this->model = app()->make(Block::class);
+        $this->model = app(Block::class);
     }
 
     protected function createTemplate(): void

@@ -22,7 +22,7 @@ class UpdateArticleSets extends Operation
 
     public function __construct(array $config)
     {
-        $this->set = app()->make(Set::class, ['config' => Arr::get($config, 'set')]);
+        $this->set = app(Set::class, ['config' => Arr::get($config, 'set')]);
     }
 
     public function run(): Installable

@@ -35,7 +35,7 @@ class MakePartial extends Command
 
     protected function createModel(): void
     {
-        $this->model = app()->make(Partial::class);
+        $this->model = app(Partial::class);
     }
 
     protected function createTemplate(): void

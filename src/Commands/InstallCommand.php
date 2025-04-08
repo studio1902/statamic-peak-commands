@@ -67,7 +67,7 @@ abstract class InstallCommand extends Command
     {
         collect($this->choices)->each(
             fn(string $handle) => $successCallback(
-                app()->make(Installable::class, ['config' => $this->items->get($handle)])->install()
+                app(Installable::class, ['config' => $this->items->get($handle)])->install()
             )
         );
     }

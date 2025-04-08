@@ -39,7 +39,7 @@ class MakeTaxonomy extends Command
 
     protected function createModel(): void
     {
-        $this->model = app()->make(Taxonomy::class);
+        $this->model = app(Taxonomy::class);
     }
 
     protected function createConfiguration(): void

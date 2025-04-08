@@ -38,7 +38,7 @@ class MakeSet extends Command
 
     protected function createModel(): void
     {
-        $this->model = app()->make(Set::class);
+        $this->model = app(Set::class);
     }
 
     protected function createTemplate(): void

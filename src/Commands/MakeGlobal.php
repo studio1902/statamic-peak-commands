@@ -91,6 +91,6 @@ class MakeGlobal extends Command
 
     protected function createModel(): void
     {
-        $this->model = app()->make(Globals::class);
+        $this->model = app(Globals::class);
     }
 }

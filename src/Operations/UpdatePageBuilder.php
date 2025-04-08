@@ -23,7 +23,7 @@ class UpdatePageBuilder extends Operation
 
     public function __construct(array $config)
     {
-        $this->block = app()->make(Block::class, ['config' => Arr::get($config, 'block')]);
+        $this->block = app(Block::class, ['config' => Arr::get($config, 'block')]);
     }
 
     public function run(): Installable
