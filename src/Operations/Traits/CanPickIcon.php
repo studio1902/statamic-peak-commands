@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use Statamic\Fieldtypes\Sets;
+
 use function Laravel\Prompts\search;
 
 trait CanPickIcon
@@ -17,7 +18,7 @@ trait CanPickIcon
         $iconsFolder = $reflection->getStaticPropertyValue('iconsFolder');
 
         $icons = collect(File::allFiles("$iconsDirectory/$iconsFolder"))
-            ->map(fn($file) => str_replace('.svg', '', $file->getBasename('.' . $file->getExtension())));
+            ->map(fn ($file) => str_replace('.svg', '', $file->getBasename('.'.$file->getExtension())));
 
         if (DIRECTORY_SEPARATOR === '\\') {
             return $icons->first();
@@ -26,14 +27,14 @@ trait CanPickIcon
         return search(
             label: $label,
             options: function (string $value) use ($icons) {
-                if (!$value) {
+                if (! $value) {
                     return $icons
                         ->values()
                         ->all();
                 }
 
                 return $icons
-                    ->filter(fn(string $item) => Str::contains($item, $value, true))
+                    ->filter(fn (string $item) => Str::contains($item, $value, true))
                     ->values()
                     ->all();
             },

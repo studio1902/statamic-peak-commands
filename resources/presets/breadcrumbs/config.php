@@ -8,7 +8,7 @@ return [
         [
             'type' => 'copy',
             'input' => 'resources/views/navigation/_breadcrumbs.antlers.html',
-            'output' => 'resources/views/navigation/_breadcrumbs.antlers.html'
-        ]
-    ]
+            'output' => 'resources/views/navigation/_breadcrumbs.antlers.html',
+        ],
+    ],
 ];

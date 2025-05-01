@@ -8,12 +8,12 @@ return [
         [
             'type' => 'copy',
             'input' => '_collection.antlers.html',
-            'output' => 'resources/views/page_builder/_collection.antlers.html'
+            'output' => 'resources/views/page_builder/_collection.antlers.html',
         ],
         [
             'type' => 'copy',
             'input' => 'collection.yaml',
-            'output' => 'resources/fieldsets/collection.yaml'
+            'output' => 'resources/fieldsets/collection.yaml',
         ],
         [
             'type' => 'update_page_builder',
@@ -22,7 +22,7 @@ return [
                 'instructions' => 'Show collection entries.',
                 'icon' => 'file-content-list',
                 'handle' => 'collection',
-            ]
+            ],
         ],
-    ]
+    ],
 ];

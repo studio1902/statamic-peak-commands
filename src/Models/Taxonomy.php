@@ -7,6 +7,7 @@ use Statamic\Facades\Collection;
 use Statamic\Facades\Config;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multisearch;
 use function Laravel\Prompts\text;
@@ -14,8 +15,11 @@ use function Laravel\Prompts\text;
 class Taxonomy
 {
     public string $name;
+
     public string $filename;
+
     public array $collections;
+
     public bool $grantPermissions;
 
     public function __construct(array $config = [])
@@ -46,8 +50,8 @@ class Taxonomy
 
         return multisearch(
             label: "Which collection(s) do you want to attach $this->name to?",
-            options: fn(string $value) => strlen($value) > 0
-                ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
+            options: fn (string $value) => strlen($value) > 0
+                ? $options->filter(fn (string $item) => Str::contains($item, $value, true))->toArray()
                 : $options->toArray(),
             scroll: 15
         );

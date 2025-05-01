@@ -2,19 +2,19 @@
 
 namespace Studio1902\PeakCommands\Models;
 
-use Illuminate\Support\Str;
-use Statamic\Facades\Collection;
 use Statamic\Facades\Config;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
+
 use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\multisearch;
 use function Laravel\Prompts\text;
 
 class Globals
 {
     public string $name;
+
     public string $filename;
+
     public bool $grantPermissions;
 
     public function __construct(array $config = [])

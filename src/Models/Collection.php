@@ -8,6 +8,7 @@ use Statamic\Facades\Config;
 use Statamic\Facades\Entry;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
@@ -16,22 +17,39 @@ use function Laravel\Prompts\text;
 class Collection
 {
     public string $name;
+
     public string $filename;
+
     public bool $grantPermissions;
+
     public bool $public;
+
     public bool $slugs;
+
     public bool $shouldMount;
+
     public bool $addPage;
+
     public string $page;
+
     public string $mount;
+
     public string $route;
+
     public string $layout;
+
     public bool $revisions;
+
     public string $sortDir;
+
     public bool $dated;
+
     public string $datePast;
+
     public string $dateFuture;
+
     public bool $index;
+
     public bool $show;
 
     public function __construct(array $config = [])
@@ -92,7 +110,7 @@ class Collection
 
     protected function promptForShouldMount(): bool
     {
-        if (!$this->public) {
+        if (! $this->public) {
             return false;
         }
 
@@ -104,7 +122,7 @@ class Collection
 
     protected function promptForAddPage(): bool
     {
-        if (!$this->shouldMount) {
+        if (! $this->shouldMount) {
             return false;
         }
 
@@ -129,14 +147,14 @@ class Collection
         $selection = search(
             label: 'On which page existing page do you want to mount this collection?',
             options: function (string $value) {
-                if (!$value) {
+                if (! $value) {
                     return collect($this->getPages())
                         ->values()
                         ->all();
                 }
 
                 return collect($this->getPages())
-                    ->filter(fn(string $item) => Str::contains($item, $value, true))
+                    ->filter(fn (string $item) => Str::contains($item, $value, true))
                     ->values()
                     ->all();
             },
@@ -156,18 +174,18 @@ class Collection
                 ->where('status', 'published')
                 ->orderBy('title', 'asc')
                 ->get()
-                ->map(fn($entry) => "{$entry->get('title')} [{$entry->id()}]")
+                ->map(fn ($entry) => "{$entry->get('title')} [{$entry->id()}]")
                 ->toArray();
         });
     }
 
     protected function linkMount(): string
     {
-        if (!$this->shouldMount) {
+        if (! $this->shouldMount) {
             return '';
         }
 
-        if (!$this->addPage) {
+        if (! $this->addPage) {
             return $this->page;
         }
 
@@ -189,7 +207,7 @@ class Collection
 
     protected function promptForRoute(): string
     {
-        if (!$this->public) {
+        if (! $this->public) {
             return '';
         }
 
@@ -239,7 +257,7 @@ class Collection
 
     protected function promptForDatePast(): string
     {
-        if (!$this->dated) {
+        if (! $this->dated) {
             return '';
         }
 
@@ -255,7 +273,7 @@ class Collection
 
     protected function promptForDateFuture(): string
     {
-        if (!$this->dated) {
+        if (! $this->dated) {
             return '';
         }
 
@@ -271,7 +289,7 @@ class Collection
 
     protected function promptForIndex(): bool
     {
-        if (!$this->public || !$this->shouldMount) {
+        if (! $this->public || ! $this->shouldMount) {
             return false;
         }
 
@@ -283,7 +301,7 @@ class Collection
 
     protected function promptForShow(): bool|string
     {
-        if (!$this->public) {
+        if (! $this->public) {
             return false;
         }
 

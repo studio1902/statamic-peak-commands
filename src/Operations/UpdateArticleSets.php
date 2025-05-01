@@ -9,6 +9,7 @@ use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Set;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use Symfony\Component\Yaml\Yaml;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\select;
@@ -40,9 +41,9 @@ class UpdateArticleSets extends Operation
             'icon' => $icon,
             'fields' => [
                 [
-                    'import' => $filename
-                ]
-            ]
+                    'import' => $filename,
+                ],
+            ],
         ];
 
         $collection = collect(Arr::get($fieldset, 'fields'))
@@ -100,9 +101,9 @@ class UpdateArticleSets extends Operation
                     'instructions' => $groupInstructions,
                     'icon' => $groupIcon,
                     'sets' => [
-                        $filename => $newSet
-                    ]
-                ]
+                        $filename => $newSet,
+                    ],
+                ],
             ];
 
             $groups = array_merge($existingGroups, $newGroup);

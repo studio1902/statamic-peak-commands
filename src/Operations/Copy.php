@@ -11,6 +11,7 @@ use Illuminate\Support\Stringable;
 use Statamic\Facades\Site;
 use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\info;
@@ -18,9 +19,13 @@ use function Laravel\Prompts\info;
 class Copy extends Operation
 {
     protected string $input;
+
     protected string $output;
+
     protected bool $skippable;
+
     protected array $replacements;
+
     protected Filesystem $filesystem;
 
     public function __construct(array $config)
@@ -48,7 +53,7 @@ class Copy extends Operation
 
         $contents = $this->mergedReplacements()
             ->reduce(
-                fn(Stringable $contents, $replacement, $placeholder) => $contents->replace($placeholder, $replacement),
+                fn (Stringable $contents, $replacement, $placeholder) => $contents->replace($placeholder, $replacement),
                 Str::of($stub)
             );
 
@@ -76,8 +81,8 @@ class Copy extends Operation
 
     protected function getStub(string $stubPath, string $basePath): string
     {
-        $publishedPath = resource_path("stubs/vendor/statamic-peak-commands/" . ltrim($stubPath, " /\t\n\r\0\x0B"));
-        $addonPath = $basePath . DIRECTORY_SEPARATOR . ltrim($stubPath, " /\t\n\r\0\x0B");
+        $publishedPath = resource_path('stubs/vendor/statamic-peak-commands/'.ltrim($stubPath, " /\t\n\r\0\x0B"));
+        $addonPath = $basePath.DIRECTORY_SEPARATOR.ltrim($stubPath, " /\t\n\r\0\x0B");
 
         return File::get(File::exists($publishedPath) ? $publishedPath : $addonPath);
     }
@@ -92,6 +97,7 @@ class Copy extends Operation
                 no: 'Overwrite'
             );
         }
+
         return false;
     }
 
@@ -109,6 +115,7 @@ class Copy extends Operation
                 throw new \Exception("Aborted. {$type} '{$path}' already exists.");
             }
         }
+
         return false;
     }
 

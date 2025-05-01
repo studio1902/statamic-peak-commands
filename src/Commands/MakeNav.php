@@ -9,16 +9,19 @@ use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Nav;
+
 use function Laravel\Prompts\info;
 
 class MakeNav extends Command
 {
-    use RunsInPlease, NeedsValidLicense, CanClearCache, HandleWithCatch;
+    use CanClearCache, HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:nav';
-    protected $description = "Make a navigation.";
+
+    protected $description = 'Make a navigation.';
 
     protected array $operations = [];
+
     protected ?Nav $model = null;
 
     public function handleWithCatch(): void
@@ -42,11 +45,11 @@ class MakeNav extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/navigation.yaml.stub',
-            'output' => "content/navigation/{{ handle }}.yaml",
+            'output' => 'content/navigation/{{ handle }}.yaml',
             'replacements' => [
                 '{{ navigation_name }}' => $this->model->name,
                 '{{ max_depth }}' => $this->model->maxDepth,
-            ]
+            ],
         ];
     }
 
@@ -55,7 +58,7 @@ class MakeNav extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/navigation_blueprint.yaml.stub',
-            'output' => "resources/blueprints/navigation/{{ handle }}.yaml"
+            'output' => 'resources/blueprints/navigation/{{ handle }}.yaml',
         ];
     }
 
@@ -75,7 +78,7 @@ class MakeNav extends Command
 
     protected function grantPermissions(): void
     {
-        if (!$this->model->grantPermissions) {
+        if (! $this->model->grantPermissions) {
             return;
         }
 
@@ -83,8 +86,8 @@ class MakeNav extends Command
             'type' => 'update_role',
             'role' => 'editor',
             'permissions' => [
-                "view {{ handle }} nav",
-                "edit {{ handle }} nav",
+                'view {{ handle }} nav',
+                'edit {{ handle }} nav',
             ],
         ];
     }
@@ -98,7 +101,7 @@ class MakeNav extends Command
                     'handle' => $this->model->filename,
                     'operations' => $this->operations,
                     'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
-                ]
+                ],
             ])
             ->install();
     }

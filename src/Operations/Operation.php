@@ -17,8 +17,8 @@ abstract class Operation
         }
 
         $className = collect(Registry::getNamespaces())
-            ->map(fn(string $namespace) => $namespace . '\\' . Str::studly($class))
-            ->filter(fn(string $class) => class_exists($class))
+            ->map(fn (string $namespace) => $namespace.'\\'.Str::studly($class))
+            ->filter(fn (string $class) => class_exists($class))
             ->first();
 
         return app($className, ['config' => $config]);

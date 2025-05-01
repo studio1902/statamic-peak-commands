@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\File;
 use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use Symfony\Component\Yaml\Yaml;
+
 use function Laravel\Prompts\info;
 
 class UpdateRole extends Operation
 {
     protected string $role;
+
     protected array $permissions;
 
     public function __construct(array $config)

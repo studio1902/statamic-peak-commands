@@ -35,7 +35,7 @@ class ServiceProvider extends AddonServiceProvider
     protected function registerPublishableStubs()
     {
         $this->publishes([
-            __DIR__ . '/../resources/stubs' => resource_path('stubs/vendor/statamic-peak-commands'),
+            __DIR__.'/../resources/stubs' => resource_path('stubs/vendor/statamic-peak-commands'),
         ], 'statamic-peak-commands-stubs');
     }
 }

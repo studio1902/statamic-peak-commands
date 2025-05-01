@@ -8,12 +8,12 @@ return [
         [
             'type' => 'copy',
             'input' => '_video_self_hosted.antlers.html',
-            'output' => 'resources/views/components/_video_self_hosted.antlers.html'
+            'output' => 'resources/views/components/_video_self_hosted.antlers.html',
         ],
         [
             'type' => 'copy',
             'input' => 'video_self_hosted.yaml',
-            'output' => 'resources/fieldsets/video_self_hosted.yaml'
+            'output' => 'resources/fieldsets/video_self_hosted.yaml',
         ],
         [
             'type' => 'update_article_sets',
@@ -22,7 +22,7 @@ return [
                 'icon' => 'media-webcam-video',
                 'instructions' => 'Add a self hosted video.',
                 'handle' => 'video_self_hosted',
-            ]
+            ],
         ],
-    ]
+    ],
 ];

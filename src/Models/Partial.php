@@ -5,15 +5,20 @@ namespace Studio1902\PeakCommands\Models;
 use Statamic\Facades\Config;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
+
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
 class Partial
 {
     public string $name;
+
     public string $description;
+
     public string $type;
+
     public string $folder;
+
     public string $filename;
 
     public function __construct(array $config = [])
@@ -62,7 +67,7 @@ class Partial
         $folder = strtolower($this->type);
 
         if (in_array($folder, ['component', 'snippet'])) {
-            $folder = $folder . 's';
+            $folder = $folder.'s';
         }
 
         return $folder;

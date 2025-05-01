@@ -9,16 +9,19 @@ use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Block;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
+
 use function Laravel\Prompts\info;
 
 class MakeBlock extends Command
 {
-    use RunsInPlease, NeedsValidLicense, CanPickIcon, HandleWithCatch;
+    use CanPickIcon, HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:block';
-    protected $description = "Make a page builder block.";
+
+    protected $description = 'Make a page builder block.';
 
     protected array $operations = [];
+
     protected ?Block $model;
 
     public function handleWithCatch(): void
@@ -45,7 +48,7 @@ class MakeBlock extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/block.antlers.html.stub',
-            'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html'
+            'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html',
         ];
     }
 
@@ -54,7 +57,7 @@ class MakeBlock extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/fieldset_block.yaml.stub',
-            'output' => 'resources/fieldsets/{{ handle }}.yaml'
+            'output' => 'resources/fieldsets/{{ handle }}.yaml',
         ];
     }
 
@@ -75,7 +78,7 @@ class MakeBlock extends Command
                     'handle' => $this->model->handle,
                     'operations' => $this->operations,
                     'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
-                ]
+                ],
             ])
             ->install();
     }

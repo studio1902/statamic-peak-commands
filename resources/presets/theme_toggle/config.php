@@ -8,15 +8,15 @@ return [
         [
             'type' => 'copy',
             'input' => 'resources/views/components/_theme_toggle.antlers.html',
-            'output' => 'resources/views/components/_theme_toggle.antlers.html'
+            'output' => 'resources/views/components/_theme_toggle.antlers.html',
         ],
         [
             'type' => 'notify',
-            'content' => "Add `@variant dark (&:where(.dark, .dark *));` to `resources/css/site.css`."
+            'content' => 'Add `@variant dark (&:where(.dark, .dark *));` to `resources/css/site.css`.',
         ],
         [
             'type' => 'notify',
-            'content' => "Add `{{ partial:components/theme_toggle }}` as the last list item in the main ul in `resources/views/navigation/_main_desktop.antlers.html`. The `section:theme_toggle` is automatically yielded in `resources/views/snippets/_browser_appearance.antlers.html`."
+            'content' => 'Add `{{ partial:components/theme_toggle }}` as the last list item in the main ul in `resources/views/navigation/_main_desktop.antlers.html`. The `section:theme_toggle` is automatically yielded in `resources/views/snippets/_browser_appearance.antlers.html`.',
         ],
         [
             'type' => 'notify',
@@ -24,7 +24,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Optionally, add the classes `scheme-light dark:scheme-dark` your HTML element in `resources/views/layout.antlers.html`."
-        ]
-    ]
+            'content' => 'Optionally, add the classes `scheme-light dark:scheme-dark` your HTML element in `resources/views/layout.antlers.html`.',
+        ],
+    ],
 ];

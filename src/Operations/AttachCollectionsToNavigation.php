@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\File;
 use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use Symfony\Component\Yaml\Yaml;
+
 use function Laravel\Prompts\info;
 
 class AttachCollectionsToNavigation extends Operation
 {
     protected string $navigation;
+
     protected array $collections;
 
     public function __construct(array $config)
@@ -21,7 +23,7 @@ class AttachCollectionsToNavigation extends Operation
 
     public function run(): Installable
     {
-        if (!$this->collections) {
+        if (! $this->collections) {
             return $this->installable;
         }
 

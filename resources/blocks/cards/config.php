@@ -8,12 +8,12 @@ return [
         [
             'type' => 'copy',
             'input' => '_cards.antlers.html',
-            'output' => 'resources/views/page_builder/_cards.antlers.html'
+            'output' => 'resources/views/page_builder/_cards.antlers.html',
         ],
         [
             'type' => 'copy',
             'input' => 'cards.yaml',
-            'output' => 'resources/fieldsets/cards.yaml'
+            'output' => 'resources/fieldsets/cards.yaml',
         ],
         [
             'type' => 'update_page_builder',
@@ -22,7 +22,7 @@ return [
                 'instructions' => 'Cards that link using the button fieldset.',
                 'icon' => 'link',
                 'handle' => 'cards',
-            ]
+            ],
         ],
-    ]
+    ],
 ];

@@ -5,6 +5,7 @@ namespace Studio1902\PeakCommands\Commands;
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Registry;
+
 use function Laravel\Prompts\info;
 
 class InstallPreset extends InstallCommand
@@ -12,7 +13,8 @@ class InstallPreset extends InstallCommand
     use RunsInPlease;
 
     protected $name = 'statamic:peak:install:preset';
-    protected $description = "Install premade collections and page builder blocks into your site.";
+
+    protected $description = 'Install premade collections and page builder blocks into your site.';
 
     protected string $type = Registry::PRESETS;
 
@@ -21,7 +23,7 @@ class InstallPreset extends InstallCommand
         $this->handleInstallation(
             label: 'Which presets do you want to install into your site?',
             emptyValidation: 'Please select at least one preset. (Space)',
-            successMessage: fn(Installable $installable) => info("<info>[✓]</info> Peak preset '$installable->name' installed.")
+            successMessage: fn (Installable $installable) => info("<info>[✓]</info> Peak preset '$installable->name' installed.")
         );
     }
 }

@@ -7,6 +7,7 @@ use Statamic\Facades\Collection;
 use Statamic\Facades\Config;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multisearch;
 use function Laravel\Prompts\text;
@@ -14,9 +15,13 @@ use function Laravel\Prompts\text;
 class Nav
 {
     public string $name;
+
     public string $filename;
+
     public int $maxDepth;
+
     public array $collections;
+
     public bool $grantPermissions;
 
     public function __construct(array $config = [])
@@ -47,9 +52,9 @@ class Nav
         $options = collect(Collection::all())->pluck('title', 'handle');
 
         return multisearch(
-            label: "Enable linking to entries from these collections:",
-            options: fn(string $value) => strlen($value) > 0
-                ? $options->filter(fn(string $item) => Str::contains($item, $value, true))->toArray()
+            label: 'Enable linking to entries from these collections:',
+            options: fn (string $value) => strlen($value) > 0
+                ? $options->filter(fn (string $item) => Str::contains($item, $value, true))->toArray()
                 : $options->toArray(),
             scroll: 15
         );
@@ -65,7 +70,7 @@ class Nav
 
     protected function promptForMaxDepth(): int
     {
-        return (int)text(
+        return (int) text(
             label: 'What should be the max depth for this navigation?',
             placeholder: '2',
             validate: ['name' => 'required|int|numeric']

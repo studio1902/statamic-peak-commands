@@ -9,16 +9,19 @@ use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Taxonomy;
+
 use function Laravel\Prompts\info;
 
 class MakeTaxonomy extends Command
 {
-    use RunsInPlease, NeedsValidLicense, CanClearCache, HandleWithCatch;
+    use CanClearCache, HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:taxonomy';
-    protected $description = "Make a taxonomy.";
+
+    protected $description = 'Make a taxonomy.';
 
     protected array $operations = [];
+
     protected ?Taxonomy $model = null;
 
     public function handleWithCatch(): void
@@ -47,10 +50,10 @@ class MakeTaxonomy extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/taxonomy.yaml.stub',
-            'output' => "content/taxonomies/{{ handle }}.yaml",
+            'output' => 'content/taxonomies/{{ handle }}.yaml',
             'replacements' => [
                 '{{ taxonomy_name }}' => $this->model->name,
-            ]
+            ],
         ];
     }
 
@@ -59,10 +62,10 @@ class MakeTaxonomy extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/taxonomy_blueprint.yaml.stub',
-            'output' => "resources/blueprints/taxonomies/{{ handle }}/{{ handle }}.yaml",
+            'output' => 'resources/blueprints/taxonomies/{{ handle }}/{{ handle }}.yaml',
             'replacements' => [
                 '{{ taxonomy_name }}' => $this->model->name,
-            ]
+            ],
         ];
     }
 
@@ -84,14 +87,14 @@ class MakeTaxonomy extends Command
                     'handle' => $this->model->filename,
                     'operations' => $this->operations,
                     'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
-                ]
+                ],
             ])
             ->install();
     }
 
     protected function grantPermissions(): void
     {
-        if (!$this->model->grantPermissions) {
+        if (! $this->model->grantPermissions) {
             return;
         }
 
@@ -99,10 +102,10 @@ class MakeTaxonomy extends Command
             'type' => 'update_role',
             'role' => 'editor',
             'permissions' => [
-                "view {{ handle }} terms",
-                "edit {{ handle }} terms",
-                "create {{ handle }} terms",
-                "delete {{ handle }} terms",
+                'view {{ handle }} terms',
+                'edit {{ handle }} terms',
+                'create {{ handle }} terms',
+                'delete {{ handle }} terms',
             ],
         ];
     }

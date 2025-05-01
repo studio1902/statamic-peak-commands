@@ -9,16 +9,19 @@ use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Globals;
 use Studio1902\PeakCommands\Models\Installable;
+
 use function Laravel\Prompts\info;
 
 class MakeGlobal extends Command
 {
-    use RunsInPlease, NeedsValidLicense, CanClearCache, HandleWithCatch;
+    use CanClearCache, HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:global';
-    protected $description = "Make a global set.";
+
+    protected $description = 'Make a global set.';
 
     protected array $operations = [];
+
     protected ?Globals $model = null;
 
     public function handleWithCatch(): void
@@ -41,10 +44,10 @@ class MakeGlobal extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/global.yaml.stub',
-            'output' => "content/globals/{{ handle }}.yaml",
+            'output' => 'content/globals/{{ handle }}.yaml',
             'replacements' => [
                 '{{ global_name }}' => $this->model->name,
-            ]
+            ],
         ];
     }
 
@@ -53,16 +56,16 @@ class MakeGlobal extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/global_blueprint.yaml.stub',
-            'output' => "resources/blueprints/globals/{{ handle }}.yaml",
+            'output' => 'resources/blueprints/globals/{{ handle }}.yaml',
             'replacements' => [
                 '{{ global_name }}' => $this->model->name,
-            ]
+            ],
         ];
     }
 
     protected function grantPermissions(): void
     {
-        if (!$this->model->grantPermissions) {
+        if (! $this->model->grantPermissions) {
             return;
         }
 
@@ -70,7 +73,7 @@ class MakeGlobal extends Command
             'type' => 'update_role',
             'role' => 'editor',
             'permissions' => [
-                "edit {{ handle }} globals",
+                'edit {{ handle }} globals',
             ],
         ];
     }
@@ -84,7 +87,7 @@ class MakeGlobal extends Command
                     'handle' => $this->model->filename,
                     'operations' => $this->operations,
                     'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
-                ]
+                ],
             ])
             ->install();
     }

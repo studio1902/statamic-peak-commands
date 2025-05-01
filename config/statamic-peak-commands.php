@@ -11,5 +11,5 @@ return [
         'sets' => [
             base_path('vendor/studio1902/statamic-peak-commands/resources/sets'),
         ],
-    ]
+    ],
 ];

@@ -9,18 +9,20 @@ use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Set;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
+
 use function Laravel\Prompts\info;
 
 class MakeSet extends Command
 {
-    use RunsInPlease, NeedsValidLicense, CanPickIcon, HandleWithCatch;
+    use CanPickIcon, HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:set';
-    protected $description = "Make an Article (Bard) set.";
+
+    protected $description = 'Make an Article (Bard) set.';
 
     protected array $operations = [];
-    protected ?Set $model;
 
+    protected ?Set $model;
 
     public function handleWithCatch(): void
     {
@@ -46,7 +48,7 @@ class MakeSet extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/set.antlers.html.stub',
-            'output' => 'resources/views/components/_{{ handle }}.antlers.html'
+            'output' => 'resources/views/components/_{{ handle }}.antlers.html',
         ];
     }
 
@@ -55,7 +57,7 @@ class MakeSet extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/fieldset_set.yaml.stub',
-            'output' => 'resources/fieldsets/{{ handle }}.yaml'
+            'output' => 'resources/fieldsets/{{ handle }}.yaml',
         ];
     }
 
@@ -76,7 +78,7 @@ class MakeSet extends Command
                     'handle' => $this->model->handle,
                     'operations' => $this->operations,
                     'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
-                ]
+                ],
             ])
             ->install();
     }

@@ -6,6 +6,7 @@ use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\spin;
@@ -13,11 +14,17 @@ use function Laravel\Prompts\spin;
 class Run extends Operation
 {
     protected string $command;
+
     protected string $processingMessage;
+
     protected string $successMessage;
+
     protected string $errorMessage;
+
     protected bool $tty;
+
     protected bool $spinner;
+
     protected int $timeout;
 
     public function __construct(array $config)
@@ -37,16 +44,15 @@ class Run extends Operation
         $process->setTimeout($this->timeout);
         $process->setTty($this->tty);
 
-
         try {
             $this->spinner ?
                 $this->withSpinner(
-                    fn() => $process->mustRun(),
+                    fn () => $process->mustRun(),
                     $this->processingMessage,
                     $this->successMessage
                 ) :
                 $this->withoutSpinner(
-                    fn() => $process->mustRun(),
+                    fn () => $process->mustRun(),
                     $this->successMessage
                 );
 

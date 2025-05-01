@@ -8,17 +8,20 @@ use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
 use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Models\Partial;
+
 use function Laravel\Prompts\info;
 
 class MakePartial extends Command
 {
-    use RunsInPlease, NeedsValidLicense, HandleWithCatch;
+    use HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:partial';
-    protected $description = "Make a partial with IDE hinting and template paths.";
+
+    protected $description = 'Make a partial with IDE hinting and template paths.';
 
     protected array $operations = [];
-    //TODO[mr]: check if ? is needed (01.04.2025 mr)
+
+    // TODO[mr]: check if ? is needed (01.04.2025 mr)
     protected ?Partial $model;
 
     public function handleWithCatch(): void
@@ -48,7 +51,7 @@ class MakePartial extends Command
                 '{{ partial_name }}' => $this->model->name,
                 '{{ partial_description }}' => $this->model->description,
                 '{{ folder }}' => $this->model->folder,
-            ]
+            ],
         ];
     }
 
@@ -61,7 +64,7 @@ class MakePartial extends Command
                     'handle' => $this->model->filename,
                     'operations' => $this->operations,
                     'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
-                ]
+                ],
             ])
             ->install();
     }

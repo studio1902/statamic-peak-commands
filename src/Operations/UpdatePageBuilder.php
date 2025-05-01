@@ -10,6 +10,7 @@ use Studio1902\PeakCommands\Models\Block;
 use Studio1902\PeakCommands\Models\Installable;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use Symfony\Component\Yaml\Yaml;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\select;
@@ -28,13 +29,13 @@ class UpdatePageBuilder extends Operation
 
     public function run(): Installable
     {
-        $name = (string)Str::of($this->block->name)->replace('{{ name }}', $this->installable->renameName);
+        $name = (string) Str::of($this->block->name)->replace('{{ name }}', $this->installable->renameName);
 
-        $instructions = (string)Str::of($this->block->instructions)->replace('{{ name }}', $this->installable->renameName);
+        $instructions = (string) Str::of($this->block->instructions)->replace('{{ name }}', $this->installable->renameName);
 
-        $icon = (string)Str::of($this->block->icon);
+        $icon = (string) Str::of($this->block->icon);
 
-        $handle = (string)Str::of($this->block->handle)
+        $handle = (string) Str::of($this->block->handle)
             ->replace('{{ handle }}', $this->installable->renameHandle);
 
         $this->updatePageBuilder($name, $instructions, $icon, $handle);
@@ -54,9 +55,9 @@ class UpdatePageBuilder extends Operation
             'icon' => $icon,
             'fields' => [
                 [
-                    'import' => $filename
-                ]
-            ]
+                    'import' => $filename,
+                ],
+            ],
         ];
 
         $existingGroups = Arr::get($fieldset, 'fields.0.field.sets');
@@ -109,13 +110,13 @@ class UpdatePageBuilder extends Operation
                     'instructions' => $groupInstructions,
                     'icon' => $groupIcon,
                     'sets' => [
-                        $filename => $newSet
-                    ]
-                ]
+                        $filename => $newSet,
+                    ],
+                ],
             ];
 
             $groups = array_merge($existingGroups, $newGroup);
-            $orderedGroups = collect($groups)->sortBy(fn($value, $key) => $key)->all();
+            $orderedGroups = collect($groups)->sortBy(fn ($value, $key) => $key)->all();
 
             Arr::set($fieldset, 'fields.0.field.sets', $orderedGroups);
         }

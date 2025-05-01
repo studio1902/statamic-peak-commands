@@ -6,16 +6,19 @@ use Exception;
 
 class Registry
 {
-    //TODO[mr]: refactor to facade (09.03.2025 mr)
-    //TODO[mr]: refactor to enums (28.01.2025 mr)
+    // TODO[mr]: refactor to facade (09.03.2025 mr)
+    // TODO[mr]: refactor to enums (28.01.2025 mr)
     const BLOCKS = 'blocks';
+
     const PRESETS = 'presets';
+
     const SETS = 'sets';
 
     protected static ?Registry $instance = null;
 
     protected array $namespaces = ['\Studio1902\PeakCommands\Operations'];
-    protected array $paths = [self::BLOCKS => [], self::PRESETS => [], self::SETS => [],];
+
+    protected array $paths = [self::BLOCKS => [], self::PRESETS => [], self::SETS => []];
 
     protected function __construct()
     {
@@ -24,8 +27,8 @@ class Registry
 
     public static function instance(): Registry
     {
-        if (!self::$instance) {
-            self::$instance = new static();
+        if (! self::$instance) {
+            self::$instance = new static;
         }
 
         return self::$instance;
@@ -43,7 +46,7 @@ class Registry
 
     public static function addPath(string $path, string $type): void
     {
-        if (!self::isValidPathType($type)) {
+        if (! self::isValidPathType($type)) {
             throw new Exception("Unknown path type '{$type}'");
         }
 
@@ -67,7 +70,7 @@ class Registry
 
     public static function removePath(string $path, string $type): void
     {
-        if (!self::isValidPathType($type)) {
+        if (! self::isValidPathType($type)) {
             throw new Exception("Unknown path type '{$type}'");
         }
 
@@ -115,7 +118,7 @@ class Registry
 
     public function __wakeup()
     {
-        throw new Exception("Cannot unserialize a singleton.");
+        throw new Exception('Cannot unserialize a singleton.');
     }
 
     protected function __clone()

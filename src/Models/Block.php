@@ -6,6 +6,7 @@ use Statamic\Facades\Config;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
 use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
+
 use function Laravel\Prompts\text;
 
 class Block
@@ -13,8 +14,11 @@ class Block
     use CanPickIcon;
 
     public string $name;
+
     public string $handle;
+
     public string $instructions;
+
     public string $icon;
 
     public function __construct(array $config = [])

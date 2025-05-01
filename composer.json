@@ -27,7 +27,8 @@
     },
     "require-dev": {
         "spatie/laravel-ray": "^1.39",
-        "orchestra/testbench": "^9.0"
+        "orchestra/testbench": "^9.0",
+        "laravel/pint": "^1.22"
     },
     "config": {
         "allow-plugins": {

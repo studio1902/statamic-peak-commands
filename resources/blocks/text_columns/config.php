@@ -8,12 +8,12 @@ return [
         [
             'type' => 'copy',
             'input' => '_text_columns.antlers.html',
-            'output' => 'resources/views/page_builder/_text_columns.antlers.html'
+            'output' => 'resources/views/page_builder/_text_columns.antlers.html',
         ],
         [
             'type' => 'copy',
             'input' => 'text_columns.yaml',
-            'output' => 'resources/fieldsets/text_columns.yaml'
+            'output' => 'resources/fieldsets/text_columns.yaml',
         ],
         [
             'type' => 'update_page_builder',
@@ -22,7 +22,7 @@ return [
                 'instructions' => 'Text wrapping in two columns.',
                 'icon' => 'layout-three-columns',
                 'handle' => 'text_columns',
-            ]
+            ],
         ],
-    ]
+    ],
 ];

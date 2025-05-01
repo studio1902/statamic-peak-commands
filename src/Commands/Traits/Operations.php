@@ -1,5 +1,7 @@
 <?php
-//TODO[mr]: delete file in the end (05.02.2025 mr)
+
+// TODO[mr]: delete file in the end (05.02.2025 mr)
+
 namespace Studio1902\PeakCommands\Commands\Traits;
 
 use Illuminate\Support\Facades\File;
@@ -8,6 +10,7 @@ use Illuminate\Support\Str;
 use Statamic\Facades\Site;
 use Statamic\Support\Arr;
 use Symfony\Component\Yaml\Yaml;
+
 use function Laravel\Prompts\pause;
 use function Laravel\Prompts\text;
 
@@ -89,12 +92,12 @@ trait Operations
     protected function operationUpdatePageBuilder(array $operation, array $preset): void
     {
         $block = $operation['block'];
-        $name = (string)Str::of($block['name'])
+        $name = (string) Str::of($block['name'])
             ->replace('{{ name }}', $this->rename_name);
-        $instructions = (string)Str::of($block['instructions'])
+        $instructions = (string) Str::of($block['instructions'])
             ->replace('{{ name }}', $this->rename_name);
-        $icon = (string)Str::of($block['icon']);
-        $handle = (string)Str::of($block['handle'])
+        $icon = (string) Str::of($block['icon']);
+        $handle = (string) Str::of($block['handle'])
             ->replace('{{ handle }}', $this->rename_handle);
 
         $this->updatePageBuilder($name, $instructions, $icon, $handle);
@@ -117,7 +120,7 @@ trait Operations
     {
         $content = $operation['content'];
 
-        $message = (string)Str::of($content)
+        $message = (string) Str::of($content)
             ->replace('{{ handle }}', $this->rename_handle)
             ->replace('{{ name }}', $this->rename_name);
 

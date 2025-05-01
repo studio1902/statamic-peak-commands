@@ -2,7 +2,6 @@
 
 namespace Studio1902\PeakCommands\Tests\Operations;
 
-
 use Studio1902\PeakCommands\Operations\Operation;
 use Studio1902\PeakCommands\Tests\TestCase;
 
@@ -13,7 +12,7 @@ class OperationTest extends TestCase
         $config = [
             'type' => 'copy',
             'input' => '_call_to_action.antlers.html',
-            'output' => 'resources/views/page_builder/_call_to_action.antlers.html'
+            'output' => 'resources/views/page_builder/_call_to_action.antlers.html',
         ];
 
         $expected = app(\Studio1902\PeakCommands\Operations\Copy::class, ['config' => $config]);
