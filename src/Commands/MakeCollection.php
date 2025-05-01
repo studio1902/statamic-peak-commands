@@ -24,7 +24,7 @@ class MakeCollection extends Command
 
     protected array $operations = [];
 
-    protected ?Collection $model = null;
+    protected Collection $model;
 
     public function handleWithCatch(): void
     {

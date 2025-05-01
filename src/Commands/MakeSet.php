@@ -22,7 +22,7 @@ class MakeSet extends Command
 
     protected array $operations = [];
 
-    protected ?Set $model;
+    protected Set $model;
 
     public function handleWithCatch(): void
     {

@@ -21,8 +21,7 @@ class MakePartial extends Command
 
     protected array $operations = [];
 
-    // TODO[mr]: check if ? is needed (01.04.2025 mr)
-    protected ?Partial $model;
+    protected Partial $model;
 
     public function handleWithCatch(): void
     {

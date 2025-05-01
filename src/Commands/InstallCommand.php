@@ -20,7 +20,7 @@ abstract class InstallCommand extends Command
 
     protected array $choices = [];
 
-    protected ?Collection $items = null;
+    protected Collection $items;
 
     protected string $type;
 

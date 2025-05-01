@@ -22,7 +22,7 @@ class MakeGlobal extends Command
 
     protected array $operations = [];
 
-    protected ?Globals $model = null;
+    protected Globals $model;
 
     public function handleWithCatch(): void
     {

@@ -22,7 +22,7 @@ class MakeTaxonomy extends Command
 
     protected array $operations = [];
 
-    protected ?Taxonomy $model = null;
+    protected Taxonomy $model;
 
     public function handleWithCatch(): void
     {

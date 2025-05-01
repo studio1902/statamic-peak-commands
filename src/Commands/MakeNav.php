@@ -22,7 +22,7 @@ class MakeNav extends Command
 
     protected array $operations = [];
 
-    protected ?Nav $model = null;
+    protected Nav $model;
 
     public function handleWithCatch(): void
     {

@@ -22,7 +22,7 @@ class MakeBlock extends Command
 
     protected array $operations = [];
 
-    protected ?Block $model;
+    protected Block $model;
 
     public function handleWithCatch(): void
     {
