@@ -113,13 +113,13 @@ class MakeCollection extends Command
 
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'resources/blocks/index_content/index_content.yaml',
+            'input' => 'blocks/index_content/index_content.yaml',
             'output' => 'resources/fieldsets/index_content.yaml',
         ];
 
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'resources/blocks/index_content/_index_content.antlers.html',
+            'input' => 'blocks/index_content/_index_content.antlers.html',
             'output' => 'resources/views/page_builder/_index_content.antlers.html',
         ];
 
