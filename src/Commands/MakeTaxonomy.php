@@ -46,7 +46,7 @@ class MakeTaxonomy extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'taxonomy.yaml.stub',
+            'input' => 'stubs/taxonomy.yaml.stub',
             'output' => "content/taxonomies/{{ handle }}.yaml",
             'replacements' => [
                 '{{ taxonomy_name }}' => $this->model->name,
@@ -58,7 +58,7 @@ class MakeTaxonomy extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'taxonomy_blueprint.yaml.stub',
+            'input' => 'stubs/taxonomy_blueprint.yaml.stub',
             'output' => "resources/blueprints/taxonomies/{{ handle }}/{{ handle }}.yaml",
             'replacements' => [
                 '{{ taxonomy_name }}' => $this->model->name,
@@ -83,7 +83,7 @@ class MakeTaxonomy extends Command
                     'name' => $this->model->name,
                     'handle' => $this->model->filename,
                     'operations' => $this->operations,
-                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources/stubs'),
+                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
                 ]
             ])
             ->install();

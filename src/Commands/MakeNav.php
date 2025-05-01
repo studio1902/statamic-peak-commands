@@ -41,7 +41,7 @@ class MakeNav extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'navigation.yaml.stub',
+            'input' => 'stubs/navigation.yaml.stub',
             'output' => "content/navigation/{{ handle }}.yaml",
             'replacements' => [
                 '{{ navigation_name }}' => $this->model->name,
@@ -54,7 +54,7 @@ class MakeNav extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'navigation_blueprint.yaml.stub',
+            'input' => 'stubs/navigation_blueprint.yaml.stub',
             'output' => "resources/blueprints/navigation/{{ handle }}.yaml"
         ];
     }
@@ -97,7 +97,7 @@ class MakeNav extends Command
                     'name' => $this->model->name,
                     'handle' => $this->model->filename,
                     'operations' => $this->operations,
-                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources/stubs'),
+                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
                 ]
             ])
             ->install();

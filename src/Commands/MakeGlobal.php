@@ -40,7 +40,7 @@ class MakeGlobal extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'global.yaml.stub',
+            'input' => 'stubs/global.yaml.stub',
             'output' => "content/globals/{{ handle }}.yaml",
             'replacements' => [
                 '{{ global_name }}' => $this->model->name,
@@ -52,7 +52,7 @@ class MakeGlobal extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'global_blueprint.yaml.stub',
+            'input' => 'stubs/global_blueprint.yaml.stub',
             'output' => "resources/blueprints/globals/{{ handle }}.yaml",
             'replacements' => [
                 '{{ global_name }}' => $this->model->name,
@@ -83,7 +83,7 @@ class MakeGlobal extends Command
                     'name' => $this->model->name,
                     'handle' => $this->model->filename,
                     'operations' => $this->operations,
-                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources/stubs'),
+                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
                 ]
             ])
             ->install();

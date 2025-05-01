@@ -42,7 +42,7 @@ class MakePartial extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'partial.antlers.html.stub',
+            'input' => 'stubs/partial.antlers.html.stub',
             'output' => "resources/views/{$this->model->folder}/_{$this->model->filename}.antlers.html",
             'replacements' => [
                 '{{ partial_name }}' => $this->model->name,
@@ -60,7 +60,7 @@ class MakePartial extends Command
                     'name' => $this->model->name,
                     'handle' => $this->model->filename,
                     'operations' => $this->operations,
-                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources/stubs'),
+                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
                 ]
             ])
             ->install();

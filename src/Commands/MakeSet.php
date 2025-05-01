@@ -45,7 +45,7 @@ class MakeSet extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'set.antlers.html.stub',
+            'input' => 'stubs/set.antlers.html.stub',
             'output' => 'resources/views/components/_{{ handle }}.antlers.html'
         ];
     }
@@ -54,7 +54,7 @@ class MakeSet extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'fieldset_set.yaml.stub',
+            'input' => 'stubs/fieldset_set.yaml.stub',
             'output' => 'resources/fieldsets/{{ handle }}.yaml'
         ];
     }
@@ -75,7 +75,7 @@ class MakeSet extends Command
                     'name' => $this->model->name,
                     'handle' => $this->model->handle,
                     'operations' => $this->operations,
-                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources/stubs'),
+                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
                 ]
             ])
             ->install();

@@ -44,7 +44,7 @@ class MakeBlock extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'block.antlers.html.stub',
+            'input' => 'stubs/block.antlers.html.stub',
             'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html'
         ];
     }
@@ -53,7 +53,7 @@ class MakeBlock extends Command
     {
         $this->operations[] = [
             'type' => 'copy',
-            'input' => 'fieldset_block.yaml.stub',
+            'input' => 'stubs/fieldset_block.yaml.stub',
             'output' => 'resources/fieldsets/{{ handle }}.yaml'
         ];
     }
@@ -74,7 +74,7 @@ class MakeBlock extends Command
                     'name' => $this->model->name,
                     'handle' => $this->model->handle,
                     'operations' => $this->operations,
-                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources/stubs'),
+                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
                 ]
             ])
             ->install();
