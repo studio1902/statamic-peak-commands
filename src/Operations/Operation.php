@@ -3,8 +3,8 @@
 namespace Studio1902\PeakCommands\Operations;
 
 use Illuminate\Support\Str;
+use Studio1902\PeakCommands\Facades\Registry;
 use Studio1902\PeakCommands\Models\Installable;
-use Studio1902\PeakCommands\Registry;
 
 abstract class Operation
 {

@@ -4,7 +4,7 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Models\Installable;
-use Studio1902\PeakCommands\Registry;
+use Studio1902\PeakCommands\RegistryManager;
 
 use function Laravel\Prompts\info;
 
@@ -16,7 +16,7 @@ class InstallBlock extends InstallCommand
 
     protected $description = 'Install pre-made blocks into your page builder.';
 
-    protected string $type = Registry::BLOCKS;
+    protected string $type = RegistryManager::BLOCKS;
 
     public function handle(): void
     {

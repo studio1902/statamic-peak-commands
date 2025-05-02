@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'namespaces' => [
+        '\Studio1902\PeakCommands\Operations',
+    ],
     'paths' => [
         'blocks' => [
             base_path('vendor/studio1902/statamic-peak-commands/resources/blocks'),

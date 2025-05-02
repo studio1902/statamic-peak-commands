@@ -6,8 +6,6 @@ use Statamic\Providers\AddonServiceProvider;
 
 class ServiceProvider extends AddonServiceProvider
 {
-    protected static $shouldBoot = false;
-
     protected $commands = [
         Commands\MakeBlock::class,
         Commands\MakeCollection::class,
@@ -27,12 +25,12 @@ class ServiceProvider extends AddonServiceProvider
         \Studio1902\PeakCommands\Updates\UpdateJSONldDateFormatting::class,
     ];
 
-    public function bootAddon()
+    public function bootAddon(): void
     {
         $this->registerPublishableStubs();
     }
 
-    protected function registerPublishableStubs()
+    protected function registerPublishableStubs(): void
     {
         $this->publishes([
             __DIR__.'/../resources/stubs' => resource_path('stubs/vendor/statamic-peak-commands'),

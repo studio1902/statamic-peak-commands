@@ -4,7 +4,7 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Models\Installable;
-use Studio1902\PeakCommands\Registry;
+use Studio1902\PeakCommands\RegistryManager;
 
 use function Laravel\Prompts\info;
 
@@ -16,7 +16,7 @@ class InstallSet extends InstallCommand
 
     protected $description = 'Install premade sets into your article field.';
 
-    protected string $type = Registry::SETS;
+    protected string $type = RegistryManager::SETS;
 
     public function handle(): void
     {

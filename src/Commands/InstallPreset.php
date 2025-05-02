@@ -4,7 +4,7 @@ namespace Studio1902\PeakCommands\Commands;
 
 use Statamic\Console\RunsInPlease;
 use Studio1902\PeakCommands\Models\Installable;
-use Studio1902\PeakCommands\Registry;
+use Studio1902\PeakCommands\RegistryManager;
 
 use function Laravel\Prompts\info;
 
@@ -16,7 +16,7 @@ class InstallPreset extends InstallCommand
 
     protected $description = 'Install premade collections and page builder blocks into your site.';
 
-    protected string $type = Registry::PRESETS;
+    protected string $type = RegistryManager::PRESETS;
 
     public function handle(): void
     {
