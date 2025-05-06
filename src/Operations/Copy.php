@@ -49,7 +49,7 @@ class Copy extends Operation
             ? $this->output = Str::of($this->output)->replace('{{ multisite_handle }}', Site::default()->handle)
             : $this->output = Str::of($this->output)->replace('{{ multisite_handle }}/', '');
 
-        $stub = $this->getStub($this->input, $this->installable->path);
+        $stub = $this->getStub($this->input, $this->installable->basePath);
 
         $contents = $this->mergedReplacements()
             ->reduce(

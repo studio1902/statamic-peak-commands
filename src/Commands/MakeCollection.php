@@ -179,16 +179,14 @@ class MakeCollection extends Command
 
     protected function runOperations(): void
     {
-        app()
-            ->make(Installable::class, [
-                'config' => [
-                    'name' => $this->model->name,
-                    'handle' => $this->model->filename,
-                    'operations' => $this->operations,
-                    'path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
-                ],
-            ])
-            ->install();
+        app(Installable::class, [
+            'config' => [
+                'name' => $this->model->name,
+                'handle' => $this->model->filename,
+                'operations' => $this->operations,
+                'base_path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
+            ],
+        ])->install();
     }
 
     protected function grantPermissions(): void

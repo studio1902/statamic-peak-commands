@@ -26,7 +26,7 @@ abstract class InstallCommand extends Command
 
     protected function collectChoices(string $label, string $emptyValidation): void
     {
-        if (! $this->items || $this->items->isEmpty()) {
+        if ($this->items->isEmpty()) {
             warning("No {$this->type} found in provided paths.");
             exit();
         }
@@ -57,7 +57,7 @@ abstract class InstallCommand extends Command
             ->map(fn ($path) => \Statamic\Support\Str::ensureRight($path, DIRECTORY_SEPARATOR))
             ->flatMap(fn (string $path) => File::glob($path.'*/config.php'))
             ->unique()
-            ->map(fn (string $path) => collect(['path' => \Statamic\Support\Str::removeRight($path, DIRECTORY_SEPARATOR.'config.php')])
+            ->map(fn (string $path) => collect(['base_path' => \Statamic\Support\Str::removeRight($path, DIRECTORY_SEPARATOR.'config.php')])
                 ->merge(include $path)
                 ->sort()
                 ->all()

@@ -13,7 +13,7 @@ class Installable
 
     public string $handle;
 
-    public string $path;
+    public string $basePath;
 
     public array $operations;
 
@@ -31,7 +31,7 @@ class Installable
     {
         $this->name = Arr::get($config, 'name');
         $this->handle = Arr::get($config, 'handle');
-        $this->path = Arr::get($config, 'path');
+        $this->basePath = Arr::get($config, 'base_path');
         $this->operations = Arr::get($config, 'operations');
         $this->singularName = Arr::get($config, 'singular_name', '');
 
