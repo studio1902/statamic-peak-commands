@@ -48,7 +48,7 @@ class MakeSet extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/set.antlers.html.stub',
-            'output' => 'resources/views/components/_{{ handle }}.antlers.html',
+            'output' => 'resources/views/components/{{ filepath }}_{{ handle }}.antlers.html',
         ];
     }
 
@@ -57,7 +57,7 @@ class MakeSet extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/fieldset_set.yaml.stub',
-            'output' => 'resources/fieldsets/{{ handle }}.yaml',
+            'output' => 'resources/fieldsets/{{ filepath }}{{ handle }}.yaml',
         ];
     }
 
