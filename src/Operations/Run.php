@@ -8,7 +8,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 use function Laravel\Prompts\error;
-use function Laravel\Prompts\info;
+use function Laravel\Prompts\note;
 use function Laravel\Prompts\spin;
 
 class Run extends Operation
@@ -68,7 +68,7 @@ class Run extends Operation
         spin($callback, $processingMessage);
 
         if ($successMessage) {
-            info("[✓] $successMessage");
+            note($successMessage);
         }
     }
 
@@ -77,7 +77,7 @@ class Run extends Operation
         $callback();
 
         if ($successMessage) {
-            info("[✓] $successMessage");
+            note($successMessage);
         }
     }
 }

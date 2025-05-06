@@ -7,7 +7,7 @@ use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use Symfony\Component\Yaml\Yaml;
 
-use function Laravel\Prompts\info;
+use function Laravel\Prompts\note;
 
 class AttachCollectionsToNavigation extends Operation
 {
@@ -36,7 +36,7 @@ class AttachCollectionsToNavigation extends Operation
 
         File::put(base_path("content/navigation/{$this->navigation}.yaml"), Yaml::dump($navigation, 99, 2));
 
-        info("Collections attached to '{$this->navigation}' navigation.");
+        note("Collections attached to '{$this->navigation}' navigation.");
 
         return $this->installable;
     }

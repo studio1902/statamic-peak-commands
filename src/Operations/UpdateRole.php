@@ -7,7 +7,7 @@ use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use Symfony\Component\Yaml\Yaml;
 
-use function Laravel\Prompts\info;
+use function Laravel\Prompts\note;
 
 class UpdateRole extends Operation
 {
@@ -32,7 +32,7 @@ class UpdateRole extends Operation
 
         File::put(base_path('resources/users/roles.yaml'), Yaml::dump($roles, 99, 2));
 
-        info("Permissions updated for '{$this->role}' role.");
+        note("Permissions updated for '{$this->role}' role.");
 
         return $this->installable;
     }

@@ -7,7 +7,7 @@ use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Models\Installable;
 use Symfony\Component\Yaml\Yaml;
 
-use function Laravel\Prompts\info;
+use function Laravel\Prompts\note;
 
 class AttachTaxonomyToCollections extends Operation
 {
@@ -37,7 +37,7 @@ class AttachTaxonomyToCollections extends Operation
 
             File::put(base_path("content/collections/{$collectionHandle}.yaml"), Yaml::dump($collection, 99, 2));
 
-            info("Taxonomy '{$this->taxonomy}' attached to '{$collectionHandle}' collection.");
+            note("Taxonomy '{$this->taxonomy}' attached to '{$collectionHandle}' collection.");
         });
 
         return $this->installable;

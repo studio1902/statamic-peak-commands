@@ -14,7 +14,7 @@ use Studio1902\PeakCommands\Models\Installable;
 
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\error;
-use function Laravel\Prompts\info;
+use function Laravel\Prompts\note;
 
 class Copy extends Operation
 {
@@ -60,13 +60,13 @@ class Copy extends Operation
 
         if ($this->skippable) {
             if ($this->checkExistenceAndSkip('File', "{$this->output}")) {
-                info("Skipped file: '{$this->output}'.");
+                note("Skipped file: '{$this->output}'.");
 
                 return $this->installable;
             }
 
             $this->filesystem->put($this->output, $contents);
-            info("Installed file: '{$this->output}'.");
+            note("Installed file: '{$this->output}'.");
 
             return $this->installable;
         }
@@ -79,7 +79,7 @@ class Copy extends Operation
             exit();
         }
 
-        info("Installed file: '{$this->output}'.");
+        note("Installed file: '{$this->output}'.");
 
         return $this->installable;
     }

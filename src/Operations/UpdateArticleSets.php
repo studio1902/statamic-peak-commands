@@ -11,7 +11,7 @@ use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use Symfony\Component\Yaml\Yaml;
 
 use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\info;
+use function Laravel\Prompts\note;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
@@ -115,7 +115,7 @@ class UpdateArticleSets extends Operation
 
         File::put(base_path('resources/fieldsets/article.yaml'), Yaml::dump($fieldset, 99, 2));
 
-        info("Installed article set: '$name'.");
+        note("Installed article set: '$name'.");
 
         return $this->installable;
     }

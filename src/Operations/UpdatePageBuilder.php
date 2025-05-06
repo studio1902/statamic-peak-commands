@@ -12,7 +12,7 @@ use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
 use Symfony\Component\Yaml\Yaml;
 
 use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\info;
+use function Laravel\Prompts\note;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
@@ -40,7 +40,7 @@ class UpdatePageBuilder extends Operation
 
         $this->updatePageBuilder($name, $instructions, $icon, $handle);
 
-        info("Installed page builder block: '$name'.");
+        note("Installed page builder block: '$name'.");
 
         return $this->installable;
     }
