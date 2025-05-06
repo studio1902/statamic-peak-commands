@@ -1,11 +1,13 @@
 # Changelog
 
-## v9.0.0 (Unreleased)
+## v9.0.0 (2025-05-06)
 
 ### What's new
 - The ability to load in your own private blocks, sets and presets to install. #28 by @marcorieser
 - The ability to compose blocks, sets and presets with custom operations. #28 by @marcorieser
 - A lot of code refactor. #28 by @marcorieser
+
+Thank you Marco Rieser for your amazing work on this.
 
 ### What's improved
 - Business hours preset supports overnight spans. #31 by @porstendorfer
