@@ -11,19 +11,21 @@ use Statamic\Facades\GlobalSet;
 use Statamic\Support\Arr;
 use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
 use Symfony\Component\Yaml\Yaml;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
 
 class ClearSite extends Command
 {
-    use RunsInPlease, CanClearCache;
+    use CanClearCache, RunsInPlease;
 
     protected $name = 'statamic:peak:clear-site';
-    protected $description = "Clear all default Peak content.";
 
-    public function handle()
+    protected $description = 'Clear all default Peak content.';
+
+    public function handle(): void
     {
-        $clear_site = $this->public = confirm(
+        $clear_site = confirm(
             label: 'Do you want to clear all default Peak content?',
             default: false
         );
@@ -35,33 +37,29 @@ class ClearSite extends Command
             $this->trashPagesButHomeAnd404();
             $this->clearNavigation();
 
-
             $this->clearGlideCache();
             $this->clearCache();
 
-            info("<info>[✓]</info> Your view from the peak is clear.");
+            info('<info>[✓]</info> Your view from the peak is clear.');
         }
     }
 
     /**
      * Trash all assets.
-     *
-     * @return bool|null
      */
-    protected function trashAssets()
+    protected function trashAssets(): void
     {
         $files = new Filesystem;
         $path = public_path('images');
-        if ($files->exists($path))
+        if ($files->exists($path)) {
             $files->cleanDirectory($path);
+        }
     }
 
     /**
      * Trash global social media data.
-     *
-     * @return bool|null
      */
-    protected function clearGlobalSocialMedia()
+    protected function clearGlobalSocialMedia(): void
     {
         $set = GlobalSet::findByHandle('social_media');
         $set->inDefaultSite()->set('social_media', null)->save();
@@ -69,10 +67,8 @@ class ClearSite extends Command
 
     /**
      * Clear the home page.
-     *
-     * @return bool|null
      */
-    protected function clearHomePage()
+    protected function clearHomePage(): void
     {
         // Note: we can't use Entry::query()->save() when running from the PostInstallHook.
         $stub = $this->getStub('/home.md.stub');
@@ -81,10 +77,8 @@ class ClearSite extends Command
 
     /**
      * Trash all pages but home.
-     *
-     * @return bool|null
      */
-    protected function trashPagesButHomeAnd404()
+    protected function trashPagesButHomeAnd404(): void
     {
         $pages = Entry::query()
             ->where('collection', 'pages')
@@ -94,17 +88,16 @@ class ClearSite extends Command
 
         foreach ($pages as $page) {
             $file_path = base_path("content/collections/pages/{$page->slug()}.md");
-            if (File::exists($file_path))
+            if (File::exists($file_path)) {
                 File::delete($file_path);
+            }
         }
     }
 
     /**
      * Clear navigation.
-     *
-     * @return bool|null
      */
-    protected function clearNavigation()
+    protected function clearNavigation(): void
     {
         $navigation = Yaml::parseFile(base_path('content/trees/navigation/main.yaml'));
         $tree = Arr::get($navigation, 'tree');
@@ -119,8 +112,8 @@ class ClearSite extends Command
      */
     protected function getStub(string $stubPath): string
     {
-        $publishedStubPath = resource_path("stubs/vendor/statamic-peak-commands/" . ltrim($stubPath, " /\t\n\r\0\x0B"));
-        $addonStubPath = __DIR__ . "/../../resources/stubs/" . ltrim($stubPath, " /\t\n\r\0\x0B");
+        $publishedStubPath = resource_path('stubs/vendor/statamic-peak-commands/'.ltrim($stubPath, " /\t\n\r\0\x0B"));
+        $addonStubPath = __DIR__.'/../../resources/stubs/'.ltrim($stubPath, " /\t\n\r\0\x0B");
 
         return File::get(File::exists($publishedStubPath) ? $publishedStubPath : $addonStubPath);
     }
