@@ -3,86 +3,81 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
-use Statamic\Facades\Config;
-use Stringy\StaticStringy as Stringy;
-use function Laravel\Prompts\text;
+use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
+use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
+use Studio1902\PeakCommands\Models\Installable;
+use Studio1902\PeakCommands\Models\Set;
+use Studio1902\PeakCommands\Operations\Traits\CanPickIcon;
+
+use function Laravel\Prompts\info;
 
 class MakeSet extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use CanPickIcon, HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:set';
-    protected $description = "Make an Article (Bard) set.";
-    protected $set_name = '';
-    protected $filename = '';
-    protected $instructions = '';
-    protected $icon = '';
 
-    public function handle()
+    protected $description = 'Make an Article (Bard) set.';
+
+    protected array $operations = [];
+
+    protected Set $model;
+
+    public function handleWithCatch(): void
     {
         $this->checkLicense();
 
-        $this->set_name = text(
-            label: 'What should be the name for this set?',
-            placeholder: 'E.g. Card',
-            required: true
-        );
+        $this->createModel();
+        $this->createTemplate();
+        $this->createFieldset();
+        $this->updateArticleSets();
 
-        $this->filename = Stringy::slugify($this->set_name, '_', Config::getShortLocale());
+        $this->runOperations();
 
-        $this->instructions = text(
-            label: 'What should be the instructions for this set?',
-            placeholder: 'E.g. Lead text that renders big and bold.',
-            required: true
-        );
-
-        $this->icon = $this->promptsIconPicker('Which icon do you want to use for this set?');
-
-        try {
-            $this->checkExistence('Fieldset', "resources/fieldsets/{$this->filename}.yaml");
-            $this->checkExistence('Partial', "resources/views/components/_{$this->filename}.antlers.html");
-
-            $this->createFieldset();
-            $this->createPartial();
-            $this->updateArticleSets($this->set_name, $this->filename, $this->instructions, $this->icon);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
-        }
-
-        $this->info("<info>[✓]</info> Peak page builder Article set '{$this->set_name}' added.");
+        info("[✓] Peak page builder Article set '{$this->model->name}' added.");
     }
 
-    /**
-     * Create fieldset.
-     *
-     * @return bool|null
-     */
-    protected function createFieldset()
+    protected function createModel(): void
     {
-        $stub = $this->getStub('/fieldset_set.yaml.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ name }}', $this->set_name);
-
-        File::put(base_path("resources/fieldsets/{$this->filename}.yaml"), $contents);
+        $this->model = app(Set::class);
     }
 
-    /**
-     * Create partial.
-     *
-     * @return bool|null
-     */
-    protected function createPartial()
+    protected function createTemplate(): void
     {
-        $stub = $this->getStub('/set.html.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ name }}', $this->set_name)
-            ->replace('{{ filename }}', $this->filename);
-
-        File::put(base_path("resources/views/components/_{$this->filename}.antlers.html"), $contents);
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'stubs/set.antlers.html.stub',
+            'output' => 'resources/views/components/{{ filepath }}_{{ handle }}.antlers.html',
+        ];
     }
 
+    protected function createFieldset(): void
+    {
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'stubs/fieldset_set.yaml.stub',
+            'output' => 'resources/fieldsets/{{ filepath }}{{ handle }}.yaml',
+        ];
+    }
 
+    protected function updateArticleSets(): void
+    {
+        $this->operations[] = [
+            'type' => 'update_article_sets',
+            'set' => $this->model->toArray(),
+        ];
+    }
+
+    protected function runOperations(): void
+    {
+        app(Installable::class, [
+            'config' => [
+                'name' => $this->model->name,
+                'handle' => $this->model->handle,
+                'operations' => $this->operations,
+                'base_path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
+            ],
+        ])->install();
+    }
 }

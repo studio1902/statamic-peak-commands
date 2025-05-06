@@ -3,390 +3,213 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
-use Statamic\Facades\Config;
 use Statamic\Facades\Entry;
-use Stringy\StaticStringy as Stringy;
-use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\search;
-use function Laravel\Prompts\select;
-use function Laravel\Prompts\text;
+use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
+use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
+use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
+use Studio1902\PeakCommands\Models\Collection;
+use Studio1902\PeakCommands\Models\Installable;
+
+use function Laravel\Prompts\info;
+use function Laravel\Prompts\warning;
 
 class MakeCollection extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use CanClearCache, HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:collection';
-    protected $description = "Make a collection.";
-    protected $collection_name = '';
-    protected $filename = '';
-    protected $public = false;
-    protected $slugs = true;
-    protected $mount_collection = false;
-    protected $route = '';
-    protected $add_page = false;
-    protected $page_title = '';
-    protected $layout = '';
-    protected $revisions = false;
-    protected $dated = false;
-    protected $sort_dir = '';
-    protected $date_past = 'public';
-    protected $date_future = 'private';
-    protected $template = '';
-    protected $mount = '';
-    protected $index = false;
-    protected $show = false;
-    protected $permissions = true;
 
-    public function handle()
+    protected $description = 'Make a collection.';
+
+    protected array $operations = [];
+
+    protected Collection $model;
+
+    public function handleWithCatch(): void
     {
         $this->checkLicense();
+        $this->createModel();
+        $this->createConfiguration();
+        $this->createBlueprint();
+        $this->createIndexTemplate();
+        $this->setIndexTemplate();
+        $this->installIndexContentBlock();
+        $this->createShowTemplate();
+        $this->grantPermissions();
 
-        $this->collection_name = text(
-            label: 'What should be the name for this collection?',
-            placeholder: 'E.g. News',
-            required: true
-        );
+        $this->runOperations();
+        $this->showWidgetNotice();
 
-        $this->filename = Str::slug($this->collection_name, '_');
+        info("[✓] Collection '{$this->model->name}' created.");
 
-        $this->public = confirm(
-            label: 'Should this be a public collection with a route?',
-            default: true
-        );
+        $this->clearCache();
+    }
 
-        if (! $this->public) {
-            $this->slugs = confirm(
-                label: 'Do you want to require slugs?',
-                default: true
-            );
-        }
+    protected function createBlueprint(): void
+    {
+        $publicPathPart = $this->model->public ? '_public' : '_private';
+        $datedPathPart = $this->model->dated ? '_dated' : '';
+        $slugPathPart = $this->model->slugs ? '' : '_no_slug';
 
-        if ($this->public) {
-            $this->mount_collection = confirm(
-                label: 'Do you want to mount this collection on an entry?',
-                default: true
-            );
-
-            if ($this->mount_collection) {
-                $this->add_page = confirm(
-                    label: 'Do you want to create a new page to mount this collection on?',
-                    default: true
-                );
-
-                if ($this->add_page) {
-                    $this->page_title = text(
-                        label: 'What should be the page title for this mount?',
-                        placeholder: 'E.g. News',
-                        required: true
-                    );
-                    $this->mount = $this->addPage();
-                } else {
-                    $choice = search(
-                        label: 'On which page existing page do you want to mount this collection?',
-                        options: function (string $value) {
-                            if (!$value) {
-                                return collect($this->getPages())
-                                    ->values()
-                                    ->all();
-                            }
-
-                            return collect($this->getPages())
-                                ->filter(fn(string $item) => Str::contains($item, $value, true))
-                                ->values()
-                                ->all();
-                        },
-                        required: true
-                    );
-                    preg_match('/\[(.*?)\]/', $choice, $id);
-                    $this->mount = $id[1];
-                }
-            }
-            $this->route = text(
-                label: 'What should be the route for this collection?',
-                default: '/{mount}/{slug}',
-                required: true
-            );
-        }
-
-        $this->layout = text(
-            label: 'What should be the layout file for this collection?',
-            default: 'layout',
-            required: true
-        );
-
-        $this->revisions = confirm(
-            label: 'Should revisions be enabled?',
-            default: false
-        );
-
-        $this->sort_dir = select(
-            label: 'What should the sort direction be?',
-            options: [
-                'asc' => 'Ascending',
-                'desc' => 'Descending',
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => "stubs/collection_blueprint{$publicPathPart}{$datedPathPart}{$slugPathPart}.yaml.stub",
+            'output' => 'resources/blueprints/collections/{{ handle }}/{{ handle }}.yaml',
+            'replacements' => [
+                '{{ collection_name }}' => $this->model->name,
             ],
-            default: 'asc'
-        );
-
-        $this->dated = confirm(
-            label: 'Should this be a dated collection?',
-            default: false
-        );
-
-        if ($this->dated) {
-            $this->date_past = select(
-                label: 'What should be the date behavior for entries in the past?',
-                options: [
-                    'public' => 'Public',
-                    'private' => 'Private',
-                ],
-                default: 'public'
-            );
-
-            $this->date_future = select(
-                label: 'What should be the date behavior for entries in the future?',
-                options: [
-                    'public' => 'Public',
-                    'private' => 'Private',
-                ],
-                default: 'private'
-            );
-        }
-
-        if ($this->public && $this->mount) {
-            $this->index = confirm(
-                label: 'Generate and apply index template?',
-                default: true
-            );
-        }
-
-        if ($this->public) {
-            $this->show = confirm(
-                label: 'Generate and apply show template?',
-                default: true
-            );
-        }
-
-        $this->permissions = confirm(
-            label: 'Grant edit permissions to editor role?',
-            default: true
-        );
-
-        try {
-            $this->createCollection();
-            File::makeDirectory("resources/blueprints/collections/{$this->filename}");
-            $this->createBlueprint();
-            if ($this->index || $this->show) File::makeDirectory("resources/views/{$this->filename}");
-            if ($this->index) $this->createIndexTemplate();
-            if ($this->index) $this->setIndexTemplate();
-            if ($this->mount) $this->installAndSetIndexContentBlock();
-            if ($this->show) $this->createShowTemplate();
-            $this->handlePermissions();
-            $this->widgetNotice();
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
-        }
-
-        Artisan::call('cache:clear');
-
-        $this->info("<info>[✓]</info> Collection '{$this->collection_name}' created.");
-    }
-
-    /**
-     * Get all pages.
-     *
-     * @return array
-     */
-    protected function getPages()
-    {
-        return Entry::query()
-            ->where('collection', 'pages')
-            ->where('status', 'published')
-            ->orderBy('title', 'asc')
-            ->get()
-            ->map(fn($entry) =>
-               "{$entry->get('title')} [{$entry->id()}]"
-            )
-            ->toArray();
-    }
-
-    /**
-     * Create fieldset.
-     *
-     * @return bool|null
-     */
-    protected function createCollection()
-    {
-        $this->checkExistence('Collection', "content/collections/{$this->filename}.yaml");
-
-        $stub = $this->getStub('/collection.yaml.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ collection_name }}', $this->collection_name)
-            ->replace('{{ route }}', $this->route)
-            ->replace('{{ layout }}', $this->layout)
-            ->replace('{{ revisions }}', ($this->revisions) ? 'true' : 'false')
-            ->replace('{{ sort_dir }}', $this->sort_dir)
-            ->replace('{{ dated }}', ($this->dated) ? 'true' : 'false')
-            ->replace('{{ date_past }}', $this->date_past)
-            ->replace('{{ date_future }}', $this->date_future)
-            ->replace('{{ template }}', $this->show ? "{$this->filename}/show" : 'default' )
-            ->replace('{{ mount }}', $this->mount)
-            ->replace('{{ slugs }}', ($this->slugs) ? 'true' : 'false');
-
-        File::put(base_path("content/collections/{$this->filename}.yaml"), $contents);
-    }
-
-    /**
-     * Create blueprints.
-     *
-     * @return bool|null
-     */
-    protected function createBlueprint()
-    {
-        $this->checkExistence('Blueprint', "resources/blueprints/collections/{$this->filename}/{$this->filename}.yaml");
-
-        $append = !$this->slugs ? '_no_slug' : '';
-        $stub = ($this->public)
-            ? ($this->dated
-                ? "/collection_blueprint_public_dated{$append}.yaml.stub"
-                : "/collection_blueprint_public{$append}.yaml.stub")
-            : ($this->dated
-                ? "/collection_blueprint_private_dated{$append}.yaml.stub"
-                : "/collection_blueprint_private{$append}.yaml.stub");
-
-        $stub = $this->getStub($stub);
-        $contents = Str::of($stub)
-            ->replace('{{ collection_name }}', $this->collection_name);
-
-        File::put(base_path("resources/blueprints/collections/{$this->filename}/{$this->filename}.yaml"), $contents);
-    }
-
-    /**
-     * Create index template.
-     *
-     * @return bool|null
-     */
-    protected function createIndexTemplate()
-    {
-        $this->checkExistence('Template', "resources/views/{$this->filename}/index.antlers.html");
-
-        $stub = $this->getStub('/index.antlers.html.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ collection_name }}', $this->collection_name)
-            ->replace('{{ handle }}', $this->filename)
-            ->replace('{{ filename }}', $this->filename)
-            ->replace('{{ sort }}', $this->dated ? 'date:desc' : 'title');
-
-        File::put(base_path("resources/views/{$this->filename}/index.antlers.html"), $contents);
-    }
-
-    /**
-     * Create index template.
-     *
-     * @return bool|null
-     */
-    protected function createShowTemplate()
-    {
-        $this->checkExistence('Template', "resources/views/{$this->filename}/show.antlers.html");
-
-        $stub = $this->getStub('/show.antlers.html.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ collection_name }}', $this->collection_name)
-            ->replace('{{ filename }}', $this->filename);
-
-        File::put(base_path("resources/views/{$this->filename}/show.antlers.html"), $contents);
-    }
-
-    /**
-     * Add a page.
-     *
-     * @return string
-     */
-    protected function addPage()
-    {
-        $entry = Entry::make()
-            ->collection('pages')
-            ->published(true)
-            ->slug(Stringy::slugify($this->page_title, '-', Config::getShortLocale()))
-            ->data(['title' => $this->page_title]);
-        $entry->save();
-
-        return $entry->id();
-    }
-
-    /**
-     * Set index template.
-     *
-     * @return bool|null
-     */
-    protected function setIndexTemplate()
-    {
-        Entry::find($this->mount)
-            ->set('template', "{$this->filename}/index")
-            ->save();
-    }
-
-    /**
-     * Install Index Content page builder block and put it on the mount.
-     *
-     * @return null
-     */
-    protected function installAndSetIndexContentBlock()
-    {
-        File::put(base_path("resources/fieldsets/index_content.yaml"), $this->getStub('/blocks/index_content.yaml.stub'));
-        File::put(base_path("resources/views/page_builder/_index_content.antlers.html"), $this->getStub('/blocks/index_content.antlers.html.stub'));
-        $this->updatePageBuilder('Index content', 'Render the currently mounted entries if available.', 'file-content-list', 'index_content');
-
-        $pageBuilder = Entry::find($this->mount)
-            ->get('page_builder');
-        $pageBuilder[] = [
-            'type' => 'index_content',
-            'enabled' => 'true'
         ];
-
-        Entry::find($this->mount)
-            ->set('page_builder', $pageBuilder)
-            ->save();
     }
 
-    /**
-    * Handle permissions
-    *
-    * @return bool|null
-    */
-    protected function handlePermissions()
+    protected function createIndexTemplate(): void
     {
-        if (! $this->permissions) {
+        if (! $this->model->index) {
             return;
         }
 
-        $permissions = [
-            "view {$this->filename} entries",
-            "edit {$this->filename} entries",
-            "create {$this->filename} entries",
-            "delete {$this->filename} entries",
-            "publish {$this->filename} entries",
-            "reorder {$this->filename} entries",
-            "edit other authors {$this->filename} entries",
-            "publish other authors {$this->filename} entries",
-            "delete other authors {$this->filename} entries",
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'stubs/index.antlers.html.stub',
+            'output' => 'resources/views/{{ handle }}/index.antlers.html',
+            'replacements' => [
+                '{{ collection_name }}' => $this->model->name,
+                '{{ sort }}' => $this->model->dated ? 'date:desc' : 'title',
+            ],
         ];
-
-        $this->grantPermissionsToEditor($permissions);
     }
 
-    /**
-     * Display CP widget notice.
-     *
-     * @return bool|null
-     */
-    protected function widgetNotice()
+    protected function createShowTemplate(): void
     {
-        $this->warn("Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '$this->filename',\n\t'width' => 50\n],");
+        if (! $this->model->show) {
+            return;
+        }
+
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'stubs/show.antlers.html.stub',
+            'output' => 'resources/views/{{ handle }}/show.antlers.html',
+            'replacements' => [
+                '{{ collection_name }}' => $this->model->name,
+            ],
+        ];
+    }
+
+    protected function setIndexTemplate(): void
+    {
+        if (! $this->model->index || ! $this->model->mount) {
+            return;
+        }
+
+        Entry::find($this->model->mount)
+            ->set('template', "{$this->model->filename}/index")
+            ->save();
+    }
+
+    protected function installIndexContentBlock(): void
+    {
+        if (! $this->model->mount) {
+            return;
+        }
+
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'blocks/index_content/index_content.yaml',
+            'output' => 'resources/fieldsets/index_content.yaml',
+        ];
+
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'blocks/index_content/_index_content.antlers.html',
+            'output' => 'resources/views/page_builder/_index_content.antlers.html',
+        ];
+
+        $this->operations[] = [
+            'type' => 'update_page_builder',
+            'block' => [
+                'name' => 'Index content',
+                'instructions' => 'Render the currently mounted entries if available.',
+                'icon' => 'file-content-list',
+                'handle' => 'index_content',
+            ],
+        ];
+
+        $mount = Entry::find($this->model->mount);
+
+        $pageBuilder = $mount->get('page_builder');
+        $pageBuilder[] = [
+            'type' => 'index_content',
+            'enabled' => 'true',
+        ];
+
+        $mount->set('page_builder', $pageBuilder)->save();
+    }
+
+    protected function showWidgetNotice(): void
+    {
+        warning("Add this to your `config/statamic/cp.php` widgets array:\n\n[\n\t'type' => 'collection',\n\t'collection' => '{$this->model->filename}',\n\t'width' => 50\n],");
         $this->newLine();
+    }
+
+    protected function createModel(): void
+    {
+        $this->model = app(Collection::class);
+    }
+
+    protected function createConfiguration(): void
+    {
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'stubs/collection.yaml.stub',
+            'output' => 'content/collections/{{ handle }}.yaml',
+            'replacements' => [
+                '{{ collection_name }}' => $this->model->name,
+                '{{ route }}' => $this->model->route,
+                '{{ layout }}' => $this->model->layout,
+                '{{ revisions }}' => $this->model->revisions ? 'true' : 'false',
+                '{{ sort_dir }}' => $this->model->sortDir,
+                '{{ dated }}' => $this->model->dated ? 'true' : 'false',
+                '{{ date_past }}' => $this->model->datePast,
+                '{{ date_future }}' => $this->model->dateFuture,
+                '{{ template }}' => $this->model->show ? "{$this->model->filename}/show" : 'default',
+                '{{ mount }}' => $this->model->mount,
+                '{{ slugs }}' => $this->model->slugs ? 'true' : 'false',
+            ],
+        ];
+    }
+
+    protected function runOperations(): void
+    {
+        app(Installable::class, [
+            'config' => [
+                'name' => $this->model->name,
+                'handle' => $this->model->filename,
+                'operations' => $this->operations,
+                'base_path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
+            ],
+        ])->install();
+    }
+
+    protected function grantPermissions(): void
+    {
+        if (! $this->model->grantPermissions) {
+            return;
+        }
+
+        $this->operations[] = [
+            'type' => 'update_role',
+            'role' => 'editor',
+            'permissions' => [
+                'view {{ handle }} entries',
+                'edit {{ handle }} entries',
+                'create {{ handle }} entries',
+                'delete {{ handle }} entries',
+                'publish {{ handle }} entries',
+                'reorder {{ handle }} entries',
+                'edit other authors {{ handle }} entries',
+                'publish other authors {{ handle }} entries',
+                'delete other authors {{ handle }} entries',
+            ],
+        ];
     }
 }

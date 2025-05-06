@@ -3,101 +3,96 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
-use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\text;
+use Studio1902\PeakCommands\Commands\Traits\CanClearCache;
+use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
+use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
+use Studio1902\PeakCommands\Models\Globals;
+use Studio1902\PeakCommands\Models\Installable;
+
+use function Laravel\Prompts\info;
 
 class MakeGlobal extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use CanClearCache, HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:global';
-    protected $description = "Make a global set.";
-    protected $global_name = '';
-    protected $filename = '';
-    protected $permissions = true;
 
-    public function handle()
+    protected $description = 'Make a global set.';
+
+    protected array $operations = [];
+
+    protected Globals $model;
+
+    public function handleWithCatch(): void
     {
         $this->checkLicense();
 
-        $this->global_name = text(
-            label: 'What should be the name for this global?',
-            placeholder: 'E.g. Contact data',
-            required: true
-        );
+        $this->createModel();
+        $this->createConfiguration();
+        $this->createBlueprint();
+        $this->grantPermissions();
 
-        $this->filename = Str::slug($this->global_name, '_');
+        $this->runOperations();
 
-        $this->permissions = confirm(
-            label: 'Grant edit permissions to editor role?',
-            default: true
-        );
+        info("[✓] Global '{$this->model->name}' created.");
 
-        try {
-            $this->createGlobal();
-            $this->createBlueprint();
-            $this->handlePermissions();
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
-        }
-
-        Artisan::call('cache:clear');
-
-        $this->info("<info>[✓]</info> Global '{$this->global_name}' created.");
+        $this->clearCache();
     }
 
-    /**
-     * Create fieldset.
-     *
-     * @return bool|null
-     */
-    protected function createGlobal()
+    protected function createConfiguration(): void
     {
-        $this->checkExistence('Global', "content/globals/{$this->filename}.yaml");
-
-        $stub = $this->getStub('/global.yaml.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ global_name }}', $this->global_name);
-
-        File::put(base_path("content/globals/{$this->filename}.yaml"), $contents);
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'stubs/global.yaml.stub',
+            'output' => 'content/globals/{{ handle }}.yaml',
+            'replacements' => [
+                '{{ global_name }}' => $this->model->name,
+            ],
+        ];
     }
 
-    /**
-     * Create blueprints.
-     *
-     * @return bool|null
-     */
-    protected function createBlueprint()
+    protected function createBlueprint(): void
     {
-        $this->checkExistence('Blueprint', "resources/blueprints/globals/{$this->filename}.yaml");
-
-        $stub = $this->getStub('/global_blueprint.yaml.stub');
-
-        $contents = Str::of($stub)
-            ->replace('{{ global_name }}', $this->global_name);
-
-        File::put(base_path("resources/blueprints/globals/{$this->filename}.yaml"), $contents);
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'stubs/global_blueprint.yaml.stub',
+            'output' => 'resources/blueprints/globals/{{ handle }}.yaml',
+            'replacements' => [
+                '{{ global_name }}' => $this->model->name,
+            ],
+        ];
     }
 
-    /**
-     * Handle permissions
-     *
-     * @return bool|null
-     */
-    protected function handlePermissions()
+    protected function grantPermissions(): void
     {
-        if (! $this->permissions) {
+        if (! $this->model->grantPermissions) {
             return;
         }
 
-        $permissions = [
-            "edit {$this->filename} globals",
+        $this->operations[] = [
+            'type' => 'update_role',
+            'role' => 'editor',
+            'permissions' => [
+                'edit {{ handle }} globals',
+            ],
         ];
+    }
 
-        $this->grantPermissionsToEditor($permissions);
+    protected function runOperations(): void
+    {
+        app(Installable::class, [
+            'config' => [
+                'name' => $this->model->name,
+                'handle' => $this->model->filename,
+                'operations' => $this->operations,
+                'base_path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
+            ],
+        ])->install();
+    }
+
+    protected function createModel(): void
+    {
+        $this->model = app(Globals::class);
     }
 }

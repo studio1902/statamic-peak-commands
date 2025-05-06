@@ -1,5 +1,28 @@
 # Changelog
 
+## v9.0.0 (2025-05-06)
+
+### What's new
+- The ability to load in your own private blocks, sets and presets to install. #28 by @marcorieser
+- The ability to compose blocks, sets and presets with custom operations. #28 by @marcorieser
+- A lot of code refactor. #28 by @marcorieser
+
+Thank you Marco Rieser for your amazing work on this.
+
+### What's improved
+- Business hours preset supports overnight spans. #31 by @porstendorfer
+- The prompts presented during the `make:collection` regarding mounting are more clear. e6e64d79 by @robdekort
+- The banner presets now uses `x-collapse`. f11c7f67 by @robdekort
+- Accessibility and semantics in the FAQ preset. 0ce0b1b4 by @robdekort
+- FAQ sections to close smoothly. #33 by @podrabinek
+- Accessibility in the theme toggle preset. 6a6156a9 by @robdekort
+
+### What's fixed
+- The width of the block title in the clients preset. faab4a6e by @robdekort
+- A comment in the clients preset notification. e411f1f8 by @robdekort
+- A class used in the footer preset is now compatible with Tailwind 4. 6f77783f by @robdekort
+- A typo in the business hours preset. #32 by @porstendorfer
+
 ## v8.16.1 (2025-01-22)
 
 ### What's fixed

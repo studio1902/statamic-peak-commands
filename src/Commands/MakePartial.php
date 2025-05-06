@@ -3,79 +3,66 @@
 namespace Studio1902\PeakCommands\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
 use Statamic\Console\RunsInPlease;
-use Statamic\Facades\Config;
-use Stringy\StaticStringy as Stringy;
-use function Laravel\Prompts\select;
-use function Laravel\Prompts\text;
+use Studio1902\PeakCommands\Commands\Traits\HandleWithCatch;
+use Studio1902\PeakCommands\Commands\Traits\NeedsValidLicense;
+use Studio1902\PeakCommands\Models\Installable;
+use Studio1902\PeakCommands\Models\Partial;
+
+use function Laravel\Prompts\info;
 
 class MakePartial extends Command
 {
-    use RunsInPlease, SharedFunctions, NeedsValidLicense;
+    use HandleWithCatch, NeedsValidLicense, RunsInPlease;
 
     protected $name = 'statamic:peak:make:partial';
-    protected $description = "Make a partial with IDE hinting and template paths.";
-    protected $partial_name = '';
-    protected $partial_description = '';
-    protected $filename = '';
-    protected $folder = '';
-    protected $type = '';
 
-    public function handle()
+    protected $description = 'Make a partial with IDE hinting and template paths.';
+
+    protected array $operations = [];
+
+    protected Partial $model;
+
+    public function handleWithCatch(): void
     {
         $this->checkLicense();
 
-        $this->type = select(
-            label: 'What type of partial do you want to add?',
-            options: ['Component', 'Layout', 'Snippet', 'Typography'],
-            default: 'Component'
-        );
+        $this->createModel();
+        $this->createTemplate();
 
-        $this->folder = strtolower($this->type);
-        if ($this->folder == 'component') $this->folder = 'components';
-        if ($this->folder == 'snippet') $this->folder = 'snippets';
+        $this->runOperations();
 
-        $this->partial_name = text(
-            label: 'What should be the name for this partial?',
-            placeholder: 'E.g. Card',
-            required: true
-        );
-
-        $this->partial_description = text(
-            label: 'What should be the description for this partial?',
-            placeholder: 'E.g. A card component.',
-            required: true
-        );
-
-        $this->filename = Stringy::slugify($this->partial_name, '_', Config::getShortLocale());
-
-        try {
-            $this->checkExistence('Partial', "resources/views/{$this->folder}/_{$this->filename}.antlers.html");
-
-            $this->createPartial();
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
-        }
-
-        $this->info("<info>[✓]</info> {$this->type} '{$this->filename}' added.");
+        info("[✓] {$this->model->type} '{$this->model->filename}' added.");
     }
 
-    /**
-     * Create partial.
-     *
-     * @return bool|null
-     */
-    protected function createPartial()
+    protected function createModel(): void
     {
-        $stub = $this->getStub('/partial.antlers.html.stub');
-        $contents = Str::of($stub)
-            ->replace('{{ partial_name }}', $this->partial_name)
-            ->replace('{{ partial_description }}', $this->partial_description)
-            ->replace('{{ folder }}', $this->folder)
-            ->replace('{{ filename }}', $this->filename);
+        $this->model = app(Partial::class);
+    }
 
-        File::put(base_path("resources/views/{$this->folder}/_{$this->filename}.antlers.html"), $contents);
+    protected function createTemplate(): void
+    {
+        $this->operations[] = [
+            'type' => 'copy',
+            'input' => 'stubs/partial.antlers.html.stub',
+            'output' => "resources/views/{$this->model->folder}/_{$this->model->filename}.antlers.html",
+            'replacements' => [
+                '{{ partial_name }}' => $this->model->name,
+                '{{ partial_description }}' => $this->model->description,
+                '{{ folder }}' => $this->model->folder,
+            ],
+        ];
+    }
+
+    protected function runOperations(): void
+    {
+        app(Installable::class, [
+            'config' => [
+                'name' => $this->model->name,
+                'handle' => $this->model->filename,
+                'operations' => $this->operations,
+                'base_path' => base_path('vendor/studio1902/statamic-peak-commands/resources'),
+            ],
+        ])->install();
     }
 }

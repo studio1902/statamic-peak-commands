@@ -1,0 +1,21 @@
+{{#
+    @name {{ name }}
+    @desc The {{ name }} component.
+    @set page.article.{{ filepath_dotted }}{{ filename }}
+#}}
+
+<!-- /components/{{ filepath }}_{{ filename }}.antlers.html -->
+<div
+    class="
+        not-prose
+        {{ switch(
+            (size == 'md') => 'span-md',
+            (size == 'lg') => 'span-lg',
+            (size == 'xl') => 'span-xl',
+            () => 'span-md'
+        )}}
+    "
+>
+    <h2>🔧<br>{{ name }}</h2>
+</div>
+<!-- End: /components/{{ filepath }}_{{ filename }}.antlers.html -->
