@@ -3,6 +3,7 @@
 namespace Studio1902\PeakCommands\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Studio1902\PeakCommands\Operations\Operation;
 use Studio1902\PeakCommands\RegistryManager;
 
 /**
@@ -17,6 +18,7 @@ use Studio1902\PeakCommands\RegistryManager;
  * @method static void appendNamespace(string $namespace)
  * @method static void prependNamespace(string $namespace)
  * @method static void removeNamespace(string $namespace)
+ * @method static Operation resolveOperation(string $class, array $config)
  *
  * @see \Studio1902\PeakCommands\RegistryManager
  */

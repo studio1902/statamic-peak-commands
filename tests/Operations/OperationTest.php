@@ -2,7 +2,7 @@
 
 namespace Studio1902\PeakCommands\Tests\Operations;
 
-use Studio1902\PeakCommands\Operations\Operation;
+use Studio1902\PeakCommands\Facades\Registry;
 use Studio1902\PeakCommands\Tests\TestCase;
 
 class OperationTest extends TestCase
@@ -17,8 +17,8 @@ class OperationTest extends TestCase
 
         $expected = app(\Studio1902\PeakCommands\Operations\Copy::class, ['config' => $config]);
 
-        $this->assertEquals($expected, Operation::resolve('copy', $config));
-        $this->assertEquals($expected, Operation::resolve('\Studio1902\PeakCommands\Operations\Copy', $config));
-        $this->assertEquals($expected, Operation::resolve(\Studio1902\PeakCommands\Operations\Copy::class, $config));
+        $this->assertEquals($expected, Registry::resolveOperation('copy', $config));
+        $this->assertEquals($expected, Registry::resolveOperation('\Studio1902\PeakCommands\Operations\Copy', $config));
+        $this->assertEquals($expected, Registry::resolveOperation(\Studio1902\PeakCommands\Operations\Copy::class, $config));
     }
 }

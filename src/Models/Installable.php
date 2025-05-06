@@ -5,6 +5,7 @@ namespace Studio1902\PeakCommands\Models;
 use Statamic\Facades\Config;
 use Statamic\Support\Arr;
 use Statamic\Support\Str;
+use Studio1902\PeakCommands\Facades\Registry;
 use Studio1902\PeakCommands\Operations\Operation;
 
 class Installable
@@ -50,7 +51,7 @@ class Installable
     public function install(): self
     {
         return collect($this->operations)
-            ->map(fn (array $operation) => Operation::resolve(Arr::get($operation, 'type'), $operation))
+            ->map(fn (array $operation) => Registry::resolveOperation(Arr::get($operation, 'type'), $operation))
             ->reduce(fn (Installable $installable, Operation $operation) => $operation->hydrate($installable)->run(), $this);
     }
 

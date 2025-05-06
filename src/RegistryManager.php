@@ -3,7 +3,9 @@
 namespace Studio1902\PeakCommands;
 
 use Exception;
+use Illuminate\Support\Str;
 use Statamic\Support\Arr;
+use Studio1902\PeakCommands\Operations\Operation;
 
 class RegistryManager
 {
@@ -84,6 +86,20 @@ class RegistryManager
         if (($key = array_search($namespace, $this->namespaces)) !== false) {
             Arr::forget($this->namespaces, $key);
         }
+    }
+
+    public function resolveOperation(string $class, array $config): Operation
+    {
+        if (Str::contains($class, '\\')) {
+            return app($class, ['config' => $config]);
+        }
+
+        $className = collect($this->getNamespaces())
+            ->map(fn (string $namespace) => $namespace.'\\'.Str::studly($class))
+            ->filter(fn (string $class) => class_exists($class))
+            ->first();
+
+        return app($className, ['config' => $config]);
     }
 
     protected function removePath(string $path, string $type): void
