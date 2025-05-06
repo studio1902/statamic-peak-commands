@@ -48,7 +48,7 @@ class MakeBlock extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/block.antlers.html.stub',
-            'output' => 'resources/views/page_builder/_{{ handle }}.antlers.html',
+            'output' => 'resources/views/page_builder/{{ filepath }}_{{ handle }}.antlers.html',
         ];
     }
 
@@ -57,7 +57,7 @@ class MakeBlock extends Command
         $this->operations[] = [
             'type' => 'copy',
             'input' => 'stubs/fieldset_block.yaml.stub',
-            'output' => 'resources/fieldsets/{{ handle }}.yaml',
+            'output' => 'resources/fieldsets/{{ filepath }}{{ handle }}.yaml',
         ];
     }
 

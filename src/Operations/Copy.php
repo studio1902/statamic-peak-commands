@@ -44,6 +44,7 @@ class Copy extends Operation
     public function run(): Installable
     {
         $this->output = Str::of($this->output)->replace('{{ handle }}', $this->installable->renameHandle);
+        $this->output = Str::of($this->output)->replace('{{ filepath }}', $this->installable->filepath);
 
         Site::hasMultiple()
             ? $this->output = Str::of($this->output)->replace('{{ multisite_handle }}', Site::default()->handle)
@@ -131,6 +132,8 @@ class Copy extends Operation
             '{{ name }}' => $this->installable->renameName,
             '{{ singular_handle }}' => $this->installable->renameSingularHandle,
             '{{ singular_name }}' => $this->installable->renameSingularName,
+            '{{ filepath }}' => $this->installable->filepath,
+            '{{ filepath_dotted }}' => Str::of($this->installable->filepath)->replace('/', '.'),
         ];
 
         return collect(array_merge($this->replacements, $defaultReplacements));
