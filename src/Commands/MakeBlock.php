@@ -35,7 +35,7 @@ class MakeBlock extends Command
 
         $this->runOperations();
 
-        info("<info>[✓]</info> Peak page builder block '{$this->model->name}' added.");
+        info("[✓] Peak page builder block '{$this->model->name}' added.");
     }
 
     protected function createModel(): void

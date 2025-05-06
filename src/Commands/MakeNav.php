@@ -35,9 +35,10 @@ class MakeNav extends Command
         $this->grantPermissions();
 
         $this->runOperations();
-        $this->clearCache();
 
-        info("<info>[✓]</info> Navigation '{$this->model->name}' created.");
+        info("[✓] Navigation '{$this->model->name}' created.");
+
+        $this->clearCache();
     }
 
     protected function createConfiguration(): void

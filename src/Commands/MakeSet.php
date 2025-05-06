@@ -35,7 +35,7 @@ class MakeSet extends Command
 
         $this->runOperations();
 
-        info("<info>[✓]</info> Peak page builder Article set '{$this->model->name}' added.");
+        info("[✓] Peak page builder Article set '{$this->model->name}' added.");
     }
 
     protected function createModel(): void

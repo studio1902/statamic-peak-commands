@@ -32,7 +32,7 @@ class MakePartial extends Command
 
         $this->runOperations();
 
-        info("<info>[✓]</info> {$this->model->type} '{$this->model->filename}' added.");
+        info("[✓] {$this->model->type} '{$this->model->filename}' added.");
     }
 
     protected function createModel(): void

@@ -25,23 +25,25 @@ class ClearSite extends Command
 
     public function handle(): void
     {
-        $clear_site = confirm(
+        $shouldClear = confirm(
             label: 'Do you want to clear all default Peak content?',
             default: false
         );
 
-        if ($clear_site) {
-            $this->trashAssets();
-            $this->clearGlobalSocialMedia();
-            $this->clearHomePage();
-            $this->trashPagesButHomeAnd404();
-            $this->clearNavigation();
-
-            $this->clearGlideCache();
-            $this->clearCache();
-
-            info('<info>[✓]</info> Your view from the peak is clear.');
+        if (! $shouldClear) {
+            return;
         }
+
+        $this->trashAssets();
+        $this->clearGlobalSocialMedia();
+        $this->clearHomePage();
+        $this->trashPagesButHomeAnd404();
+        $this->clearNavigation();
+
+        info('[✓] Your view from the peak is clear.');
+
+        $this->clearGlideCache();
+        $this->clearCache();
     }
 
     /**

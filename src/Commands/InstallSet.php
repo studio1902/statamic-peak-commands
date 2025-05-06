@@ -23,7 +23,7 @@ class InstallSet extends InstallCommand
         $this->handleInstallation(
             label: 'Which sets do you want to install into your article field?',
             emptyValidation: 'Please select at least one set. (Space)',
-            successMessage: fn (Installable $installable) => info("<info>[✓]</info> Peak Article Set '$installable->name' installed.")
+            successMessage: fn (Installable $installable) => info("[✓] Peak Article Set '$installable->name' installed.")
         );
     }
 }

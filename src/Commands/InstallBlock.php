@@ -23,7 +23,7 @@ class InstallBlock extends InstallCommand
         $this->handleInstallation(
             label: 'Which blocks do you want to install into your page builder?',
             emptyValidation: 'Please select at least one block. (Space)',
-            successMessage: fn (Installable $installable) => info("<info>[✓]</info> Peak page builder block '$installable->name' installed.")
+            successMessage: fn (Installable $installable) => info("[✓] Peak page builder block '$installable->name' installed.")
         );
     }
 }

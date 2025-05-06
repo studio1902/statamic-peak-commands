@@ -23,7 +23,7 @@ class InstallPreset extends InstallCommand
         $this->handleInstallation(
             label: 'Which presets do you want to install into your site?',
             emptyValidation: 'Please select at least one preset. (Space)',
-            successMessage: fn (Installable $installable) => info("<info>[✓]</info> Peak preset '$installable->name' installed.")
+            successMessage: fn (Installable $installable) => info("[✓] Peak preset '$installable->name' installed.")
         );
     }
 }

@@ -39,10 +39,11 @@ class MakeCollection extends Command
         $this->grantPermissions();
 
         $this->runOperations();
-        $this->clearCache();
         $this->showWidgetNotice();
 
-        info("<info>[✓]</info> Collection '{$this->model->name}' created.");
+        info("[✓] Collection '{$this->model->name}' created.");
+
+        $this->clearCache();
     }
 
     protected function createBlueprint(): void

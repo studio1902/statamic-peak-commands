@@ -35,9 +35,10 @@ class MakeTaxonomy extends Command
         $this->grantPermissions();
 
         $this->runOperations();
-        $this->clearCache();
 
-        info("<info>[✓]</info> Taxonomy '{$this->model->name}' created.");
+        info("[✓] Taxonomy '{$this->model->name}' created.");
+
+        $this->clearCache();
     }
 
     protected function createModel(): void

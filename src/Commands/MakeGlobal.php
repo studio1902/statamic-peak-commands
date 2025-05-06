@@ -34,9 +34,10 @@ class MakeGlobal extends Command
         $this->grantPermissions();
 
         $this->runOperations();
-        $this->clearCache();
 
-        info("<info>[✓]</info> Global '{$this->model->name}' created.");
+        info("[✓] Global '{$this->model->name}' created.");
+
+        $this->clearCache();
     }
 
     protected function createConfiguration(): void
