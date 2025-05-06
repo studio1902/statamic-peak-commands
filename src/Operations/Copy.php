@@ -60,21 +60,25 @@ class Copy extends Operation
         if ($this->skippable) {
             if ($this->checkExistenceAndSkip('File', "{$this->output}")) {
                 info("Skipped file: '{$this->output}'.");
-            } else {
-                $this->filesystem->put($this->output, $contents);
-                info("Installed file: '{$this->output}'.");
-            }
-        } else {
-            try {
-                $this->checkExistence('File', "{$this->output}");
-                $this->filesystem->put($this->output, $contents);
-            } catch (\Exception $e) {
-                error($e->getMessage());
-                exit();
+
+                return $this->installable;
             }
 
+            $this->filesystem->put($this->output, $contents);
             info("Installed file: '{$this->output}'.");
+
+            return $this->installable;
         }
+
+        try {
+            $this->checkExistence('File', "{$this->output}");
+            $this->filesystem->put($this->output, $contents);
+        } catch (\Exception $e) {
+            error($e->getMessage());
+            exit();
+        }
+
+        info("Installed file: '{$this->output}'.");
 
         return $this->installable;
     }
