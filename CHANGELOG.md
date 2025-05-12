@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.0.1 (2025-05-12)
+
+### What's improved
+- Use inline bard for banner preset. 5c1eb572 by @robdekort
+
 ## v9.0.0 (2025-05-06)
 
 ### What's new
