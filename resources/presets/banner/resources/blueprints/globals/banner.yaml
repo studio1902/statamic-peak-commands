@@ -8,17 +8,14 @@ tabs:
           -
             handle: use_banner
             field:
-              default: false
               display: 'Use banner'
               type: toggle
-              icon: toggle
-              listable: hidden
-              instructions_position: above
               localizable: true
           -
             handle: text
             field: common.text_basic
             config:
               localizable: true
+              inline: true
               validate:
                 - 'required_if:use_banner,true'
