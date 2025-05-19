@@ -180,6 +180,28 @@ tabs:
               if:
                 {{ singular_handle }}_type: 'equals offline'
           -
+            handle: location_country
+            field:
+              input_type: text
+              antlers: false
+              display: Country
+              type: text
+              icon: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              width: 50
+              instructions: 'Enter the two-letter ISO country code (e.g., NL, US, GB). If left empty, the site locale will be used.'
+              placeholder: 'e.g., NL'
+              validate:
+                - sometimes
+                - max:2
+                - min:2
+                - alpha
+              if:
+                {{ singular_handle }}_type: 'equals offline'
+          -
             handle: {{ singular_handle }}_url
             field:
               input_type: url
