@@ -1,5 +1,11 @@
 # Changelog
 
+## v9.0.2 (2025-05-20)
+
+### What's improved
+- Add `location_country` field to `events.yaml` and update `addressCountry` in `show.antlers.html`. #35 by @eugene-karuna
+- Remove double group class from an event preset partial. d20f41fe by @robdekort
+
 ## v9.0.1 (2025-05-12)
 
 ### What's improved
