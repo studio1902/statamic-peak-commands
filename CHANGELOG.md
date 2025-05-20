@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.1.0 (2025-05-20)
+
+### What's new
+- A password protect preset with which you can password protect entries. b75e52cb by @robdekort
+
 ## v9.0.2 (2025-05-20)
 
 ### What's improved
