@@ -1,0 +1,33 @@
+{{#
+    @name Login
+    @desc The Login page builder block.
+    @set page.page_builder.login
+#}}
+
+<!-- /page_builder/_login.antlers.html -->
+{{ partial:page_builder/block }}
+    <div class="span-content md:col-start-[col-5] md:col-span-4">
+        {{ protect:password_form }}
+            {{ if no_token }}
+                {{ 404 }}
+            {{ else }}
+                <div class="flex flex-col stack-4">
+                    <div class="flex flex-col stack-1">
+                        <label class="font-bold" for="password">
+                            {{ trans:strings.password }}
+                        </label>
+
+                        <input type="password" id="password" name="password" class="w-full border-neutral focus:border-primary rounded-sm caret-primary" />
+
+                        {{ errors:password }}
+                            <span class="mt-1 text-red-700 text-sm font-bold">{{ trans:strings.password_invalid }}</span>
+                        {{ /errors:password }}
+                    </div>
+
+                    {{ partial:components/button as="button" button_type="button" class="self-end" label="{ trans:strings.password_login }" }}
+                </div>
+            {{ /if }}
+        {{ /protect:password_form }}
+    </div>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_login.antlers.html -->

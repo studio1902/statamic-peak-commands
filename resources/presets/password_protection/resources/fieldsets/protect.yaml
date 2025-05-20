@@ -1,0 +1,30 @@
+title: Login
+fields:
+  -
+    handle: protect_entry
+    field:
+      type: toggle
+      display: Protect
+      instructions: 'Optionally protect this page with a password.'
+      instructions_position: below
+      listable: true
+  -
+    handle: protect
+    field:
+      default: password
+      type: hidden
+      display: Protect
+      if:
+        protect_entry: 'equals true'
+  -
+    handle: password
+    field:
+      type: text
+      display: Password
+      instructions: 'Protect this page with password.'
+      instructions_position: below
+      validate:
+        - sometimes
+        - required
+      if:
+        protect_entry: 'equals true'
