@@ -21,7 +21,7 @@
                     "@type": "PostalAddress",
                     "streetAddress": "{{ location_address }}",
                     "addressLocality": "{{ location_locality }}",
-                    "addressCountry": "NL"
+                    "addressCountry": "{{ location_country | upper ?? site:short_locale | upper }}"
                 }
             },
         {{ elseif {{ singular_handle }}_type.value == 'online' }}
