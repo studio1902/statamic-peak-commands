@@ -136,6 +136,10 @@ class Collection
 
     protected function promptForPage(): string
     {
+        if (! $this->shouldMount) {
+            return '';
+        }
+
         if ($this->addPage) {
             return text(
                 label: 'What should be the page title for this mount?',
