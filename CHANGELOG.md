@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.1.1 (2025-05-21)
+
+### What's fixed
+- Fix an issue with the flow in `make:collection`. e9700ec4 by @robdekort
+
 ## v9.1.0 (2025-05-20)
 
 ### What's new
