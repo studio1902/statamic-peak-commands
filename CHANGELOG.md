@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.2.1 (2025-06-05)
+
+### What's improved
+- Display folder names instead of handles when creating/installing page builder blocks or article sets. 9da2a4ed by @robdekort
+
 ## v9.2.0 (2025-06-05)
 
 ### What's new
