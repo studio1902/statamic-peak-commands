@@ -1,5 +1,13 @@
 # Changelog
 
+## v9.2.0 (2025-06-05)
+
+### What's new
+- A secured downloads presets. ecddfa34 by @robdekort
+
+### What's improved
+- Use `ul` for cards block. e5387664 by @robdekort
+
 ## v9.1.1 (2025-05-21)
 
 ### What's fixed
