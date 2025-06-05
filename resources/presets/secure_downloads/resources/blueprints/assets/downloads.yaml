@@ -1,0 +1,25 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: Download
+        fields:
+          -
+            handle: title
+            field:
+              input_type: text
+              antlers: false
+              type: text
+              display: Title
+              icon: text
+              localizable: false
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+          -
+            handle: description
+            field: common.text_basic
+            config:
+              display: Description

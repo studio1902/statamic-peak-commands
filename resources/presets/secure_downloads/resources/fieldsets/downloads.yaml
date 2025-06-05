@@ -1,0 +1,18 @@
+title: Downloads
+fields:
+  -
+    handle: title
+    field:
+      display: Title
+      type: text
+      always_save: false
+  -
+    handle: downloads
+    field:
+      min_files: 1
+      container: downloads
+      show_set_alt: false
+      type: assets
+      display: Downloads
+      validate:
+        - required
