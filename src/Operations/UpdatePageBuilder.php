@@ -72,7 +72,7 @@ class UpdatePageBuilder extends Operation
         if ($useExistingGroup) {
             $group = select(
                 label: "In which group of page builder blocks do you want to install: '$name'?",
-                options: array_keys($existingGroups),
+                options: collect($existingGroups)->map(fn($item)=> $item['display'])->all(),
                 scroll: 10
             );
 
