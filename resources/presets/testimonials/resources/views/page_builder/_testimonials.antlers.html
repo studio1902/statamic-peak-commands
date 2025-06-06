@@ -1,0 +1,52 @@
+{{#
+    @name {{ name }}
+    @desc The {{ name }} page builder block.
+    @set page.page_builder.{{ handle }}
+#}}
+
+<!-- /page_builder/_{{ handle }}.antlers.html -->
+{{ partial:page_builder/block class="gap-y-8" }}
+    {{ if block:heading }}
+        <header class="span-content md:text-center">
+            {{ partial:typography/h2 :content="block:heading" }}
+        </header>
+    {{ /if }}
+
+    {{
+        {{ handle }} = block:{{ handle }}
+            ? block:{{ handle }}
+            : { collection:{{ handle }} sort="random" limit="3" }
+    }}
+
+     <ul class="span-content grid md:grid-cols-3 gap-16">
+         {{ {{ handle }} }}
+            <li>
+                <figure class="stack-5">
+                    <blockquote class="text-2xl leading-tight ">
+                        {{ testimonial | widont | nl2br }}
+                    </blockquote>
+
+                    <figcaption class="flex items-center gap-3">
+                        {{ if image }}
+                            <div class="size-12 rounded-full overflow-clip" aria-hidden="true">
+                                {{ partial:statamic-peak-tools::components/picture :image="image" sizes="44px" aspect_ratio="1/1" lazy="true" cover="true" }}
+                            </div>
+                        {{ /if }}
+
+                        <span class="flex flex-col">
+                            <span class="text-neutral">
+                                {{ author }}
+                            </span>
+                            {{ if function || company }}
+                                <span class="text-sm">
+                                    {{ function }}{{ company ?= ', '}}{{ company }}
+                                </span>
+                            {{ /if }}
+                        </span>
+                    </figcaption>
+                </figure>
+            </li>
+         {{ /{{ handle }} }}
+     </ul>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_{{ handle }}.antlers.html -->

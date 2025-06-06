@@ -1,0 +1,54 @@
+title: {{ name }}
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: General
+        fields:
+          -
+            handle: title
+            field:
+              type: hidden
+              required: false
+              display: Title
+          -
+            handle: testimonial
+            field:
+              type: textarea
+              display: Testimonial
+              validate:
+                - required
+          -
+            handle: author
+            field:
+              type: text
+              display: Author
+              width: 33
+              validate:
+                - required
+          -
+            handle: function
+            field:
+              type: text
+              display: Function
+              width: 33
+          -
+            handle: company
+            field:
+              type: text
+              display: Company
+              width: 33
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        display: Image
+        fields:
+          -
+            handle: image
+            field: common.image
+            config:
+              width: 100
+              mode: grid
+              listable: true

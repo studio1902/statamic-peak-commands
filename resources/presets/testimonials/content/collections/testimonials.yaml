@@ -1,0 +1,12 @@
+title: {{ name }}
+template: default
+layout: layout
+revisions: false
+title_format: '{author}'
+slugs: false
+sort_dir: asc
+preview_targets:
+  -
+    label: Entry
+    url: '{permalink}'
+    refresh: true

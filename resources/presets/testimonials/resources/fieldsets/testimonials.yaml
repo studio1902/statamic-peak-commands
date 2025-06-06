@@ -1,0 +1,22 @@
+title: {{ name }}
+fields:
+  -
+    handle: heading
+    field:
+      type: text
+      localizable: true
+      display: Heading
+  -
+    handle: {{ handle }}
+    field:
+      max_items: 3
+      mode: default
+      create: true
+      collections:
+        - {{ handle }}
+      display: {{ name }}
+      type: entries
+      icon: entries
+      instructions: 'Select entries or leave empty to show all.'
+      listable: hidden
+      instructions_position: below
