@@ -1,5 +1,11 @@
 # Changelog
 
+## v9.3.1 (2025-06-06)
+
+### What's improved
+- Increase multisearch scroll size to 20. 07c8b686 by @robdekort
+- Update incorrect preset descriptions. df3eb970 by @robdekort
+
 ## v9.3.0 (2025-06-06)
 
 ### What's new
