@@ -1,5 +1,11 @@
 # Changelog
 
+## v9.3.0 (2025-06-06)
+
+### What's new
+- Testimonial preset. 4b26890a by @robdekort
+- Hero preset. 6d45a106 by @robdekort
+
 ## v9.2.1 (2025-06-05)
 
 ### What's improved
