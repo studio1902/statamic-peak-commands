@@ -1,0 +1,31 @@
+title: Hero
+fields:
+  -
+    handle: render
+    field:
+      display: 'Render hero'
+      type: toggle
+      always_save: false
+  -
+    handle: heading
+    field:
+      display: Heading
+      type: text
+      validate:
+        - 'required_if:render,true'
+      if:
+        render: 'equals true'
+  -
+    handle: subheading
+    field:
+      display: 'Subheading'
+      type: text
+      if:
+        render: 'equals true'
+  -
+    handle: buttons
+    field: buttons.buttons
+    config:
+      max_rows: 2
+      if:
+        render: 'equals true'

@@ -1,0 +1,20 @@
+{{#
+    @name Hero
+    @desc The hero optionally rendered on each page.
+#}}
+
+<!-- /layout/_hero.antlers.html -->
+<section class="fluid-grid pt-24 pb-8">
+    <div class="span-content md:col-span-8 md:col-start-[col-3] text-center stack-4">
+        <h1 class="text-5xl md:text-7xl font-bold">
+            {{ hero_heading  }}
+        </h1>
+
+        {{ if hero_subheading }}
+            <p class="text-lg">{{ hero_subheading }}</p>
+        {{ /if }}
+
+        {{ partial:components/buttons :buttons="hero_buttons" class="stack-space-8 justify-center" }}
+    </div>
+</section>
+<!-- End: /layout/_hero.antlers.html -->
