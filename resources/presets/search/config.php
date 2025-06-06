@@ -3,7 +3,7 @@
 return [
     'handle' => 'search',
     'name' => 'Search',
-    'description' => 'Search form search results.',
+    'description' => 'Search form and search results.',
     'operations' => [
         [
             'type' => 'copy',
