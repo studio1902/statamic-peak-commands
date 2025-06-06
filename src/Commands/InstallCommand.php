@@ -38,7 +38,7 @@ abstract class InstallCommand extends Command
             options: fn (string $value) => strlen($value) > 0
                 ? $options->filter(fn (string $item) => Str::contains($item, $value, true))->toArray()
                 : $options->toArray(),
-            scroll: 15,
+            scroll: 20,
             validate: fn ($values) => match (true) {
                 empty($values) => $emptyValidation,
                 default => null,
