@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.4.0 (2025-06-12)
+
+### What's new
+- Lottie animation preset. c8adf858 by @robdekort
+
 ## v9.3.1 (2025-06-06)
 
 ### What's improved
