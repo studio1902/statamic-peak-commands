@@ -1,0 +1,13 @@
+{{#
+    @name Animation
+    @desc The Animation  page builder block.
+    @set page.page_builder.animation
+#}}
+
+<!-- /page_builder/_animation.antlers.html -->
+{{ partial:page_builder/block }}
+    <figure class="span-content">
+        {{ partial:components/animation as="div" :animation="block:animation" class="size-64" }}
+    </figure>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_animation.antlers.html -->

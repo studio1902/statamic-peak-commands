@@ -1,0 +1,27 @@
+{{#
+    @name Animation
+    @desc Render a Lottie animation.
+#}}
+
+<!-- /components/_animation.antlers.html -->
+<{{ as or 'figure' }}
+    x-data="{
+        animation: '' ,
+        reducedMotion: false
+    }"
+    x-init="
+        reducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true,
+        animation = lottie.loadAnimation({
+            container: $root,
+            autoplay: false,
+            loop: {{ loop ?? '1' }},
+            renderer: 'svg',
+            path: '{{ animation }}'
+        })
+    "
+    x-intersect:enter="!reducedMotion && animation.play()"
+    x-intersect:leave.treshold.1="animation.stop()"
+    class="{{ class }}"
+    aria-hidden="true"
+></{{ as or 'figure' }}>
+<!-- End: /components/_animation.antlers.html -->

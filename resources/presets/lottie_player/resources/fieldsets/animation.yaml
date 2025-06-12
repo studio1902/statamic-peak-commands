@@ -1,0 +1,48 @@
+title: 'Animation'
+fields:
+  -
+    handle: animation
+    field:
+      max_files: 1
+      container: animations
+      show_set_alt: false
+      type: assets
+      display: Animation
+      instructions: 'This should be a Lottie file with the `.json` extension.'
+      instructions_position: below
+      width: 50
+      validate:
+        - required
+        - 'mimes:json'
+      localizable: true
+  -
+    handle: loop
+    field:
+      options:
+        -
+          key: 1
+          value: '2'
+        -
+          key: 2
+          value: '3'
+        -
+          key: 3
+          value: '4'
+        -
+          key: 4
+          value: '5'
+        -
+          key: 'false'
+          value: '1'
+        -
+          key: 'true'
+          value: Indefinitely
+      searchable: false
+      default: '1'
+      replicator_preview: false
+      type: select
+      display: Loop
+      width: 50
+      validate:
+        - required
+      localizable: true
