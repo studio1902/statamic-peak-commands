@@ -9,11 +9,13 @@ return [
             'type' => 'copy',
             'input' => '_index_content.antlers.html',
             'output' => 'resources/views/page_builder/_index_content.antlers.html',
+            'skippable' => true,
         ],
         [
             'type' => 'copy',
             'input' => 'index_content.yaml',
             'output' => 'resources/fieldsets/index_content.yaml',
+            'skippable' => true,
         ],
         [
             'type' => 'update_page_builder',
