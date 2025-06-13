@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.4.1 (2025-06-13)
+
+### What's improved
+- Add git tracking notifications to Secure download and Lottie presets. b67519c3 by @robdekort
+
 ## v9.4.0 (2025-06-12)
 
 ### What's new
