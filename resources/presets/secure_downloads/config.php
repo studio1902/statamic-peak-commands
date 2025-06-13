@@ -59,6 +59,10 @@ return [
         ],
         [
             'type' => 'notify',
+            'content' => "Add this to your `paths` array to your `config/statamic/git.php` file:\n\nstorage_path('downloads'),",
+        ],
+        [
+            'type' => 'notify',
             'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Downloads\n'download' => 'Download',",
         ],
     ],

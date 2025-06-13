@@ -62,6 +62,10 @@ return [
         ],
         [
             'type' => 'notify',
+            'content' => "Add this to your `paths` array to your `config/statamic/git.php` file:\n\public_path('animations'),",
+        ],
+        [
+            'type' => 'notify',
             'content' => "Add this to your `resources/js/site.js` file:\n\nimport intersect from '@alpinejs/intersect'\nimport lottie from 'lottie-web'\n\n// Init Lottie\nwindow.lottie = lottie\n\nAlpine.plugin([collapse, focus, intersect, morph, persist, precognition])",
         ],
     ],
