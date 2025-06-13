@@ -1,0 +1,247 @@
+title: Links
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: General
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              localizable: true
+              listable: true
+              display: Title
+              validate:
+                - required
+          -
+            handle: layout
+            field:
+              type: hidden
+              default: links
+      -
+        display: Introduction
+        fields:
+          -
+            handle: profile_image
+            field: common.image
+            config:
+              mode: list
+              display: 'Profile image'
+              width: 50
+          -
+            handle: heading
+            field:
+              type: text
+              display: Heading
+          -
+            handle: introduction
+            field: common.text_basic
+            config:
+              display: Introduction
+              remove_empty_nodes: true
+      -
+        display: Links
+        fields:
+          -
+            handle: sections
+            field:
+              collapse: accordion
+              button_label: 'Add section'
+              type: replicator
+              display: Sections
+              sets:
+                section:
+                  display: Section
+                  sets:
+                    section:
+                      display: Section
+                      fields:
+                        -
+                          handle: heading
+                          field:
+                            type: text
+                            display: Heading
+                        -
+                          handle: introduction
+                          field: common.text_basic
+                          config:
+                            display: Introduction
+                        -
+                          handle: links
+                          field:
+                            collapse: true
+                            fullscreen: false
+                            button_label: 'Add link'
+                            type: replicator
+                            display: Links
+                            replicator_preview: false
+                            validate:
+                              - required
+                            sets:
+                              links:
+                                display: Links
+                                sets:
+                                  image:
+                                    display: Image
+                                    icon: media-image-picture-orientation
+                                    fields:
+                                      -
+                                        handle: icon
+                                        field:
+                                          directory: resources/svg/phosphor-fill/
+                                          type: icon
+                                          display: Icon
+                                          replicator_preview: false
+                                          width: 50
+                                      -
+                                        handle: title
+                                        field:
+                                          type: text
+                                          display: Title
+                                          width: 100
+                                          validate:
+                                            - required
+                                      -
+                                        handle: url
+                                        field:
+                                          input_type: url
+                                          type: text
+                                          display: URL
+                                          replicator_preview: false
+                                          validate:
+                                            - required
+                                            - active_url
+                                      -
+                                        handle: image
+                                        field: common.image
+                                        config:
+                                          replicator_preview: false
+                                          mode: grid
+                                          width: 50
+                                  plain:
+                                    display: Plain
+                                    icon: link
+                                    fields:
+                                      -
+                                        handle: icon
+                                        field:
+                                          directory: resources/svg/phosphor-fill/
+                                          type: icon
+                                          display: Icon
+                                          replicator_preview: false
+                                          width: 50
+                                      -
+                                        handle: title
+                                        field:
+                                          type: text
+                                          display: Title
+                                          width: 100
+                                          validate:
+                                            - required
+                                      -
+                                        handle: url
+                                        field:
+                                          input_type: url
+                                          type: text
+                                          display: URL
+                                          replicator_preview: false
+                                          validate:
+                                            - required
+                                            - active_url
+                                  video:
+                                    display: Video
+                                    icon: media-webcam-video
+                                    fields:
+                                      -
+                                        handle: icon
+                                        field:
+                                          directory: resources/svg/phosphor-fill/
+                                          type: icon
+                                          display: Icon
+                                          replicator_preview: false
+                                          width: 50
+                                      -
+                                        handle: title
+                                        field:
+                                          type: text
+                                          display: Title
+                                          width: 100
+                                          validate:
+                                            - required
+                                      -
+                                        handle: video_url
+                                        field:
+                                          type: video
+                                          display: Video
+                                          replicator_preview: false
+                                          validate:
+                                            - required
+  seo:
+    display: SEO
+    sections:
+      -
+        display: Basic
+        instructions: 'Basic SEO settings.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_basic'
+      -
+        display: Advanced
+        instructions: 'Advanced SEO settings.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_advanced'
+      -
+        display: 'Open Graph'
+        instructions: 'Open Graph meta tags for social sharing.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_open_graph'
+      -
+        display: Sitemap
+        instructions: 'Sitemap configuration.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_sitemap'
+      -
+        display: 'JSON-ld Schema'
+        instructions: 'Custom JSON-ld schema objects.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_jsonld'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        display: Meta
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate:
+                - required
+              display: Slug
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
+              localizable: true
+              display: Parent
+      -
+        display: Styling
+        fields:
+          -
+            handle: background_image
+            field: common.image
+            config:
+              mode: grid
+              display: 'Background image'

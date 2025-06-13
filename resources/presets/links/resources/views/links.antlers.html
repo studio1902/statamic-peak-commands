@@ -1,0 +1,116 @@
+{{#
+    @name Layout
+    @desc The default layout file.
+#}}
+
+<!-- /layout.antlers.html -->
+<!doctype html>
+<html lang="{{ site:short_locale }}" class="antialiased scroll-smooth scroll-pt-4">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        {{ vite src="resources/css/site.css|resources/js/site.js" }}
+        {{ partial:statamic-peak-seo::snippets/seo }}
+        {{ partial:statamic-peak-browser-appearance::snippets/browser_appearance }}
+        {{ partial:statamic-peak-tools::snippets/live_preview }}
+        {{ stack:head }}
+    </head>
+    <body class="flex flex-col min-h-screen bg-white selection:bg-primary selection:text-white">
+        {{ stack:seo_body }}
+        {{ partial:statamic-peak-tools::snippets/noscript }}
+        {{ partial:statamic-peak-tools::navigation/skip_links }}
+        {{ partial:statamic-peak-tools::components/toolbar }}
+
+        {{ if background_image }}
+            <div class="fixed inset-0 bg-white" aria-hidden="true">
+                {{ partial:statamic-peak-tools::components/picture :image="background_image" cover="true" sizes="100vw" blur="20" class="opacity-55" }}
+            </div>
+        {{ /if }}
+
+        <header class="relative fluid-grid pt-12 md:pt-16">
+            <div class="span-content md:col-span-6 md:col-start-5 flex flex-col items-center stack-4 text-center">
+                {{ if profile_image }}
+                    <figure class="size-24 rounded-full overflow-clip border-3 border-white shadow">
+                        {{ partial:statamic-peak-tools::components/picture :image="profile_image" cover="true" sizes="100px" }}
+                    </figure>
+                {{ /if }}
+
+                {{ partial:typography/h1 :when="heading" :content="heading" }}
+
+                {{ partial:typography/prose :when="introduction" }}
+                    {{ introduction }}
+                {{ /partial:typography/prose }}
+
+                {{ if social_media:social_media }}
+                    <div class="flex gap-1">
+                        {{ social_media:social_media }}
+                            <a class="p-1 text-neutral" href="{{ prefix }}{{ handle }}" rel="noopener{{ type == 'mastodon' ?= ' me' }}" aria-label="{{ config:app:name }} {{ trans:strings.on }} {{ type | title }}">{{ svg src="phosphor-fill/{type}-logo" attr:class="w-7 h-7 overflow-visible fill-current" attr:alt="" attr:aria-hidden="true" }}</a>
+                        {{ /social_media:social_media }}
+                    </div>
+                {{ /if }}
+            </div>
+        </header>
+
+        <main class="relative py-12 md:py-16 stack-12 md:stack-16" id="content">
+            {{ sections }}
+                <section class="fluid-grid">
+                    <div class="span-content md:col-span-6 md:col-start-5 stack-4 text-center">
+                        {{ partial:typography/h2 :when="heading" :content="heading" }}
+
+                        {{ partial:typography/prose :when="introduction" }}
+                            {{ introduction }}
+                        {{ /partial:typography/prose }}
+
+                        <ul class="text-left stack-1.5">
+                            {{ links scope="link" }}
+                                <li class="bg-white rounded-xl shadow">
+                                    <a href="{{ link:url }}" class="p-5 rounded-xl flex items-center gap-3 -outline-offset-4">
+                                        {{ svg :src="link:icon" :when="link:icon" class="size-5" }}
+
+                                        {{ partial:typography/h3 :content="link:title" }}
+                                    </a>
+
+                                    {{ if type === 'image' }}
+                                        <div class="pb-5 px-5">
+                                            <figure class="w-full rounded-lg overflow-clip">
+                                                {{ partial:statamic-peak-tools::components/picture :image="link:image" sizes="(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw" }}
+                                            </figure>
+                                        </div>
+                                    {{ /if }}
+
+                                    {{ if type === 'video' }}
+                                        <div class="pb-5 px-5">
+                                            {{ partial:components/consent_gate class="w-full rounded-lg overflow-clip" }}
+                                                <iframe class="absolute top-0 left-0 w-full h-full" width="100%" src="{{ video_url | embed_url }}" height="auto" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            {{ /partial:components/consent_gate }}
+                                        </div>
+                                    {{ /if }}
+                                    </a>
+                                </li>
+                            {{ /links }}
+                        </ul>
+                    </div>
+                </section>
+            {{ /sections }}
+        </main>
+
+        <footer class="relative fluid-grid py-4 mt-auto">
+            <div class="span-content flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
+                <div class="flex flex-col gap-4 md:flex-row text-xs font-bold">
+                    <span>
+                        &copy; {{ configuration:copyright_since }}
+                        {{ unless (now | format('Y')) == configuration:copyright_since }}
+                            - {{ now | format('Y') }}
+                            {{ /unless }}
+                        {{ configuration:copyright_name ?? config:app:name }}
+                    </span>
+
+                    {{# Let's users reset consent when you use the consent banner. #}}
+                    {{ yield:reset_consent }}
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+<!-- End: /layout.antlers.html -->
