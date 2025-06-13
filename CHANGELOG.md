@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.5.0 (2025-06-13)
+
+### What's new
+- Links preset. 7569b4b1 by @robdekort
+
 ## v9.4.1 (2025-06-13)
 
 ### What's improved
