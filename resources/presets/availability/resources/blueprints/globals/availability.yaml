@@ -1,0 +1,28 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: 'Availability'
+        instructions: 'Configure availability.'
+        fields:
+          -
+            handle: now
+            field:
+              type: toggle
+              display: 'Availability now'
+              instructions: 'Set when you''re available right away.'
+              instructions_position: 'below'
+              localizable: false
+              width: 50
+          -
+            handle: from
+            field:
+              display: 'Availability from'
+              instructions: 'Set a date in the month you become available. If the current date is later, a month will automatically be added.'
+              instructions_position: 'below'
+              type: date
+              width: 50
+              localizable: false
+              if:
+                now: 'equals false'

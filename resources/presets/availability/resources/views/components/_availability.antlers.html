@@ -1,0 +1,23 @@
+{{#
+    @name Availability
+    @desc Render availability.
+#}}
+
+{{ if availability:now || availability:from }}
+    <!-- /components/_availability.antlers.html -->
+    <div class="flex items-center gap-1">
+        <div class="relative size-3.5 p-0.75 rounded-full bg-[#1BB700]" aria-hidden="true">
+            <div class="absolute inset-0.25 rounded-full bg-[#1BB700] animate-ping"></div>
+            <div class="relative w-full h-full rounded-full bg-[#199C01] "></div>
+        </div>
+        {{ if availability:now }}
+            {{ trans:strings.availability_now }}<br>
+        {{ elseif availability:from | is_future }}
+            {{ trans:strings.availability month="{ availability:from | iso_format('MMMM YYYY') }" }}
+        {{ else }}
+            {{? $next_month = \Carbon\Carbon::now()->addMonth(1) ?}}
+            {{ trans:strings.availability month="{ {{ next_month }} | iso_format('MMMM YYYY') }" }}
+        {{ /if }}
+    </div>
+    <!-- End: /components/_availability.antlers.html -->
+{{ /if }}
