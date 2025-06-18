@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.6.0 (2025-06-18)
+
+### What's new
+- Availability preset. 399b8f5f by @robdekort
+
 ## v9.5.0 (2025-06-13)
 
 ### What's new
