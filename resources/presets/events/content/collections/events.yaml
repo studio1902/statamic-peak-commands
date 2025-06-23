@@ -13,4 +13,3 @@ preview_targets:
   -
     label: Entry
     url: '{permalink}'
-    refresh: false
