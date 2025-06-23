@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.6.1 (2025-06-23)
+
+### What's improved
+- Remove the 'refresh' property in events preset to enable live preview by default. #36 by @eugene-karuna
+
 ## v9.6.0 (2025-06-18)
 
 ### What's new
