@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.6.2 (2025-06-27)
+
+### What's improved
+- Locale instructions are more clear. #37 by @jelleroorda and a0b0e2cc by @robdekort
+
 ## v9.6.1 (2025-06-23)
 
 ### What's improved
