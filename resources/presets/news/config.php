@@ -91,7 +91,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_all' => 'All articles',\n'{{ handle }}_more' => 'More articles',\n'{{ handle }}_read_more' => 'Read more',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n// {{ name }}\n'{{ handle }}_all' => 'All articles',\n'{{ handle }}_more' => 'More articles',\n'{{ handle }}_read_more' => 'Read more',",
         ],
         [
             'type' => 'notify',

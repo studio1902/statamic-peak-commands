@@ -86,7 +86,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_all' => 'All {{ name }}',\n'{{ handle }}_date' => 'Date',\n'{{ handle }}_date_start' => 'Start date',\n'{{ handle }}_date_end' => 'End date',\n'{{ handle }}_more' => 'More {{ name }}',\n'{{ handle }}_when' => 'When',\n'{{ handle }}_where' => 'Where',\n'{{ handle }}_organizer' => 'Organizer',\n'{{ handle }}_tickets' => 'Tickets',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n// {{ name }}\n'{{ handle }}_all' => 'All {{ name }}',\n'{{ handle }}_date' => 'Date',\n'{{ handle }}_date_start' => 'Start date',\n'{{ handle }}_date_end' => 'End date',\n'{{ handle }}_more' => 'More {{ name }}',\n'{{ handle }}_when' => 'When',\n'{{ handle }}_where' => 'Where',\n'{{ handle }}_organizer' => 'Organizer',\n'{{ handle }}_tickets' => 'Tickets',",
         ],
         [
             'type' => 'notify',

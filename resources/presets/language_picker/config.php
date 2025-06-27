@@ -16,7 +16,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Language picker\n'language_open' => 'Open language picker. Current language is :current_language',\n'language_close' => 'Close language picker',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n// Language picker\n'language_open' => 'Open language picker. Current language is :current_language',\n'language_close' => 'Close language picker',",
         ],
     ],
 ];

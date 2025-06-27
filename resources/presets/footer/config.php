@@ -42,7 +42,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Footer\n'privacy_statement' => 'Privacy statement',\n'cookie_notice' => 'Cookie notice',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n// Footer\n'privacy_statement' => 'Privacy statement',\n'cookie_notice' => 'Cookie notice',",
         ],
     ],
 ];

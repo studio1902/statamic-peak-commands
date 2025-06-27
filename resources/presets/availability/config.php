@@ -31,7 +31,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n'availability' => 'available from :month',\n'availability_now' => 'available right now',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n'availability' => 'available from :month',\n'availability_now' => 'available right now',",
         ],
     ],
 ];

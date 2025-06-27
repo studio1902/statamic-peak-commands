@@ -52,7 +52,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n'password' => 'Password',\n'password_invalid' => 'Password invalid.',\n'password_login' => 'Login',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n'password' => 'Password',\n'password_invalid' => 'Password invalid.',\n'password_login' => 'Login',",
         ],
     ],
 ];

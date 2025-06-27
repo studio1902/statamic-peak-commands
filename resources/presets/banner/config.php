@@ -36,7 +36,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Banner\n'banner_close' => 'Close banner',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n// Banner\n'banner_close' => 'Close banner',",
         ],
     ],
 ];

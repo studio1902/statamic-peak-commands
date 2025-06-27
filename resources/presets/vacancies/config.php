@@ -67,7 +67,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// {{ name }}\n'{{ handle }}_expires' => 'Expires',\n'{{ handle }}_hours' => 'Hours',\n'{{ handle }}_published' => 'Published',\n'{{ handle }}_region' => 'Region',\n'{{ handle }}_employment_type' => 'Employment type',\n'{{ handle }}_part_time' => 'Part time',\n'{{ handle }}_full_time' => 'Full time',\n'{{ handle }}_salary_min' => 'Minimum salary',\n'{{ handle }}_salary_max' => 'Maximum salary',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n// {{ name }}\n'{{ handle }}_expires' => 'Expires',\n'{{ handle }}_hours' => 'Hours',\n'{{ handle }}_published' => 'Published',\n'{{ handle }}_region' => 'Region',\n'{{ handle }}_employment_type' => 'Employment type',\n'{{ handle }}_part_time' => 'Part time',\n'{{ handle }}_full_time' => 'Full time',\n'{{ handle }}_salary_min' => 'Minimum salary',\n'{{ handle }}_salary_max' => 'Maximum salary',",
         ],
         [
             'type' => 'notify',

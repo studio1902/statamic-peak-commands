@@ -105,7 +105,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Pricing and features\n'pricing_title' => 'Plans and included features',\n'pricing_included_sr' => 'Included in :tier tier.',\n'pricing_excluded_sr' => 'Excluded in :tier tier.',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n// Pricing and features\n'pricing_title' => 'Plans and included features',\n'pricing_included_sr' => 'Included in :tier tier.',\n'pricing_excluded_sr' => 'Excluded in :tier tier.',",
         ],
         [
             'type' => 'notify',

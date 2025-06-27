@@ -63,7 +63,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/locale/strings.php` file:\n\n// Downloads\n'download' => 'Download',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n\n// Downloads\n'download' => 'Download',",
         ],
     ],
 ];

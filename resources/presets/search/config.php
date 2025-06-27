@@ -17,7 +17,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `lang/en/strings.php` file:\n(and possibly any other locales you support)\n\n// Search\n'search' => 'Search',\n'search_close' => 'Close search',\n'search_open' => 'Open search',\n'search_no_results' => 'No results found',\n'search_results_for' => 'Results for',",
+            'content' => "Add this to your `lang/locale/strings.php` file:\n(and possibly any other locales you support)\n(and possibly any other locales you support)\n\n// Search\n'search' => 'Search',\n'search_close' => 'Close search',\n'search_open' => 'Open search',\n'search_no_results' => 'No results found',\n'search_results_for' => 'Results for',",
         ],
         [
             'type' => 'notify',
