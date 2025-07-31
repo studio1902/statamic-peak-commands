@@ -86,8 +86,11 @@ class Copy extends Operation
 
     protected function getStub(string $stubPath, string $basePath): string
     {
-        $publishedPath = resource_path('stubs/vendor/statamic-peak-commands/'.ltrim($stubPath, " /\t\n\r\0\x0B"));
-        $addonPath = $basePath.DIRECTORY_SEPARATOR.ltrim($stubPath, " /\t\n\r\0\x0B");
+        $stubPath = ltrim($stubPath, " /\t\n\r\0\x0B");
+        $addonPath = $basePath.DIRECTORY_SEPARATOR.$stubPath;
+
+        $stubPath = Str::of($stubPath)->replaceStart('stubs/', '')->toString();
+        $publishedPath = resource_path('stubs/vendor/statamic-peak-commands/'.$stubPath);
 
         return File::get(File::exists($publishedPath) ? $publishedPath : $addonPath);
     }
