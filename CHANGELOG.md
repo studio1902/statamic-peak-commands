@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.6.3 (2025-07-31)
+
+### What's fixed
+- Use published stubs. 1333c954 by @marcorieser
+
 ## v9.6.2 (2025-06-27)
 
 ### What's improved
