@@ -94,16 +94,10 @@ tabs:
               max_rows: 7
               min_rows: 7
               add_row: 'Add day'
-          -
-            handle: phone_button
-            field:
-              type: section
-              listable: hidden
-              display: 'Phone number'
-              instructions: 'Configure a phone number.'
-              instructions_position: above
-              visibility: visible
-              always_save: false
+      -
+        display: 'Phone number'
+        instructions: 'Configure a phone number.'
+        fields:
           -
             handle: phone_number
             field:
