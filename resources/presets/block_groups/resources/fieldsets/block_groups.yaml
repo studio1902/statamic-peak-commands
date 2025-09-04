@@ -1,0 +1,13 @@
+title: 'Global Group Blocks'
+fields:
+  -
+    handle: block_group_info
+    field:
+      type: html
+      display: 'Available Block Groups'
+      html: '<div class="text-xs text-gray-700">To use a block group here, it must have "Available as Block" enabled in Block Groups Global. Select the block group below.</div>'
+  -
+    handle: block_group
+    field:
+      type: block_group_select
+      display: 'Block Group'
