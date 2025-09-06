@@ -27,8 +27,8 @@ return [
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/views/snippets/_block_groups.antlers.html',
-            'output' => 'resources/views/snippets/_block_groups.antlers.html',
+            'input' => 'resources/views/layout/_block_groups.antlers.html',
+            'output' => 'resources/views/layout/_block_groups.antlers.html',
         ],
         [
             'type' => 'copy',
@@ -51,7 +51,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add the following partials to your `resources/views/default.antlers.html` template:\n\n{{# Block Groups (before content, inside main) #}}\n{{ partial:snippets/block_groups position=\"before_content\" }}\n\n{{# Block Groups (after content, inside main) #}}\n{{ partial:snippets/block_groups position=\"after_content\" }}\n\n{{# Block Groups (before footer, outside main) #}}\n{{ partial:snippets/block_groups position=\"before_footer\" }}",
+            'content' => "Add the following partials to your `resources/views/default.antlers.html` template:\n\n{{# Block Groups (before content, inside main) #}}\n{{ partial:snippets/block_groups position=\"before_content\" }}\n\n{{# Block Groups (after content, inside main) #}}\n{{ partial:layout/block_groups position=\"after_content\" }}\n\n{{# Block Groups (before footer, outside main) #}}\n{{ partial:layout/block_groups position=\"before_footer\" }}",
         ],
     ],
 ];
