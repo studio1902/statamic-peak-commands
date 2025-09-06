@@ -4,34 +4,34 @@
     @param position The position to render blocks for (after_content, before_content or before_footer)
 #}}
 
-{{ $current_entry_id = id }}
-{{ $requested_position = position ?? 'after_content' }}
-{{ $slug = label | slugify}}
+{{ _current_entry_id = id }}
+{{ _requested_position = position ?? 'after_content' }}
+{{ _slug = label | slugify}}
 
 {{# Loop through all block groups #}}
 {{ block_groups:block_groups }}
     
     {{# Only process groups with auto-positioning in the requested position #}}
-    {{ if position != 'none' && position == $requested_position }}
+    {{ if position != 'none' && position == _requested_position }}
         
-        {{ $should_show = false }}
+        {{ _should_show = false }}
         
         {{# Check visibility mode for this group #}}
         {{ if visibility_mode == 'all' }}
-            {{ $should_show = true }}
+            {{ _should_show = true }}
         {{ elseif visibility_mode == 'whitelist' }}
             {{# Check if current page is in whitelist #}}
             {{ whitelist_entries }}
-                {{ if id == $current_entry_id }}
-                    {{ $should_show = true }}
+                {{ if id == _current_entry_id }}
+                    {{ _should_show = true }}
                 {{ /if }}
             {{ /whitelist_entries }}
         {{ elseif visibility_mode == 'blacklist' }}
-            {{ $should_show = true }}
+            {{ _should_show = true }}
             {{# Check if current page is in blacklist #}}
             {{ blacklist_entries }}
-                {{ if id == $current_entry_id }}
-                    {{ $should_show = false }}
+                {{ if id == _current_entry_id }}
+                    {{ _should_show = false }}
                 {{ /if }}
             {{ /blacklist_entries }}
         {{ /if }}
@@ -39,16 +39,16 @@
         {{# Check for page-specific override if the fieldset is used #}}
         {{ if visibility_override }}
             {{ if visibility_override == 'show' }}
-                {{ $should_show = true }}
+                {{ _should_show = true }}
             {{ elseif visibility_override == 'hide' }}
-                {{ $should_show = false }}
+                {{ _should_show = false }}
             {{ /if }}
         {{ /if }}
         
         {{# Render page builder blocks if conditions are met #}}
-        {{ if $should_show && page_builder }}
-            {{ if $requested_position == 'before_footer' }}
-                <div id="{{ $slug }}" class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" data-block-group="{{ $slug }}">
+        {{ if _should_show && page_builder }}
+            {{ if _requested_position == 'before_footer' }}
+                <div id="{{ _slug }}" class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" data-block-group="{{ _slug }}">
                     {{ page_builder scope="block" }}
                         {{ partial src="page_builder/{type}" }}
                     {{ /page_builder }}

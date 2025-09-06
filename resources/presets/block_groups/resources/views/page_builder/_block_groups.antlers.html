@@ -6,8 +6,8 @@
 
 <!-- /page_builder/_block_groups.antlers.html -->
 {{ block_groups:block_groups }}
-    {{ $slug = label | slugify }}
-    {{ if $slug == block:block_group && available_as_block }}
+    {{ _slug = label | slugify }}
+    {{ if _slug == block:block_group && available_as_block }}
         {{ page_builder scope="block" }}
             {{ partial src="page_builder/{type}" }}
         {{ /page_builder }}
