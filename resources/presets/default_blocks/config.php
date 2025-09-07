@@ -40,7 +40,7 @@ return [
             'block' => [
                 'name' => 'Default blocks',
                 'instructions' => 'Add a reusable block from the Default blocks global.',
-                'icon' => 'layers-filled',
+                'icon' => 'programming-module-box-cube',
                 'handle' => 'default_blocks',
             ],
         ],
