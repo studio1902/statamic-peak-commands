@@ -6,7 +6,7 @@ use Statamic\Fieldtypes\Select;
 use Statamic\Facades\GlobalSet;
 use Illuminate\Support\Str;
 
-class BlockGroupSelect extends Select
+class DefaultBlockSelect extends Select
 {
     protected $component = 'select';
     protected $categories = ['special'];
@@ -26,17 +26,17 @@ class BlockGroupSelect extends Select
     {
         $options = [];
         
-        // Get the Block Groups global data
-        $globalSet = GlobalSet::findByHandle('block_groups');
+        // Get the Default blocks global data
+        $globalSet = GlobalSet::findByHandle('default_blocks');
         
         if ($globalSet && $globalSet->inCurrentSite()) {
             $data = $globalSet->inCurrentSite()->data();
-            $blockGroups = $data->get('block_groups', []);
+            $defaultBlocks = $data->get('default_blocks', []);
             
-            foreach ($blockGroups as $group) {
+            foreach ($defaultBlocks as $block) {
                 // Only include groups that are available as blocks
-                if ($group['available_as_block'] ?? false) {
-                    $label = $group['label'] ?? 'Unnamed Block';
+                if ($block['available_as_block'] ?? false) {
+                    $label = $block['label'] ?? 'Unnamed Block';
                     $slug = Str::slug($label);
                     $options[] = [
                         'value' => $slug,

@@ -1,31 +1,33 @@
 tabs:
   main:
-    display: 'Block Groups'
+    display: 'Default blocks'
     sections:
       -
+        display: 'Default blocks'
+        instructions: 'Configure blocks that can appear automatically on pages or be manually placed via the page builder.'
         fields:
           -
-            handle: block_groups
+            handle: default_blocks
             field:
               type: replicator
-              display: 'Block Groups'
-              instructions: 'Each group can have different visibility settings and positions.'
-              button_label: 'Add Block Group'
+              display: 'Blocks'
+              instructions: 'Create reusable blocks with automatic positioning or manual page builder placement.'
+              button_label: 'Add Default block'
               collapse: accordion
               sets:
                 main:
                   display: Main
                   sets:
-                    block_group:
-                      display: 'Block Group'
-                      instructions: 'A group of page builder blocks with visibility settings.'
+                    default_block:
+                      display: 'Default block'
+                      instructions: 'Configure a reusable block with its content and display rules.'
                       fields:
                         -
                           handle: label
                           field:
                             type: text
                             display: 'Group Label'
-                            instructions: 'Internal label for this block group.'
+                            instructions: 'Internal label for this default block.'
                             validate:
                               - required
                             width: 50
@@ -55,7 +57,7 @@ tabs:
                           field:
                             type: button_group
                             display: 'Visibility Mode'
-                            instructions: 'Control which pages show this block group.'
+                            instructions: 'Control which pages show this default block.'
                             options:
                               all: 'All Pages'
                               whitelist: 'Only Selected'
@@ -69,7 +71,7 @@ tabs:
                           field:
                             type: entries
                             display: 'Show on These Pages'
-                            instructions: 'Select pages where this block group should appear.'
+                            instructions: 'Select pages where this default block should appear.'
                             collections:
                               - pages
                               - offerings
@@ -82,7 +84,7 @@ tabs:
                           field:
                             type: entries
                             display: 'Hide on These Pages'
-                            instructions: 'Select pages where this block group should NOT appear.'
+                            instructions: 'Select pages where this default block should NOT appear.'
                             collections:
                               - pages
                               - offerings
