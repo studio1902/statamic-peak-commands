@@ -2,8 +2,8 @@
 
 ## v9.7.0 (2025-09-08)
 
-### What's fixed
-- Use published stubs. 1333c954 by @marcorieser
+### What's new
+- Add default blocks preset. #38 by @porstendorfer
 
 ## v9.6.3 (2025-07-31)
 
