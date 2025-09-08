@@ -1,0 +1,16 @@
+{{#
+    @name Default blocks
+    @desc Renders a selected default block
+    @set page.page_builder.default_blocks
+#}}
+
+<!-- /page_builder/_default_blocks.antlers.html -->
+{{ default_blocks:default_blocks }}
+    {{ _slug = label | slugify }}
+    {{ if _slug == block:default_block && available_as_block }}
+        {{ page_builder scope="block" }}
+            {{ partial src="page_builder/{type}" }}
+        {{ /page_builder }}
+    {{ /if }}
+{{ /default_blocks:default_blocks }}
+<!-- End: /page_builder/_default_blocks.antlers.html -->

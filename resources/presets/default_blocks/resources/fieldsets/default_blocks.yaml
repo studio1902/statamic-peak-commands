@@ -1,0 +1,14 @@
+title: 'Default blocks'
+fields:
+  -
+    handle: default_block_info
+    field:
+      type: html
+      display: 'Select block'
+      html: '<div class="text-xs text-gray-700">Select a reusable block from the Default blocks global. Only blocks with "Available as Block" enabled will appear here.</div>'
+  -
+    handle: default_block
+    field:
+      type: default_block_select
+      display: 'Default block'
+      placeholder: 'Choose a default block'

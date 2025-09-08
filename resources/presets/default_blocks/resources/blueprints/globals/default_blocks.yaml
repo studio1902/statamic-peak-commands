@@ -1,0 +1,96 @@
+tabs:
+  main:
+    display: 'Default blocks'
+    sections:
+      -
+        display: 'Default blocks'
+        instructions: 'Configure blocks that can appear automatically on pages or be manually placed via the page builder.'
+        fields:
+          -
+            handle: default_blocks
+            field:
+              type: replicator
+              display: 'Blocks'
+              instructions: 'Create reusable blocks with automatic positioning or manual page builder placement.'
+              button_label: 'Add Default block'
+              collapse: accordion
+              sets:
+                main:
+                  display: Main
+                  sets:
+                    default_block:
+                      display: 'Default block'
+                      instructions: 'Configure a reusable block with its content and display rules.'
+                      fields:
+                        -
+                          handle: label
+                          field:
+                            type: text
+                            display: 'Group Label'
+                            instructions: 'Internal label for this default block.'
+                            validate:
+                              - required
+                            width: 50
+                        -
+                          handle: available_as_block
+                          field:
+                            type: toggle
+                            display: 'Available as Block'
+                            instructions: 'Make this group available as a reusable page builder block.'
+                            default: false
+                            width: 50
+                        -
+                          handle: position
+                          field:
+                            type: select
+                            display: 'Auto Position'
+                            instructions: 'Where should these blocks automatically appear?'
+                            options:
+                              none: 'None (Manual only)'
+                              before_content: 'Before main content (inside main)'
+                              after_content: 'After main content (inside main)'
+                              before_footer: 'Before footer (outside main)'
+                            default: none
+                            width: 50
+                        -
+                          handle: visibility_mode
+                          field:
+                            type: button_group
+                            display: 'Visibility Mode'
+                            instructions: 'Control which pages show this default block.'
+                            options:
+                              all: 'All Pages'
+                              whitelist: 'Only Selected'
+                              blacklist: 'All Except Selected'
+                            default: all
+                            width: 50
+                            if:
+                              position: 'not none'
+                        -
+                          handle: whitelist_entries
+                          field:
+                            type: entries
+                            display: 'Show on These Pages'
+                            instructions: 'Select pages where this default block should appear.'
+                            collections:
+                              - pages
+                              - offerings
+                            create: false
+                            if:
+                              visibility_mode: 'equals whitelist'
+                              enabled: 'equals true'
+                        -
+                          handle: blacklist_entries
+                          field:
+                            type: entries
+                            display: 'Hide on These Pages'
+                            instructions: 'Select pages where this default block should NOT appear.'
+                            collections:
+                              - pages
+                              - offerings
+                            create: false
+                            if:
+                              visibility_mode: 'equals blacklist'
+                              enabled: 'equals true'
+                        -
+                          import: page_builder
