@@ -1,0 +1,100 @@
+{{#
+    @name Account
+    @desc The Account page builder block.
+    @set page.page_builder.account
+#}}
+
+<!-- /page_builder/_account.antlers.html -->
+{{ if !logged_in }}
+    {{ redirect to="{ intranet:login_entry | url }" }}
+{{ /if }}
+
+{{ user }}
+    {{ if !email_verified_at }}
+        {{ redirect to="{ intranet:email_verify_entry | url }" }}
+    {{ /if }}
+{{ /user }}
+
+<div class="fluid-container flex flex-col gap-8">
+    {{ user }}
+        <section class="grid md:grid-cols-12 gap-8">
+            <header class="md:col-span-4">
+                {{ partial:typography/h3 as="h2" class="mb-2" content="{ trans:strings.account_basic }" }}
+
+                {{ partial:typography/prose as="div" }}
+                    {{ block:account_description }}
+                {{ /partial:typography/prose }}
+            </header>
+
+            <div class="md:col-span-8">
+                {{ user:profile_form redirect="#form" error_redirect="#form" id="form" class="grid md:grid-cols-2 gap-6 pt-1.5" }}
+                    {{ partial:components/form_input handle="first_name" type="text" label="{ trans:strings.account_first_name }" required="true" old_value="{ old:first_name }" value="{ first_name }" }}
+
+                    {{ partial:components/form_input handle="last_name" type="text" label="{ trans:strings.account_last_name }" required="true" old_value="{ old:last_name }" value="{ last_name }" }}
+
+                    {{ partial:components/form_input handle="email" type="email" label="{ trans:strings.account_email }" required="true" old_value="{ old:email }" value="{ email }" }}
+
+                    {{ partial:components/form_input handle="address" type="text" label="{ trans:strings.account_address }"  old_value="{ old:address }" value="{ address }" }}
+
+                    {{ partial:components/form_input handle="zip_code" type="text" label="{ trans:strings.account_zip_code }"  old_value="{ old:zip_code }" value="{ zip_code }" }}
+
+                    {{ partial:components/form_input handle="residence" type="text" label="{ trans:strings.account_residence }"  old_value="{ old:residence }" value="{ residence }" }}
+
+                    {{ if errors }}
+                        {{ partial:components/notification type="error" class="md:col-span-2" content="{ errors | list }" }}
+                    {{ /if }}
+
+                    {{ if success }}
+                        {{ partial:components/notification type="success" class="md:col-span-2" content="{ success }" }}
+                    {{ /if }}
+
+                    <div class="md:col-span-2 place-self-end flex items-center gap-6">
+                        <button class="p-1 -m-1 text-neutral-600 text-sm underline hover:text-primary rounded focus:outline-none focus-visible:ring focus-visible:ring-primary motion-safe:transition" type="reset">{{ trans:strings.account_cancel }}</button>
+
+                        {{ partial:components/form_submit label="{ trans:strings.account_save }" }}
+                    </div>
+                {{ /user:profile_form }}
+            </div>
+        </section>
+        <hr class="border-0 border-b border-primary/40">
+        <section class="grid md:grid-cols-12 gap-8">
+            <header class="md:col-span-4">
+                {{ partial:typography/h3 as="h2" class="mb-2" content="{ trans:strings.account_password }" }}
+
+                {{ partial:typography/prose as="div" }}
+                    {{ block:password_description }}
+                {{ /partial:typography/prose }}
+            </header>
+
+            <div class="md:col-span-8">
+                {{ user:password_form redirect="#form" error_redirect="#form" id="form" class="grid md:grid-cols-2 gap-6 pt-1.5" }}
+                    {{ partial:components/form_input handle="current_password" type="password" label="{ trans:strings.account_current_password }" required="true" old_value="{ old:current_password }" }}
+
+                    {{ partial:components/form_input handle="password" type="password" label="{ trans:strings.account_new_password }" required="true" old_value="{ old:password }" }}
+
+                    {{ partial:components/form_input handle="password_confirmation" type="password" label="{ trans:strings.account_new_password_confirmation }" required="true" old_value="{ old:password_confirmation }" }}
+
+                    {{ if errors }}
+                        {{ partial:components/notification type="error" class="md:col-span-2" content="{ errors | list }" }}
+                    {{ /if }}
+
+                    {{ if success }}
+                        {{ partial:components/notification type="success" class="md:col-span-2" content="{ success }" }}
+                    {{ /if }}
+
+                    <div class="md:col-span-2 place-self-end flex items-center gap-6">
+                        <button class="p-1 -m-1 text-neutral-600 text-sm underline hover:text-primary rounded focus:outline-none focus-visible:ring focus-visible:ring-primary motion-safe:transition" type="reset">{{ trans:strings.account_cancel }}</button>
+                        {{ partial:components/form_submit label="{ trans:strings.account_password_save }" }}
+                    </div>
+                {{ /user:password_form }}
+            </div>
+        </section>
+        <section class="flex justify-end">
+            <a class="flex items-center gap-2 p-1 -m-1 text-neutral-600 text-sm underline hover:text-primary rounded focus:outline-none focus-visible:ring focus-visible:ring-primary motion-safe:transition" href="{{ user:logout_url redirect="{ intranet:login_entry | url }" }}" title="{{ trans:strings.account_logout }}" aria-label="{{ trans:strings.account_logout }}">
+                <span>{{ trans:strings.account_logout }}</span>
+                {{ svg:logout class="w-4 h-4 fill-current overflow-visible" aria-hidden="true" }}
+            </a>
+        </section>
+    {{ /user }}
+</div>
+<!-- End: /page_builder/_account.antlers.html -->

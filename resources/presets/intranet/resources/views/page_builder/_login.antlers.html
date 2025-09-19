@@ -1,0 +1,65 @@
+{{#
+    @name Login
+    @desc The Login page builder block.
+    @set page.page_builder.login
+#}}
+
+<!-- /page_builder/_login.antlers.html -->
+{{ if logged_in }}
+    {{ redirect to="{ intranet:account_entry | url }" }}
+{{ /if }}
+
+<section class="overflow-hidden -mt-12 md:-mt-20">
+    <div class="fluid-container grid md:grid-cols-12 gap-8 md:gap-12">
+        <div class="md:col-span-6 lg:col-span-5 lg:col-start-2 relative p-6 mr-2 mb-2 bg-white rounded-lg" id="form">
+            <div class="absolute top-2 -right-2 -bottom-2 left-2 z-behind rounded-lg rounded-br-xl bg-secondary"></div>
+
+            {{ partial:typography/prose class="[&>h1,&>h2]:text-secondary [&>h1,&>h2]:text-4xl md:[&>h1,&>h2]:text-6xl [&>h1,&>h2]:mb-2 mb-8" }}
+                {{ block:introduction }}
+            {{ /partial:typography/prose }}
+
+            {{ user:login_form redirect="{ get:redirect ?? intranet:account_entry | url }" error_redirect="#form" class="flex flex-col gap-6" }}
+                {{ partial:components/form_input handle="email" type="email" label="{ trans:strings.account_email }" required="true" old_value="{ old:email }" }}
+
+                <div class="flex flex-col gap-2">
+                    {{ partial:components/form_input handle="password" type="password" label="{ trans:strings.account_password }" required="true" old_value="{ old:password }" }}
+
+                    <a class="p-1 -m-1 text-neutral-600 text-sm underline hover:text-primary rounded focus:outline-none focus-visible:ring focus-visible:ring-primary motion-safe:transition" href="{{ intranet:password_forgotten_entry | url }}">{{ trans:strings.account_password_forgotten }}</a>
+                </div>
+
+                {{ if errors }}
+                    {{ partial:components/notification type="error" content="{ errors | list }" }}
+                {{ /if }}
+
+                {{ if success }}
+                    {{ partial:components/notification type="success" content="{ success }" }}
+                {{ /if }}
+
+                {{ partial:components/form_submit label="{ trans:strings.account_login }" }}
+            {{ /user:login_form }}
+
+            <div class="relative my-6">
+                <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div class="w-full border-t border-neutral-300"></div>
+                </div>
+                <div class="relative flex justify-center">
+                    <span class="bg-white px-2 text-sm text-neutral-500">{{ trans:strings.account_or }}</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+            {{ partial:components/oauth_button type="login" vendor="google" href="{ oauth:google }" }}
+                {{# {{ partial:components/oauth_button type="login" vendor="microsoft" href="{ oauth:microsoft }" }} #}}
+                {{ partial:components/oauth_button type="login" vendor="facebook" href="{ oauth:facebook }" }}
+            </div>
+        </div>
+
+        {{ partial:typography/prose class="md:col-span-6 lg:col-span-5 md:py-8 relative" }}
+            {{ svg:circle class="absolute top-0 right-0 translate-x-1/3 w-54 h-54 fill-quaternary mix-blend-multiply" }}
+            {{ block:text }}
+                {{ partial src="components/{type}" }}
+            {{ /block:text }}
+        {{ /partial:typography/prose }}
+    </div>
+</section>
+<!-- End: /page_builder/_login.antlers.html -->

@@ -1,0 +1,33 @@
+title: "Register"
+fields:
+  -
+    handle: exclude_from_static_caching
+    field:
+      display: 'Exclude from static caching'
+      type: hidden
+      default: true
+      replicator_preview: false
+      listable: false
+  -
+    handle: introduction
+    field: common.text_basic
+    config:
+      buttons:
+        - h1
+        - h2
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - removeformat
+        - anchor
+      display: Introduction
+      validate:
+        - required
+  -
+    handle: text
+    field: common.text_rich
+    config:
+      display: Text
+      validate:
+        - required
