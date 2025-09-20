@@ -9,16 +9,32 @@ fields:
       replicator_preview: false
       listable: false
   -
-    handle: account_description
+    handle: account
     field: common.text_basic
     config:
-      display: 'Account description'
+      buttons:
+        - h2
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - removeformat
+        - anchor
+      display: Account
       validate:
         - required
   -
-    handle: password_description
+    handle: password
     field: common.text_basic
     config:
-      display: 'Password description'
+      buttons:
+        - h2
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - removeformat
+        - anchor
+      display: Password
       validate:
         - required

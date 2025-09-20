@@ -24,10 +24,3 @@ fields:
       display: Introduction
       validate:
         - required
-  -
-    handle: text
-    field: common.text_rich
-    config:
-      display: Text
-      validate:
-        - required

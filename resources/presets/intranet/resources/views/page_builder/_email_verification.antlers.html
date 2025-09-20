@@ -11,31 +11,20 @@
     {{ /if }}
 {{ /user }}
 
-<section class="overflow-hidden -mt-12 md:-mt-20">
-    <div class="fluid-container grid md:grid-cols-12 gap-8 md:gap-12">
-        <div class="md:col-span-6 lg:col-span-5 lg:col-start-2 relative p-6 mr-2 mb-2 bg-white rounded-lg" id="form">
-            <div class="absolute top-2 -right-2 -bottom-2 left-2 z-behind rounded-lg rounded-br-xl bg-secondary"></div>
-
-            {{ partial:typography/prose class="[&>h1,&>h2]:text-secondary [&>h1,&>h2]:text-4xl md:[&>h1,&>h2]:text-6xl [&>h1,&>h2]:mb-2 mb-8" }}
-                {{ block:introduction }}
-            {{ /partial:typography/prose }}
-
-            {{ if {session:has key="success"} }}
-                {{ partial:components/notification type="success" class="mb-6" content="{ trans:strings.account_verification_resend_succes }" }}
-            {{ /if }}
-
-            <form action="{{ route:verification.send }}" method="POST">
-                {{ csrf_field }}
-                {{ partial:components/form_submit label="{ trans:strings.account_verification_resend }" }}
-            </form>
-        </div>
-
-        {{ partial:typography/prose class="md:col-span-6 lg:col-span-5 md:py-8 relative" }}
-            {{ svg:circle class="absolute top-0 right-0 translate-x-1/3 w-54 h-54 fill-quaternary mix-blend-multiply" }}
-            {{ block:text }}
-                {{ partial src="components/{type}" }}
-            {{ /block:text }}
+<section class="fluid-grid">
+    <div class="span-content md:col-span-6 md:col-start-[col-1] stack-8" id="form">
+        {{ partial:typography/prose }}
+            {{ block:introduction }}
         {{ /partial:typography/prose }}
+
+        {{ if {session:has key="success"} }}
+            {{ partial:components/notification type="success" class="mb-6" content="{ trans:strings.account_verification_resend_succes }" }}
+        {{ /if }}
+
+        <form action="{{ route:verification.send }}" method="POST">
+            {{ csrf_field }}
+            {{ partial:components/button as="button" button_type="button" label="{ trans:strings.account_verification_resend }" }}
+        </form>
     </div>
 </section>
 <!-- End: /page_builder/_email_verification.antlers.html -->

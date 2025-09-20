@@ -15,14 +15,12 @@
     {{ /if }}
 {{ /user }}
 
-<div class="fluid-container flex flex-col gap-8">
+<div class="fluid-grid gap-y-8">
     {{ user }}
-        <section class="grid md:grid-cols-12 gap-8">
+        <section class="span-content grid md:grid-cols-12 gap-8">
             <header class="md:col-span-4">
-                {{ partial:typography/h3 as="h2" class="mb-2" content="{ trans:strings.account_basic }" }}
-
                 {{ partial:typography/prose as="div" }}
-                    {{ block:account_description }}
+                    {{ block:account }}
                 {{ /partial:typography/prose }}
             </header>
 
@@ -34,12 +32,6 @@
 
                     {{ partial:components/form_input handle="email" type="email" label="{ trans:strings.account_email }" required="true" old_value="{ old:email }" value="{ email }" }}
 
-                    {{ partial:components/form_input handle="address" type="text" label="{ trans:strings.account_address }"  old_value="{ old:address }" value="{ address }" }}
-
-                    {{ partial:components/form_input handle="zip_code" type="text" label="{ trans:strings.account_zip_code }"  old_value="{ old:zip_code }" value="{ zip_code }" }}
-
-                    {{ partial:components/form_input handle="residence" type="text" label="{ trans:strings.account_residence }"  old_value="{ old:residence }" value="{ residence }" }}
-
                     {{ if errors }}
                         {{ partial:components/notification type="error" class="md:col-span-2" content="{ errors | list }" }}
                     {{ /if }}
@@ -49,20 +41,20 @@
                     {{ /if }}
 
                     <div class="md:col-span-2 place-self-end flex items-center gap-6">
-                        <button class="p-1 -m-1 text-neutral-600 text-sm underline hover:text-primary rounded focus:outline-none focus-visible:ring focus-visible:ring-primary motion-safe:transition" type="reset">{{ trans:strings.account_cancel }}</button>
+                        <button class="text-sm underline" type="reset">{{ trans:strings.account_cancel }}</button>
 
-                        {{ partial:components/form_submit label="{ trans:strings.account_save }" }}
+                        <div class="flex justify-end">
+                            {{ partial:components/button as="button" button_type="button" label="{ trans:strings.account_save }" }}
+                        </div>
                     </div>
                 {{ /user:profile_form }}
             </div>
         </section>
-        <hr class="border-0 border-b border-primary/40">
-        <section class="grid md:grid-cols-12 gap-8">
-            <header class="md:col-span-4">
-                {{ partial:typography/h3 as="h2" class="mb-2" content="{ trans:strings.account_password }" }}
 
+        <section class="span-content grid md:grid-cols-12 gap-8">
+            <header class="md:col-span-4">
                 {{ partial:typography/prose as="div" }}
-                    {{ block:password_description }}
+                    {{ block:password }}
                 {{ /partial:typography/prose }}
             </header>
 
@@ -83,16 +75,19 @@
                     {{ /if }}
 
                     <div class="md:col-span-2 place-self-end flex items-center gap-6">
-                        <button class="p-1 -m-1 text-neutral-600 text-sm underline hover:text-primary rounded focus:outline-none focus-visible:ring focus-visible:ring-primary motion-safe:transition" type="reset">{{ trans:strings.account_cancel }}</button>
-                        {{ partial:components/form_submit label="{ trans:strings.account_password_save }" }}
+                        <button class="text-sm underline" type="reset">{{ trans:strings.account_cancel }}</button>
+
+                        <div class="flex justify-end">
+                            {{ partial:components/button as="button" button_type="button" label="{ trans:strings.account_password_save }" }}
+                        </div>
                     </div>
                 {{ /user:password_form }}
             </div>
         </section>
-        <section class="flex justify-end">
-            <a class="flex items-center gap-2 p-1 -m-1 text-neutral-600 text-sm underline hover:text-primary rounded focus:outline-none focus-visible:ring focus-visible:ring-primary motion-safe:transition" href="{{ user:logout_url redirect="{ intranet:login_entry | url }" }}" title="{{ trans:strings.account_logout }}" aria-label="{{ trans:strings.account_logout }}">
+
+        <section class="span-content flex justify-end">
+            <a class="text-sm underline" href="{{ user:logout_url redirect="{ intranet:login_entry | url }" }}" title="{{ trans:strings.account_logout }}" aria-label="{{ trans:strings.account_logout }}">
                 <span>{{ trans:strings.account_logout }}</span>
-                {{ svg:logout class="w-4 h-4 fill-current overflow-visible" aria-hidden="true" }}
             </a>
         </section>
     {{ /user }}
