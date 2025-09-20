@@ -17,6 +17,11 @@ return [
         ],
         [
             'type' => 'copy',
+            'input' => 'app/models/User.php',
+            'output' => 'app/models/User.php',
+        ],
+        [
+            'type' => 'copy',
             'input' => 'app/Listeners/SetUserEmailVerified.php',
             'output' => 'app/Listeners/SetUserEmailVerified.php',
         ],
