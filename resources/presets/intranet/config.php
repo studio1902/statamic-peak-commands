@@ -205,7 +205,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to the `register()` method in your `AppServiceProvider.php`.:\n\n\$this->app->bind(CustomUrlExcluder::class, function (\$app) {\n\treturn new CustomUrlExcluder(\n\t\t\$app[Cacher::class]->getBaseUrl(),\n\t\t\$app['config']['statamic.static_caching.exclude.urls'] ?? []\n\t);\n});",
+            'content' => "Add this to the `register()` method in your `AppServiceProvider.php`.:\n\n\$this->app->bind(\App\Statamic\CustomUrlExcluder::class, function (\$app) {\n\treturn new \App\Statamic\CustomUrlExcluder (\n\t\t\$app[\Statamic\StaticCaching\Cacher::class]->getBaseUrl(),\n\t\t\$app['config']['statamic.static_caching.exclude.urls'] ?? []\n\t);\n});",
         ],
         [
             'type' => 'notify',
