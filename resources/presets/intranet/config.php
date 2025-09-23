@@ -47,6 +47,11 @@ return [
         ],
         [
             'type' => 'copy',
+            'input' => 'content/globals/default/intranet.yaml',
+            'output' => 'content/globals/default/intranet.yaml',
+        ],
+        [
+            'type' => 'copy',
             'input' => 'resources/fieldsets/account.yaml',
             'output' => 'resources/fieldsets/account.yaml',
         ],
