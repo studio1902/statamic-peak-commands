@@ -1,0 +1,30 @@
+{{#
+    @name Email verification
+    @desc The Email verification page builder block.
+    @set page.page_builder.email_verification
+#}}
+
+<!-- /page_builder/_email_verification.antlers.html -->
+{{ user }}
+    {{ if email_verified_at }}
+        {{ redirect to="{ intranet:account_entry | url }" }}
+    {{ /if }}
+{{ /user }}
+
+<section class="fluid-grid">
+    <div class="span-content md:col-span-6 md:col-start-[col-1] stack-8" id="form">
+        {{ partial:typography/prose }}
+            {{ block:introduction }}
+        {{ /partial:typography/prose }}
+
+        {{ if {session:has key="success"} }}
+            {{ partial:components/notification type="success" class="mb-6" content="{ trans:strings.account_verification_resend_succes }" }}
+        {{ /if }}
+
+        <form action="{{ route:verification.send }}" method="POST">
+            {{ csrf_field }}
+            {{ partial:components/button as="button" button_type="button" label="{ trans:strings.account_verification_resend }" }}
+        </form>
+    </div>
+</section>
+<!-- End: /page_builder/_email_verification.antlers.html -->

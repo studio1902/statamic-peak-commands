@@ -1,0 +1,93 @@
+title: User
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: Data
+        instructions: 'User provided data.'
+        fields:
+          -
+            handle: first_name
+            field:
+              type: text
+              display: 'First name'
+              instructions_position: above
+              listable: true
+              visibility: visible
+              input_type: text
+              antlers: false
+              validate:
+                - required
+              width: 50
+              hide_display: false
+          -
+            handle: last_name
+            field:
+              input_type: text
+              antlers: false
+              type: text
+              display: 'Last name'
+              icon: text
+              width: 50
+              listable: true
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+              validate:
+                - required
+          -
+            handle: email
+            field:
+              type: text
+              input_type: email
+              display: 'Email Address'
+              listable: true
+              input: email
+              width: 50
+              validate:
+                - required
+          -
+            handle: email_verified_at
+            field:
+              mode: single
+              time_enabled: false
+              time_seconds_enabled: false
+              full_width: false
+              inline: false
+              columns: 1
+              rows: 1
+              display: 'Email Verified At'
+              type: date
+              icon: date
+              listable: true
+              instructions_position: above
+              visibility: visible
+              width: 50
+      -
+        display: 'Roles and user'
+        instructions: 'User control panel configuration.'
+        fields:
+          -
+            handle: roles
+            field:
+              type: user_roles
+              mode: select
+              width: 50
+              listable: true
+              filterable: false
+          -
+            handle: groups
+            field:
+              type: user_groups
+              mode: select
+              width: 50
+              listable: true
+              filterable: false
+          -
+            handle: avatar
+            field:
+              type: assets
+              max_files: 1
+              container: images
+              width: 50

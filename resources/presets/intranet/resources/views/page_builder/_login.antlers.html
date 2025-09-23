@@ -1,0 +1,41 @@
+{{#
+    @name Login
+    @desc The Login page builder block.
+    @set page.page_builder.login
+#}}
+
+<!-- /page_builder/_login.antlers.html -->
+{{ if logged_in }}
+    {{ redirect to="{ intranet:account_entry | url }" }}
+{{ /if }}
+
+<section class="fluid-grid">
+    <div class="span-content md:col-span-6 md:col-start-[col-1] stack-8" id="form">
+        {{ partial:typography/prose }}
+            {{ block:introduction }}
+        {{ /partial:typography/prose }}
+
+        {{ user:login_form redirect="{ get:redirect ?? intranet:account_entry | url }" error_redirect="#form" class="stack-6" }}
+            {{ partial:components/form_input field_handle="email" type="email" label="{ trans:strings.account_email }" required="true" old_value="{ old:email }" }}
+
+            <div class="stack-2">
+                {{ partial:components/form_input field_handle="password" type="password" label="{ trans:strings.account_password }" required="true" old_value="{ old:password }" }}
+
+                <a class="inline-block text-sm underline" href="{{ intranet:password_forgotten_entry | url }}">{{ trans:strings.account_password_forgotten }}</a>
+            </div>
+
+            {{ if errors }}
+                {{ partial:components/notification type="error" content="{ errors | list }" }}
+            {{ /if }}
+
+            {{ if success }}
+                {{ partial:components/notification type="success" content="{ success }" }}
+            {{ /if }}
+
+            <div class="flex justify-end">
+                {{ partial:components/button as="button" button_type="button" label="{ trans:strings.account_login }" }}
+            </div>
+        {{ /user:login_form }}
+    </div>
+</section>
+<!-- End: /page_builder/_login.antlers.html -->

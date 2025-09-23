@@ -1,0 +1,74 @@
+tabs:
+  general:
+    display: Intranet
+    sections:
+      -
+        display: 'Intranet pages'
+        instructions: 'Configure intranet pages.'
+        fields:
+          -
+            handle: account_entry
+            field: common.entry
+            config:
+              display: Account
+              width: 50
+              instructions: 'The account page.'
+              collections:
+                - pages
+              validate:
+                - required
+          -
+            handle: login_entry
+            field: common.entry
+            config:
+              display: Login
+              width: 50
+              instructions: 'The login page.'
+              collections:
+                - pages
+              validate:
+                - required
+          -
+            handle: register_entry
+            field: common.entry
+            config:
+              display: Register
+              width: 50
+              instructions: 'The register page.'
+              collections:
+                - pages
+              validate:
+                - required
+          -
+            handle: email_verify_entry
+            field: common.entry
+            config:
+              display: 'Email verification'
+              width: 50
+              instructions: 'The email verification page.'
+              collections:
+                - pages
+              validate:
+                - required
+          -
+            handle: password_forgotten_entry
+            field: common.entry
+            config:
+              display: 'Password forgotten'
+              width: 50
+              instructions: 'The password forgotten page.'
+              collections:
+                - pages
+              validate:
+                - required
+          -
+            handle: password_reset_entry
+            field: common.entry
+            config:
+              display: 'Password reset'
+              width: 50
+              instructions: 'The password reset page.'
+              collections:
+                - pages
+              validate:
+                - required
