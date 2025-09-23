@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.8.0 (2025-09-23)
+
+### What's new
+- Add Intranet preset. #40 by @robdekort
+
 ## v9.7.0 (2025-09-08)
 
 ### What's new
