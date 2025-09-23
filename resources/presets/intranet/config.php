@@ -117,6 +117,11 @@ return [
         ],
         [
             'type' => 'copy',
+            'input' => 'resources/views/vendor/mail/html/message.blade.php',
+            'output' => 'resources/views/vendor/mail/html/message.blade.php',
+        ],
+        [
+            'type' => 'copy',
             'input' => 'content/collections/pages/account.md',
             'output' => 'content/collections/pages/account.md',
         ],
