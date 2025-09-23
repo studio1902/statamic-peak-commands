@@ -23,6 +23,6 @@ class SendEmailVerificationNotification
      */
     public function handle(UserRegistered $event): void
     {
-        $event->user->model()->sendEmailVerificationNotification();
+        $event->user->sendEmailVerificationNotification();
     }
 }

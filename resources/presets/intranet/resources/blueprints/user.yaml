@@ -45,6 +45,8 @@ tabs:
               listable: true
               input: email
               width: 50
+              validate:
+                - required
           -
             handle: email_verified_at
             field:
