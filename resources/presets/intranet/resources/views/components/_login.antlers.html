@@ -1,0 +1,14 @@
+{{#
+    @name Login
+    @desc The login link.
+#}}
+
+<!-- /components/_login.antlers.html -->
+{{ nocache }}
+    {{ if logged_in }}
+        <a href="{{ intranet:account_entry:url }}">{{ trans:strings.account }}</a>
+    {{ else }}
+        <a href="{{ intranet:login_entry:url }}">{{ trans:strings.account_login }}</a>
+    {{ /if }}
+{{ /nocache }}
+<!-- End: /components/_login.antlers.html -->

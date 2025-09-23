@@ -1,0 +1,40 @@
+title: Account
+fields:
+  -
+    handle: exclude_from_static_caching
+    field:
+      display: 'Exclude from static caching'
+      type: hidden
+      default: true
+      replicator_preview: false
+      listable: false
+  -
+    handle: account
+    field: common.text_basic
+    config:
+      buttons:
+        - h2
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - removeformat
+        - anchor
+      display: Account
+      validate:
+        - required
+  -
+    handle: password
+    field: common.text_basic
+    config:
+      buttons:
+        - h2
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - removeformat
+        - anchor
+      display: Password
+      validate:
+        - required
