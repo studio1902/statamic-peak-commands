@@ -5,7 +5,7 @@
 
 <!-- /components/_form_input.antlers.html -->
 <div class="stack-2">
-    <label class="font-bold" for="{{ handle }}">{{ label }}{{ required ?= '<sup class="text-yellow-800 font-bold">*</sup>' }}</label>
-    <input class="w-full rounded border-neutral caret-primary" type="{{ type }}" id="{{ handle }}" name="{{ handle }}" value="{{ old_value ?? value }}" {{ required ?= 'required' }}/>
+    <label class="font-bold" for="{{ field_handle }}">{{ label }}{{ required ?= '<sup class="text-yellow-800 font-bold">*</sup>' }}</label>
+    <input class="w-full rounded border-neutral caret-primary" type="{{ type }}" id="{{ field_handle }}" name="{{ field_handle }}" value="{{ old_value ?? value }}" {{ required ?= 'required' }}/>
 </div>
 <!-- End: /components/_form_input.antlers.html -->
