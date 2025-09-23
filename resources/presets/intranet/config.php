@@ -17,8 +17,8 @@ return [
         ],
         [
             'type' => 'copy',
-            'input' => 'app/models/User.php',
-            'output' => 'app/models/User.php',
+            'input' => 'app/models/CustomUser.php',
+            'output' => 'app/models/CustomUser.php',
         ],
         [
             'type' => 'copy',
@@ -220,6 +220,10 @@ return [
         [
             'type' => 'notify',
             'content' => "Add this to the `boot()` method in your `AppServiceProvider.php`.:\n\n\$this->app->bind(\Statamic\Http\Controllers\UserController::class, \App\Http\Controllers\UserController::class);",
+        ],
+        [
+            'type' => 'notify',
+            'content' => "Add this to the `boot()` method in your `AppServiceProvider.php`.:\n\n\$this->app->bind(\Statamic\Contracts\Auth\User::class, \App\Models\CustomUser::class);",
         ],
         [
             'type' => 'notify',
