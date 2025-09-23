@@ -6,12 +6,6 @@ return [
     'description' => 'Intranet with frontend users and email verification.',
     'operations' => [
         [
-            'type' => 'run',
-            'command' => 'composer require laravel/sanctum',
-            'processing_message' => 'Installing laravel/sanctum',
-            'success_message' => 'Sanctum installed.',
-        ],
-        [
             'type' => 'copy',
             'input' => 'app/http/Controllers/UserController.php',
             'output' => 'app/http/Controllers/UserController.php',
