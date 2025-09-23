@@ -6,6 +6,12 @@ return [
     'description' => 'Intranet with frontend users and email verification.',
     'operations' => [
         [
+            'type' => 'run',
+            'command' => 'composer require laravel/sanctum',
+            'processing_message' => 'Installing laravel/sanctum',
+            'success_message' => 'Sanctum installed.',
+        ],
+        [
             'type' => 'copy',
             'input' => 'app/http/Controllers/UserController.php',
             'output' => 'app/http/Controllers/UserController.php',
@@ -215,15 +221,15 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to the `register()` method in your `AppServiceProvider.php`.:\n\n\$this->app->bind(\App\Statamic\CustomUrlExcluder::class, function (\$app) {\n\treturn new \App\Statamic\CustomUrlExcluder (\n\t\t\$app[\Statamic\StaticCaching\Cacher::class]->getBaseUrl(),\n\t\t\$app['config']['statamic.static_caching.exclude.urls'] ?? []\n\t);\n});",
-        ],
-        [
-            'type' => 'notify',
             'content' => "Add this to the `boot()` method in your `AppServiceProvider.php`.:\n\n\$this->app->bind(\Statamic\Http\Controllers\UserController::class, \App\Http\Controllers\UserController::class);",
         ],
         [
             'type' => 'notify',
             'content' => "Add this to the `boot()` method in your `AppServiceProvider.php`.:\n\n\$this->app->bind(\Statamic\Contracts\Auth\User::class, \App\Models\CustomUser::class);",
+        ],
+        [
+            'type' => 'notify',
+            'content' => "Add this to the `register()` method in your `AppServiceProvider.php`.:\n\n\$this->app->bind(\App\Statamic\CustomUrlExcluder::class, function (\$app) {\n\treturn new \App\Statamic\CustomUrlExcluder (\n\t\t\$app[\Statamic\StaticCaching\Cacher::class]->getBaseUrl(),\n\t\t\$app['config']['statamic.static_caching.exclude.urls'] ?? []\n\t);\n});",
         ],
         [
             'type' => 'notify',
@@ -239,7 +245,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add the following to your routes file in `web.php`:\n\nuse App\Models\User;\nuse Illuminate\Auth\Events\Verified;\nuse Illuminate\Http\Request;\nuse Illuminate\Support\Facades\Auth;\nuse Illuminate\Support\Facades\Route;\nuse Statamic\Facades\Entry;\nuse Statamic\Globals\GlobalSet;\nuse Statamic\Http\Middleware\Localize;\n\n// This is the URL that the email verifcation link points to.\nRoute::get('/email-verification/{id}/{hash}', function (Request \$request) {\n\t\$user = User::find(\$request->route('id'));\n\n\tif (! hash_equals((string) \$user->getKey(), (string) \$request->route('id'))) {\n\t\tabort(403);\n\t}\n\n\tif (! hash_equals(sha1(\$user->getEmailForVerification()), (string) \$request->route('hash'))) {\n\t\tabort(403);\n\t}\n\n\tAuth::login(\$user);\n\n\tif (! \$user->hasVerifiedEmail()) {\n\t\t\$user->markEmailAsVerified();\n\n\tevent(new Verified(\$user));\n\t}\n\n\t\$accountEntry = Entry::find(GlobalSet::findByHandle('intranet')\n\t\t->inDefaultSite()\n\t\t->get('account_entry'));\n\n\treturn redirect(\$accountEntry->url());\n\t})->middleware(['signed'])->name('verification.verify');\n\n// This route is used to resend the email verification link.\nRoute::post('/email-verification/notificatie', function (Request \$request) {\n\t\$request->user()->sendEmailVerificationNotification();\n\n\treturn back()->with('success', 'Verification link sent.');\n})->middleware(['auth', 'throttle:6,1', Localize::class])->name('verification.send');",
+            'content' => "Add the following to your routes file in `web.php`:\n\nuse Statamic\Facades\User;\nuse Illuminate\Auth\Events\Verified;\nuse Illuminate\Http\Request;\nuse Illuminate\Support\Facades\Auth;\nuse Illuminate\Support\Facades\Route;\nuse Statamic\Facades\Entry;\nuse Statamic\Globals\GlobalSet;\nuse Statamic\Http\Middleware\Localize;\n\n// This is the URL that the email verifcation link points to.\nRoute::get('/email-verification/{id}/{hash}', function (Request \$request) {\n\t\$user = User::find(\$request->route('id'));\n\n\tif (! hash_equals((string) \$user->getKey(), (string) \$request->route('id'))) {\n\t\tabort(403);\n\t}\n\n\tif (! hash_equals(sha1(\$user->getEmailForVerification()), (string) \$request->route('hash'))) {\n\t\tabort(403);\n\t}\n\n\tAuth::login(\$user);\n\n\tif (! \$user->hasVerifiedEmail()) {\n\t\t\$user->markEmailAsVerified();\n\n\tevent(new Verified(\$user));\n\t}\n\n\t\$accountEntry = Entry::find(GlobalSet::findByHandle('intranet')\n\t\t->inDefaultSite()\n\t\t->get('account_entry'));\n\n\treturn redirect(\$accountEntry->url());\n\t})->middleware(['signed'])->name('verification.verify');\n\n// This route is used to resend the email verification link.\nRoute::post('/email-verification/notificatie', function (Request \$request) {\n\t\$request->user()->sendEmailVerificationNotification();\n\n\treturn back()->with('success', 'Verification link sent.');\n})->middleware(['auth', 'throttle:6,1', Localize::class])->name('verification.send');",
         ],
         [
             'type' => 'notify',
