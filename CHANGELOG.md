@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.8.1 (2025-09-25)
+
+### What's fixed
+- Standardize file paths and adjust getStub method to fix issues on Windows. #41 by @webulousWS
+
 ## v9.8.0 (2025-09-23)
 
 ### What's new

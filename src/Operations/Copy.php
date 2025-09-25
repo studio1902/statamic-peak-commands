@@ -86,13 +86,20 @@ class Copy extends Operation
 
     protected function getStub(string $stubPath, string $basePath): string
     {
+        $basePath = Str::endsWith($basePath, 'config.php') ? dirname($basePath) : $basePath;
+
         $stubPath = ltrim($stubPath, " /\t\n\r\0\x0B");
-        $addonPath = $basePath.DIRECTORY_SEPARATOR.$stubPath;
+        $addonPath = $basePath . DIRECTORY_SEPARATOR . $this->normalizePath($stubPath);
 
         $stubPath = Str::of($stubPath)->replaceStart('stubs/', '')->toString();
         $publishedPath = resource_path('stubs/vendor/statamic-peak-commands/'.$stubPath);
 
         return File::get(File::exists($publishedPath) ? $publishedPath : $addonPath);
+    }
+
+    protected function normalizePath(string $path): string
+    {
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
     protected function checkExistenceAndSkip($type, $path): bool
