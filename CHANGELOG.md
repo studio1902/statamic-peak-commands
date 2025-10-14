@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.9.1 (2025-10-24)
+
+### What's fixed
+- Fix Horizon preset. 39f888ad @robdekort
+
 ## v9.9.0 (2025-10-24)
 
 ### What's new
