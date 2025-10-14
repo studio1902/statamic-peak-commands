@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.9.0 (2025-10-24)
+
+### What's new
+- Laravel Horizon preset. d04feab2by @robdekort
+
 ## v9.8.1 (2025-09-25)
 
 ### What's fixed
