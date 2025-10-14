@@ -18,15 +18,13 @@ return [
             'success_message' => 'Horizon resources installed.',
         ],
         [
-            'type' => 'run',
-            'command' => "node -e \"require('fs').closeSync(require('fs').openSync('database/database.sqlite', 'a'))\"",
-            'processing_message' => 'Creating SQLite database.',
-            'success_message' => 'SQLite database created.',
-        ],
-        [
             'type' => 'copy',
             'input' => 'config/horizon.php',
             'output' => 'config/horizon.php',
+        ],
+        [
+            'type' => 'notify',
+            'content' => "Make sure you have a `database/database.sqlite` file present.",
         ],
         [
             'type' => 'notify',
