@@ -34,7 +34,7 @@ return [
             'block' => [
                 'name' => '{{ name }}',
                 'instructions' => 'A {{ name }} logo cloud.',
-                'icon' => 'favorite-award',
+                'icon' => 'favorite-star',
                 'handle' => '{{ handle }}',
             ],
         ],
