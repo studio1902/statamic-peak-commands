@@ -34,7 +34,7 @@ return [
             'block' => [
                 'name' => '{{ name }}',
                 'instructions' => 'List {{ name }}.',
-                'icon' => 'user-multiple',
+                'icon' => 'fieldtype-user_roles',
                 'handle' => '{{ handle }}',
             ],
         ],
