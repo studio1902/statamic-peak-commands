@@ -30,7 +30,7 @@ return [
             'block' => [
                 'name' => 'FAQ',
                 'instructions' => 'List frequently asked questions in an accordion.',
-                'icon' => 'alert-help-question',
+                'icon' => 'support',
                 'handle' => 'faq',
             ],
         ],
