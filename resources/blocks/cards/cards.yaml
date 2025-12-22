@@ -53,5 +53,5 @@ fields:
                   field: buttons.buttons
                   config:
                     display: Button
-                    max_rows: 1
+                    max_sets: 1
       hide_display: true
