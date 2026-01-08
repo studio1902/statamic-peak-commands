@@ -1,11 +1,11 @@
 title: '{{ name }}'
 fields:
   -
-    handle: title
+    handle: heading
     field:
       input_type: text
       antlers: false
-      display: Title
+      display: Heading
       type: text
       icon: text
       listable: hidden

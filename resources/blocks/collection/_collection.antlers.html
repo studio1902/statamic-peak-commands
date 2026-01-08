@@ -6,8 +6,9 @@
 
 <!-- /page_builder/_collection.antlers.html -->
 {{ partial:page_builder/block }}
-    <div class="span-content md:col-start-[col-3] md:col-span-8">
-        {{ partial:typography/h2 class="mb-4" :content="block:title" }}
+    <div class="span-content md:col-start-[col-3] md:col-span-8 stack-4">
+        {{ partial:typography/h2 :content="block:heading" }}
+
         <ul class="list-inside list-disc">
             {{ block:collection }}
                 <li>

@@ -1,48 +1,37 @@
 title: Cards
 fields:
   -
-    handle: title
+    handle: heading
     field:
-      input_type: text
       type: text
       localizable: true
-      listable: hidden
-      display: Title
+      display: Heading
   -
     handle: cards
     field:
       reorderable: true
       type: replicator
       localizable: true
-      listable: hidden
       display: Cards
       replicator_preview: false
-      instructions_position: above
-      visibility: visible
       collapse: accordion
-      previews: true
-      fullscreen: true
+      hide_display: true
       button_label: 'Add card'
       sets:
         cards:
           display: Cards
-          instructions: null
-          icon: null
           sets:
             card:
               display: Card
-              instructions: null
-              icon: null
+              image: null
               fields:
                 -
-                  handle: title
+                  handle: heading
                   field:
-                    input_type: text
                     type: text
                     localizable: true
-                    listable: hidden
                     validate: required
-                    display: Title
+                    display: Heading
                 -
                   handle: text
                   field: common.text_plain
@@ -54,4 +43,3 @@ fields:
                   config:
                     display: Button
                     max_sets: 1
-      hide_display: true

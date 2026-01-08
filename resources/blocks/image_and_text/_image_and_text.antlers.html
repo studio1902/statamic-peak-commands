@@ -7,7 +7,7 @@
 <!-- /page_builder/_image_and_text.antlers.html -->
 {{ partial:page_builder/block class="gap-y-8 items-center grid-flow-col" }}
     <article class="span-content md:col-span-6 stack-4 {{ image_position == 'left' ? 'md:col-start-[col-7]' : 'md:col-start-[content-start]' }}">
-        {{ block:title ?= { partial:typography/h2 :content="block:title" } }}
+        {{ block:heading ?= { partial:typography/h2 :content="block:heading" } }}
 
         {{ partial:typography/prose }}
             {{ block:text }}

@@ -6,9 +6,9 @@
 
 <!-- /page_builder/_{{ handle }}.antlers.html -->
 {{ partial:page_builder/block class="gap-y-8" }}
-    {{ if block:title or block:text }}
+    {{ if block:heading or block:text }}
         <header class="span-content stack-4">
-            {{ block:title ?= { partial:typography/h2 :content="block:title" } }}
+            {{ block:heading ?= { partial:typography/h2 :content="block:heading" } }}
             {{ block:text ?= { partial:typography/p :content="block:text" } }}
         </header>
     {{ /if }}

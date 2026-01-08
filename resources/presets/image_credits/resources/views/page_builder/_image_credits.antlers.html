@@ -6,9 +6,9 @@
 
 <!-- /page_builder/_image_credits.antlers.html -->
 {{ partial:page_builder/block }}
-    {{ if block:title || block:text }}
+    {{ if block:heading || block:text }}
         <header class="span-content text-center stack-4">
-            {{ block:title ?= { partial:typography/h2 :content="block:title" } }}
+            {{ block:heading ?= { partial:typography/h2 :content="block:heading" } }}
             {{ block:text ?= { partial:typography/p :content="block:text" } }}
         </header>
     {{ /if }}

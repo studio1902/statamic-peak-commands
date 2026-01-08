@@ -7,7 +7,7 @@
 <!-- /page_builder/_downloads.antlers.html -->
 {{ partial:page_builder/block }}
     <div class="span-content grid md:grid-cols-12 gap-6">
-        {{ block:title ?= { partial:typography/h1 as="h2" :content="block:title" class="md:col-span-12" } }}
+        {{ block:heading ?= { partial:typography/h1 as="h2" :content="block:heading" class="md:col-span-12" } }}
 
         {{ block:downloads }}
             <article class="md:col-span-4 lg:md-col-span-3 flex flex-col gap-4 justify-between items-start p-6 border border-neutral-300 rounded bg-neutral-100">
