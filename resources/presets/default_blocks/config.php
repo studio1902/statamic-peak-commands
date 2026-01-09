@@ -7,8 +7,8 @@ return [
     'operations' => [
         [
             'type' => 'copy',
-            'input' => 'app/FieldTypes/DefaultBlockSelect.php',
-            'output' => 'app/FieldTypes/DefaultBlockSelect.php',
+            'input' => 'app/Fieldtypes/DefaultBlockSelect.php',
+            'output' => 'app/Fieldtypes/DefaultBlockSelect.php',
         ],
         [
             'type' => 'copy',
