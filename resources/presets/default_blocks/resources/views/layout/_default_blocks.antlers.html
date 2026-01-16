@@ -1,7 +1,7 @@
 {{#
     @name Default blocks
     @desc Renders Default blocks based on visibility settings
-    @param position The position to render blocks for (after_content, before_content or before_footer)
+    @param position The position to render blocks for (after_content, before_content)
 #}}
 
 {{ _current_entry_id = id }}
@@ -10,12 +10,12 @@
 
 {{# Loop through all default blocks #}}
 {{ default_blocks:default_blocks }}
-    
+
     {{# Only process groups with auto-positioning in the requested position #}}
     {{ if position != 'none' && position == _requested_position }}
-        
+
         {{ _should_show = false }}
-        
+
         {{# Check visibility mode for this group #}}
         {{ if visibility_mode == 'all' }}
             {{ _should_show = true }}
@@ -35,7 +35,7 @@
                 {{ /if }}
             {{ /blacklist_entries }}
         {{ /if }}
-        
+
         {{# Check for page-specific override if the fieldset is used #}}
         {{ if visibility_override }}
             {{ if visibility_override == 'show' }}
@@ -44,22 +44,14 @@
                 {{ _should_show = false }}
             {{ /if }}
         {{ /if }}
-        
+
         {{# Render page builder blocks if conditions are met #}}
         {{ if _should_show && page_builder }}
-            {{ if _requested_position == 'before_footer' }}
-                <div id="{{ _slug }}" class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" data-default-block="{{ _slug }}">
-                    {{ page_builder scope="block" }}
-                        {{ partial src="page_builder/{type}" }}
-                    {{ /page_builder }}
-                </div>
-            {{ else }}
-                {{ page_builder scope="block" }}
-                    {{ partial src="page_builder/{type}" }}
-                {{ /page_builder }}
-            {{ /if }}
+            {{ page_builder scope="block" }}
+                {{ partial src="page_builder/{type}" }}
+            {{ /page_builder }}
         {{ /if }}
-        
+
     {{ /if }}
-    
+
 {{ /default_blocks:default_blocks }}

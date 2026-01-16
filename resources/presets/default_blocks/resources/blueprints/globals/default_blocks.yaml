@@ -47,9 +47,8 @@ tabs:
                             instructions: 'Where should these blocks automatically appear?'
                             options:
                               none: 'None (Manual only)'
-                              before_content: 'Before main content (inside main)'
-                              after_content: 'After main content (inside main)'
-                              before_footer: 'Before footer (outside main)'
+                              before_content: 'Before main content'
+                              after_content: 'After main content'
                             default: none
                             width: 50
                         -
