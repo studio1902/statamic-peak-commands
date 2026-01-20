@@ -20,7 +20,7 @@ return [
             'block' => [
                 'name' => 'Columns',
                 'instructions' => 'Text columns with optional images and buttons.',
-                'icon' => 'layout-two-columns',
+                'icon' => 'layout-three-columns',
                 'handle' => 'columns',
             ],
         ],
