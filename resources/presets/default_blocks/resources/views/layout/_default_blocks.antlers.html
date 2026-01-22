@@ -19,7 +19,7 @@
 
         {{# Check visibility mode for entry based visiblity. #}}
         {{ if visibility == 'entry' }}
-            {{ if visibility_mode_collections == 'all' }}
+            {{ if visibility_mode_entries == 'all' }}
                 {{ _should_show = true }}
             {{ elseif visibility_mode_entries == 'whitelist' }}
                 {{# Check if current page is in whitelist #}}
