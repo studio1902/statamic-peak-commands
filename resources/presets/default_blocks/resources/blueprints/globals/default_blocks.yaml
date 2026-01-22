@@ -56,9 +56,9 @@ tabs:
                           field:
                             type: button_group
                             display: 'Visibility Mode'
-                            instructions: 'Control which pages show this default block.'
+                            instructions: 'Control which entries show this default block.'
                             options:
-                              all: 'All Pages'
+                              all: 'All Entries'
                               whitelist: 'Only Selected'
                               blacklist: 'All Except Selected'
                             default: all
@@ -69,11 +69,8 @@ tabs:
                           handle: whitelist_entries
                           field:
                             type: entries
-                            display: 'Show on These Pages'
-                            instructions: 'Select pages where this default block should appear.'
-                            collections:
-                              - pages
-                              - offerings
+                            display: 'Show on These Entries'
+                            instructions: 'Select entries where this default block should appear.'
                             create: false
                             if:
                               visibility_mode: 'equals whitelist'
@@ -82,11 +79,8 @@ tabs:
                           handle: blacklist_entries
                           field:
                             type: entries
-                            display: 'Hide on These Pages'
-                            instructions: 'Select pages where this default block should NOT appear.'
-                            collections:
-                              - pages
-                              - offerings
+                            display: 'Hide on These Entries'
+                            instructions: 'Select entries where this default block should NOT appear.'
                             create: false
                             if:
                               visibility_mode: 'equals blacklist'
