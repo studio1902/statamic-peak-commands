@@ -10,7 +10,7 @@ tabs:
             handle: default_blocks
             field:
               type: replicator
-              display: 'Blocks'
+              display: Blocks
               instructions: 'Create reusable blocks with automatic positioning or manual page builder placement.'
               button_label: 'Add Default block'
               collapse: accordion
@@ -28,6 +28,7 @@ tabs:
                             type: text
                             display: 'Group Label'
                             instructions: 'Internal label for this default block.'
+                            instructions_position: below
                             validate:
                               - required
                             width: 50
@@ -37,7 +38,7 @@ tabs:
                             type: toggle
                             display: 'Available as Block'
                             instructions: 'Make this group available as a reusable page builder block.'
-                            default: false
+                            instructions_position: below
                             width: 50
                         -
                           handle: position
@@ -45,6 +46,7 @@ tabs:
                             type: select
                             display: 'Auto Position'
                             instructions: 'Where should these blocks automatically appear?'
+                            instructions_position: below
                             options:
                               none: 'None (Manual only)'
                               before_content: 'Before main content'
@@ -52,11 +54,26 @@ tabs:
                             default: none
                             width: 50
                         -
-                          handle: visibility_mode
+                          handle: visibility
+                          field:
+                            type: button_group
+                            display: Visibility
+                            instructions: 'The type of visiblity do you want to configure for this default block.'
+                            instructions_position: below
+                            options:
+                              entry: 'Entry Based'
+                              collection: 'Collection Based'
+                            default: entry
+                            width: 50
+                            if:
+                              position: 'not none'
+                        -
+                          handle: visibility_mode_entries
                           field:
                             type: button_group
                             display: 'Visibility Mode'
                             instructions: 'Control which entries show this default block.'
+                            instructions_position: below
                             options:
                               all: 'All Entries'
                               whitelist: 'Only Selected'
@@ -64,16 +81,37 @@ tabs:
                             default: all
                             width: 50
                             if:
-                              position: 'not none'
+                              visibility: 'equals entry'
+                        -
+                          handle: visibility_mode_collections
+                          field:
+                            type: button_group
+                            display: 'Visibility Mode'
+                            instructions: 'Control which collection entries show this default block.'
+                            instructions_position: below
+                            options:
+                              all: 'All Collections'
+                              whitelist: 'Only Selected'
+                              blacklist: 'All Except Selected'
+                            default: all
+                            width: 50
+                            if:
+                              visibility: 'equals collection'
                         -
                           handle: whitelist_entries
                           field:
                             type: entries
                             display: 'Show on These Entries'
                             instructions: 'Select entries where this default block should appear.'
+                            instructions_position: below
+                            validate:
+                              - required
+                              - sometimes
                             create: false
+                            width: 50
                             if:
-                              visibility_mode: 'equals whitelist'
+                              visibility: 'equals entry'
+                              visibility_mode_entries: 'equals whitelist'
                               enabled: 'equals true'
                         -
                           handle: blacklist_entries
@@ -81,9 +119,47 @@ tabs:
                             type: entries
                             display: 'Hide on These Entries'
                             instructions: 'Select entries where this default block should NOT appear.'
+                            instructions_position: below
+                            validate:
+                              - required
+                              - sometimes
                             create: false
+                            width: 50
                             if:
-                              visibility_mode: 'equals blacklist'
+                              visibility: 'equals entry'
+                              visibility_mode_entries: 'equals blacklist'
+                              enabled: 'equals true'
+                        -
+                          handle: whitelist_collections
+                          field:
+                            mode: select
+                            type: collections
+                            display: 'Show on These Collections'
+                            instructions: 'Select collections where this default block should appear.'
+                            instructions_position: below
+                            validate:
+                              - required
+                              - sometimes
+                            width: 50
+                            if:
+                              visibility: 'equals collection'
+                              visibility_mode_collections: 'equals whitelist'
+                              enabled: 'equals true'
+                        -
+                          handle: blacklist_collections
+                          field:
+                            mode: select
+                            type: collections
+                            display: 'Hide on These Collections'
+                            instructions: 'Select collections where this default block should NOT appear.'
+                            instructions_position: below
+                            validate:
+                              - required
+                              - sometimes
+                            width: 50
+                            if:
+                              visibility: 'equals collection'
+                              visibility_mode_collections: 'equals blacklist'
                               enabled: 'equals true'
                         -
                           import: page_builder
