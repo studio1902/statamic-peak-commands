@@ -24,7 +24,7 @@
 
         {{ if background_image }}
             <div class="fixed inset-0 bg-white" aria-hidden="true">
-                {{ partial:statamic-peak-tools::components/picture :image="background_image" cover="true" sizes="100vw" blur="20" class="opacity-55" }}
+                {{ picture :image="background_image" cover="true" sizes="100vw" blur="20" class="opacity-55" }}
             </div>
         {{ /if }}
 
@@ -32,7 +32,7 @@
             <div class="span-content md:col-span-6 md:col-start-5 flex flex-col items-center stack-4 text-center">
                 {{ if profile_image }}
                     <figure class="size-24 rounded-full overflow-clip border-3 border-white shadow">
-                        {{ partial:statamic-peak-tools::components/picture :image="profile_image" cover="true" sizes="100px" }}
+                        {{ picture :image="profile_image" cover="true" sizes="100px" }}
                     </figure>
                 {{ /if }}
 
@@ -74,7 +74,7 @@
                                     {{ if type === 'image' }}
                                         <div class="pb-5 px-5">
                                             <figure class="w-full rounded-lg overflow-clip">
-                                                {{ partial:statamic-peak-tools::components/picture :image="link:image" sizes="(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw" }}
+                                                {{ picture :image="link:image" sizes="(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw" }}
                                             </figure>
                                         </div>
                                     {{ /if }}
