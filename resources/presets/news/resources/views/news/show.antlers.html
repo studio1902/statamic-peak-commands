@@ -31,7 +31,7 @@
     }
 </script>
 
-<main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
+<main class="page-builder" id="content">
     <div class="fluid-grid stack-8">
         <header class="md:col-start-[col-3] md:col-span-8 stack-4">
             {{ partial:typography/time :content="date" class="block text-center" }}
@@ -39,7 +39,7 @@
             {{ partial:typography/h1 :content="title" class="text-center" }}
 
             <figure>
-                {{ partial:statamic-peak-tools::components/picture :image="image" sizes="(min-width: 1280px) 1150px, (min-width: 768px) 90vw" aspect_ratio="3/2" lazy="true" cover="true" class="aspect-[3/2]" }}
+                {{ picture :image="image" sizes="(min-width: 1280px) 1150px, (min-width: 768px) 90vw" aspect_ratio="3/2" cover="true" class="aspect-[3/2]" }}
             </figure>
         </header>
     </div>

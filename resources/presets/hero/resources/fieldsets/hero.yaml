@@ -26,6 +26,6 @@ fields:
     handle: buttons
     field: buttons.buttons
     config:
-      max_rows: 2
+      max_sets: 2
       if:
         render: 'equals true'

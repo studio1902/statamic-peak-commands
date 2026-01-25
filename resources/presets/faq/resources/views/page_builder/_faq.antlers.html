@@ -5,25 +5,26 @@
 #}}
 
 <!-- /page_builder/_faq.antlers.html -->
-{{ once }}
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org/",
-            "@type": "FAQPage",
-            "mainEntity": [
-                {{ stack:questions }}
-                    {{ value }}{{ !last ?= ',' }}
-                {{ /stack:questions }}
-            ]
-        }
-    </script>
-{{ /once }}
 
 {{ partial:page_builder/block }}
+    {{ once }}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {{ stack:questions }}
+                        {{ value }}{{ !last ?= ',' }}
+                    {{ /stack:questions }}
+                ]
+            }
+        </script>
+    {{ /once }}
+
     <div class="contents stack-8">
-        {{ if block:title || block:text }}
-            <header class="span-content md:col-start-[col-3] md:col-span-8">
-                {{ block:title ?= { partial:typography/h1 as="h2" :content="block:title" class="mb-4" } }}
+        {{ if block:heading || block:text }}
+            <header class="span-content md:col-start-[col-3] md:col-span-8 stack-4">
+                {{ block:heading ?= { partial:typography/h1 as="h2" :content="block:heading" } }}
                 {{ block:text ?= { partial:typography/p :content="block:text" } }}
             </header>
         {{ /if }}

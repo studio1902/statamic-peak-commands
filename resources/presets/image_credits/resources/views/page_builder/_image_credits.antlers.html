@@ -6,9 +6,9 @@
 
 <!-- /page_builder/_image_credits.antlers.html -->
 {{ partial:page_builder/block }}
-    {{ if block:title || block:text }}
+    {{ if block:heading || block:text }}
         <header class="span-content text-center stack-4">
-            {{ block:title ?= { partial:typography/h2 :content="block:title" } }}
+            {{ block:heading ?= { partial:typography/h2 :content="block:heading" } }}
             {{ block:text ?= { partial:typography/p :content="block:text" } }}
         </header>
     {{ /if }}
@@ -18,7 +18,7 @@
             {{ images where (copyright.name !== null) orderby (copyright.name 'asc') }}
                 <figure class="md:col-span-3">
                     <div class="aspect-square">
-                        {{ partial:statamic-peak-tools::components/picture :image="url" sizes="(min-width: 1280px) 1280px, (min-width: 768px) 20vw, 50vw" aspect_ratio="1/1" cover="true" }}
+                        {{ picture :image="url" sizes="(min-width: 1280px) 1280px, (min-width: 768px) 20vw, 50vw" aspect_ratio="1/1" cover="true" }}
                     </div>
                     <figcaption class="mt-4">
                         {{ if copyright:url }}

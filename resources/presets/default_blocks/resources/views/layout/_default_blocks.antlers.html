@@ -1,65 +1,72 @@
 {{#
     @name Default blocks
     @desc Renders Default blocks based on visibility settings
-    @param position The position to render blocks for (after_content, before_content or before_footer)
+    @param position The position to render blocks for (after_content, before_content)
 #}}
 
 {{ _current_entry_id = id }}
+{{ _current_entry_collection = collection:handle }}
 {{ _requested_position = position ?? 'after_content' }}
 {{ _slug = label | slugify}}
 
 {{# Loop through all default blocks #}}
 {{ default_blocks:default_blocks }}
-    
+
     {{# Only process groups with auto-positioning in the requested position #}}
     {{ if position != 'none' && position == _requested_position }}
-        
+
         {{ _should_show = false }}
-        
-        {{# Check visibility mode for this group #}}
-        {{ if visibility_mode == 'all' }}
-            {{ _should_show = true }}
-        {{ elseif visibility_mode == 'whitelist' }}
-            {{# Check if current page is in whitelist #}}
-            {{ whitelist_entries }}
-                {{ if id == _current_entry_id }}
-                    {{ _should_show = true }}
-                {{ /if }}
-            {{ /whitelist_entries }}
-        {{ elseif visibility_mode == 'blacklist' }}
-            {{ _should_show = true }}
-            {{# Check if current page is in blacklist #}}
-            {{ blacklist_entries }}
-                {{ if id == _current_entry_id }}
-                    {{ _should_show = false }}
-                {{ /if }}
-            {{ /blacklist_entries }}
-        {{ /if }}
-        
-        {{# Check for page-specific override if the fieldset is used #}}
-        {{ if visibility_override }}
-            {{ if visibility_override == 'show' }}
+
+        {{# Check visibility mode for entry based visiblity. #}}
+        {{ if visibility == 'entry' }}
+            {{ if visibility_mode_entries == 'all' }}
                 {{ _should_show = true }}
-            {{ elseif visibility_override == 'hide' }}
-                {{ _should_show = false }}
+            {{ elseif visibility_mode_entries == 'whitelist' }}
+                {{# Check if current page is in whitelist #}}
+                {{ whitelist_entries }}
+                    {{ if id == _current_entry_id }}
+                        {{ _should_show = true }}
+                    {{ /if }}
+                {{ /whitelist_entries }}
+            {{ elseif visibility_mode_entries == 'blacklist' }}
+                {{ _should_show = true }}
+                {{# Check if current page is in blacklist #}}
+                {{ blacklist_entries }}
+                    {{ if id == _current_entry_id }}
+                        {{ _should_show = false }}
+                    {{ /if }}
+                {{ /blacklist_entries }}
+            {{ /if }}
+
+        {{# Check visibility mode for collection based visiblity. #}}
+        {{ elseif visibility == 'collection' }}
+            {{ if visibility_mode_collections == 'all' }}
+                {{ _should_show = true }}
+            {{ elseif visibility_mode_collections == 'whitelist' }}
+                {{# Check if current collection is in whitelist #}}
+                {{ whitelist_collections }}
+                    {{ if handle == _current_entry_collection }}
+                        {{ _should_show = true }}
+                    {{ /if }}
+                {{ /whitelist_collections }}
+            {{ elseif visibility_mode_collections == 'blacklist' }}
+                {{ _should_show = true }}
+                {{# Check if current collection is in blacklist #}}
+                {{ blacklist_collections }}
+                    {{ if handle == _current_entry_collection }}
+                        {{ _should_show = false }}
+                    {{ /if }}
+                {{ /blacklist_collections }}
             {{ /if }}
         {{ /if }}
-        
+
         {{# Render page builder blocks if conditions are met #}}
         {{ if _should_show && page_builder }}
-            {{ if _requested_position == 'before_footer' }}
-                <div id="{{ _slug }}" class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" data-default-block="{{ _slug }}">
-                    {{ page_builder scope="block" }}
-                        {{ partial src="page_builder/{type}" }}
-                    {{ /page_builder }}
-                </div>
-            {{ else }}
-                {{ page_builder scope="block" }}
-                    {{ partial src="page_builder/{type}" }}
-                {{ /page_builder }}
-            {{ /if }}
+            {{ page_builder scope="block" }}
+                {{ partial src="page_builder/{type}" }}
+            {{ /page_builder }}
         {{ /if }}
-        
+
     {{ /if }}
-    
+
 {{ /default_blocks:default_blocks }}

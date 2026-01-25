@@ -17,8 +17,8 @@
                     )}}
                 "
             >
-                {{ partial
-                    src="statamic-peak-tools::components/picture"
+                {{
+                    picture
                     sizes="
                         { switch(
                             (total_results == 1) => '(min-width: 1280px) 1150px, 90vw',
@@ -29,7 +29,6 @@
                     aspect_ratio="{ total_results > 1 ?= 'large:4/3' }"
                     :image="image"
                     class="mb-6"
-                    lazy="true"
                 }}
 
                 {{ partial:typography/prose as="div" class="{ buttons ?= 'mb-6' }" }}

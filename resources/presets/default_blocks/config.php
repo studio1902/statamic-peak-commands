@@ -7,8 +7,8 @@ return [
     'operations' => [
         [
             'type' => 'copy',
-            'input' => 'app/FieldTypes/DefaultBlockSelect.php',
-            'output' => 'app/FieldTypes/DefaultBlockSelect.php',
+            'input' => 'app/Fieldtypes/DefaultBlockSelect.php',
+            'output' => 'app/Fieldtypes/DefaultBlockSelect.php',
         ],
         [
             'type' => 'copy',
@@ -51,7 +51,7 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => "Add the following partials to your `resources/views/default.antlers.html` template:\n\n{{# Default blocks (before content, inside main) #}}\n{{ partial:snippets/default_blocks position=\"before_content\" }}\n\n{{# Default blocks (after content, inside main) #}}\n{{ partial:layout/default_blocks position=\"after_content\" }}\n\n{{# Default blocks (before footer, outside main) #}}\n{{ partial:layout/default_blocks position=\"before_footer\" }}",
+            'content' => "Add the following partials to your `resources/views/default.antlers.html` template:\n\n{{# Default blocks (before content, inside main) #}}\n{{ partial:layout/default_blocks position=\"before_content\" }}\n\n{{# Default blocks (after content, inside main) #}}\n{{ partial:layout/default_blocks position=\"after_content\" }}",
         ],
     ],
 ];

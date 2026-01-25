@@ -6,9 +6,9 @@
 
 <!-- /page_builder/_{{ handle }}.antlers.html -->
 {{ partial:page_builder/block class="gap-y-8" }}
-    {{ if block:title or block:text }}
+    {{ if block:heading or block:text }}
         <header class="span-content stack-4">
-            {{ block:title ?= { partial:typography/h2 :content="block:title" } }}
+            {{ block:heading ?= { partial:typography/h2 :content="block:heading" } }}
             {{ block:text ?= { partial:typography/p :content="block:text" } }}
         </header>
     {{ /if }}
@@ -22,13 +22,12 @@
 
         {{ {{ handle }} scope="{{ singular_handle }}" }}
             <article class="md:col-span-4 flex flex-col gap-3 aspect-[4/3]">
-                {{ partial
-                    src="statamic-peak-tools::components/picture"
+                {{
+                    picture
                     :image="{{ singular_handle }}:image:url"
                     aspect_ratio="4/3"
                     sizes="(min-width: 1280px) 430px, (min-width: 768px) 33vw, 90vw"
                     cover="true"
-                    lazy="true"
                 }}
                 <header class="flex flex-col">
                     <span class="text-sm text-neutral">{{ {{ singular_handle }}:function }}</span>

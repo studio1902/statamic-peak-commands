@@ -175,7 +175,7 @@ class Collection
         return Blink::once('all_pages', function () {
             return Entry::query()
                 ->where('collection', 'pages')
-                ->where('status', 'published')
+                ->whereStatus('published')
                 ->orderBy('title', 'asc')
                 ->get()
                 ->map(fn ($entry) => "{$entry->get('title')} [{$entry->id()}]")

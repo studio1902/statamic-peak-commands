@@ -1,13 +1,13 @@
 title: 'Call to action'
 fields:
   -
-    handle: title
+    handle: heading
     field:
       input_type: text
       type: text
       localizable: true
       listable: hidden
-      display: Title
+      display: Heading
       validate:
         - required
   -

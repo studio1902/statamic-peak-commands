@@ -1,9 +1,28 @@
 # Changelog
 
-## v9.9.1 (2025-10-24)
+## v10.0.0 (2026-01-25)
 
-### What's fixed
-- Fix Horizon preset. 39f888ad @robdekort
+### What's new
+- Statamic v6 support. 4459a980 by @robdekort
+- Replace picture partial with picture tag. 7fe3669b by @robdekort
+- Remove redundant lazy parameter on picture tag. 0b10f6f5 by @robdekort
+- Remove section fieldtype. 68b6d1b8 by @robdekort
+- Use v6 global structure in presets. 56b4cc26 by @robdekort
+- Properly handle icon picking in v6. 879ec5cd by @robdekort
+- Update clients preset icon. 335b9ff6 by @robdekort
+- Use `whereStatus()`. fa53ab21 by @robdekort
+- Update team members preset icon. bec07d23 by @robdekort
+- Update FAQ members preset icon. cbcf7dc0 by @robdekort
+- Update divider block icon. a1f2397f by @robdekort
+- Nest FAQ script tag. d9b22241 by @robdekort
+- Use `max_sets` instead of `max_rows` for buttons replicator. 70eae619 by @robdekort
+- Fix default blocks preset instruction. 1955fd51 by @robdekort
+- Use "Heading" instead of "Title for all presets and blocks. e7f6be13 by @robdekort
+- Use extracted page builder class. 7fa7f8fe by @robdekort
+- Add ability to show default blocks based on collection. 4d5603d5 by @robdekort
+- Various default blocks preset fixes. 93137a15, 26693dda, dda51147, a888754d , c3db519c and 8fcabdf4 by @robdekort
+- Update Columns block icon. d8f623be by @robdekort
+- Use `page:title` for legal links footer preset. 4f8eddaa by @robdekort
 
 ## v9.9.0 (2025-10-24)
 

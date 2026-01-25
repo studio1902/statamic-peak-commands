@@ -50,7 +50,7 @@
         <ul class="inline-flex flex-wrap gap-2">
             {{ if configuration:privacy_statement_type == 'entry' }}
                 <li>
-                    <a href="{{ configuration:privacy_statement_entry:url }}">{{ trans:strings.privacy_statement }}</a>
+                    <a href="{{ configuration:privacy_statement_entry:url }}">{{ configuration:privacy_statement_entry:title }}</a>
                 </li>
 
             {{ elseif configuration:privacy_statement_type == 'pdf' }}
@@ -61,7 +61,7 @@
 
             {{ if configuration:cookie_notice_type == 'entry' }}
                 <li>
-                    <a href="{{ configuration:cookie_notice_entry:url }}">{{ trans:strings.cookie_notice }}</a>
+                    <a href="{{ configuration:cookie_notice_entry:url }}">{{ configuration:cookie_notice_entry:title }}</a>
                 </li>
 
             {{ elseif configuration:cookie_notice_type == 'pdf' }}

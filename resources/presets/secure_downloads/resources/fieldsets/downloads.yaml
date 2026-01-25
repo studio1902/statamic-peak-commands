@@ -1,9 +1,9 @@
 title: Downloads
 fields:
   -
-    handle: title
+    handle: heading
     field:
-      display: Title
+      display: Heading
       type: text
       always_save: false
   -

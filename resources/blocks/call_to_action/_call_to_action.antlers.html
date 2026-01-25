@@ -6,9 +6,11 @@
 
 <!-- /page_builder/_call_to_action.antlers.html -->
 {{ partial:page_builder/block }}
-    <div class="span-content md:col-start-[col-3] md:col-span-8">
-        {{ partial:typography/h2 class="mb-4" :content="block:title" }}
-        {{ partial:typography/p class="mb-4" :content="block:text" }}
+    <div class="span-content md:col-start-[col-3] md:col-span-8 stack-4">
+        {{ partial:typography/h2 :content="block:heading" }}
+
+        {{ partial:typography/p :content="block:text" }}
+
         {{ block:buttons ?= { partial:components/buttons } }}
     </div>
 {{ /partial:page_builder/block }}

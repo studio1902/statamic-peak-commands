@@ -20,7 +20,7 @@ return [
             'block' => [
                 'name' => 'Divider',
                 'instructions' => 'A visual divider between blocks.',
-                'icon' => 'layout-table-row-insert',
+                'icon' => 'align-object-center',
                 'handle' => 'divider',
             ],
         ],

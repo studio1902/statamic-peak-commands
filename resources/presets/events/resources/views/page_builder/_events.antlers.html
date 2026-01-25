@@ -7,7 +7,7 @@
 <!-- /page_builder/_{{ handle }}.antlers.html -->
 {{ partial:page_builder/block }}
     <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
-        {{ title ?= { partial:typography/h1 as="h2" :content="title" class="md:col-span-12" } }}
+        {{ heading ?= { partial:typography/h1 as="h2" :content="heading" class="md:col-span-12" } }}
 
         {{ collection:{{ handle }} sort="{{ singular_handle }}_date_start:asc" {{ singular_handle }}_date_end:is_after="{ today | modify_date('+1 day') }" limit="3" as="items" }}
             {{ unless no_results }}
