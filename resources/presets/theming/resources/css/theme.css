@@ -1,0 +1,21 @@
+@theme inline {
+    --color-theme-text: var(--theme-text);
+    --color-theme-primary: var(--theme-primary);
+}
+
+@layer theme {
+    :root {
+        --theme-text: black;
+        --theme-primary: blue;
+    }
+
+    [data-theme="primary"] {
+        --theme-text: black;
+        --theme-primary: blue;
+    }
+
+    [data-theme="secondary"] {
+        --theme-text: black;
+        --theme-primary: yellow;
+    }
+}
