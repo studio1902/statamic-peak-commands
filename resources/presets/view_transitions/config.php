@@ -3,7 +3,7 @@
 return [
     'handle' => 'view_transitions',
     'name' => 'View Transitions',
-    'description' => 'Enable view transitions with speculation rules',
+    'description' => 'Enable view transitions with speculation rules.',
     'operations' => [
         [
             'type' => 'copy',
@@ -12,11 +12,11 @@ return [
         ],
         [
             'type' => 'notify',
-            'content' => 'Add `{{ partial:snippets/speculation_rules }}` the head of your layout file in: `resources/views/layout.antlers.html`.',
+            'content' => "Add `\n@import \"./view-transitions.css\";` to the top of your `resources/css/site.css` file.",
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `resources/css/site.css` file:\n@import \"./view-transitions.css\";",
+            'content' => 'Add `{{ partial:snippets/speculation_rules }}` the head of your layout file in: `resources/views/layout.antlers.html`.',
         ],
     ],
 ];
