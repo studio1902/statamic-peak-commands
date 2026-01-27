@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.2.0 (2026-01-27)
+
+### What's new
+- A theming preset to scaffold page and/or block based color theming. 0d92ccc6 by @robdekort
+
 ## v10.1.0 (2026-01-26)
 
 ### What's new
