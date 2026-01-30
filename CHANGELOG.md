@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.2.1 (2026-01-30)
+
+### What's fixed
+- Fix view transitions preset. 5ae21255 by @robdekort
+
 ## v10.2.0 (2026-01-27)
 
 ### What's new
