@@ -1,0 +1,23 @@
+{{#
+    @name Speculation Rules
+    @desc Prerender speculation rules.
+#}}
+
+<!-- /snippets/_speculation_rules.antlers.html -->
+<script type="speculationrules">
+    {
+        "prerender": [
+            {
+                "where": {
+                    "and": [
+                        { "href_matches": "/*" },
+                        { "not": { "selector_matches": "[rel~=noopener]" } },
+                        { "not": { "selector_matches": "[rel~=nofollow]" } },
+                        { "not": { "selector_matches": "[target=_blank]" } }
+                    ]
+                }
+            }
+        ]
+    }
+</script>
+<!-- End: /snippets/_speculation_rules.antlers.html -->
