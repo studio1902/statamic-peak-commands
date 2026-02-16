@@ -1,5 +1,13 @@
 # Changelog
 
+## v10.3.0 (2026-02-16)
+
+### What's new
+- Add option to skip replacements on copy command. 07dd4837 by @marcorieser
+
+### What's fixed
+- Skip replacements on footer preset. 5897341b by @robdekort
+
 ## v10.2.1 (2026-01-30)
 
 ### What's fixed
