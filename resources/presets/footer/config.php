@@ -9,6 +9,7 @@ return [
             'type' => 'copy',
             'input' => 'resources/views/layout/_footer.antlers.html',
             'output' => 'resources/views/layout/_footer.antlers.html',
+            'skip_default_replacements' => true,
         ],
         [
             'type' => 'copy',
