@@ -24,6 +24,8 @@ class Copy extends Operation
 
     protected bool $skippable;
 
+    protected bool $skip_default_replacements;
+
     protected array $replacements;
 
     protected Filesystem $filesystem;
@@ -33,7 +35,9 @@ class Copy extends Operation
         $this->input = Arr::get($config, 'input');
         $this->output = Arr::get($config, 'output');
         $this->skippable = Arr::get($config, 'skippable', false);
+        $this->skip_default_replacements = Arr::get($config, 'skip_default_replacements', false);
         $this->replacements = Arr::get($config, 'replacements', []);
+
 
         $this->filesystem = Storage::build([
             'driver' => 'local',
@@ -136,6 +140,10 @@ class Copy extends Operation
 
     protected function mergedReplacements(): Collection
     {
+        if($this->skip_default_replacements) {
+            return collect($this->replacements);
+        }
+
         $defaultReplacements = [
             '{{ handle }}' => $this->installable->renameHandle,
             '{{ filename }}' => $this->installable->renameHandle,
