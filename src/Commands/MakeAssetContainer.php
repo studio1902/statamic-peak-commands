@@ -36,7 +36,7 @@ class MakeAssetContainer extends Command
 
         $this->runOperations();
 
-        warning("Add this to your filesystems.php:\n\n'{$this->model->name}' => [\n\t'driver' => 'local',\n\t'root' => public_path('{$this->model->name}'),\n\t'url' => '\\{$this->model->name}',\n\t'visibility' => 'public',\n\t'throw' => false,\n\t'report' => false,\n],");
+        warning("Add this to your filesystems.php:\n\n'{$this->model->filename}' => [\n\t'driver' => 'local',\n\t'root' => public_path('{$this->model->filename}'),\n\t'url' => '\\{$this->model->filename}',\n\t'visibility' => 'public',\n\t'throw' => false,\n\t'report' => false,\n],");
         pause('Follow the instructions and press ENTER to continue.');
         info("[✓] Asset container '{$this->model->name}' created.");
 
