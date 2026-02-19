@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.3.0 (2026-02-19)
+
+### What's new
+- New `make:asset-container` command. 5db233a6 by @robdekort
+
 ## v10.3.0 (2026-02-16)
 
 ### What's new
