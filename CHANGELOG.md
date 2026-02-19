@@ -1,11 +1,11 @@
 # Changelog
 
-## v10.3.1 (2026-02-19)
+## v10.4.1 (2026-02-19)
 
 ### What's fixed
 - Use filename instead of name in filesystem snippet. d668705a by @robdekort
 
-## v10.3.0 (2026-02-19)
+## v10.4.0 (2026-02-19)
 
 ### What's new
 - New `make:asset-container` command. 5db233a6 by @robdekort
