@@ -7,6 +7,7 @@ use Statamic\Providers\AddonServiceProvider;
 class ServiceProvider extends AddonServiceProvider
 {
     protected $commands = [
+        Commands\MakeAssetContainer::class,
         Commands\MakeBlock::class,
         Commands\MakeCollection::class,
         Commands\MakeGlobal::class,
