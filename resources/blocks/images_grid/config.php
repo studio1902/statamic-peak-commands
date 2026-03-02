@@ -20,7 +20,7 @@ return [
             'block' => [
                 'name' => 'Images grid',
                 'instructions' => 'A multi row image grid.',
-                'icon' => 'layout-grid-dots',
+                'icon' => 'media-image-picture-gallery',
                 'handle' => 'images_grid',
             ],
         ],
