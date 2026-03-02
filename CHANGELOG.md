@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.4.2 (2026-03-02)
+
+### What's fixed
+- Fix an issue with the images grid block causing an error. 70287632 by @robdekort
+
 ## v10.4.1 (2026-02-19)
 
 ### What's fixed
