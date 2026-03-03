@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.5.0 (2026-03-02)
+
+### What's new
+- Add horizon preset panel access instructions. f86aa53b by @robdekort
+
 ## v10.4.2 (2026-03-02)
 
 ### What's fixed
