@@ -38,6 +38,9 @@ return [
             'type' => 'notify',
             'content' => "Replace the commands in your Forge deploy script with:\n\n\$FORGE_PHP artisan migrate --force\n\$FORGE_PHP artisan cache:clear\n\$FORGE_PHP artisan config:cache\n\$FORGE_PHP artisan route:cache\n\$FORGE_PHP artisan statamic:stache:warm\n\$FORGE_PHP artisan horizon:terminate\n\$FORGE_PHP artisan statamic:search:update --all\n\$FORGE_PHP artisan horizon:clear --queue=static-cache --force\n\$FORGE_PHP artisan statamic:static:clear\n\$FORGE_PHP artisan statamic:static:warm --queue",
         ],
-
+        [
+            'type' => 'notify',
+            'content' => "Add emails for users that should get access to the `/horizon` admin panel in the `viewHorizon` gate in `app/Providers/HorizonServiceProvider.php`.",
+        ],
     ],
 ];
