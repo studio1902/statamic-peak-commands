@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.6.0 (2026-03-02)
+
+### What's new
+- Add a self hosted audio set. 4b754ef5 by @robdekort
+
 ## v10.5.0 (2026-03-02)
 
 ### What's new
