@@ -1,0 +1,18 @@
+title: 'Audio self hosted'
+fields:
+  -
+    handle: size
+    field: common.size
+    config:
+      instructions: 'The size in which the Audio self hosted should be displayed.'
+  -
+    handle: file
+    field:
+      max_files: 1
+      min_files: 1
+      container: files
+      show_set_alt: false
+      type: assets
+      display: File
+      validate:
+        - required

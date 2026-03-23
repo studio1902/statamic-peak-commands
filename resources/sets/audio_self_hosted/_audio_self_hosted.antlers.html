@@ -1,0 +1,23 @@
+{{#
+    @name Audio self hosted
+    @desc The Audio self hosted component.
+    @set page.article.audio_self_hosted
+#}}
+
+<!-- /components/_audio_self_hosted.antlers.html -->
+<div
+    class="
+        not-prose
+        {{ switch(
+            (size == 'md') => 'span-md',
+            (size == 'lg') => 'span-lg',
+            (size == 'xl') => 'span-xl',
+            () => 'span-md'
+        )}}
+    "
+>
+    <audio class="w-full" controls>
+        <source src="{{ file }}" type="{{ file:mime_type }}"/>
+    </audio>
+</div>
+<!-- End: /components/_audio_self_hosted.antlers.html -->

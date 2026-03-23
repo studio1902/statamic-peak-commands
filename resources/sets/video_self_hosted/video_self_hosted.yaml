@@ -19,7 +19,7 @@ fields:
           field:
             max_files: 1
             min_files: 1
-            container: images
+            container: files
             show_set_alt: false
             type: assets
             display: File
