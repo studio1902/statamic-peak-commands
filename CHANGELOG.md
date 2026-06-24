@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.7.0 (2026-06-24)
+
+### What's new
+- Remove page builder assets when clearing a site. 43d5ba6a by @robdekort
+
 ## v10.6.0 (2026-03-02)
 
 ### What's new
