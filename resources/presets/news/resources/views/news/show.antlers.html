@@ -8,7 +8,7 @@
     {
         "@context": "https://schema.org",
         "@type": "NewsArticle",
-        "@id": "{{ site:permalink }}/#article"
+        "@id": "{{ site:permalink }}/#article",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "{{ permalink }}"
@@ -22,7 +22,7 @@
         },{{ /glide:image }}{{ /if }}
         "datePublished": "{{ date | format('c') }}",
         "dateModified": "{{ last_modified | format('c') }}",
-        "author": { "@id": "{{ site:permalink }}/#organization" }
+        "author": { "@id": "{{ site:permalink }}/#organization" },
         "publisher": { "@id": "{{ site:permalink }}/#organization" }
     }
 </script>
