@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.7.2 (2026-08-05)
+
+### What's fixed
+- Add missing comma's to news JSON-LD snippet. 5e76b786 by @robdekort
+
 ## v10.7.1 (2026-08-05)
 
 ### What's improved
