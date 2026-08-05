@@ -20,7 +20,7 @@ return [
             'block' => [
                 'name' => 'Full width image',
                 'instructions' => 'A full width image with optional text and button(s).',
-                'icon' => 'media-image-picture-orientation',
+                'icon' => 'orientation-image-picture-horizontal-landscape',
                 'handle' => 'full_width_image',
             ],
         ],
