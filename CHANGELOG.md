@@ -1,5 +1,11 @@
 # Changelog
 
+## v10.7.1 (2026-08-05)
+
+### What's improved
+- Update news JSON-LD snippet. 5e76b786 by @robdekort
+- Fix missing icon in full width image block. 1b56c195 by @robdekort
+
 ## v10.7.0 (2026-06-24)
 
 ### What's new
