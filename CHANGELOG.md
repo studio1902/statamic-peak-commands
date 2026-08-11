@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.7.3 (2026-08-11)
+
+### What's improved
+- Improve new preset JSON-LD snippet. 5e76b786 by @robdekort
+
 ## v10.7.2 (2026-08-05)
 
 ### What's fixed
