@@ -8,7 +8,7 @@
     {
         "@context": "https://schema.org",
         "@type": "NewsArticle",
-        "@id": "{{ site:permalink }}/#article",
+        "@id": "{{ permalink }}/#article",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "{{ permalink }}"
@@ -16,7 +16,7 @@
         "headline": "{{ title }}",{{ if image }}{{ glide:image width="1680" fit="crop" format="webp" quality="85" }}
         "image": {
             "@type": "ImageObject",
-            "url": "{{ site:permalink }}{{ url }}",
+            "url": "{{ config:app:url }}{{ url }}",
             "width": {{ width }},
             "height": {{ height }}
         },{{ /glide:image }}{{ /if }}
