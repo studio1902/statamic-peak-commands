@@ -1,5 +1,10 @@
 # Changelog
 
+## v10.7.4 (2026-08-18)
+
+### What's improved
+- Use display_timezone in business hours logic. de4d5e53 by @robdekort
+
 ## v10.7.3 (2026-08-11)
 
 ### What's improved
