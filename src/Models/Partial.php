@@ -57,7 +57,7 @@ class Partial
     {
         return select(
             label: 'What type of partial do you want to add?',
-            options: ['Component', 'Layout', 'Snippet', 'Typography'],
+            options: ['Component', 'Layout', 'Snippet'],
             default: 'Component'
         );
     }
