@@ -36,11 +36,13 @@
                     </figure>
                 {{ /if }}
 
-                {{ partial:typography/h1 :when="heading" :content="heading" }}
+                {{ heading ?= { heading | wrap('h1') } }}
 
-                {{ partial:typography/prose :when="introduction" }}
-                    {{ introduction }}
-                {{ /partial:typography/prose }}
+                {{ if introduction }}
+                    <article class="prose">
+                        {{ introduction }}
+                    </article>
+                {{ /if }}
 
                 {{ if social_media:social_media }}
                     <div class="flex gap-1">
@@ -56,11 +58,13 @@
             {{ sections }}
                 <section class="fluid-grid">
                     <div class="span-content md:col-span-6 md:col-start-5 stack-4 text-center">
-                        {{ partial:typography/h2 :when="heading" :content="heading" }}
+                        {{ heading ?= { heading | wrap('h2') } }}
 
-                        {{ partial:typography/prose :when="introduction" }}
-                            {{ introduction }}
-                        {{ /partial:typography/prose }}
+                        {{ if introduction }}
+                            <article class="prose">
+                                {{ introduction }}
+                            </article>
+                        {{ /if }}
 
                         <ul class="text-left stack-1.5">
                             {{ links scope="link" }}
@@ -68,7 +72,7 @@
                                     <a href="{{ link:url }}" class="p-5 rounded-xl flex items-center gap-3 -outline-offset-4">
                                         {{ svg :src="link:icon" :when="link:icon" class="size-5" }}
 
-                                        {{ partial:typography/h3 :content="link:title" }}
+                                        <h3>{{ link:title }}</h3>
                                     </a>
 
                                     {{ if type === 'image' }}

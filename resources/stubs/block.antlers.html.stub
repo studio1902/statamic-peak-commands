@@ -6,6 +6,6 @@
 
 <!-- /page_builder/{{ filepath }}_{{ filename }}.antlers.html -->
 {{ partial:page_builder/block }}
-    {{ partial:typography/h3 content="🔧<br>{{ name }}" class="span-content text-center" }}
+    <h3 class="span-content text-center">🔧<br>{{ name }}</h3>
 {{ /partial:page_builder/block }}
 <!-- End: /page_builder/{{ filepath }}_{{ filename }}.antlers.html -->

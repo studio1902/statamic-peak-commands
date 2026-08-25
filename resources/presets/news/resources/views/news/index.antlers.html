@@ -14,7 +14,8 @@
 {{ section:index_content }}
     <!-- /{{ handle }}/index.antlers.html -->
     <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
-        {{ partial:typography/h1 as="h2" :content="title" class="md:col-span-12" }}
+        <h2 class="heading-size-1 md:col-span-12">{{ title }}</h2>
+
         {{ collection:{{ handle }} sort="date:desc" paginate="true" limit="12" as="items" }}
             {{ unless no_results }}
                 {{ items }}

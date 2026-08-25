@@ -8,9 +8,9 @@
 <div class="not-prose span-md flex">
     {{ partial:components/modal :label_open="label_open" :label_close="label_close" :label_aria="label_aria" }}
         {{ slot:content }}
-            {{ partial:typography/prose }}
+            <article class="prose">
                 {{ text }}
-            {{ /partial:typography/prose }}
+            </article>
         {{ /slot:content }}
     {{ /partial:components/modal }}
 </div>

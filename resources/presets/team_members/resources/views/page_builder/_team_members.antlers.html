@@ -8,8 +8,8 @@
 {{ partial:page_builder/block class="gap-y-8" }}
     {{ if block:heading or block:text }}
         <header class="span-content stack-4">
-            {{ block:heading ?= { partial:typography/h2 :content="block:heading" } }}
-            {{ block:text ?= { partial:typography/p :content="block:text" } }}
+            {{ block:heading ?= { block:heading | wrap('h2') } }}
+            {{ block:text ?= { block:text | wrap('p') } }}
         </header>
     {{ /if }}
 

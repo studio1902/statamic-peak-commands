@@ -9,7 +9,7 @@
     <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
         {{ block:columns }}
             <div
-                class="
+                class="stack-6
                     {{ switch(
                         (total_results == 1) => 'md:col-span-6 md:col-start-4',
                         (total_results == 2) => 'md:col-span-6',
@@ -28,12 +28,11 @@
                     "
                     aspect_ratio="{ total_results > 1 ?= 'large:4/3' }"
                     :image="image"
-                    class="mb-6"
                 }}
 
-                {{ partial:typography/prose as="div" class="{ buttons ?= 'mb-6' }" }}
+                <div class="prose">
                     {{ text }}
-                {{ /partial:typography/prose }}
+                </div>
 
                 {{ partial:components/buttons }}
             </div>

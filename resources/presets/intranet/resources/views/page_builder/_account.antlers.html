@@ -18,10 +18,8 @@
 <div class="fluid-grid gap-y-8">
     {{ user }}
         <section class="span-content grid md:grid-cols-12 gap-8">
-            <header class="md:col-span-4">
-                {{ partial:typography/prose as="div" }}
-                    {{ block:account }}
-                {{ /partial:typography/prose }}
+            <header class="md:col-span-4 prose">
+                {{ block:account }}
             </header>
 
             <div class="md:col-span-8">
@@ -52,10 +50,8 @@
         </section>
 
         <section class="span-content grid md:grid-cols-12 gap-8">
-            <header class="md:col-span-4">
-                {{ partial:typography/prose as="div" }}
-                    {{ block:password }}
-                {{ /partial:typography/prose }}
+            <header class="md:col-span-4 prose">
+                {{ block:password }}
             </header>
 
             <div class="md:col-span-8">

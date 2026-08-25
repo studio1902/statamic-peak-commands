@@ -12,15 +12,15 @@
 
     <div class="flex flex-col gap-y-2">
         <a href="{{ url }}" class="group">
-            {{ partial:typography/h3 content="{ title } - { hours } { trans:strings.{{ handle }}_hours }" class="mb-4 underline decoration-primary decoration-2 underline-offset-2 group-hover:text-primary motion-safe:transition-colors" }}
+            <h3 class="mb-4 underline decoration-primary decoration-2 underline-offset-2 group-hover:text-primary motion-safe:transition-colors">{{ title }} - {{ hours }} {{ trans:strings.{{ handle }}_hours }}</h3>
         </a>
 
         <div class="flex flex-col">
-            <span>{{ trans:strings.{{ handle }}_published }}: {{ partial:typography/time :content="date" }}</span>
-            <span>{{ trans:strings.{{ handle }}_expires }}: {{ partial:typography/time :content="expires" }}</span>
+            <span>{{ trans:strings.{{ handle }}_published }}: {{ partial:components/time :content="date" }}</span>
+            <span>{{ trans:strings.{{ handle }}_expires }}: {{ partial:components/time :content="expires" }}</span>
         </div>
 
-        {{ partial:typography/p :content="teaser" }}
+        <p>{{ teaser }}</p>
     </div>
 </article>
 <!-- End: /components/_{{ handle }}.item.antlers.html -->

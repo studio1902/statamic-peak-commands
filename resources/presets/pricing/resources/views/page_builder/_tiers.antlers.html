@@ -35,15 +35,15 @@
                     <h3 class="text-sm font-bold">{{ benefits_title }}</h3>
                 {{ /if }}
 
-                {{ partial:typography/prose :if="benefits" class="stack-space-2 prose-sm" }}
-                    {{ if benefits }}
+                {{ if benefits }}
+                    <article class="prose prose-sm stack-space-2">
                         <ul class="stack-1">
                             {{ benefits }}
                                 <li><p>{{ benefit }}</p></li>
                             {{ /benefits }}
                         </ul>
-                    {{ /if }}
-                {{ /partial:typography/prose }}
+                    </article>
+                {{ /if }}
             </article>
         {{ /block:tiers }}
     </div>

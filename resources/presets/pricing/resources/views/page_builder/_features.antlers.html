@@ -58,11 +58,12 @@
                                 role="row"
                             >
                                 <div class="col-span-3 md:col-span-1 pt-6 pb-3 md:py-6 px-4 border-b md:border-b-0 border-gray-150" role="rowheader">
-                                    {{ partial:typography/prose :when="explanation" class="prose-sm text-gray-500 prose-h3:mb-0 text-center md:text-left" }}
-                                        <h3>{{ title }}</h3>
-
-                                        {{ explanation }}
-                                    {{ /partial:typography/prose }}
+                                    {{ if explanation }}
+                                        <article class="prose prose-sm text-gray-500 text-center md:text-left">
+                                            <h3 class="mb-0">{{ title }}</h3>
+                                            {{ explanation }}
+                                        </article>
+                                    {{ /if }}
                                 </div>
 
                                 {{ _feature = id }}

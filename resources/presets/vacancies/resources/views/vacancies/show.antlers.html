@@ -45,15 +45,15 @@
 <main class="page-builder" id="content">
     <section class="fluid-grid">
         <div class="contents stack-12">
-            {{ partial:typography/h1 :content="title" class="span-content" }}
+            <h1 class="span-content">{{ title }}</h1>
 
-            <div class="span-content md:col-start-[col-1] md:col-span-6">
-                {{ partial:typography/p :content="teaser" }}
-            </div>
+            <p class="span-content md:col-start-[col-1] md:col-span-6">
+                {{ teaser }}
+            </p>
 
             <aside class="span-content md:col-start-[col-1] md:col-span-6">
-                {{ trans:strings.{{ handle }}_published }}: {{ partial:typography/time :content="date" }}<br>
-                {{ trans:strings.{{ handle }}_expires }}: {{ partial:typography/time :content="expires" }}<br>
+                {{ trans:strings.{{ handle }}_published }}: {{ partial:components/time :content="date" }}<br>
+                {{ trans:strings.{{ handle }}_expires }}: {{ partial:components/time :content="expires" }}<br>
                 {{ trans:strings.{{ handle }}_region }}: {{ region }}<br>
                 {{ trans:strings.{{ handle }}_employment_type }}: {{ employment_type == 'FULL_TIME' ? { trans:strings.{{ handle }}_full_time } : { trans:strings.{{ handle }}_part_time } }}<br>
                 {{ trans:strings.{{ handle }}_hours }}: {{ hours }}<br>

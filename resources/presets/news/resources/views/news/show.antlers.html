@@ -30,9 +30,9 @@
 <main class="page-builder" id="content">
     <div class="fluid-grid stack-8">
         <header class="md:col-start-[col-3] md:col-span-8 stack-4">
-            {{ partial:typography/time :content="date" class="block text-center" }}
+            {{ partial:components/time :content="date" class="block text-center" }}
 
-            {{ partial:typography/h1 :content="title" class="text-center" }}
+            <h2 class="text-center">{{ title }}</h2>
 
             <figure>
                 {{ picture :image="image" sizes="(min-width: 1280px) 1150px, (min-width: 768px) 90vw" aspect_ratio="3/2" cover="true" class="aspect-[3/2]" }}
@@ -41,18 +41,18 @@
     </div>
 
     <section class="fluid-grid">
-        {{ partial:typography/prose as="article" class="contents" }}
+        <div class="prose contents">
             {{ article }}
                 {{ partial src="components/{type}" }}
             {{ /article }}
-        {{ /partial:typography/prose }}
+        </div>
     </section>
 
     {{ collection:previous in="{{ handle }}" sort="date:asc" limit="3" as="items" }}
         {{ unless no_results }}
             <section class="fluid-grid">
                 <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
-                    {{ partial:typography/h1 as="h2" content="{ trans:strings.{{ handle }}_more }" class="md:col-span-12" }}
+                    <h2 class="heading-size-1 md:col-span-12">{{ trans:strings.{{ handle }}_more }}</h2>
 
                     {{ items }}
                         {{ partial:components/{{ handle }}_item class="md:col-span-4" }}

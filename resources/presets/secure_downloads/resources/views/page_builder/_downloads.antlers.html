@@ -7,20 +7,20 @@
 <!-- /page_builder/_downloads.antlers.html -->
 {{ partial:page_builder/block }}
     <div class="span-content grid md:grid-cols-12 gap-6">
-        {{ block:heading ?= { partial:typography/h1 as="h2" :content="block:heading" class="md:col-span-12" } }}
+        {{ block:heading ?= { block:heading | wrap('h2.heading-size-1.md:col-span-12') } }}
 
         {{ block:downloads }}
             <article class="md:col-span-4 lg:md-col-span-3 flex flex-col gap-4 justify-between items-start p-6 border border-neutral-300 rounded bg-neutral-100">
                 <div class="flex flex-col stack-1">
-                    {{ partial:typography/h3 :content="title" }}
+                    <h3>{{ title }}</h3>
 
                     <span class="stack-space-2 text-sm text-neutral-darker">
                         {{ extension }} - {{ size }}
                     </span>
 
-                    {{ partial:typography/prose :when="description" class="prose-sm" as="div" }}
-                        {{ description }}
-                    {{ /partial:typography/prose }}
+                    {{ if description }}
+                        <div class="prose prose-sm">{{ description }}</div>
+                    {{ /if }}
                 </div>
 
                 {{ nocache }}

@@ -6,7 +6,7 @@
 <!-- /{{ filename }}/show.antlers.html -->
 <main class="page-builder" id="content">
     <header class="fluid-grid">
-        {{ partial:typography/h1 :content="title" class="span-content" }}
+        <h1 class="span-content">{{ title }}</h1>
     </header>
 
     {{ page_builder scope="block" }}

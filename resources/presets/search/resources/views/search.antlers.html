@@ -12,7 +12,7 @@
 <main class="page-builder" id="content">
     <section class="fluid-grid stack-6">
         <div class="span-content md:col-start-[col-3] md:col-span-8">
-            {{ partial:typography/h1 class="mb-2" content="{trans:strings.search_results_for} &OpenCurlyDoubleQuote;<span class='italic'>{get:q}</span>&CloseCurlyDoubleQuote;" }}
+            <h1>{{ trans:strings.search_results_for }} &OpenCurlyDoubleQuote;<span class='italic'>{{ get:q }}</span>&CloseCurlyDoubleQuote;</h1>
         </div>
 
         <form class="relative span-content md:col-start-[col-3] md:col-span-8" action="/search" role="search">
@@ -26,14 +26,14 @@
         {{ search:results }}
             {{ if no_results }}
                 <article class="span-content md:col-start-[col-3] md:col-span-8">
-                    {{ partial:typography/p content="{trans:strings.search_no_results}" }}
+                    <p>{{ trans:strings.search_no_results }}</p>
                 </article>
             {{ else }}
                 <article class="span-content md:col-start-[col-3] md:col-span-8">
                     <a class="flex flex-col" href="{{ url }}">
                         <span class="text-neutral underline decoration-primary mb-1 break-words">{{ permalink }}</span>
 
-                        {{ partial:typography/h2 class="mt-0" color="text-primary" :content="title" }}
+                        <h2 class="text-primary">{{ title }}</h2>
                     </a>
                     <p>
                         {{ search_snippets | flatten | implode(' … ') | mark }}
