@@ -3,7 +3,7 @@
 ## v11.1.0 (2026-08-26)
 
 ### What's new
-- Optionally generate a CSS file for new components generated with `make:partial`. #46 by andjsch
+- Optionally generate a CSS file for new components generated with `make:partial`. #46 by @andjsch
 
 ## v11.0.0 (2026-08-25)
 
