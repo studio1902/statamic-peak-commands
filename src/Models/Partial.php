@@ -6,6 +6,7 @@ use Statamic\Facades\Config;
 use Statamic\Support\Arr;
 use Stringy\StaticStringy as Stringy;
 
+use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
@@ -21,11 +22,14 @@ class Partial
 
     public string $filename;
 
+    public bool $cssFile;
+
     public function __construct(array $config = [])
     {
         $this->type = Arr::get($config, 'type') ?? $this->promptForType();
         $this->name = Arr::get($config, 'name') ?? $this->promptForName();
         $this->description = Arr::get($config, 'description') ?? $this->promptForDescription();
+        $this->cssFile = $this->promptForCssFileGeneration();
         $this->filename = $this->generateFilename();
         $this->folder = $this->generateFolderName();
     }
@@ -71,5 +75,13 @@ class Partial
         }
 
         return $folder;
+    }
+
+    protected function promptForCssFileGeneration(): bool
+    {
+        return confirm(
+            label: 'Do you want to generate a CSS file for the component?',
+            default: false,
+        );
     }
 }

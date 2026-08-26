@@ -29,6 +29,7 @@ class MakePartial extends Command
 
         $this->createModel();
         $this->createTemplate();
+        $this->createCssFile();
 
         $this->runOperations();
 
@@ -51,6 +52,18 @@ class MakePartial extends Command
                 '{{ partial_description }}' => $this->model->description,
                 '{{ folder }}' => $this->model->folder,
             ],
+        ];
+    }
+
+    protected function createCssFile(): void
+    {
+        if (! $this->model->cssFile) {
+            return;
+        }
+
+        $this->operations[] = [
+            'type' => 'create_component_css_file',
+            'filename' => $this->model->filename,
         ];
     }
 

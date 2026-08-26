@@ -22,12 +22,12 @@
         }
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "statamic/cms": "^6.0"
     },
     "require-dev": {
-        "spatie/laravel-ray": "^1.39",
-        "orchestra/testbench": "^9.0",
+        "spatie/laravel-ray": "^1.43",
+        "orchestra/testbench": "^11.2",
         "laravel/pint": "^1.22"
     },
     "config": {
