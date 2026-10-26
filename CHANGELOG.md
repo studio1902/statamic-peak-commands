@@ -1,5 +1,10 @@
 # Changelog
 
+## v11.1.1 (2026-08-26)
+
+### What's fixed
+- Add missing playsinline attribute to self hosted video component. 25346ef0 by @robdekort
+
 ## v11.1.0 (2026-08-26)
 
 ### What's new
