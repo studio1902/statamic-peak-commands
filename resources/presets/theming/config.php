@@ -13,16 +13,16 @@ return [
         ],
         [
             'type' => 'copy',
-            'input' => 'resources/css/theme.css',
-            'output' => 'resources/css/theme.css',
+            'input' => 'resources/css/theming.css',
+            'output' => 'resources/css/theming.css',
         ],
         [
             'type' => 'notify',
-            'content' => "Add this to your `resources/css/site.css` file:\n@import \"./theme.css\";",
+            'content' => "Add this to your `resources/css/theme.css` file:\n@import \"./theming.css\";",
         ],
         [
             'type' => 'notify',
-            'content' => "Define your theme variables and colors in `resources/css/theme.css`.",
+            'content' => "Define your theme variables and colors in `resources/css/theming.css`.",
         ],
         [
             'type' => 'notify',
